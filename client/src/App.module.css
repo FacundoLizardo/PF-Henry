@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  width: 100%;
+}
+
+.appContainer {
+  width: 100%;
+  height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  /* Colores principales */
+  --color-primary: #f44336;
+  --color-secondary: #ffcc00;
+  --color-accent: #0075be;
+  --color-details: #4caf50;
+
+  /* Colores de fondo */
+  --color-background: #f0f0f0;
+  --color-background-off: #494949;
+  --color-background-off-two: #f2f2f2;
+
+  /* Texto y elementos */
+  --color-text-primary: #000000;
+  --color-text-secondary: #ffffff;
+
+  /* Cards */
+  --color-border-one: #000000;
+  --color-border-two: #0f0f0f;
+
+  /* Hover */
+  --color-hover: #000000;
+}
+
+/* Estilos generales */
+
+a {
+  text-decoration: none;
+}
+
