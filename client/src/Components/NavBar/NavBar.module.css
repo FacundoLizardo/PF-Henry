@@ -1,9 +1,131 @@
-.navBarContainer {
+nav {
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 70px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   background-color: var(--color-background-off);
+  transition: box-shadow 0.1s ease 0s, background-color 0.1s ease 0s;
+  padding: 16px 32px;
   color: var(--color-text-secondary);
+  position: static;
+}
+
+.navbarLogo {
+  display: flex;
+  align-items: center;
+}
+
+.navbarAssets {
+  display: flex;
+  align-items: center;
+}
+
+.navbarLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  color: var(--text-secondary-color);
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.navbarLinks li a {
+  color: var(--text-secondary-color);
+}
+
+.navbarLinks li a:hover {
+  color: var(--color-hover);
+}
+
+.navbarLinks.active {
+  height: 60%;
+  opacity: 1;
+  height: 100vh;
+}
+
+.navbarLinks.active li {
+  padding: 16px;
+}
+
+.navbarLinks.active li a {
+  font-weight: bold;
+  transition: all 0.2s ease-out;
+}
+
+.modal {
+  background-color: var(--color-background-off-two);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  text-align: center;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  padding: 30px;
+  z-index: 3;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--color-text-primary);
+}
+
+.navbarToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 38px;
+  width: 38px;
+  transition: all 0.2s ease-out;
+}
+
+.navbarToggle:hover {
+  color: var(--color-hover);
+}
+
+.navbarToggle svg {
+  height: 36px;
+  width: 36px;
+}
+
+.menuClose {
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.menuOpen {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .navbarLinks {
+    display: flex;
+    opacity: 1;
+    position: relative;
+  }
+
+  .navbarLinks ul {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .navbarToggle {
+    display: none;
+  }
 }
