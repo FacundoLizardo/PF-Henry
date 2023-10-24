@@ -1,3 +1,4 @@
+
 import Layout from "./views/Layout/Layout";
 import NavBar from "./Components/NavBar/NavBar";
 import DetailCourse from "./views/DetailCourse/DetailCourse";
