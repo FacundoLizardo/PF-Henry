@@ -1,27 +1,33 @@
 const { DataTypes } = require("sequelize");
 
-const Courses = (sequelize) => {
+const Rating = (sequelize) => {
     sequelize.define(
-        'courses',
+        'Rating',
         {
+            rating_id: {
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
+                primaryKey: true,
+                allowNull: false
+            },
             course_id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true,
+                foreingKey: true,
                 allowNull: false
             },
-            title: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            description: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
-            instructor_id: {
+            user_id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true,
+                foreingKey: true,
+                allowNull: false
+            },
+            rating: {
+                type: DataTypes.INTEGER,
+                allowNull: false
+            },
+            comment: {
+                type: DataTypes.STRING,
                 allowNull: false
             },
             create_at: {
@@ -31,22 +37,15 @@ const Courses = (sequelize) => {
             updated_at: {
                 type: DataTypes.DATE,
                 allowNull: false
-            },
-            progress: {
-                type: DataTypes.INTEGER,
-                allowNull: false
-            },
-            category: {
-                type: DataTypes.STRING,
-                allowNull: false
             }
         },
         {
-            tableName: 'Courses',
+            tableName: 'Rating',
             timestamps: false,
             freezeTableName: true,
+
         }
     );
 };
 
-module.exports = Courses;
+module.exports = Rating;
