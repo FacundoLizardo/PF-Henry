@@ -1,8 +1,8 @@
 const { DataTypes  } = require("sequelize");
 
-const Lessons = (sequelize) => {
+const Lesson = (sequelize) => {
     sequelize.define(
-     'lessons',
+     'Lesson',
      {
     lesson_id:{
         type: DataTypes.UUID,
@@ -21,7 +21,7 @@ const Lessons = (sequelize) => {
     course_id:{
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
+        foreingKey: true,
         allowNull: false
     },
     images:{
@@ -50,11 +50,11 @@ const Lessons = (sequelize) => {
     },
 },
 {
-    tableName: 'Lessons',
+    tableName: 'Lesson',
     timestamps: false,
     freezeTableName: true,
 }
 
 );
 }
-module.exports = Lessons;
+module.exports = Lesson;

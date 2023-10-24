@@ -2,24 +2,24 @@ const { DataTypes } = require("sequelize");
 
 const Consumption = (sequelize) => {
     sequelize.define(
-        'consumption',
+        'Consumption',
         {
             user_id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true,
+                foreingKey: true,
                 allowNull: false
             },
             course_id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true,
+                foreingKey: true,
                 allowNull: false
             },
             lesson_id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
-                primaryKey: true,
+                foreingKey: true,
                 allowNull: false
             },
             date_of_use: {

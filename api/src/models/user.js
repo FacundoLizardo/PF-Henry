@@ -1,8 +1,8 @@
 const { DataTypes, Sequelize } = require("sequelize");
 
-const Users = (sequelize) => {
+const User = (sequelize) => {
     sequelize.define(
-        'users',
+        'User',
         {
             user_id: {
                 type: DataTypes.UUID,
@@ -58,7 +58,7 @@ const Users = (sequelize) => {
             }
         },
         {
-            tableName: 'Users', // Cambia el nombre de la tabla si es necesario
+            tableName: 'User', // Cambia el nombre de la tabla si es necesario
             timestamps: false, // Si deseas habilitar timestamps, cambia esto a true
             freezeTableName: true, // Para evitar que Sequelize pluralice el nombre de la tabla
         }
@@ -66,4 +66,4 @@ const Users = (sequelize) => {
 };
 
 
-module.exports = Users;
+module.exports = User;
