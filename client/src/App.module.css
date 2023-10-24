@@ -20,7 +20,6 @@ html {
   /* Colores principales */
   --color-primary: #f44336;
   --color-secondary: #ffcc00;
-  --color-accent: #0075be;
   --color-details: #4caf50;
 
   /* Colores de fondo */
@@ -37,7 +36,7 @@ html {
   --color-border-two: #0f0f0f;
 
   /* Hover */
-  --color-hover: #000000;
+  --color-hover: #0075be;
 }
 
 /* Estilos generales */
@@ -46,3 +45,6 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
