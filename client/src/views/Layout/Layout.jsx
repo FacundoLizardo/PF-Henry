@@ -2,21 +2,86 @@ import Button from "../../Components/Button/Button";
 import CardContainer from "../../Components/CardContainer/CardContainer";
 import Footer from "../../Components/Footer/Footer";
 import Home from "../../Components/Home/Home";
-
+import { Link } from "react-router-dom";
 import Styles from "./Layout.module.css";
 
 const Layout = () => {
-  return (
-    <div className={Styles.layoutContainer}>
-      <Home />
-      <CardContainer text={"Los mejores cursos"} />
-      <CardContainer text={"Categorias"} />
-      <CardContainer text={"Últimos cursos"} />
-      <CardContainer text={"Novedades"} />
-      <Button text={"Ver todos cursos"} />
-      <Footer />
-    </div>
-  );
+	const course = [
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+		{
+			title: "Curso de microlearning",
+			description: "aqui aprenderas que es el microlearning",
+			rating: 4,
+			image:
+				"https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+			instructorImage:
+				"https://yt3.ggpht.com/peu87JRecAO0qd7KhfPHLrQ_XJBEiuAiNHGuGU74dvJRnfNzP6x3sNfiIINRISZpDIqQzRgFpg=s68-c-k-c0x00ffffff-no-rj",
+		},
+	];
+	return (
+		<div className={Styles.layoutContainer}>
+			<h1>Cursos mejor valorados por nuestros alumnos</h1>
+			<CardContainer course={course} />
+			<h1>Categorias</h1>
+			<CardContainer course={course} />
+			<h1>Ultimos cursos </h1>
+			<CardContainer course={course} />
+			<h1>Novedades</h1>
+
+			<Link to="/courses">
+				<button className={Styles.buttonCourses}>Ver todos cursos</button>
+			</Link>
+
+			<Footer />
+		</div>
+	);
 };
 
 export default Layout;
