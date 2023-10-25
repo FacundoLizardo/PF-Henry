@@ -20,20 +20,21 @@ const Course = (sequelize) => {
       },
       instructor_id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        //defaultValue: DataTypes.UUIDV4,-> No generar en forma automática
         allowNull: false,
-      },
+      } /*
       create_at: {
         type: DataTypes.DATE,
-        allowNull: false,
+        //allowNull: false,
       },
       updated_at: {
         type: DataTypes.DATE,
-        allowNull: false,
-      },
+        //allowNull: false,
+      },*/,
       progress: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 0,
       },
       category: {
         type: DataTypes.STRING,
