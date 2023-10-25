@@ -62,6 +62,14 @@ nav {
   transition: all 0.2s ease-out;
 }
 
+.menuModal {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
 .modal {
   background-color: var(--color-background-off-two);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);

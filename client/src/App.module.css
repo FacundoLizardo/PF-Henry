@@ -18,7 +18,7 @@ html {
 
 :root {
   /* Colores principales */
-  --color-primary: #f44336;
+  --color-primary: #2c0b8e;
   --color-secondary: #ffcc00;
   --color-details: #4caf50;
 
@@ -37,6 +37,26 @@ html {
 
   /* Hover */
   --color-hover: #0075be;
+
+  /* Padding */
+
+  /* Eje Y */
+  --pd-y-1: 10px;
+  --pd-y-2: 20px;
+  --pd-y-3: 30px;
+
+  /* Eje X */
+  --pd-x-1: 10px;
+  --pd-x-2: 20px;
+  --pd-x-3: 30px;
+
+  /* Eje Y + X */
+  --pd-1: 10px;
+  --pd-2: 20px;
+  --pd-3: 30px;
+
+
+  --pd-section: 30px 0;
 }
 
 /* Estilos generales */
