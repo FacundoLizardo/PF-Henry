@@ -1,12 +1,9 @@
 .layoutContainer {
-	text-align: center;
+	width: 90%;
+	margin: auto;
 }
 
-.buttonCourses {
-	border-radius: 25px;
-	background-color: rgb(182, 182, 182);
-}
-
-.buttonCourses:hover {
-	background-color: rgb(53, 53, 53);
+.layoutContainer h2 {
+	padding-top: var(--pd-y-1);
+	padding-bottom: var(--pd-y-2);
 }
