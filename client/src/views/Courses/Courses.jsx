@@ -1,6 +1,7 @@
 import Styles from "./Courses.module.css";
 import CardContainer from "../../Components/CardContainer/CardContainer";
 import Card from "../../Components/Card/Card";
+import Filters from "../../Components/Filters/Filters";
 
 const Courses = () => {
 	const course = [
@@ -64,6 +65,7 @@ const Courses = () => {
 	];
 	return (
 		<div className={Styles.coursesContainer}>
+			<Filters/>
 			<CardContainer course={course} />
 		</div>
 	);
