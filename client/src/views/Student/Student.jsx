@@ -3,7 +3,7 @@ import Button from "../../Components/Button/Button";
 import Styles from "./Student.module.css";
 
 const Student = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleNavigate = () => {
     navigate("/lecture");

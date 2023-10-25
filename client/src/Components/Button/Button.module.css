@@ -9,10 +9,10 @@
   position: relative;
   display: inline-block;
   outline: none;
-  border: 2px solid #2c0b8e;
-  background: #2c0b8e;
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
 }
 .buttonContainer .cssButtonSharpBlue:hover {
   background: #fff;
-  color: #2c0b8e;
+  color: var(--color-primary);
 }

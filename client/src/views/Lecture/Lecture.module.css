@@ -3,21 +3,22 @@
   width: 90%;
   margin: auto;
   max-width: 1024px;
-  padding: 20px 0;
+  padding: var(--pd-section);
+  padding-bottom: var(--pd-y-2);
 }
 
 .lectureContainer h2 {
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
 }
 
 /* Estilos descripción de clase */
 
 .descriptionClass {
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
 }
 
 .descriptionClass h3 {
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
   padding-left: 20px;
 }
 
@@ -27,7 +28,7 @@
   max-width: 564px;
   width: 100%;
   margin: auto;
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
 }
 
 .videoWrapper {
@@ -51,14 +52,14 @@
 }
 
 .commentContainer h3 {
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
   padding-left: 20px;
 }
 
 .comment {
   display: flex;
   width: 100%;
-  padding-bottom: 20px;
+  padding-bottom: var(--pd-y-2);
 }
 
 .imgContainer {
