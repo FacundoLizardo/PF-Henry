@@ -1,7 +1,7 @@
 const {Router} = require("express");
 const getHandlerAllRoutes = require("../handlers/getHandlerAllRoutes");
 const getHandlerById = require("../handlers/getHandlerById");
-const postHandlerVideo = require("../handlers/postHandlerVideo");
+const postHandlerVideo = require("../handlers/postHandlerCourse");
 
 const courseRoutes = require("./courseRoutes");
 const lessonRutes = require("./lessonRoutes");
