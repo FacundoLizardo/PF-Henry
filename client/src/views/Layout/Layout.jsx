@@ -67,13 +67,13 @@ const Layout = () => {
 	];
 	return (
 		<div className={Styles.layoutContainer}>
-			<h1>Cursos mejor valorados por nuestros alumnos</h1>
+			<h2>Cursos mejor valorados por nuestros alumnos</h2>
 			<CardContainer course={course} />
-			<h1>Categorias</h1>
+			<h2>Categorias</h2>
 			<CardContainer course={course} />
-			<h1>Ultimos cursos </h1>
+			<h2>Ultimos cursos </h2>
 			<CardContainer course={course} />
-			<h1>Novedades</h1>
+			<h2>Novedades</h2>
 
 			<Link to="/courses">
 				<button className={Styles.buttonCourses}>Ver todos cursos</button>

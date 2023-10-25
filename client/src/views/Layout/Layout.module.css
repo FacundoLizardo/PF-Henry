@@ -1,5 +1,9 @@
 .layoutContainer {
-	width: 100%;
-	height: 100%;
-	text-align: center;
+  width: 90%;
+  margin: auto;
+}
+
+.layoutContainer h2 {
+  padding-top: var(--pd-y-1);
+  padding-bottom: var(--pd-y-2);
 }
