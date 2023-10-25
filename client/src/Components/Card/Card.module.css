@@ -1,0 +1,40 @@
+.cardContainer {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	border-radius: 25px;
+	width: 30vh;
+	height: auto;
+	background-color: rgb(92, 92, 92);
+	margin: 5px;
+}
+
+.image {
+	border-radius: 25px;
+	margin: 2px;
+	width: auto;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+.image:hover {
+	transform: scale(0.98);
+}
+
+.contentContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.instructorImage {
+	border-radius: 100px;
+	max-width: 30px;
+	max-height: 30px;
+	margin: 5px;
+	cursor: pointer;
+}
+.text {
+	display: flex;
+	flex-direction: column;
+	margin: 5px;
+}
