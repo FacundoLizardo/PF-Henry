@@ -1,9 +1,9 @@
 import Styles from "./Button.module.css";
 
-const Button = ({ text }) => {
+const Button = ({ text, onClick }) => {
   return (
     <div className={Styles.buttonContainer}>
-      <div>{text}</div>
+      <button className={Styles.cssButtonSharpBlue} onClick={onClick}>{text}</button>
     </div>
   );
 };

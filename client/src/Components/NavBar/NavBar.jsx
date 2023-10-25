@@ -46,14 +46,14 @@ const Navbar = () => {
                 <NavLink to={"/courses"}>Cursos</NavLink>
               </li>
               <li>
-                <button onClick={handleModal}>M</button>
+                <button onClick={handleModal} className={Styles.menuModal}>M</button>
                 {showModal && (
                   <div className={Styles.modal}>
-                    <div className={Styles.modalContent}>
-                      <Link to={"/student"}>Student</Link>
+                    <div className={Styles.modalContent} onClick={handleModal}>
+                      <Link to={"/student"}>Alumno</Link>
                       <Link to={"/instructor"}>Instructor</Link>
-                      <Link to={"/config"}>Config</Link>
-                      <Link to={"/login"}>Login / Logout</Link>
+                      <Link to={"/config"}>Configuración</Link>
+                      <Link to={"/login"}>Ingresar / Salir</Link>
                     </div>
                   </div>
                 )}
