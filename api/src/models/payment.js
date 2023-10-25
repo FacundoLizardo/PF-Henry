@@ -8,7 +8,6 @@ const Payment = (sequelize) => {
       user_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        foreingKey: true,
         allowNull: false,
       },
       payment_id: {
@@ -20,7 +19,6 @@ const Payment = (sequelize) => {
       course_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        foreingKey: true,
         allowNull: false,
       },
       amount: {
@@ -39,11 +37,16 @@ const Payment = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      deletedAt: {
+        type: DataTypes.DATE,
+        allowNull: true, // Para permitir registros no eliminados
+      },
     },
     {
       tableName: "Payment",
       timestamps: false,
       freezeTableName: true,
+      paranoid: true,
     }
   );
 };

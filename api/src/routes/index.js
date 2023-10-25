@@ -9,8 +9,8 @@ const router = Router();
 //get x id
 //post -> subir video
 
-router.use("/educaStream", getHandlerAllRoutes)
-router.use("/educaStream/:id", getHandlerById)
-router.use("/educStream", postHandlerVideo)
+router.use("/educaStream", getHandlerAllRoutes); //todos los cursos disponibles
+router.use("/educaStream/:id", getHandlerById); //curso por id
+router.use("/educStream", postHandlerVideo); //subida de video
 
 module.exports = router;
