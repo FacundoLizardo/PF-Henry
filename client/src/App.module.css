@@ -40,21 +40,20 @@ html {
 
   /* Padding */
 
-  /* Eje Y */
+  /* Eje Y = Se usa para para el padding-top ó padding-bottom */
   --pd-y-1: 10px;
   --pd-y-2: 20px;
   --pd-y-3: 30px;
 
-  /* Eje X */
+  /* Eje X = Se usa para para el padding-left ó padding-right */
   --pd-x-1: 10px;
   --pd-x-2: 20px;
   --pd-x-3: 30px;
 
-  /* Eje Y + X */
+  /* Eje Y + X = le da padding a los 4 lados y se usa en padding*/
   --pd-1: 10px;
   --pd-2: 20px;
   --pd-3: 30px;
-
 
   --pd-section: 30px 0;
 }
