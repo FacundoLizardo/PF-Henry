@@ -8,6 +8,7 @@ const LessonModel = require("./models/lesson");
 const PaymentModel = require("./models/payment");
 const RatingModel = require("./models/rating");
 const UserModel = require("./models/user");
+const ConsumptionModel = require("./models/consumption");
 
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
@@ -52,11 +53,42 @@ LessonModel(sequelize);
 PaymentModel(sequelize);
 RatingModel(sequelize);
 UserModel(sequelize);
+ConsumptionModel(sequelize);
 
-const { Course, Lesson, Payment, Rating, User } = sequelize.models;
+const { Course, Lesson, Payment, Rating, User, Consumption } = sequelize.models;
 
+//Cursos con Lecciones
 Course.hasMany(Lesson, { as: "course_lesson" });
-Lesson.belongsTo(Course, { as: "lesson_course" });
+Lesson.belongsTo(Course, { foreignKey: "course_id", as: "lesson_course" });
+
+//Cursos con consumo
+Course.hasMany(Consumption, { as: "course_consumption" });
+Consumption.belongsTo(Course, {foreignKey:"course_id", as: "consumption_course" });
+
+//Cursos con Pagos
+Course.hasMany(Payment, {as: "course_payment"});
+Payment.belongsTo(Course, {foreingKey:"course_id",as: "payment_course"});
+
+//Cursos con Rating
+Course.hasMany(Rating, {as: "course_rating"});
+Rating.belongsTo(Course, {foreingKey: "course_id",as: "rating_course"});
+
+//Lecciones con Consumo
+Lesson.hasMany(Consumption, {as: "lesson_consumption"});
+Consumption.belongsTo(Lesson, {foreingKey:"lesson_id", as: "consumption_lesson"});
+
+//Usuarios con Consumo
+User.hasMany(Consumption, {as: "user_consumption"});
+Consumption.belongsTo(User, {foreingKey:"user_id",as: "consumption_user"});
+
+//Usuarios con Pagos
+User.hasMany(Payment, {as: "user_payment"});
+Payment.belongsTo(User, {foreingKey:"user_id",as: "payment_user"});
+
+//Usuarios con Rating
+User.hasMany(Rating, {as: "user_rating"});
+Rating.belongsTo(User, {foreingKey:"user_id",as: "rating_user"});
+
 
 module.exports = {
   Course,
