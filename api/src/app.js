@@ -2,6 +2,9 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+// const routes = require("./routes/index.js");
+const courseRoutes = require("./routes/courseRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 //const routes = require("./routes/index.js");
 
 require("./db.js");
@@ -24,8 +27,11 @@ server.use((req, res, next) => {
 	res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
 	next();
 });
-
+// server.use("/courses", courseRoutes);
 // server.use("/", routes);
+
+server.use("/users", userRoutes);
+server.use("/courses", courseRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

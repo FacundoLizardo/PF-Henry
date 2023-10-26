@@ -1,13 +1,13 @@
-const {Router} = require("express")
+const { Router } = require("express");
 
-const getHandlerAllRoutes = require("../handlers/getHandlerAllRoutes")
-const getHandlerById = require("../handlers/getHandlerById")
-const postHandlerCourse = require("../handlers/postHandlerCourse")
+// const getHandlerAllRoutes = require("../handlers/getHandlerAllRoutes");
+// const getHandlerById = require("../handlers/getHandlerById");
+const { postHandlerCourse } = require("../handlers/postHandlerCourse");
 
 const courseRoutes = Router();
 
-courseRoutes.get("/",getHandlerAllRoutes);
-courseRoutes.get("/:course_id",getHandlerById);
-courseRoutes.post("/",postHandlerCourse);
+// courseRoutes.get("/", getHandlerAllRoutes);
+// courseRoutes.get("/:course_id", getHandlerById);
+courseRoutes.post("/create", postHandlerCourse);
 
-module.exports = courseRoutes
+module.exports = courseRoutes;

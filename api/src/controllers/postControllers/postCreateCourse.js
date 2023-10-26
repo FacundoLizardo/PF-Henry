@@ -1,23 +1,36 @@
-const axios = require("axios");
-const { Course } = require("../../db");
+const { Course, User } = require("../../db");
 
 const postCreateCourse = async (
-  title,
-  description,
-  instructor_id,
-  category
+	title,
+	description,
+	instructor_id,
+	image,
+	category
 ) => {
-  try {
-    const newCourse = await Course.create({
-      title,
-      description,
-      instructor_id,
-      category,
-    });
-    return newCourse;
-  } catch (error) {
-    return res.json({ error: error.message });
-  }
+	try {
+		const [course, created] = await Course.findOrCreate({
+			where: { title: title },
+			defaults: {
+				description,
+				instructor_id,
+				image,
+				category,
+			},
+		});
+
+		const instructor = await User.findByPk(instructor_id);
+
+		if (instructor) {
+			course.addUser(instructor);
+		}
+
+		if (created) {
+			return course;
+		} else
+			return "Course not created cause it already exist or something is wrong, please try again";
+	} catch (error) {
+		return error;
+	}
 };
 
 module.exports = { postCreateCourse };
