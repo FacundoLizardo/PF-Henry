@@ -4,7 +4,7 @@ const Instructor = () => {
 	return (
 		<div className={Styles.instructorContainer}>
 			<div>Hola soy instructor</div>
-			<Link to="/form">
+			<Link to="/instructor/form">
 				<button>Crear nuevo curso</button>
 			</Link>
 		</div>

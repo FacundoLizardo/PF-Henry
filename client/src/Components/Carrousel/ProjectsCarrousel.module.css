@@ -6,6 +6,14 @@
     gap: 20px;
   }
 
+  .imgContainer{
+    display: flex;
+  justify-content: center; 
+  align-items: center; 
+  max-height: 500px;
+  object-fit: cover;
+  }
+
   /* .logo {
 
     -webkit-text-size-adjust: 100%;
