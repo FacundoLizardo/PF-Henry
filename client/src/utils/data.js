@@ -82,6 +82,151 @@ export const listCourses = [
             }
         ]
     }, {
+        "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+        "title": "Curso Avanzado de Programación en Python",
+        "description": "Aprende programación en Python desde cero y conviértete en un experto en desarrollo de software.",
+        "instructor_id": "e0f83b49-6a3c-4e72-9b15-2cd0b81f7d32",
+        "created_at": "25-02-2023 10:30hs",
+        "updated_at": "25-02-2023 10:30hs",
+        "progress": 0,
+        "category": "Programación",
+        "image": "https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+        "instructorImage": "https://example.com/instructor_python.jpg",
+        "rating": 4.5,
+        "comments": [
+            {
+                "user": "a2c5938d-7cfe-4d29-aa7e-3e3a2c5938d",
+                "description": "Este curso me ayudó a mejorar mis habilidades en Python. ¡Muy recomendado!"
+            },
+            {
+                "user": "f6e38d9a-2c9d-4a7e-8f2c-7cfe8f9a2c5",
+                "description": "El instructor explica de manera clara y concisa. Estoy muy satisfecho con este curso."
+            }
+        ],
+        "lessons": [
+            {
+                "lesson_id": "f4e3b7d9-62c5-4a1e-9e6a-2c3b6a9d5f4e",
+                "title": "Introducción a Python",
+                "description": "Conoce los conceptos básicos de Python y cómo configurar tu entorno de desarrollo.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_intro.jpg",
+                "video_url": "https://example.com/python_intro.mp4",
+                "duration": 20,
+                "sequence_order": 1,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "a6d2c4b3-5e2f-4b7a-9a6f-2b3a6c9d5a6d",
+                "title": "Estructuras de Control en Python",
+                "description": "Aprende a usar condicionales y bucles en Python para controlar el flujo de tu programa.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_control.jpg",
+                "video_url": "https://example.com/python_control.mp4",
+                "duration": 25,
+                "sequence_order": 2,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "c1f2b3e4-7d8e-4a6b-9e9a-3b6a1c9d5f2b",
+                "title": "Programación Orientada a Objetos en Python",
+                "description": "Descubre los principios de la programación orientada a objetos y cómo aplicarlos en Python.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_oop.jpg",
+                "video_url": "https://example.com/python_oop.mp4",
+                "duration": 30,
+                "sequence_order": 3,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "b4e9d8c6-5a2f-4e7b-9d8c-3a6b4d9e5a2f",
+                "title": "Desarrollo de Aplicaciones Web con Flask",
+                "description": "Aprende a crear aplicaciones web con el framework Flask y despliega tus proyectos en línea.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/flask_web.jpg",
+                "video_url": "https://example.com/flask_web.mp4",
+                "duration": 28,
+                "sequence_order": 4,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            }
+        ]
+    }
+    , {
+        "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+        "title": "Curso Avanzado de Programación en Python",
+        "description": "Aprende programación en Python desde cero y conviértete en un experto en desarrollo de software.",
+        "instructor_id": "e0f83b49-6a3c-4e72-9b15-2cd0b81f7d32",
+        "created_at": "25-02-2023 10:30hs",
+        "updated_at": "25-02-2023 10:30hs",
+        "progress": 0,
+        "category": "Programación",
+        "image": "https://i.ytimg.com/vi/MHip3eVhK9g/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBa2Tc3wl_CWfJzbvhBmHo1sBXdEg",
+        "instructorImage": "https://example.com/instructor_python.jpg",
+        "rating": 4.5,
+        "comments": [
+            {
+                "user": "a2c5938d-7cfe-4d29-aa7e-3e3a2c5938d",
+                "description": "Este curso me ayudó a mejorar mis habilidades en Python. ¡Muy recomendado!"
+            },
+            {
+                "user": "f6e38d9a-2c9d-4a7e-8f2c-7cfe8f9a2c5",
+                "description": "El instructor explica de manera clara y concisa. Estoy muy satisfecho con este curso."
+            }
+        ],
+        "lessons": [
+            {
+                "lesson_id": "f4e3b7d9-62c5-4a1e-9e6a-2c3b6a9d5f4e",
+                "title": "Introducción a Python",
+                "description": "Conoce los conceptos básicos de Python y cómo configurar tu entorno de desarrollo.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_intro.jpg",
+                "video_url": "https://example.com/python_intro.mp4",
+                "duration": 20,
+                "sequence_order": 1,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "a6d2c4b3-5e2f-4b7a-9a6f-2b3a6c9d5a6d",
+                "title": "Estructuras de Control en Python",
+                "description": "Aprende a usar condicionales y bucles en Python para controlar el flujo de tu programa.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_control.jpg",
+                "video_url": "https://example.com/python_control.mp4",
+                "duration": 25,
+                "sequence_order": 2,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "c1f2b3e4-7d8e-4a6b-9e9a-3b6a1c9d5f2b",
+                "title": "Programación Orientada a Objetos en Python",
+                "description": "Descubre los principios de la programación orientada a objetos y cómo aplicarlos en Python.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/python_oop.jpg",
+                "video_url": "https://example.com/python_oop.mp4",
+                "duration": 30,
+                "sequence_order": 3,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            },
+            {
+                "lesson_id": "b4e9d8c6-5a2f-4e7b-9d8c-3a6b4d9e5a2f",
+                "title": "Desarrollo de Aplicaciones Web con Flask",
+                "description": "Aprende a crear aplicaciones web con el framework Flask y despliega tus proyectos en línea.",
+                "course_id": "d1a12e5a-62f3-4f7e-9e67-19d8a5abf63e",
+                "image": "https://example.com/flask_web.jpg",
+                "video_url": "https://example.com/flask_web.mp4",
+                "duration": 28,
+                "sequence_order": 4,
+                "created_at": "25-02-2023 10:30hs",
+                "updated_at": "25-02-2023 10:30hs"
+            }
+        ]
+    }, {
         course_id: 'd2390d33-4c57-4a62-9a8b-47c9a0e3d7e3',
         title: "Curso de Marketing Digital",
         description: "Aprende estrategias efectivas de marketing en línea",

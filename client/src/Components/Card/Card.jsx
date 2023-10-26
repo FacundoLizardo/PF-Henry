@@ -1,23 +1,26 @@
 import Styles from "./Card.module.css";
 
-const Card = ({ course }) => {
-	return (
-		<div className={Styles.cardContainer}>
-			<img src={course.image} className={Styles.image}></img>
+const Card = ({ course, handleNavigate }) => {
+  const handleCardClick = () => {
+    handleNavigate(course.course_id);
+  };
 
-			<div className={Styles.contentContainer}>
-				<img
-					src={course.instructorImage}
-					className={Styles.instructorImage}
-				></img>
-				<div className={Styles}>
-					<h2>{course.title}</h2>
-					<h3>{course.description}</h3>
-				</div>
-			</div>
-			<h4>{course.rating}</h4>
-		</div>
-	);
+  return (
+    <div className={Styles.cardContainer}>
+      <div className={Styles.imgContainer} onClick={handleCardClick}>
+        <img src={course.image} />
+      </div>
+      <div className={Styles.contentContainer}>
+        <div className={Styles.contentTop}>
+          <h4>{course.title}</h4>
+        </div>
+        <div className={Styles.contentBottom}>
+          <p>{course.description}</p>
+        </div>
+        <div>{course.rating}</div>
+      </div>
+    </div>
+  );
 };
 
 export default Card;

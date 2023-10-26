@@ -20,7 +20,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Layout />} />
-        <Route path="/detailCourse/:course_id" element={<DetailCourse />} />
+        <Route path="/detailCourse/:detailId" element={<DetailCourse />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/student" element={<Student />} />
         <Route path="/instructor" element={<Instructor />} />

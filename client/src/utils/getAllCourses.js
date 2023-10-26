@@ -1,14 +1,16 @@
+import axios from "axios";
+
 export const getAllCourses = async () => {
     try {
-        const response = await fetch()
+        const response = await axios.get();
 
-        if (!response.ok) {
+        if (response.status !== 200) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data = await response.json()
+        const data = response.data;
         console.log(data);
-        return data
+        return data;
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;
