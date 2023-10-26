@@ -5,6 +5,7 @@
   border: 1px solid var(--color-border-one);
   max-width: 300px;
   min-width: 200px;
+  min-height: 200px;
 }
 
 .imgContainer {
