@@ -1,0 +1,20 @@
+.coursesContainer {
+  width: 90%;
+  margin: auto;
+  padding: var(--pd-section);
+}
+
+.categoryContainer {
+  padding-bottom: var(--pd-y-3);
+}
+
+.coursesContainer h2 {
+  padding-bottom: var(--pd-y-2);
+}
+
+.courses {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
