@@ -6,6 +6,7 @@ const LessonModel = require("./models/lesson");
 const PaymentModel = require("./models/payment");
 const RatingModel = require("./models/rating");
 const UserModel = require("./models/user");
+const CategoryModel = require("./models/category");
 //const ConsumptionModel = require("./models/consumption");
 
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
@@ -23,6 +24,7 @@ LessonModel(sequelize);
 PaymentModel(sequelize);
 RatingModel(sequelize);
 UserModel(sequelize);
+CategoryModel(sequelize);
 //ConsumptionModel(sequelize);
 
 const { Course, Lesson, Payment, Rating, User } = sequelize.models;
@@ -73,7 +75,6 @@ User.hasMany(Payment, {
 Payment.belongsTo(User, {
 	foreignKey: "user_id",
 });
-
 // // Relacion Lessons con Tabla Intermedia Comsumption
 // Lesson.belongsTo(Consumption, {
 // 	foreignKey: "lesson_id",
