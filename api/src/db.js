@@ -30,8 +30,8 @@ CategoryModel(sequelize);
 const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
 // //Cursos con Lecciones
-// Course.hasMany(Lesson, { as: "course_lesson" });
-// Lesson.belongsTo(Course, { foreignKey: "id", as: "lesson_course" });
+Course.hasMany(Lesson, { as: "lesson" });
+Lesson.belongsTo(Course, { foreignKey: "id"});
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
