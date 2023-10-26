@@ -8,7 +8,7 @@ const postHandlerCourse = async (req, res) => {
 	if (!title || !description || !instructor_id || !category || !image) {
 		return res.status(400).json({ error: "Lack Of Data" });
 	}
-
+	//Comment Prueba
 	try {
 		const newCourse = await postCreateCourse(
 			title,
