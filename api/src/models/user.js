@@ -42,11 +42,11 @@ const User = (sequelize) => {
 			},
 			role_instructor: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			role_student: {
 				type: DataTypes.BOOLEAN,
-				allowNull: false,
+				allowNull: true,
 			},
 			deletedAt: {
 				type: DataTypes.DATE,

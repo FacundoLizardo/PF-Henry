@@ -7,14 +7,45 @@ const Form = () => {
 	const [course, setCourse] = useState({
 		title: "",
 		description: "",
+		instructor_id: "",
 		category: "",
 		image: "",
 	});
+
+	const getId = () => {
+		const user = getUserInfo();
+
+		const id = user.id;
+
+		setCourse((prevCourse) => ({ ...prevCourse, instructor_id: id }));
+	};
+
+	// 	Desarrollo web
+	// Marketing digital
+	// Programación
+	// Diseño gráfico
+	// Idiomas
+	// Negocios y emprendimiento
+	// Ciencias de datosgti
+	// Fotografía
+	// Arte y creatividad
+	// Salud y bienestar
+	// Música
+	// Culinaria y gastronomía
+	// Finanzas personales
+	// Programación de videojuegos
+	// Desarrollo de aplicaciones móviles
+	// Ciencias sociales
+	// Diseño de moda
+	// Psicología y consejería
+	// Energías renovables
+	// Ciencias ambientales
 
 	const handleChange = (event) => {
 		event.preventDefault();
 		const { name, value } = event.target;
 		setCourse((prevCourse) => ({ ...prevCourse, [name]: value }));
+		getId();
 	};
 
 	const onSubmit = async () => {
