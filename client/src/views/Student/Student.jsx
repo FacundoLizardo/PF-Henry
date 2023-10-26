@@ -1,19 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
+
 import Styles from "./Student.module.css";
+
+import { listCourses } from "../../utils/data";
 
 const Student = () => {
   const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate("/lecture");
+  const handleNavigateToLessons = (courseId) => {
+    const selectedCourse = listCourses.find(
+      (course) => course.course_id === courseId
+    );
+    navigate(`/classList/${courseId}`, {
+      state: { courseData: selectedCourse },
+    });
   };
 
   return (
-    <div className={Styles.studentContainer}>
+    <div className={Styles.studentContaineester}>
       <div>
-        Hola, soy Alumno
-        <Button text={"Ir al curso"} onClick={handleNavigate} />
+        <h1>Mis cursos</h1>
+        {listCourses.map((course) => (
+          <div key={course.course_id}>
+            <h2>{course.title}</h2>
+            <Button
+              text={"Clases"}
+              onClick={() => handleNavigateToLessons(course.course_id)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import Student from "./views/Student/Student";
 import Instructor from "./views/Instructor/Instructor";
 import Lecture from "./views/Lecture/Lecture";
 import Config from "./views/Config/Config";
+import ClassList from "./views/ListClass/ClassList";
 
 import Styles from "./App.module.css";
 
@@ -21,8 +22,9 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/student" element={<Student />} />
         <Route path="/instructor" element={<Instructor />} />
-        <Route path="/lecture" element={<Lecture />} />
+        <Route path="/lecture/:lessonId" element={<Lecture />} />
         <Route path="/config" element={<Config />} />
+        <Route path="/classList/:courseId" element={<ClassList />} />
       </Routes>
     </div>
   );

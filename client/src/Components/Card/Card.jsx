@@ -1,4 +1,3 @@
-import Button from "../Button/Button";
 import Styles from "./Card.module.css";
 
 const Card = ({ course }) => {
