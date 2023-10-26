@@ -28,7 +28,7 @@ function App() {
 				<Route path="/lecture/:lessonId" element={<Lecture />} />
 				<Route path="/config" element={<Config />} />
 				<Route path="/classList/:courseId" element={<ClassList />} />
-				<Route path="/form" element={<Form />} />
+				<Route path="/instructor/form" element={<Form />} />
 			</Routes>
 		</div>
 	);
