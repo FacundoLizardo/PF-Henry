@@ -33,7 +33,7 @@ const User = (sequelize) => {
 				defaultValue: "apellido",
 			},
 			birthdate: {
-				type: DataTypes.INTEGER,
+				type: DataTypes.DATEONLY,
 				allowNull: false,
 			},
 			profile_picture: {

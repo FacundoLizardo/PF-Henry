@@ -1,4 +1,7 @@
-const postCreateCourse = require("../controllers/postControllers/postCreateCourse");
+const {
+	postCreateCourse,
+} = require("../controllers/postControllers/postCreateCourse");
+
 
 const postHandlerVideo = async (res, req) => {
 	const { title, description, instructor_id, image, category } = req.body;
@@ -6,9 +9,14 @@ const postHandlerVideo = async (res, req) => {
 		const newCourse = await postCreateCourse(
 			title,
 			description,
+			instructor_id,
+			image,
+			category
+		);
+
+		return res.status(200).json(newCourse);
 			image,
 			instructor_id,
-
 			category
 		);
 		return res.status(201).json(newCourse);
@@ -17,4 +25,4 @@ const postHandlerVideo = async (res, req) => {
 	}
 };
 
-module.exports = { postHandlerVideo };
+module.exports = { postHandlerCourse };

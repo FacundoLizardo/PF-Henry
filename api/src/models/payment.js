@@ -1,4 +1,3 @@
-const sequelize = require("../db.js");
 const { DataTypes } = require("sequelize");
 
 const Payment = (sequelize) => {
@@ -9,11 +8,11 @@ const Payment = (sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				allowNull: false,
+				primaryKey: true,
 			},
 			payment_id: {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
-				primaryKey: true,
 				allowNull: false,
 			},
 			course_id: {

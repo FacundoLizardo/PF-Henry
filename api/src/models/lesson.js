@@ -20,7 +20,6 @@ const Lesson = (sequelize) => {
 			},
 			course_id: {
 				type: DataTypes.UUID,
-				defaultValue: DataTypes.UUIDV4,
 				allowNull: false,
 			},
 			images: {
