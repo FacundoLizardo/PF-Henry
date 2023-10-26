@@ -1,7 +1,8 @@
+//const getAllCoursesController = require("../controllers/getControllers/getAllCoursesController");
 const getAllCoursesController = require("../controllers/getControllers/getAllCoursesController");
 const getCourseByNameController = require("../controllers/getControllers/getCourseByNameController");
 
-const getHandlerAllRoutes = async (res, req) => {
+const getHandlerAllRoutes = async (req, res) => {
   const { name } = req.query;
   try {
     const result = name
@@ -16,4 +17,4 @@ const getHandlerAllRoutes = async (res, req) => {
   }
 };
 
-module.exports = { getHandlerAllRoutes };
+module.exports = {getHandlerAllRoutes};
