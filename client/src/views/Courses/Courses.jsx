@@ -1,24 +1,28 @@
 import CardContainer from "../../Components/CardContainer/CardContainer";
 import Filters from "../../Components/Filters/Filters";
-import { listCourses } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 
 import Styles from "./Courses.module.css";
+import { useEffect, useState } from "react";
 
 const Courses = () => {
   const navigate = useNavigate();
+  const [dataCourses, setDataCourses] = useState([]);
+  useEffect(() => {
+    setDataCourses(JSON.parse(localStorage.getItem("coursesData")));
+  }, []);
 
-  const groupedCourses = listCourses.reduce((result, course) => {
+  const handleNavigate = (detailId) => {
+    navigate(`./detailCourse/${detailId}`);
+  };
+
+  const groupedCourses = dataCourses.reduce((result, course) => {
     if (!result[course.category]) {
       result[course.category] = [];
     }
     result[course.category].push(course);
     return result;
   }, {});
-
-  const handleNavigate = (detailId) => {
-    navigate(`./detailCourse/${detailId}`);
-  };
 
   return (
     <div className={Styles.coursesContainer}>
