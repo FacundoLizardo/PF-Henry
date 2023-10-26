@@ -2,7 +2,7 @@ import Styles from "./Card.module.css";
 
 const Card = ({ course, handleNavigate }) => {
   const handleCardClick = () => {
-    handleNavigate(course.course_id);
+    handleNavigate(course.id);
   };
 
   return (
