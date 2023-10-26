@@ -10,14 +10,14 @@ import Lecture from "./views/Lecture/Lecture";
 import Config from "./views/Config/Config";
 import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
-import Login from "./views/Login/Login";
+import { Login } from "./views/Login/Login";
 
 import Styles from "./App.module.css";
 
 function App() {
 	return (
 		<div className={Styles.appContainer}>
-			<NavBar />
+			{location.pathname === "/login" ? "" : <NavBar />}
 			<Routes>
 				<Route path="/" element={<Layout />} />
 				<Route path="/detailCourse/:course_id" element={<DetailCourse />} />
