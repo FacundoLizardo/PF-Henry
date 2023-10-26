@@ -1,14 +1,18 @@
 import ReactPlayer from "react-player/youtube";
 import Button from "../../Components/Button/Button";
+import { useLocation } from "react-router-dom";
 
 import Styles from "./Lecture.module.css";
 
 const Lecture = () => {
+  const { state } = useLocation();
+  const lesson = state.lessonData;
+
   return (
     <div className={Styles.lectureContainer}>
-      <h2>Nombre del Curso</h2>
+      <h2>{lesson.title}</h2>
       <div className={Styles.descriptionClass}>
-        <h3>Clase 1</h3>
+        <h3>Clase {lesson.sequence_order}</h3>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod
           necessitatibus reiciendis animi fuga, quas iure numquam amet dicta,
@@ -29,7 +33,7 @@ const Lecture = () => {
       <div className={Styles.videoContainer}>
         <div className={Styles.videoWrapper}>
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+            url={lesson.video_url}
             controls
             width="100%"
             height="100%"

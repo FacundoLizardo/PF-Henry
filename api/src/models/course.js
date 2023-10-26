@@ -20,7 +20,7 @@ const Course = (sequelize) => {
 			},
 			instructor_id: {
 				type: DataTypes.UUID,
-				allowNull: false,
+				allowNull: true,
 			},
 			progress: {
 				type: DataTypes.INTEGER,
