@@ -27,7 +27,7 @@ UserModel(sequelize);
 CategoryModel(sequelize);
 //ConsumptionModel(sequelize);
 
-const { Course, Lesson, Payment, Rating, User } = sequelize.models;
+const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
 // //Cursos con Lecciones
 // Course.hasMany(Lesson, { as: "course_lesson" });
@@ -94,7 +94,12 @@ Lesson.hasOne(Course, {
 	foreignKey: "course_id",
 });
 
+Category.hasMany(Course, {
+	foreignKey: "course_id",
+});
+
 module.exports = {
+	Category,
 	Course,
 	Lesson,
 	Payment,
