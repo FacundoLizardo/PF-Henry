@@ -31,7 +31,7 @@ const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
 // //Cursos con Lecciones
 Course.hasMany(Lesson, { as: "lesson" });
-Lesson.belongsTo(Course, { foreignKey: "id"});
+Lesson.belongsTo(Course, { foreignKey: "id" });
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
@@ -90,13 +90,11 @@ Course.hasMany(Rating, {
 	foreignKey: "course_id",
 });
 
-Lesson.hasOne(Course, {
-	foreignKey: "course_id",
-});
+Lesson.hasOne(Course);
 
-Category.hasMany(Course, {
-	foreignKey: "course_id",
-});
+Category.hasMany(Course);
+
+Course.belongsTo(Category);
 
 module.exports = {
 	Category,

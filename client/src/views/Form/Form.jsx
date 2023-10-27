@@ -1,106 +1,107 @@
-import Styles from "./Form.module.css";
-import { useState } from "react";
-import Footer from "../../Components/Footer/Footer";
+/* eslint-disable */
+import { useState, useEffect } from "react";
 import { sendData } from "../../utils/postCreateCourse";
+import { storage } from "../../firebase/firebase";
+import style from "./Form.module.css";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+	const navigate = useNavigate();
+	const [categoriesData, setCategoriesData] = useState([]);
+	const [imagePath, setImagePath] = useState("");
 	const [course, setCourse] = useState({
 		title: "",
 		description: "",
-		instructor_id: "",
+		instructor_id: "ab518b48-1a30-4d10-b525-479167e4fdd4",
 		category: "",
 		image: "",
 	});
 
-	const getId = () => {
-		const user = getUserInfo();
+	useEffect(() => {
+		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
+	}, []);
 
-		const id = user.id;
-
-		setCourse((prevCourse) => ({ ...prevCourse, instructor_id: id }));
+	const uploadImage = async (imageUpload) => {
+		const nombreCurso = document.getElementById("title").value;
+		const imageRef = ref(storage, `courses/${nombreCurso}/${imageUpload.name}`);
+		await uploadBytes(imageRef, imageUpload);
+		const downloadURL = await getDownloadURL(imageRef);
+		setImagePath(downloadURL);
+		return downloadURL;
 	};
 
-	// 	Desarrollo web
-	// Marketing digital
-	// Programación
-	// Diseño gráfico
-	// Idiomas
-	// Negocios y emprendimiento
-	// Ciencias de datosgti
-	// Fotografía
-	// Arte y creatividad
-	// Salud y bienestar
-	// Música
-	// Culinaria y gastronomía
-	// Finanzas personales
-	// Programación de videojuegos
-	// Desarrollo de aplicaciones móviles
-	// Ciencias sociales
-	// Diseño de moda
-	// Psicología y consejería
-	// Energías renovables
-	// Ciencias ambientales
+	const handleUploadImage = async (e) => {
+		const imageUpload = e.target.files[0];
+		const newPath = await uploadImage(imageUpload);
+		setCourse({ ...course, image: `${newPath}` });
+	};
 
 	const handleChange = (event) => {
-		event.preventDefault();
 		const { name, value } = event.target;
-		setCourse((prevCourse) => ({ ...prevCourse, [name]: value }));
-		getId();
+		setCourse({ ...course, [name]: value });
+		console.log(course);
+		console.log(imagePath);
+		//getId();
 	};
-
-	const onSubmit = async () => {
+	const onSubmit = async (course) => {
 		await sendData(course);
+		navigate("/courses");
 	};
-
-	console.log(course);
-
 	return (
-		<div className={Styles.detailCourseContainer}>
-			<form className={Styles.form} onSubmit={onSubmit}>
-				<h2 className={Styles.formTitle}>
-					AQUÍ PODRÁS CREAR TU CURSO, LUEGO APARECERÁ EN TU PANEL DE INSTRUCTOR
-					DONDE PODRÁS AÑADIR LAS LECCIONES QUE CONSIDERES NECESARIAS.
-				</h2>
-				<label>Titulo de tu curso</label>
-				<input
-					placeholder="Titulo"
-					onChange={handleChange}
-					name="title"
-					className={Styles.input}
-				/>
-
-				<label>Descripcion del curso (maximo 100 caracteres)</label>
-				<input
-					placeholder="Descripcion"
-					onChange={handleChange}
-					name="description"
-					className={Styles.input}
-				/>
-
-				<label>Categoria a la que pertenece</label>
-				<input
-					placeholder="Categoria"
-					onChange={handleChange}
-					name="category"
-					className={Styles.input}
-				/>
-
-				<label>
-					Agrega una imagen miniatura descriptiva de tu curso, esta debe ser una
-					URL
-				</label>
-				<input
-					placeholder="Ingresa aqui la URL de la imagen "
-					onChange={handleChange}
-					name="image"
-					className={Styles.input}
-				/>
-
-				<button type="submit" className={Styles.buttonSubmit}>
-					Submit
-				</button>
-			</form>
-			<Footer />
+		<div className={style.container}>
+			<div className={style.modal}>
+				<div className={style.modal__header}>
+					<span className={style.modal__title}>Nuevo Curso</span>
+				</div>
+				<div className={style.modal__body}>
+					<div className={style.input}>
+						<label className={style.input__label}>Nombre del curso</label>
+						<input
+							className={style.input__field}
+							type="text"
+							id="title"
+							name="title"
+							value={course.title}
+							onInput={handleChange}
+						/>
+						<p className={style.input__description}>{}</p>
+						<label className={style.input__label}>Descripcion</label>
+						<textarea
+							id="description"
+							name="description"
+							value={course.description}
+							className={style.input__field}
+							onInput={handleChange}></textarea>
+						<p className={style.input__description}>{}</p>
+						<label className={style.input__label}>Categoria:</label>
+						<select
+							className={style.input__field}
+							id="category"
+							name="category"
+							value={course.category}
+							onInput={handleChange}>
+							{categoriesData?.map((category, index) => (
+								<option key={index}>{category.name}</option>
+							))}
+						</select>
+						<p className={style.input__description}>{}</p>
+						<label className={style.input__label}>Imagen:</label>
+						<input
+							className={style.input__field}
+							type="file"
+							id="image"
+							onChange={handleUploadImage}
+						/>
+						<p className={style.input__description}>{}</p>
+					</div>
+				</div>
+				<div className={style.modal__footer}>
+					<button className={style.button} onClick={() => onSubmit(course)}>
+						Create project
+					</button>
+				</div>
+			</div>
 		</div>
 	);
 };
