@@ -13,7 +13,7 @@ const ClassList = () => {
         (lesson) => lesson.lesson_id === lessonId
       );
       if (selectedLesson) {
-        navigate(`/lecture/${lessonId}`, {
+        navigate(`/student/classList/lecture/${lessonId}`, {
           state: { lessonData: selectedLesson },
         });
       } else {
@@ -25,12 +25,12 @@ const ClassList = () => {
   };
 
   return (
-    <div className={Styles.ClassListContainer}>
+    <div className={Styles.classListContainer}>
       <h1>Lista de Clases</h1>
       {selectedCourse && selectedCourse.lessons ? (
-        selectedCourse.lessons.map((lesson) => (
+        selectedCourse.lessons.map((lesson, index) => (
           <div key={lesson.lesson_id}>
-            <p key={lesson.lesson_id}>{lesson.title}</p>
+            <p key={index}>{lesson.title}</p>
             <Button
               text={"Ir"}
               onClick={() => handleNavigateToLecture(lesson.lesson_id)}

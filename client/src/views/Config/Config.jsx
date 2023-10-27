@@ -1,4 +1,4 @@
-import Styles from "react";
+import Styles from "./Config.module.css";
 
 const Config = () => {
   return (

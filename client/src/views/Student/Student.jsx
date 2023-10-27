@@ -12,7 +12,7 @@ const Student = () => {
     const selectedCourse = listCourses.find(
       (course) => course.course_id === courseId
     );
-    navigate(`/classList/${courseId}`, {
+    navigate(`/student/classList/${courseId}`, {
       state: { courseData: selectedCourse },
     });
   };

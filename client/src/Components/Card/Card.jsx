@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
 
-const Card = ({ course, handleNavigate }) => {
+const Card = ({ course }) => {
+  const navigate = useNavigate();
+
   const handleCardClick = () => {
-    handleNavigate(course.id);
+    navigate(`/detailCourse/${course.id}`);
   };
 
   return (
