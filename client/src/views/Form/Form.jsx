@@ -5,6 +5,7 @@ import { storage } from "../../firebase/firebase";
 import style from "./Form.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import Button from "../../Components/Button/Button";
 
 const Form = () => {
 	const navigate = useNavigate();
@@ -97,9 +98,8 @@ const Form = () => {
 					</div>
 				</div>
 				<div className={style.modal__footer}>
-					<button className={style.button} onClick={() => onSubmit(course)}>
-						Create project
-					</button>
+					<Button text={"Crear curso"} className={style.button} onClick={() => onSubmit(course)} />
+			
 				</div>
 			</div>
 		</div>

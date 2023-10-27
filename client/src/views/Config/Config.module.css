@@ -1,0 +1,6 @@
+.configContainer {
+  width: 90%;
+  margin: auto;
+  height: 100%;
+  padding: var(--pd-section);
+}
