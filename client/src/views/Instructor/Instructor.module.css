@@ -1,0 +1,6 @@
+.instructorContainer {
+  width: 90%;
+  margin: auto;
+  min-height: 100%;
+  padding: var(--pd-section);
+}

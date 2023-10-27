@@ -12,17 +12,17 @@ const Student = () => {
     const selectedCourse = listCourses.find(
       (course) => course.course_id === courseId
     );
-    navigate(`/classList/${courseId}`, {
+    navigate(`/student/classList/${courseId}`, {
       state: { courseData: selectedCourse },
     });
   };
 
   return (
-    <div className={Styles.studentContaineester}>
+    <div className={Styles.studentContainer}>
       <div>
         <h1>Mis cursos</h1>
         {listCourses.map((course) => (
-          <div key={course.course_id}>
+          <div key={course.course_id} className={Styles.studentContent}>
             <h2>{course.title}</h2>
             <Button
               text={"Clases"}

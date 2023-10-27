@@ -1,0 +1,10 @@
+.classListContainer {
+  width: 90%;
+  margin: auto;
+  min-height: 100%;
+  padding: var(--pd-section);
+}
+
+.classListContent {
+  padding: 10px 0;
+}
