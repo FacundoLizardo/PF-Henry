@@ -29,7 +29,7 @@ const ClassList = () => {
       <h1>Lista de Clases</h1>
       {selectedCourse && selectedCourse.lessons ? (
         selectedCourse.lessons.map((lesson, index) => (
-          <div key={lesson.lesson_id}>
+          <div key={lesson.lesson_id} className={Styles.classListContent}>
             <p key={index}>{lesson.title}</p>
             <Button
               text={"Ir"}

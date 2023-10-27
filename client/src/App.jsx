@@ -35,18 +35,18 @@ function App() {
         {location.pathname === "/login" ? "" : <NavBar />}
         <Routes>
           <Route path="/" element={<Layout />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/" element={<Courses />} />
           <Route path="/detailCourse/:id" element={<DetailCourse />} />
-          <Route path="/student" element={<Student />} />
+          <Route path="/student/" element={<Student />} />
           <Route path="/student/classList/:courseId" element={<ClassList />} />
           <Route
             path="/student/classList/lecture/:lessonId"
             element={<Lecture />}
           />
-          <Route path="/instructor" element={<Instructor />} />
+          <Route path="/instructor/" element={<Instructor />} />
           <Route path="/instructor/form" element={<Form />} />
-          <Route path="/config" element={<Config />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/config/" element={<Config />} />
+          <Route path="/login/" element={<Login />} />
           <Route path="*"></Route>
         </Routes>
         {shouldShowFooter() && <Footer />}

@@ -1,6 +1,10 @@
-.studentContaineester {
-    width: 90%;
-    margin: auto;
-    min-height: 100%;
-    padding: var(--pd-section);
+.studentContainer {
+  width: 90%;
+  margin: auto;
+  min-height: 100%;
+  padding: var(--pd-section);
+}
+
+.studentContent {
+  padding: 10px 0;
 }

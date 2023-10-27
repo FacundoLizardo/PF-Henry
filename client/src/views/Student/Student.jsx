@@ -18,11 +18,11 @@ const Student = () => {
   };
 
   return (
-    <div className={Styles.studentContaineester}>
+    <div className={Styles.studentContainer}>
       <div>
         <h1>Mis cursos</h1>
         {listCourses.map((course) => (
-          <div key={course.course_id}>
+          <div key={course.course_id} className={Styles.studentContent}>
             <h2>{course.title}</h2>
             <Button
               text={"Clases"}
