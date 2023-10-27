@@ -1,0 +1,28 @@
+Deben entrar a su PGadmin 4 dar click derecho en la tabla Categories y darle SQL Tool
+Luego sobre el recuadro que les permite escribir, copian y pegan esto tal cual hasta
+el ";" con el que termina, esto automaticamente creara todas las categorias propuestas
+por Facu, por cierto estan geniales, hice una modificacion en las relaciones de cursos
+y categorias pero en cuanto nos reunamos mañana les explico.
+
+
+INSERT INTO "Categories" (id, name) VALUES
+  (gen_random_uuid(), 'Desarrollo web'),
+  (gen_random_uuid(), 'Marketing digital'),
+  (gen_random_uuid(), 'Programación'),
+  (gen_random_uuid(), 'Diseño gráfico'),
+  (gen_random_uuid(), 'Idiomas'),
+  (gen_random_uuid(), 'Negocios y emprendimiento'),
+  (gen_random_uuid(), 'Ciencias de datos'),
+  (gen_random_uuid(), 'Fotografía'),
+  (gen_random_uuid(), 'Arte y creatividad'),
+  (gen_random_uuid(), 'Salud y bienestar'),
+  (gen_random_uuid(), 'Música'),
+  (gen_random_uuid(), 'Culinaria y gastronomía'),
+  (gen_random_uuid(), 'Finanzas personales'),
+  (gen_random_uuid(), 'Programación de videojuegos'),
+  (gen_random_uuid(), 'Desarrollo de aplicaciones móviles'),
+  (gen_random_uuid(), 'Ciencias sociales'),
+  (gen_random_uuid(), 'Diseño de moda'),
+  (gen_random_uuid(), 'Psicología y consejería'),
+  (gen_random_uuid(), 'Energías renovables'),
+  (gen_random_uuid(), 'Ciencias ambientales');
