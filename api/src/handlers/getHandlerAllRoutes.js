@@ -1,12 +1,15 @@
-//const getAllCoursesController = require("../controllers/getControllers/getAllCoursesController");
-const getAllCoursesController = require("../controllers/getControllers/getAllCoursesController");
-const getCourseByNameController = require("../controllers/getControllers/getCourseByNameController");
+const {
+  getAllCoursesController,
+} = require("../controllers/getControllers/getAllCoursesController");
+const {
+  getCourseByNameController,
+} = require("../controllers/getControllers/getCourseByNameController");
 
 const getHandlerAllRoutes = async (req, res) => {
-  const { name } = req.query;
+  const { title } = req.query;
   try {
-    const result = name
-      ? await getCourseByNameController(name)
+    const result = title
+      ? await getCourseByNameController(title)
       : await getAllCoursesController();
     if (!result[0]) {
       return res.status(404).send("Curso no encontrado");
@@ -17,4 +20,4 @@ const getHandlerAllRoutes = async (req, res) => {
   }
 };
 
-module.exports = {getHandlerAllRoutes};
+module.exports = { getHandlerAllRoutes };
