@@ -124,4 +124,22 @@
   ;
 }
 
-    
+.buttonContainer .cssButtonSharpBlue {
+  min-width: 100px;
+  height: auto;
+  color: #fff;
+  padding: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+}
+.buttonContainer .cssButtonSharpBlue:hover {
+  background: #fff;
+  color: var(--color-primary);
+}
+   
