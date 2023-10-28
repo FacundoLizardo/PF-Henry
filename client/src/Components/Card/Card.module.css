@@ -6,6 +6,8 @@
   max-width: 300px;
   min-width: 200px;
   height: 300px;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .imgContainer {
