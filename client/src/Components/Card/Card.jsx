@@ -1,11 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
+import Button from "../Button/Button";
 
 const Card = ({ course }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const generateStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i <= rating) {
+        stars.push(<span key={i} className={Styles.starFilled}></span>);
+      } else {
+        stars.push(<span key={i} className={Styles.star}></span>);
+      }
+    }
+    return stars;
   };
 
   return (
@@ -19,8 +32,14 @@ const Card = ({ course }) => {
         </div>
         <div className={Styles.contentBottom}>
           <p>{course.description}</p>
+          <div className={Styles.contentBottomPrice}>$1590.0</div>
         </div>
-        <div>{course.rating}</div>
+        <div className={Styles.contentFooter}>
+          <div>
+            {course.rating} {generateStars(course.rating)}
+          </div>
+          <Button text={"Agregar"} />
+        </div>
       </div>
     </div>
   );
