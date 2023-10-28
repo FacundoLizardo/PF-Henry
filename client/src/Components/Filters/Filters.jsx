@@ -1,7 +1,5 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import Styles from './Filters.module.css';
-import { filterBack } from './FiltersBc';
-
 
 const categories = [
     "Desarrollo web",
