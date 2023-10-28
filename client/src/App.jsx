@@ -11,48 +11,49 @@ import Config from "./views/Config/Config";
 import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
+import Filters from "./Components/Filters/Filters";
 
 import Styles from "./App.module.css";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
-  const location = useLocation();
+	const location = useLocation();
 
-  const shouldShowFooter = () => {
-    return ![
-      "/student/",
-      "/student/classList/",
-      "/student/classList/lecture/",
-      "/login",
-      "/instructor/form",
-      "/instructor/",
-      "/detailCourse/",
-    ].includes(location.pathname);
-  };
-  return (
-    <>
-      <div className={Styles.appContainer}>
-        {location.pathname === "/login" ? "" : <NavBar />}
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route path="/courses/" element={<Courses />} />
-          <Route path="/detailCourse/:id" element={<DetailCourse />} />
-          <Route path="/student/" element={<Student />} />
-          <Route path="/student/classList/:courseId" element={<ClassList />} />
-          <Route
-            path="/student/classList/lecture/:lessonId"
-            element={<Lecture />}
-          />
-          <Route path="/instructor/" element={<Instructor />} />
-          <Route path="/instructor/form" element={<Form />} />
-          <Route path="/config/" element={<Config />} />
-          <Route path="/login/" element={<Login />} />
-          <Route path="*"></Route>
-        </Routes>
-        {shouldShowFooter() && <Footer />}
-      </div>
-    </>
-  );
+	const shouldShowFooter = () => {
+		return ![
+			"/student/",
+			"/student/classList/",
+			"/student/classList/lecture/",
+			"/login",
+			"/instructor/form",
+			"/instructor/",
+			"/detailCourse/",
+		].includes(location.pathname);
+	};
+	return (
+		<>
+			<div className={Styles.appContainer}>
+				{location.pathname === "/login" ? "" : <NavBar />}
+				<Routes>
+					<Route path="/" element={<Layout />} />
+					<Route path="/courses/" element={<Filters />} />
+					<Route path="/detailCourse/:id" element={<DetailCourse />} />
+					<Route path="/student/" element={<Student />} />
+					<Route path="/student/classList/:courseId" element={<ClassList />} />
+					<Route
+						path="/student/classList/lecture/:lessonId"
+						element={<Lecture />}
+					/>
+					<Route path="/instructor/:id" element={<Instructor />} />
+					<Route path="/instructor/form" element={<Form />} />
+					<Route path="/config/" element={<Config />} />
+					<Route path="/login/" element={<Login />} />
+					<Route path="*"></Route>
+				</Routes>
+				{shouldShowFooter() && <Footer />}
+			</div>
+		</>
+	);
 }
 
 export default App;
