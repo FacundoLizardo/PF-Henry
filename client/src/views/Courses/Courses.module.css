@@ -8,8 +8,16 @@
   padding-bottom: var(--pd-y-3);
 }
 
-.coursesContainer h2 {
-  padding-bottom: var(--pd-y-2);
+.categoryHeader {
+  cursor: pointer;
+  padding: var(--pd-y-2);
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+  transition: border-bottom 0.3s ease;
+}
+
+.categoryHeader.active {
+  border-bottom: 3px solid #007bff;
 }
 
 .courses {
@@ -17,4 +25,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+.hidden {
+  display: none;
 }
