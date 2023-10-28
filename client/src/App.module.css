@@ -38,6 +38,9 @@ html {
   /* Hover */
   --color-hover: #0075be;
 
+  /* Radius */
+  --radius: 5px;
+
   /* Padding */
 
   /* Eje Y = Se usa para para el padding-top ó padding-bottom */
