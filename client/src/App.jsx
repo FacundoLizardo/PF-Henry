@@ -10,7 +10,6 @@ import Lecture from "./views/Lecture/Lecture";
 import Config from "./views/Config/Config";
 import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
-import Login from "./views/Login/Login";
 
 import Styles from "./App.module.css";
 import Footer from "./Components/Footer/Footer";
