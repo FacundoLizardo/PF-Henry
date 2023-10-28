@@ -9,6 +9,7 @@ const Courses = () => {
   useEffect(() => {
     setDataCourses(JSON.parse(localStorage.getItem("coursesData")));
   }, []);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const groupedCourses = dataCourses.reduce((result, course) => {
     if (!result[course.category]) {
@@ -24,8 +25,9 @@ const Courses = () => {
       <div>
         {Object.entries(groupedCourses).map(([category, courses], index) => (
           <div className={Styles.categoryContainer} key={index}>
-            <h2>{category}</h2>
-            <div className={Styles.courses}>
+            <h2 onClick={() => setActiveCategory(activeCategory === category ? null : category)}
+              className={Styles.categoryHeader}>{category}</h2>
+            <div className={`${Styles.courses} ${activeCategory !== category ? Styles.hidden : ""}`}>
               {courses.map((course, courseIndex) => (
                 <CardContainer course={course} key={courseIndex} />
               ))}

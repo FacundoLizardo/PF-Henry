@@ -31,6 +31,10 @@ const Layout = () => {
         <div className={Styles.enDesarrollo}>
           En desarrollo <img src={img} alt="" />
         </div>
+        <h2>Últimos cursos</h2>
+        <div className={Styles.enDesarrollo}>
+          En desarrollo <img src={img} alt="" />
+        </div>
       </div>
       <div className={Styles.layoutBottom}>
         <Button text={"Ver todos cursos"} onClick={handleNavigate} />
