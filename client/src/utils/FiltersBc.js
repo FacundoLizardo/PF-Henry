@@ -8,6 +8,7 @@ export const filterBack = async (params = "/") => {
     if (params !== "/") {
       localStorage.setItem(`${params.type}Courses`, JSON.stringify(data));
     }
+    
   } catch (error) {
     console.log("Error en el front", error);
   }
