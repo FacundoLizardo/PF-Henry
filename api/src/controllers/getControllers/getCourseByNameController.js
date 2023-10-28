@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
 const { Course, Lesson } = require("../../db");
 
-const getCourseByNameController = async (title) => {
+const getCourseByNameController = async (propiedad, valorPropiedad) => {
   const courses = await Course.findAll({
     where: {
-      title: { [Op.iLike]: `%${title}%` },
+      [propiedad]: { [Op.iLike]: `%${valorPropiedad}%` },
       deletedAt: null,
     },
     include: { model: Lesson, as: "lesson" },
