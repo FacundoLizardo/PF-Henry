@@ -45,7 +45,7 @@ function App() {
 						element={<Lecture />}
 					/>
 					<Route path="/instructor/:id" element={<Instructor />} />
-					<Route path="/instructor/form" element={<Form />} />
+					<Route path="/instructor/:id/form" element={<Form />} />
 					<Route path="/config/" element={<Config />} />
 					<Route path="/login/" element={<Login />} />
 					<Route path="*"></Route>

@@ -5,9 +5,11 @@ const postCreateCourse = async (
 	description,
 	instructor_id,
 	image,
-	category
+	category,
+	price
 ) => {
 	try {
+		console.log(price);
 		const [course, created] = await Course.findOrCreate({
 			where: { title: title },
 			defaults: {
@@ -15,6 +17,7 @@ const postCreateCourse = async (
 				instructor_id,
 				image,
 				category,
+				price,
 			},
 		});
 

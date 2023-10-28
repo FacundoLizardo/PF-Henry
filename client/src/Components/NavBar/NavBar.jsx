@@ -12,6 +12,7 @@ const Navbar = () => {
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
 
+	// este user id viene de un usuario ficticio ubicado en utils, se debe reemplazar una vez este implementado el login
 	const handleNavigateToUser = (userId) => {
 		navigate(`/instructor/${userId}`, {
 			state: { userData: userData },

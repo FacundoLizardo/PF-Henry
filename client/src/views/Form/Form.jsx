@@ -4,21 +4,25 @@ import { sendData } from "../../utils/postCreateCourse";
 import { storage } from "../../firebase/firebase";
 import style from "./Form.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { getAllCourses } from "../../utils/getAllCourses";
 
 const Form = () => {
 	const navigate = useNavigate();
+	const id = useParams().id;
 	const [categoriesData, setCategoriesData] = useState([]);
 	const [imagePath, setImagePath] = useState("");
 	const [course, setCourse] = useState({
 		title: "",
 		description: "",
-		instructor_id: "ab518b48-1a30-4d10-b525-479167e4fdd4",
+		instructor_id: id,
 		category: "",
 		image: "",
+		price: "",
 	});
+
+	console.log(course);
 
 	useEffect(() => {
 		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
@@ -44,7 +48,6 @@ const Form = () => {
 		setCourse({ ...course, [name]: value });
 		console.log(course);
 		console.log(imagePath);
-		//getId();
 	};
 	const onSubmit = async (course) => {
 		await sendData(course);
@@ -97,6 +100,17 @@ const Form = () => {
 							type="file"
 							id="image"
 							onChange={handleUploadImage}
+						/>
+						<p className={style.input__description}>{}</p>
+						<label className={style.input__label}>Precio</label>
+						<input
+							className={style.input__field}
+							type="number"
+							step="0.01"
+							id="price"
+							name="price"
+							value={course.price}
+							onInput={handleChange}
 						/>
 						<p className={style.input__description}>{}</p>
 					</div>
