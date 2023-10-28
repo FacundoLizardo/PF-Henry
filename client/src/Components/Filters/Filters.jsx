@@ -5,7 +5,7 @@ import Courses from "../../views/Courses/Courses";
 
 export default function Filters() {
 	const [categoriesData, setCategoriesData] = useState([]);
-	const [categoryFilter, setCategoryFilter] = useState("undefined");
+	const [categoryFilter, setCategoryFilter] = useState("Categorias");
 	const [ratingFilter, setRatingFilter] = useState("undefined");
 	const [order, setOrder] = useState("udefined");
 
@@ -13,11 +13,6 @@ export default function Filters() {
 		data: [],
 		filteredData: [],
 	});
-
-	// setState((prevState) => ({
-	// 	...prevState,
-	// 	rating: 5, // El nuevo valor de "rating"
-	// }));
 
 	useEffect(() => {
 		setDataCourses((prevState) => ({
@@ -48,6 +43,7 @@ export default function Filters() {
 	const handleChangeOrder = () => {};
 
 	const handleReset = () => {
+		setCategoryFilter("Categorias");
 		setDataCourses((prevState) => ({
 			...prevState,
 			filteredData: [],
@@ -59,9 +55,6 @@ export default function Filters() {
 			<section id="container" className={Styles.filtersContainer}>
 				<div className={Styles.filtOrderCont}>
 					<div className={Styles.filters}>
-						{/* 		
-
- */}
 						<select
 							className={Styles.filterButt}
 							onChange={handleChange}
@@ -73,10 +66,7 @@ export default function Filters() {
 								<option key={index}>{category.name}</option>
 							))}
 						</select>
-						{/* 		
 
-
- */}
 						<select
 							className={Styles.filterButt}
 							onChange={handleChange}
@@ -91,10 +81,6 @@ export default function Filters() {
 							<option value="1">1 estrella</option>
 						</select>
 
-						{/* 		
-
-
- */}
 						<select
 							className={Styles.filterButt}
 							value={order}
