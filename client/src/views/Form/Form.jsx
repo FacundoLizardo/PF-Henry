@@ -6,6 +6,7 @@ import style from "./Form.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
+import { getAllCourses } from "../../utils/getAllCourses";
 
 const Form = () => {
 	const navigate = useNavigate();
@@ -47,6 +48,7 @@ const Form = () => {
 	};
 	const onSubmit = async (course) => {
 		await sendData(course);
+		await getAllCourses();
 		navigate("/courses");
 	};
 	return (
@@ -73,7 +75,8 @@ const Form = () => {
 							name="description"
 							value={course.description}
 							className={style.input__field}
-							onInput={handleChange}></textarea>
+							onInput={handleChange}
+						></textarea>
 						<p className={style.input__description}>{}</p>
 						<label className={style.input__label}>Categoria:</label>
 						<select
@@ -81,7 +84,8 @@ const Form = () => {
 							id="category"
 							name="category"
 							value={course.category}
-							onInput={handleChange}>
+							onInput={handleChange}
+						>
 							{categoriesData?.map((category, index) => (
 								<option key={index}>{category.name}</option>
 							))}
@@ -98,8 +102,11 @@ const Form = () => {
 					</div>
 				</div>
 				<div className={style.modal__footer}>
-					<Button text={"Crear curso"} className={style.button} onClick={() => onSubmit(course)} />
-			
+					<Button
+						text={"Crear curso"}
+						className={style.button}
+						onClick={() => onSubmit(course)}
+					/>
 				</div>
 			</div>
 		</div>

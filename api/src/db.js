@@ -13,6 +13,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
 	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
+	//`postgres://postgres:123@localhost/educastream`,
 	{
 		logging: false,
 		native: false,
