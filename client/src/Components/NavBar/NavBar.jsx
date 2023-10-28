@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import logo from '../../assets/logo.png'
 
 import Styles from "../NavBar/NavBar.module.css";
 
@@ -35,7 +36,7 @@ const Navbar = () => {
   return (
     <div className={Styles.navbarContainer}>
       <nav>
-        <div className={Styles.navbarLogo}>EducaStream</div>
+        <div className={Styles.navbarLogo}><img src={logo} alt="EducaStream" /></div>
         <div className={Styles.navbarAssets}>
           <div className={`${Styles.navbarLinks} ${open ? Styles.active : ""}`}>
             <div>
