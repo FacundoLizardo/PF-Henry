@@ -12,12 +12,23 @@
   cursor: pointer;
   padding: var(--pd-y-2);
   border-bottom: 1px solid #ccc;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   transition: border-bottom 0.3s ease;
+  display: flex;
+  align-items: end;
 }
 
-.categoryHeader.active {
-  border-bottom: 3px solid #007bff;
+.inactiveCategorySVG {
+  margin-left: 5px;
+  width: 27px;
+  height: 27px;
+}
+
+.activeCategorySVG {
+  margin-left: 5px;
+  width: 27px;
+  height: 27px;
+  transform: rotate(180deg); 
 }
 
 .courses {
