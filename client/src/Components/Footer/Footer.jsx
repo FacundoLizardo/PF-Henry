@@ -7,25 +7,25 @@ const Footer = () => {
         <div className={Styles.sbFooterLinks}>
           <div className={Styles.sbFooterLinksDiv}>
             <h4>Educación</h4>
-            <a href="/cursos">
+            <a href="/courses">
               <p>Curso</p>
             </a>
-            <a href="/cursos">
+            <a href="/courses">
               <p>English Academy</p>
             </a>
-            <a href="/cursos">
+            <a href="/courses">
               <p>Arte Digital</p>
             </a>
           </div>
           <div className={Styles.sbFooterLinksDiv}>
             <h4>Recursos</h4>
-            <a href="/cursos">
+            <a href="/courses">
               <p>Cursos</p>
             </a>
-            <a href="/cursos">
+            <a href="/courses">
               <p>Cursos</p>
             </a>
-            <a href="/cursos">
+            <a href="/courses">
               <p>Cursos</p>
             </a>
           </div>
