@@ -2,7 +2,6 @@ import CardContainer from "../../Components/CardContainer/CardContainer";
 import Styles from "./Courses.module.css";
 
 const Courses = ({ dataCourses }) => {
-	console.log(dataCourses);
 	const groupedCourses = dataCourses.reduce((result, course) => {
 		if (!result[course.category]) {
 			result[course.category] = [];
