@@ -39,6 +39,10 @@ const Course = (sequelize) => {
         type: DataTypes.DATE,
         allowNull: true,
       },
+      price: {
+				type: DataTypes.FLOAT,
+				allowNull: true,
+			},
     },
 
     {
