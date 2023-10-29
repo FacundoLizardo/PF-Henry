@@ -12,11 +12,11 @@ const CategoryModel = require("./models/category");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
-	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
-	{
-		logging: false,
-		native: false,
-	}
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
+  {
+    logging: false,
+    native: false,
+  }
 );
 
 CourseModel(sequelize);
@@ -29,9 +29,17 @@ CategoryModel(sequelize);
 
 const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
-// //Cursos con Lecciones
+//Cursos con Lecciones
 Course.hasMany(Lesson, { as: "lesson" });
-Lesson.belongsTo(Course, { foreignKey: "id" });
+Lesson.belongsTo(Course, { foreignKey: "course_id" });
+
+//Cursos con Ratings
+Course.hasMany(Rating, { as: "rating" });
+Rating.belongsTo(Course, { foreignKey: "course_id" });
+
+//Cursos con Categorias
+Category.hasMany(Course);
+Course.belongsTo(Category);
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
@@ -65,43 +73,29 @@ Course.belongsToMany(User, { through: "Consumption" });
 User.belongsToMany(Course, { through: "Consumption" });
 
 Course.hasMany(Payment, {
-	foreignKey: "course_id",
+  foreignKey: "course_id",
 });
 
 // Users - Payments
 User.hasMany(Payment, {
-	foreignKey: "user_id",
+  foreignKey: "user_id",
 });
 Payment.belongsTo(User, {
-	foreignKey: "user_id",
+  foreignKey: "user_id",
 });
 // // Relacion Lessons con Tabla Intermedia Comsumption
 // Lesson.belongsTo(Consumption, {
 // 	foreignKey: "lesson_id",
 // });
 
-// Relacion Rating con Cursos
-Rating.belongsTo(Course, {
-	foreignKey: "course_id",
-});
-
-// Relacion Cursos con Ratings
-Course.hasMany(Rating, {
-	foreignKey: "course_id",
-});
-
-Lesson.hasOne(Course);
-
-Category.hasMany(Course);
-
-Course.belongsTo(Category);
+//Lesson.hasOne(Course);
 
 module.exports = {
-	Category,
-	Course,
-	Lesson,
-	Payment,
-	Rating,
-	User,
-	conn: sequelize,
+  Category,
+  Course,
+  Lesson,
+  Payment,
+  Rating,
+  User,
+  conn: sequelize,
 };
