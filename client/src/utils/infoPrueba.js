@@ -4,7 +4,7 @@
             "instructor_id": "f8a3b7e9-3c8e-4b6a-9d8c-4b7f6a6a8e9d",
                 "image": "https://example.com/design-course.jpg",
                     "category": "Diseño",
-                        "price": 11111
+                        "price": 1.25
 }
 
 {

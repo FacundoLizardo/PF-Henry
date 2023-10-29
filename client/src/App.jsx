@@ -11,9 +11,9 @@ import Config from "./views/Config/Config";
 import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
+import Footer from "./Components/Footer/Footer";
 
 import Styles from "./App.module.css";
-import Footer from "./Components/Footer/Footer";
 
 function App() {
   const location = useLocation();
@@ -43,8 +43,8 @@ function App() {
             path="/student/classList/lecture/:lessonId"
             element={<Lecture />}
           />
-          <Route path="/instructor/" element={<Instructor />} />
-          <Route path="/instructor/form" element={<Form />} />
+          <Route path="/instructor/:id" element={<Instructor />} />
+          <Route path="/instructor/:id/form" element={<Form />} />
           <Route path="/config/" element={<Config />} />
           <Route path="/login/" element={<Login />} />
           <Route path="*"></Route>
