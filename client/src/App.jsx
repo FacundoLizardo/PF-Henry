@@ -13,6 +13,7 @@ import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
 import About from "./views/About/About"
 import Terms from "./Components/Terms/Terms";
+import Privacy from "./Components/Privacy/Privacy";
 import Styles from "./App.module.css";
 import Footer from "./Components/Footer/Footer";
 
@@ -50,6 +51,7 @@ function App() {
           <Route path="/login/" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*"></Route>
         </Routes>
         {shouldShowFooter() && <Footer />}

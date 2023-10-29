@@ -1,0 +1,10 @@
+.container{
+  padding: 30px;
+  font-size: 18px;
+  width: 100%;
+  height: auto;
+}
+
+.container h3{   
+  font-size: 20px;
+}

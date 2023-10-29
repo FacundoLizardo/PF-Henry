@@ -8,7 +8,7 @@ const Terms = () => {
     },[])
 
     return(
-        <div>
+        <div className={styles.container}>
           <br />
           <br />
             <h2 className={styles.h2}>TÉRMINOS Y CONDICIONES</h2>
@@ -28,19 +28,19 @@ const Terms = () => {
                 <li>(IV) Proveedor. Educastream </li> <br />
                 <li>(V) Datos necesarios: nombre; apellido; e-mail; número de teléfono; país de residencia; DNI.</li>
                 <br />
-                <h4 className={styles.h4}>2.Alcance</h4>
+                <h4 className={styles.h4}>2. Alcance</h4>
                 <br />
                 <li>Educastream prestará los servicios a todos los usuarios. Educastream arbitrará los medios que estén a su alcance para proveer el mejor servicio disponible y con la tecnología que, <br /> de acuerdo a sus recursos y posibilidades técnico-económicos, se considere apropiada. Educastream se reserva el derecho de cambiar la forma en la que presta los servicios, <br /> comprometiéndose a informar a los usuarios con la mayor anticipación posible. </li>
                 <br />
-                <h4 className={styles.h4}>3.Condiciones de Uso</h4>
+                <h4 className={styles.h4}>3. Condiciones de Uso</h4>
                 <br />
                 <li>Educastream podrá retirar o suspender, cautelarmente, la prestación del servicio a aquellos Usuarios que incumplan lo establecido en estos Términos de Uso de los servicios, <br /> reservándose los derechos legales correspondientes frente a los eventuales daños y perjuicios que dichos incumplimientos le ocasionen.</li>
                 <br />
-                <h4 className={styles.h4}>4.Responsabilidad del Usuario</h4>
+                <h4 className={styles.h4}>4. Responsabilidad del Usuario</h4>
                 <br />
                 <li>El usuario se compromete a utilizar el servicio de conformidad con la legislación vigente, la moral, las buenas costumbres y el orden público, así como a abstenerse de utilizar el servicio <br /> con fines o efectos ilícitos, prohibidos en los presentes Términos de Uso de los servicios, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan dañar, inutilizar, <br /> sobrecargar o deteriorar los servicios, los equipos informáticos de otros usuarios o de otros usuarios de Internet (hardware y software) así como los documentos, archivos y toda clase de <br /> contenidos almacenados en sus equipos informáticos (hacking), o impedir la normal utilización o disfrute de dichos servicios, equipos informáticos y documentos, archivos y contenidos <br /> por parte de los demás usuarios y de otros usuarios.</li>
                 <br />
-                <h4 className={styles.h4}>Propiedad Intelectual de los Estudiantes</h4>
+                <h4 className={styles.li}>Propiedad Intelectual de los Estudiantes</h4>
                 <br />
                 <li>La propiedad intelectual del código desarrollado durante la etapa educativa pertenece exclusivamente a quien lo creó. Educastream no difundirá el mismo. 
                   <br />
