@@ -38,10 +38,7 @@ const Footer = () => {
           <div className={Styles.sbFooterLinksDiv}>
             <h4>Nosotros</h4>
             <a href="/about">
-              <p>Mision</p>
-            </a>
-            <a href="/contactos">
-              <p>Vision</p>
+              <p>Mision/Vsion</p>
             </a>
           </div>
           <div className={Styles.sbFooterLinksDiv}>
