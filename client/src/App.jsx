@@ -10,6 +10,8 @@ import Lecture from "./views/Lecture/Lecture";
 import Config from "./views/Config/Config";
 import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
+import Login from "./views/Login/Login";
+import About from "./views/About/About"
 
 import Styles from "./App.module.css";
 import Footer from "./Components/Footer/Footer";
@@ -46,6 +48,7 @@ function App() {
           <Route path="/instructor/form" element={<Form />} />
           <Route path="/config/" element={<Config />} />
           <Route path="/login/" element={<Login />} />
+          <Route path="/about" element={<About />} />
           <Route path="*"></Route>
         </Routes>
         {shouldShowFooter() && <Footer />}
