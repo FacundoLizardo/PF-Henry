@@ -12,11 +12,6 @@ const { ratingRoutes } = require("./ratingRoutes");
 
 const router = Router();
 
-// getAll -> todos los cursos disponibles
-//filtrado de cursos
-//get x id
-//post -> subir video
-
 router.use("/courses", courseRoutes);
 router.use("/users", userRoutes);
 router.use("/rating", ratingRoutes);
@@ -24,10 +19,5 @@ router.use("/rating", ratingRoutes);
 // router.use("/payment", paymentRoutes);
 // router.use("/consumption", consumptionRoutes);
 
-/*
-router.use("/educaStream", getHandlerAllRoutes); //todos los cursos disponibles
-router.use("/educaStream/:id", getHandlerById); //curso por id
-router.use("/educaStream", postHandlerVideo); //subida de video
-*/
 
 module.exports = router;

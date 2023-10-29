@@ -30,4 +30,3 @@ const getHandlerAllRoutes = async (req, res) => {
 
 module.exports = { getHandlerAllRoutes };
 
-
