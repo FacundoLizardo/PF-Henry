@@ -14,6 +14,7 @@ const Form = () => {
 	const [categoriesData, setCategoriesData] = useState([]);
 	const [imagePath, setImagePath] = useState("");
 	const [file, setFile] = useState(null);
+	const [price, setPrice] = useState(0.0);
 	const [loading, setLoading] = useState(false);
 
 	const [course, setCourse] = useState({
@@ -22,7 +23,7 @@ const Form = () => {
 		instructor_id: id,
 		category: "",
 		image: "",
-		price: "",
+		price: 0.0,
 	});
 
 	console.log(course);
@@ -127,9 +128,9 @@ const Form = () => {
 									className={style.input__field}
 									type="number"
 									step="0.01"
+									defaultValue={price.toFixed(2)}
 									id="price"
 									name="price"
-									value={course.price}
 									onInput={handleChange}
 								/>
 								<p className={style.input__description}>{}</p>
