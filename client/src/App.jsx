@@ -12,7 +12,7 @@ import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
 import About from "./views/About/About"
-
+import Terms from "./Components/Terms/Terms";
 import Styles from "./App.module.css";
 import Footer from "./Components/Footer/Footer";
 
@@ -49,6 +49,7 @@ function App() {
           <Route path="/config/" element={<Config />} />
           <Route path="/login/" element={<Login />} />
           <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*"></Route>
         </Routes>
         {shouldShowFooter() && <Footer />}
