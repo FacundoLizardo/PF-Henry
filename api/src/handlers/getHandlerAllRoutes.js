@@ -6,10 +6,18 @@ const {
 } = require("../controllers/getControllers/getCourseByNameController");
 
 const getHandlerAllRoutes = async (req, res) => {
-  const { title } = req.query;
+  
+  
+  const arrayPropiedad = Object.keys(req.query)
+  const propiedad = arrayPropiedad[0];
+  const valorPropiedad = req.query[arrayPropiedad[0]]
+  console.log(propiedad,valorPropiedad)
+  
+
+  //const { title } = req.query;
   try {
-    const result = title
-      ? await getCourseByNameController(title)
+    const result = propiedad
+      ? await getCourseByNameController(propiedad, valorPropiedad)
       : await getAllCoursesController();
     if (!result[0]) {
       return res.status(404).send("Curso no encontrado");

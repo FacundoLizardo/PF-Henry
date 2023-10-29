@@ -1,13 +1,23 @@
 /* eslint-disable react/no-unknown-property */
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from '../../assets/logo.png'
+import logo from "../../assets/logo.png";
+import { userData } from "../../utils/user";
+import { useNavigate } from "react-router-dom";
 
 import Styles from "../NavBar/NavBar.module.css";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleNavigateToUser = (userId) => {
+    navigate(`/instructor/${userId}`, {
+      state: { userData: userData },
+    });
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,7 +46,9 @@ const Navbar = () => {
   return (
     <div className={Styles.navbarContainer}>
       <nav>
-        <div className={Styles.navbarLogo}><img src={logo} alt="EducaStream" /></div>
+        <div className={Styles.navbarLogo}>
+          <img src={logo} alt="EducaStream" />
+        </div>
         <div className={Styles.navbarAssets}>
           <div className={`${Styles.navbarLinks} ${open ? Styles.active : ""}`}>
             <div>
@@ -58,7 +70,13 @@ const Navbar = () => {
                         onClick={handleModal}
                       >
                         <Link to={"/student"}>Alumno</Link>
-                        <Link to={"/instructor"}>Instructor</Link>
+                        <button
+                          onClick={() => {
+                            handleNavigateToUser(userData.id);
+                          }}
+                        >
+                          Instructor
+                        </button>
                         <Link to={"/config"}>Configuración</Link>
                         <Link to={"/login"}>Ingresar / Salir</Link>
                       </div>
