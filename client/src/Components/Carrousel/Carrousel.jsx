@@ -23,7 +23,7 @@ export const Carrousel = () => {
         showStatus={false}
         animationHandler="fade"
         autoPlay={true}
-        interval={2000}
+        interval={5000}
         infiniteLoop={true}
         showThumbs={false}
       >
