@@ -1,77 +1,95 @@
 import Styles from "./Footer.module.css";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   return (
     <div className={Styles.footerContainer}>
-      <div className={Styles.sbFooter}>
-        <div className={Styles.sbFooterLinks}>
-          <div className={Styles.sbFooterLinksDiv}>
-            <h4>Educación</h4>
-            <a href="/cursos">
-              <p>Curso</p>
-            </a>
-            <a href="/cursos">
-              <p>English Academy</p>
-            </a>
-            <a href="/cursos">
-              <p>Arte Digital</p>
-            </a>
+      <div className={Styles.footerContainerImg}>
+        <img src={logo} alt={logo} />
+      </div>
+      <div className={Styles.subFooter}>
+        <div className={Styles.footerTop}>
+          <div className={Styles.footerTopItem}>
+            <h4>Acceso</h4>
+            <a href="/">Inicio</a>
+            <a href="/courses">Cursos</a>
           </div>
-          <div className={Styles.sbFooterLinksDiv}>
-            <h4>Recursos</h4>
-            <a href="/cursos">
-              <p>Cursos</p>
-            </a>
-            <a href="/cursos">
-              <p>Cursos</p>
-            </a>
-            <a href="/cursos">
-              <p>Cursos</p>
-            </a>
+          <div className={Styles.footerTopItem}>
+            <h4>Empresa</h4>
+            <a href="/">Mision</a>
+            <a href="/">Vision</a>
           </div>
-          <div className={Styles.sbFooterLinksDiv}>
-            <h4>Comunidad</h4>
-            <a href="/">
-              <p>Testimonios</p>
-            </a>
-          </div>
-          <div className={Styles.sbFooterLinksDiv}>
+          <div className={Styles.footerTopItem}>
             <h4>Nosotros</h4>
-            <a href="/about">
-              <p>Mision</p>
+            <a
+              href="https://www.linkedin.com/in/lucasgabrieltamburlini/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/lucastamburlini
             </a>
-            <a href="/contactos">
-              <p>Vision</p>
+
+            <a
+              href="https://www.linkedin.com/in/danielor92/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/danielor92
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/facundolizardo/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/facundolizardo
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/carlosenriquegonzalezgonzalez/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/carlosenriquegonzalezgonzalez
+            </a>
+            <a
+              href="https://www.linkedin.com/in/josevalperga/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/josevalperga
+            </a>
+            <a
+              href="https://www.linkedin.com/in/claudia-torres-a580a11a8/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              in/claudiatorres
             </a>
           </div>
-          <div className={Styles.sbFooterLinksDiv}>
-            <h4>Redes Sociales</h4>
-            <div className={Styles.socialMedia}></div>
+          <div className={Styles.footerTopItem}>
+            <h4>Colaboración</h4>
+            <a
+              href="https://www.soyhenry.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Henry
+            </a>
           </div>
         </div>
 
-        <hr></hr>
-
-        <div className={Styles.sbFooterBelow}>
-          <div className={Styles.sbFooterCopyright}>
-            <p>@{new Date().getFullYear()} EducaStream. All right reserved.</p>
+        <div className={Styles.footerBottom}>
+          <div className={Styles.footerBottomItem}>
+            <p>
+              {new Date().getFullYear()} EducaStream @ Todos los derechos
+              reservados.
+            </p>
           </div>
-          <div className={Styles.sbFooterBelowLinks}>
-            <a href="/terms">
-              <div>
-                <p>Terminos & Condiciones</p>
-              </div>
-            </a>
-            <a href="/privacy">
-              <div>
-                <p>Privacidad</p>
-              </div>
-            </a>
-            <a href="/security">
-              <div>
-                <p>Seguridad</p>
-              </div>
-            </a>
+          <div className={Styles.footerBottomItem}>
+            <a href="/">Terminos & Condiciones</a>
+            <a href="/">Privacidad</a>
+            <a href="/">Seguridad</a>
           </div>
         </div>
       </div>

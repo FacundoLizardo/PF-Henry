@@ -1,7 +1,7 @@
 const { Course, Lesson } = require('../../db');
 const { Op } = require('sequelize');
 
-const applyFilters = async (category, page, order, popularity, rating) => {
+const applyFilters = async (category, page, order, price, rating) => {
   const limit = 10; // Número de elementos por página
   const offset = (page - 1) * limit; // Cálculo del desplazamiento
 
@@ -25,11 +25,11 @@ const applyFilters = async (category, page, order, popularity, rating) => {
       include: 
         { model: Lesson, as: "lesson"},
     });
-  } else if (popularity) {
+  } else if (price) {
     filteredCourses = await Course.findAll({
       where: whereClause,
       offset,
-      order: [['popularity', popularity]],
+      order: [['price', price]],
       include: 
           { model: Lesson, as: "lesson"},
     });

@@ -29,10 +29,9 @@
   max-height: 300px;
 }
 
-
 .detailContentBottom {
   width: 100%;
-  gap: 10px;
+  gap: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -43,6 +42,7 @@
   background-color: var(--color-background-off-two);
   justify-content: space-between;
   padding: 15px 20px;
+  box-shadow: var(--box-shadow);
 }
 
 .buttonsContainer {

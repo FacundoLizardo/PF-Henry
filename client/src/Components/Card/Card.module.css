@@ -1,14 +1,11 @@
 .cardContainer {
   display: flex;
   flex-direction: column;
-  height: auto;
-  max-width: 300px;
-  min-width: 200px;
+  width: 270px;
   height: 300px;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1),
-    0 5px 5px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--box-shadow);
   border: 2px solid transparent;
   transition: all 0.2s ease-out;
 }
