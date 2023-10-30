@@ -37,7 +37,8 @@ const Courses = () => {
   const dataFiltered = async (e) => {
     const categoryFilter = e.target.value;
 
-    const url = `/courses?${categoryFilter}`;
+    const url = `/courses?category=${categoryFilter}`;
+    
 
     if (categoryFilter) {
       const { data } = await axios.get(url);
