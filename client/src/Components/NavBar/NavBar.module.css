@@ -155,3 +155,10 @@ nav {
     display: none;
   }
 }
+
+@media (max-width: 425px){
+  nav {
+        margin: 0px;
+        justify-content: space-around;
+  }
+}
