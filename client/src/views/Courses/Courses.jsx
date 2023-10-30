@@ -103,13 +103,11 @@ const Courses = () => {
 		// 	optionToSelect3.selected = true;
 		// }
 
-		setDataCourses((prevState) => ({
+		setDataCourses(() => ({
 			data: JSON.parse(localStorage.getItem("coursesData")),
 			filteredData: [],
 		}));
 	};
-
-	const sortedArr = () => {};
 
 	return (
 		<div className={Styles.coursesContainer}>
