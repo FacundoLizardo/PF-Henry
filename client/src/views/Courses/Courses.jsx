@@ -38,6 +38,7 @@ const Courses = () => {
     const categoryFilter = e.target.value;
 
     const url = `/courses?category=${categoryFilter}`;
+    
 
     if (categoryFilter) {
       const { data } = await axios.get(url);
