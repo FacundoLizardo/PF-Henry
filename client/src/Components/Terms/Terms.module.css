@@ -1,5 +1,5 @@
 .container{
-  width: 100%;
+  width: 90%;
   height: auto;
 }
 
@@ -13,15 +13,15 @@ p{
   margin-left: 20%;
 }
 
-h2{
+.container h2{
   text-align: center;
 }
 
-h3{
+.container h3{
   text-align: center;
 }
 
-li{
+.container li{
   justify-content: left;
   margin-left: 20%;
 }
