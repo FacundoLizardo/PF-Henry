@@ -55,11 +55,11 @@ const Courses = () => {
 			: [];
 		const selectedOpt = e.target.value;
 		if (selectedOpt === "ASC") {
-			sortedData.sort((a, b) => b.price - a.price);
-			sortedFilteredData.sort((a, b) => b.price - a.price);
-		} else if (selectedOpt === "DESC") {
 			sortedData.sort((a, b) => a.price - b.price);
 			sortedFilteredData.sort((a, b) => a.price - b.price);
+		} else if (selectedOpt === "DESC") {
+			sortedData.sort((a, b) => b.price - a.price);
+			sortedFilteredData.sort((a, b) => b.price - a.price);
 		}
 
 		setDataCourses((prevState) => ({
