@@ -34,8 +34,13 @@ Course.hasMany(Lesson, { as: "lesson" });
 Lesson.belongsTo(Course, { foreignKey: "course_id" });
 
 //Cursos con Ratings
-Course.hasMany(Rating, { as: "rating" });
-Rating.belongsTo(Course, { foreignKey: "course_id" });
+Course.hasMany(Rating);
+//Rating.belongsTo(Course, { foreignKey: "course_id" });
+Rating.belongsTo(Course);
+
+User.hasMany(Rating)
+//Rating.belongsTo(User, { foreignKey: "user_id" });
+Rating.belongsTo(User);
 
 //Cursos con Categorias
 Category.hasMany(Course);
@@ -88,7 +93,7 @@ Payment.belongsTo(User, {
 // 	foreignKey: "lesson_id",
 // });
 
-//Lesson.hasOne(Course);
+Lesson.hasOne(Course);
 
 module.exports = {
   Category,

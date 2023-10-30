@@ -14,10 +14,12 @@ const Rating = (sequelize) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
+        unique: "user_course",
       },
       user_id: {
         type: DataTypes.UUID,
         allowNull: false,
+        unique: "user_course",
       },
       rating: {
         type: DataTypes.INTEGER,

@@ -5,7 +5,7 @@ const { postHandlerRating } = require("../handlers/postHandlerRating");
 
 const ratingRoutes = Router();
 
-ratingRoutes.get("/rating", getHandlerRating);
-ratingRoutes.post("/rating", postHandlerRating);
+ratingRoutes.get("/", getHandlerRating);
+ratingRoutes.post("/create", postHandlerRating);
 
 module.exports = ratingRoutes;
