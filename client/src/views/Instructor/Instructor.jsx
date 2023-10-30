@@ -27,6 +27,7 @@ const Instructor = () => {
         <h1>
           ¡Hola <span>{userData.user_name}</span>!
         </h1>
+        <h5>Instructor n°: {userData.id}</h5>
       </div>
       <div className={Styles.instructorContainerCreate}>
         <p>¡Empieza, crea tu curso!</p>
