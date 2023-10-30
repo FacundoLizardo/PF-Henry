@@ -115,3 +115,31 @@
 .resetButton:hover {
   background-color: #cc0000;
 }
+
+@media (max-width: 642px) {
+
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column-reverse;
+  }
+
+  .section-filters {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .filtOrderCont {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column-reverse;
+  }
+    
+}

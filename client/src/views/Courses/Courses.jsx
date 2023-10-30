@@ -13,9 +13,9 @@ const Courses = () => {
 	});
 	const [activeCategory, setActiveCategory] = useState(null);
 	const [categoriesData, setCategoriesData] = useState([]);
-	const [ratingFilter, setRatingFilter] = useState("");
-	const [orderFilter, setOrderFilter] = useState("Default");
-	const dataCopy = [...dataCourses.data];
+	// const [ratingFilter, setRatingFilter] = useState("");
+	// const [orderFilter, setOrderFilter] = useState("Default");
+	// const dataCopy = [...dataCourses.data];
 
 	useEffect(() => {
 		setDataCourses((prevState) => ({
@@ -48,18 +48,18 @@ const Courses = () => {
 		}
 	};
 
-	const sortByPrice = () => {
+	const sortByPrice = (e) => {
 		const sortedData = [...dataCourses.data];
 		const sortedFilteredData = dataCourses.filteredData.length
 			? [...dataCourses.filteredData]
 			: [];
-
-		if (orderFilter === "ASC") {
-			sortedData.sort((a, b) => a.price - b.price);
-			sortedFilteredData.sort((a, b) => a.price - b.price);
-		} else if (orderFilter === "DESC") {
+		const selectedOpt = e.target.value;
+		if (selectedOpt === "ASC") {
 			sortedData.sort((a, b) => b.price - a.price);
 			sortedFilteredData.sort((a, b) => b.price - a.price);
+		} else if (selectedOpt === "DESC") {
+			sortedData.sort((a, b) => a.price - b.price);
+			sortedFilteredData.sort((a, b) => a.price - b.price);
 		}
 
 		setDataCourses((prevState) => ({
@@ -69,11 +69,13 @@ const Courses = () => {
 		}));
 	};
 
-	const handleorderFilter = (e) => {
-		const selectedOrder = e.target.value;
-		setOrderFilter(selectedOrder);
-		sortByPrice();
-	};
+	// Pendiente de Review y refactorizacion.
+	//
+	// const handleorderFilter = (e) => {
+	// 	const selectedOrder = e.target.value;
+	// 	setOrderFilter(selectedOrder);
+	// 	sortByPrice();
+	// };
 
 	const handleReset = () => {
 		const selectElement = document.getElementById("category");
@@ -84,10 +86,25 @@ const Courses = () => {
 		if (optionToSelect) {
 			optionToSelect.selected = true;
 		}
+		const selectElement2 = document.getElementById("order");
+		const optionToSelect2 = selectElement2.querySelector(
+			'option[name="Default"]'
+		);
+		if (optionToSelect2) {
+			optionToSelect2.selected = true;
+		}
 
-		setDataCourses((prevState) => ({
-			...prevState,
-			dataCourses: [...dataCopy],
+		// En Desarrollo
+		// const selectElement3 = document.getElementById("rating");
+		// const optionToSelect3 = selectElement3.querySelector(
+		// 	'option[name="default"]'
+		// );
+		// if (optionToSelect3) {
+		// 	optionToSelect3.selected = true;
+		// }
+
+		setDataCourses(() => ({
+			data: JSON.parse(localStorage.getItem("coursesData")),
 			filteredData: [],
 		}));
 	};
@@ -103,7 +120,9 @@ const Courses = () => {
 							name="category"
 							id="category"
 						>
-							<option value="categories">Categorías</option>
+							<option name="categories" value="categories">
+								Categorías
+							</option>
 							{categoriesData?.map((category, index) => (
 								<option key={index} value={category.name}>
 									{category.name}
@@ -111,30 +130,32 @@ const Courses = () => {
 							))}
 						</select>
 
+						{/*  En Desarollo           
 						<select
 							className={Styles.filterButt}
 							onChange={() => {}}
-							name="rating"
-						>
+							name="rating">
 							<option value={""}>Filtrar por rating</option>
 							<option value={5}>5 estrellas</option>
 							<option value={4}>4 estrellas</option>
 							<option value={3}>3 estrellas</option>
 							<option value={2}>2 estrellas</option>
 							<option value={1}>1 estrella</option>
-						</select>
+						</select> */}
 
 						<select
 							className={Styles.filterButt}
-							onChange={handleorderFilter}
+							onChange={sortByPrice}
 							name="order"
+							id="order"
 						>
-							<option value={"Default"}>Ordenar por precio</option>
+							<option name="Default" value="Default">
+								Ordenar por precio
+							</option>
 							<option value="ASC">Menor a mayor</option>
 							<option value="DESC">Mayor a menor</option>
 						</select>
 					</div>
-
 					<div className={Styles.reset}>
 						<Button
 							className="reset-button"
@@ -144,7 +165,7 @@ const Courses = () => {
 					</div>
 				</div>
 			</section>
-			<section></section>
+
 			<section>
 				{dataCourses.filteredData.length > 0 ? (
 					<div className={Styles.categoryContainer}>
