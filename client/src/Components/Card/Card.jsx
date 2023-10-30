@@ -32,7 +32,7 @@ const Card = ({ course }) => {
 				</div>
 				<div className={Styles.contentBottom}>
 					<p>{course.description}</p>
-					<div className={Styles.contentBottomPrice}>{course.price}</div>
+					<div className={Styles.contentBottomPrice}>US$ {course.price}</div>
 				</div>
 				<div className={Styles.contentFooter}>
 					<div>

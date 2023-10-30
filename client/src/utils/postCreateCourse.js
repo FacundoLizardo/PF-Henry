@@ -1,14 +1,11 @@
 import axios from "axios";
 
 export async function sendData(course) {
+	console.log(course);
 	try {
-		const { data } = await axios.post(
-			"/courses/create",
-			course
-		);
-
+		const { data } = await axios.post("/courses/create", course);
 		if (data) {
-			window.alert("Se anadio tu curso con exito");
+			return course;
 		}
 	} catch (error) {
 		window.alert("Hay informacion erronea");
