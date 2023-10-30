@@ -10,8 +10,20 @@ export const getAllCategories = async () => {
 
 		const data = response.data;
 
-		localStorage.setItem("categoriesData", JSON.stringify(data));
+		data.sort((a, b) => {
+			const nameA = a.name.toUpperCase();
+			const nameB = b.name.toUpperCase();
 
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+			return 0;
+		});
+
+		localStorage.setItem("categoriesData", JSON.stringify(data));
 		return data;
 	} catch (error) {
 		console.error("Error fetching data:", error);
