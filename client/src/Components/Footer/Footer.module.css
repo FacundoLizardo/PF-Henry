@@ -11,11 +11,11 @@
 .footerContainer a {
   color: var(--color-text-secondary);
   padding: 2px 0;
+  transition: all 0.2 ease-out;
 }
 
 .footerContainer a:hover {
-  color: var(--color-text-secondary);
-  padding: 2px 0;
+  color: var(--color-hover);
 }
 
 .footerContainerImg {
