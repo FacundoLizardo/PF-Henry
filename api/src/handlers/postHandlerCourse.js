@@ -14,7 +14,7 @@ const postHandlerCourse = async (req, res) => {
 		!image ||
 		!price
 	) {
-		return res.status(400).json({ error: "Lack Of Data" });
+		return res.status(404).json({ error: "Lack Of Data" });
 	}
 	//Comment Prueba
 	try {
@@ -34,4 +34,3 @@ const postHandlerCourse = async (req, res) => {
 };
 
 module.exports = { postHandlerCourse };
-
