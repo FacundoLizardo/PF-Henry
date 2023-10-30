@@ -27,10 +27,6 @@ const Form = () => {
 		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
 	}, []);
 
-	useEffect(() => {
-		console.log(course);
-	}, [course]);
-
 	const uploadImage = async () => {
 		const image = document.getElementById("image");
 		const imageFile = image.files[0];
@@ -39,14 +35,13 @@ const Form = () => {
 		await uploadBytes(imageRef, imageFile);
 		const path = await getDownloadURL(imageRef);
 		setCourse({ ...course, image: `${path}` });
-		console.log(course);
+
 		return path;
 	};
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setCourse({ ...course, [name]: value });
-		console.log(course);
 	};
 
 	const onSubmit = async () => {
@@ -117,9 +112,22 @@ const Form = () => {
 									value={course.category}
 									onInput={handleChange}>
 									<option name="categorias">Categorias:</option>
-									{categoriesData?.map((category, index) => (
-										<option key={index}>{category.name}</option>
-									))}
+									{categoriesData
+										?.sort((a, b) => {
+											const nameA = a.name.toUpperCase();
+											const nameB = b.name.toUpperCase();
+
+											if (nameA < nameB) {
+												return -1;
+											}
+											if (nameA > nameB) {
+												return 1;
+											}
+											return 0;
+										})
+										.map((category, index) => (
+											<option key={index}>{category.name}</option>
+										))}
 								</select>
 								<p className={style.input__description}>{}</p>
 								<label className={style.input__label}>Imagen:</label>
