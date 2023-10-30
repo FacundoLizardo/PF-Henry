@@ -1,6 +1,6 @@
 /* eslint-disable */
+import axios from "axios";
 import { useState, useEffect } from "react";
-import { sendData } from "../../utils/postCreateCourse";
 import { storage } from "../../firebase/firebase";
 import style from "./Form.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -12,65 +12,72 @@ const Form = () => {
 	const navigate = useNavigate();
 	const id = useParams().id;
 	const [categoriesData, setCategoriesData] = useState([]);
-	const [imagePath, setImagePath] = useState("");
-	const [file, setFile] = useState(null);
 	const [price, setPrice] = useState(0.0);
 	const [loading, setLoading] = useState(false);
-
 	const [course, setCourse] = useState({
 		title: "",
 		description: "",
 		instructor_id: id,
 		category: "",
 		image: "",
-		price: 0.0,
+		price: price,
 	});
-
-	console.log(course);
 
 	useEffect(() => {
 		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
 	}, []);
 
+	useEffect(() => {
+		console.log(course);
+	}, [course]);
+
 	const uploadImage = async () => {
+		const image = document.getElementById("image");
+		const imageFile = image.files[0];
 		const nombreCurso = document.getElementById("title").value;
-		const imageRef = ref(storage, `courses/${nombreCurso}/${file.name}`);
-
-		await uploadBytes(imageRef, file);
-
-		const downloadURL = await getDownloadURL(imageRef);
-
-		setImagePath(downloadURL);
-		handlerPathImage(imagePath);
-
-		return downloadURL;
-	};
-
-	const eTargetImgFile = (e) => {
-		const imageUpload = e.target.files[0];
-		setFile(imageUpload);
-		console.log(file);
-	};
-
-	const handlerPathImage = async (newPath) => {
-		setCourse({ ...course, image: `${newPath}` });
+		const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
+		await uploadBytes(imageRef, imageFile);
+		const path = await getDownloadURL(imageRef);
+		setCourse({ ...course, image: `${path}` });
+		console.log(course);
+		return path;
 	};
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setCourse({ ...course, [name]: value });
 		console.log(course);
-		console.log(file);
 	};
 
-	const onSubmit = async (course) => {
-		await uploadImage();
-		sendData(course)
-			.then(() => console.log("Data sent successfully:"))
-			.catch(() => console.log("Error on the promise"))
-			.finally(setLoading(false));
-		await getAllCourses();
-		navigate("/courses");
+	const onSubmit = async () => {
+		setLoading(true);
+
+		try {
+			const imagePath = await uploadImage();
+
+			setCourse((prevCourse) => {
+				return {
+					...prevCourse,
+					image: imagePath,
+				};
+			});
+
+			const response = await axios.post("/courses/create", {
+				...course,
+				image: imagePath,
+			});
+
+			await getAllCourses();
+
+			if (response.data) {
+				alert("Se creo correctamente el curso.");
+			}
+		} catch (error) {
+			console.error("Error al crear el curso:", error);
+		} finally {
+			setLoading(false);
+			navigate("/courses/");
+		}
 	};
 
 	return (
@@ -116,37 +123,39 @@ const Form = () => {
 								</select>
 								<p className={style.input__description}>{}</p>
 								<label className={style.input__label}>Imagen:</label>
-								<input
-									className={style.input__field}
-									type="file"
-									id="image"
-									onChange={eTargetImgFile}
-								/>
+								<input className={style.input__field} type="file" id="image" />
 								<p className={style.input__description}>{}</p>
-								<label className={style.input__label}>Precio</label>
-								<input
-									className={style.input__field}
-									type="number"
-									step="0.01"
-									defaultValue={price.toFixed(2)}
-									id="price"
-									name="price"
-									onInput={handleChange}
-								/>
-								<p className={style.input__description}>{}</p>
+								<div className={style.fieldPrice_Send}>
+									<div className={style.priceField}>
+										<label className={style.input__label}>Precio: </label>
+										<input
+											className={style.input__price}
+											type="number"
+											step="0.01"
+											defaultValue={price.toFixed(2)}
+											id="price"
+											name="price"
+											min="0.00"
+											max="9999.99"
+											onInput={handleChange}
+										/>
+									</div>
+									<p className={style.input__description}>{}</p>
+									<Button
+										text={"Crear curso"}
+										onClick={() => onSubmit(course)}
+									/>
+								</div>
 							</div>
-						</div>
-						<div className={style.modal__footer}>
-							<Button
-								text={"Crear curso"}
-								className={style.button}
-								onClick={() => onSubmit(course)}
-							/>
 						</div>
 					</div>
 				</div>
 			)}
-			{loading && <div className="loader"></div>}
+			{loading && (
+				<div className={style.container}>
+					<div className={style.loader}></div>
+				</div>
+			)}
 		</>
 	);
 };
