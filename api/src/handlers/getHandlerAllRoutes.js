@@ -5,14 +5,21 @@ const {
   getCourseByNameController,
 } = require("../controllers/getControllers/getCourseByNameController");
 
+const {
+  getCourseByRatingController,
+} = require("../controllers/getControllers/getCourseByRatingController");
+const { Rating } = require("../db");
+
 const getHandlerAllRoutes = async (req, res) => {
-  
-  
-  const arrayPropiedad = Object.keys(req.query)
+  const arrayPropiedad = Object.keys(req.query);
   const propiedad = arrayPropiedad[0];
-  const valorPropiedad = req.query[arrayPropiedad[0]]
-  console.log(propiedad,valorPropiedad)
-  
+  const valorPropiedad = req.query[arrayPropiedad[0]];
+
+  if (propiedad === "rating") {
+    return await getCourseByRatingController(valorPropiedad);
+  }
+
+  console.log(propiedad, valorPropiedad);
 
   //const { title } = req.query;
   try {
@@ -29,4 +36,3 @@ const getHandlerAllRoutes = async (req, res) => {
 };
 
 module.exports = { getHandlerAllRoutes };
-

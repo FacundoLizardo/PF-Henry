@@ -46,6 +46,24 @@ Rating.belongsTo(User);
 Category.hasMany(Course);
 Course.belongsTo(Category);
 
+// Courses - Payments
+Course.belongsToMany(User, { through: "Consumption" });
+User.belongsToMany(Course, { through: "Consumption" });
+
+Course.hasMany(Payment, {
+  foreignKey: "course_id",
+});
+
+Lesson.hasOne(Course);
+
+// Users - Payments
+User.hasMany(Payment, {
+  foreignKey: "user_id",
+});
+Payment.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
 // Consumption.belongsTo(Course, { foreignKey: "id", as: "consumption_course" });
@@ -73,27 +91,12 @@ Course.belongsTo(Category);
 // User.hasMany(Rating, { as: "user_rating" });
 // Rating.belongsTo(User, { foreingKey: "id", as: "rating_user" });
 
-// Courses - Payments
-Course.belongsToMany(User, { through: "Consumption" });
-User.belongsToMany(Course, { through: "Consumption" });
 
-Course.hasMany(Payment, {
-  foreignKey: "course_id",
-});
-
-// Users - Payments
-User.hasMany(Payment, {
-  foreignKey: "user_id",
-});
-Payment.belongsTo(User, {
-  foreignKey: "user_id",
-});
 // // Relacion Lessons con Tabla Intermedia Comsumption
 // Lesson.belongsTo(Consumption, {
 // 	foreignKey: "lesson_id",
 // });
 
-Lesson.hasOne(Course);
 
 module.exports = {
   Category,
