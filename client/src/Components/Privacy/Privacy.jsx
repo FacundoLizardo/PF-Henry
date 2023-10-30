@@ -7,10 +7,10 @@ export default function Privacy() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h2>Política de Privacidad</h2>
+    <div className={styles.containerPri}>
+      <h2 className={styles.h2}>Política de Privacidad</h2>
       <br />
-      <h3>Nuestro compromiso de cumplir con la ley</h3>
+      <h3 className={styles.h3}>Nuestro compromiso de cumplir con la ley</h3>
       <br />
       <p>
         Esta Política de Privacidad afecta a los datos que nos proporciona, ya
@@ -20,7 +20,7 @@ export default function Privacy() {
         procese sus datos personales con los fines indicados a continuación.
       </p>
       <br />
-      <h3>¿Qué información recopilaremos y para qué la utilizaremos?</h3>
+      <h3 className={styles.h3}>¿Qué información recopilaremos y para qué la utilizaremos?</h3>
       <br />
       <p>
         Le pediremos su nombre y su correo electrónico en caso de que desee
@@ -40,7 +40,7 @@ export default function Privacy() {
         por correo electrónico.
       </p>
       <br />
-      <h3>Sus derechos</h3>
+      <h3 className={styles.h3}>Sus derechos</h3>
       <br />
       <p>
         Puede ejercer sus derechos de acceso, rectificación, cancelación y
@@ -48,7 +48,7 @@ export default function Privacy() {
         través del correo electrónico de contacto de la página.
       </p>
       <br />
-      <h3>Idioma</h3>
+      <h3 className={styles.h3}>Idioma</h3>
       <br />
       <p>
         El idioma aplicable a esta Política de Privacidad es el español. Si se le
@@ -60,7 +60,7 @@ export default function Privacy() {
         versión en español.
       </p>
       <br />
-      <h3>Dudas y consultas</h3>
+      <h3 className={styles.h3}>Dudas y consultas</h3>
       <br />
       <p>
         Por supuesto, si tiene dudas o preguntas sobre la protección de sus

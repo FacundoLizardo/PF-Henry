@@ -16,8 +16,8 @@ const Footer = () => {
           </div>
           <div className={Styles.footerTopItem}>
             <h4>Empresa</h4>
-            <a href="/">Mision</a>
-            <a href="/">Vision</a>
+            <a href="/about">Mision</a>
+            <a href="/about">Vision</a>
           </div>
           <div className={Styles.footerTopItem}>
             <h4>Nosotros</h4>
@@ -87,8 +87,8 @@ const Footer = () => {
             </p>
           </div>
           <div className={Styles.footerBottomItem}>
-            <a href="/">Terminos & Condiciones</a>
-            <a href="/">Privacidad</a>
+            <a href="/terms">Terminos & Condiciones</a>
+            <a href="/privacy">Privacidad</a>
             <a href="/">Seguridad</a>
           </div>
         </div>

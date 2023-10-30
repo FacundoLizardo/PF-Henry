@@ -1,10 +1,14 @@
-.container{
+.containerPri{
   padding: 30px;
   font-size: 18px;
   width: 100%;
   height: auto;
 }
 
-.container h3{   
-  font-size: 20px;
+.containerPri h3{   
+  margin-left: 20%;
+}
+
+.containerPri h2{   
+   margin-left: 20%;
 }
