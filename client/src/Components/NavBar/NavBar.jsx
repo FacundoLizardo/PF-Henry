@@ -4,10 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { userData } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
-
 import Styles from "../NavBar/NavBar.module.css";
-import { userData } from "../../utils/user";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
