@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<Layout />} />
           <Route path="/courses/" element={<Courses />} />
           <Route path="/detailCourse/:id" element={<DetailCourse />} />
-          <Route path="/student/" element={<Student />} />
+          <Route path="/student/:id" element={<Student />} />
           <Route path="/student/classList/:courseId" element={<ClassList />} />
           <Route
             path="/student/classList/lecture/:lessonId"
@@ -50,7 +50,7 @@ function App() {
           />
           <Route path="/instructor/:id" element={<Instructor />} />
           <Route path="/instructor/:id/form" element={<Form />} />
-          <Route path="/config/" element={<Config />} />
+          <Route path="/config/:id" element={<Config />} />
           <Route path="/login/" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />

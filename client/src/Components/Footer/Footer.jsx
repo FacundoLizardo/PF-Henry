@@ -16,11 +16,11 @@ const Footer = () => {
           </div>
           <div className={Styles.footerTopItem}>
             <h4>Empresa</h4>
-            <a href="/about">Mision</a>
-            <a href="/about">Vision</a>
+            <a href="/">Misión</a>
+            <a href="/">Visión</a>
           </div>
           <div className={Styles.footerTopItem}>
-            <h4>Nosotros</h4>
+            <h4>Sobre nosotros</h4>
             <a
               href="https://www.linkedin.com/in/lucasgabrieltamburlini/"
               target="_blank"
@@ -87,8 +87,8 @@ const Footer = () => {
             </p>
           </div>
           <div className={Styles.footerBottomItem}>
-            <a href="/terms">Terminos & Condiciones</a>
-            <a href="/privacy">Privacidad</a>
+            <a href="/">Términos & Condiciones</a>
+            <a href="/">Privacidad</a>
             <a href="/">Seguridad</a>
           </div>
         </div>
