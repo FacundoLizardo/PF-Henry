@@ -24,7 +24,7 @@ const Card = ({ course }) => {
   return (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer} onClick={handleCardClick}>
-        <img src={course.image} />
+        <img src={course.image} alt={course.title}/>
       </div>
       <div className={Styles.contentContainer}>
         <div className={Styles.contentTop}>
