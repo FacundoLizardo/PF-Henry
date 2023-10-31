@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const courseRoutes = require("./routes/courseRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const categoryRoutes = require("./routes/categoryRoutes.js");
+const ratingRoutes = require("./routes/ratingRoutes.js");
 //const routes = require("./routes/index.js");
 
 require("./db.js");
@@ -34,6 +35,7 @@ server.use((req, res, next) => {
 server.use("/users", userRoutes);
 server.use("/courses", courseRoutes);
 server.use("/categories", categoryRoutes);
+server.use("/rating",ratingRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {
