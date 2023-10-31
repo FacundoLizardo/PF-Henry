@@ -3,20 +3,20 @@ const { Router } = require("express");
 // const getHandlerById = require("../handlers/getHandlerById");
 // const postHandlerVideo = require("../handlers/postHandlerCourse");
 
-const courseRoutes = require("./courseRoutes");
+const { courseRoutes } = require("./courseRoutes");
+const { userRoutes } = require("./userRoutes");
+const { ratingRoutes } = require("./ratingRoutes");
 // const lessonRutes = require("./lessonRoutes");
-const userRoutes = require("./userRoutes");
 // const paymentRoutes = require("./paymentRoutes");
-// const ratingRoutes = require("./ratingRoutes");
 // const consumptionRoutes = require("./consumptionRoutes");
 
 const router = Router();
 
 router.use("/courses", courseRoutes);
-// router.use("/lesson", lessonRutes);
 router.use("/users", userRoutes);
+router.use("/rating", ratingRoutes);
+// router.use("/lesson", lessonRutes);
 // router.use("/payment", paymentRoutes);
-// router.use("/rating", ratingRoutes);
 // router.use("/consumption", consumptionRoutes);
 
 
