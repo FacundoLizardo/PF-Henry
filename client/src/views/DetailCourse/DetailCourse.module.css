@@ -39,7 +39,7 @@
 .classContainer {
   display: flex;
   width: 100%;
-  background-color: var(--color-background-off-two);
+  background-color: var(--color-background-details);
   justify-content: space-between;
   padding: 15px 20px;
   box-shadow: var(--box-shadow);
