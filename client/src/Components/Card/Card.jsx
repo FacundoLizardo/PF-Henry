@@ -29,12 +29,14 @@ const Card = ({ course }) => {
       <div className={Styles.contentContainer}>
         <div className={Styles.contentTop}>
           <div className={Styles.contentTopTitle}>
-            <h2>{course.title}</h2>
+            <div className={Styles.title}>
+              <h2>{course.title}</h2>
+              <span>{course.category}</span>
+            </div>
             <div className={Styles.contentTopPrice}>US$ {course.price}</div>
           </div>
           <div className={Styles.contentTopText}>
             <p>{course.description}</p>
-            <span>{course.category}</span>
           </div>
           <div className={Styles.contentTopDetail}>
             <div>Nombre del instructor</div>
