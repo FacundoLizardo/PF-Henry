@@ -1,8 +1,8 @@
 const {
-	getAllCoursesController,
+  getAllCoursesController,
 } = require("../controllers/getControllers/getAllCoursesController");
 const {
-	getCourseByNameController,
+  getCourseByNameController,
 } = require("../controllers/getControllers/getCourseByNameController");
 
 const {
@@ -11,15 +11,14 @@ const {
 const { Rating } = require("../db");
 
 const getHandlerAllRoutes = async (req, res) => {
-  
-  
-  const arrayPropiedad = Object.keys(req.query)
+  const arrayPropiedad = Object.keys(req.query);
   const propiedad = arrayPropiedad[0];
-  const valorPropiedad = req.query[arrayPropiedad[0]]
-  console.log(propiedad,valorPropiedad)
-  
+  const valorPropiedad = req.query[arrayPropiedad[0]];
 
-  //const { title } = req.query;
+  if (propiedad === "rating") {
+    return await getCourseByRatingController(valorPropiedad);
+  }
+
   try {
     const result = propiedad
       ? await getCourseByNameController(propiedad, valorPropiedad)
