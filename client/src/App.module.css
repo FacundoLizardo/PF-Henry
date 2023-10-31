@@ -26,6 +26,7 @@ html {
   --color-background: #f0f0f0;
   --color-background-off: #999999;
   --color-background-off-two: #8e7cff;
+  --color-background-details: #f5f5f5;
 
   /* Texto y elementos */
   --color-text-primary: #000000;
@@ -35,6 +36,7 @@ html {
   /* Cards */
   --color-border-one: #494949;
   --color-border-two: #f2f2f2;
+  --color-border-three: #ccc;
 
   /* Hover */
   --color-hover: #2c0b8e;
