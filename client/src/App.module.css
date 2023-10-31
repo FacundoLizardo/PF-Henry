@@ -18,25 +18,26 @@ html {
 
 :root {
   /* Colores principales */
-  --color-primary: #2c0b8e;
-  --color-secondary: #ffcc00;
-  --color-details: #4caf50;
+  --color-primary: #3d0dca;
+  --color-secondary: #27272A;
+  --color-details: #1c0570;
 
   /* Colores de fondo */
   --color-background: #f0f0f0;
-  --color-background-off: #494949;
-  --color-background-off-two: #f2f2f2;
+  --color-background-off: #999999;
+  --color-background-off-two: #8e7cff;
 
   /* Texto y elementos */
   --color-text-primary: #000000;
   --color-text-secondary: #ffffff;
+  --color-text-off: #494949;
 
   /* Cards */
-  --color-border-one: #000000;
-  --color-border-two: #0f0f0f;
+  --color-border-one: #494949;
+  --color-border-two: #f2f2f2;
 
   /* Hover */
-  --color-hover: #0075be;
+  --color-hover: #2c0b8e;
 
   /* Radius */
   --radius: 5px;
@@ -68,8 +69,8 @@ html {
   --pd-section-x2: 60px 0;
 
   /* Sombra */
-  --box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1),
-    0 5px 5px -5px rgba(0, 0, 0, 0.04);
+  --box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2),
+    0 10px 10px -10px rgba(0, 0, 0, 0.06);
 }
 
 /* Estilos generales */

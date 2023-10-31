@@ -14,6 +14,7 @@ nav {
   color: var(--color-text-secondary);
   position: static;
   margin: auto;
+  font-weight: bold;
 }
 
 .navbarLogo {
@@ -156,9 +157,9 @@ nav {
   }
 }
 
-@media (max-width: 425px){
+@media (max-width: 425px) {
   nav {
-        margin: 0px;
-        justify-content: space-around;
+    margin: 0px;
+    justify-content: space-around;
   }
 }

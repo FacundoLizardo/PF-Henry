@@ -28,17 +28,28 @@ const Card = ({ course }) => {
       </div>
       <div className={Styles.contentContainer}>
         <div className={Styles.contentTop}>
-          <h4>{course.title}</h4>
+          <div className={Styles.contentTopTitle}>
+            <h2>{course.title}</h2>
+            <div className={Styles.contentTopPrice}>US$ {course.price}</div>
+          </div>
+          <div className={Styles.contentTopText}>
+            <p>{course.description}</p>
+            <span>{course.category}</span>
+          </div>
+          <div className={Styles.contentTopDetail}>
+            <div>Nombre del instructor</div>
+            <div>
+              4.5 xxxxx (800)
+              {course.rating} {generateStars(course.rating)}
+            </div>
+            <div>30 horas en total - 200 clases</div>
+          </div>
         </div>
         <div className={Styles.contentBottom}>
-          <p>{course.description}</p>
-          <div className={Styles.contentBottomPrice}>US$ {course.price}</div>
-        </div>
-        <div className={Styles.contentFooter}>
-          <div>
-            {course.rating} {generateStars(course.rating)}
+          <div className={Styles.contentBottomButton}>
+            <Button text={"Agregar al carrito"} />
+            <Button text={"Comprar"} />
           </div>
-          <Button text={"Agregar"} />
         </div>
       </div>
     </div>
