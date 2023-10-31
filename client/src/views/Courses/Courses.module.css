@@ -87,6 +87,10 @@
 .filter-butt:first-child {
   margin-left: 0;
 }
+.SearchBarContainer input {
+padding: 5px;
+border-radius: var(--radius)
+}
 
 .order {
   margin-left: 20px;
