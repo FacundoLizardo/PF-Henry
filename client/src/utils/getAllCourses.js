@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const getAllCourses = async () => {
 	try {
@@ -15,7 +16,12 @@ export const getAllCourses = async () => {
 		console.log(data);
 		return data;
 	} catch (error) {
-		console.error("Error fetching data:", error);
+		Swal.fire({
+			title: "Error al conectar con la base de datos",
+			text: "Gracias por usar Educastream",
+			icon: "error",
+			confirmButtonText: "Cerrar",
+		});
 		throw error;
 	}
 };

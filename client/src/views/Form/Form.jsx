@@ -7,6 +7,8 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { getAllCourses } from "../../utils/getAllCourses";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const Form = () => {
 	const navigate = useNavigate();
@@ -67,13 +69,23 @@ const Form = () => {
 			await getAllCourses();
 
 			if (response.data) {
-				alert("Se creo correctamente el curso.");
+				Swal.fire({
+					title: "Se creo tu curso correctamente!",
+					text: "Gracias por usar Educastream",
+					icon: "success",
+					confirmButtonText: "Cerrar",
+				});
+				navigate("/courses/");
 			}
 		} catch (error) {
-			console.error("Error al crear el curso:", error);
+			Swal.fire({
+				title: "Falta informacion",
+				text: "Por favor, revisa con cuidado los datos proporcionados , e intentalo nuevamente!",
+				icon: "warning",
+				confirmButtonText: "Volver a intentarlo",
+			});
 		} finally {
 			setLoading(false);
-			navigate("/courses/");
 		}
 	};
 
