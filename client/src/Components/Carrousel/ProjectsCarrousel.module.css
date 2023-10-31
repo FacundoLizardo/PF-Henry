@@ -14,23 +14,6 @@
   object-fit: cover;
 }
 
-/* .logo {
-
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    font-family: "Poppins",sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #000;
-    line-height: 1;
-    text-align: center;
-    box-sizing: border-box;
-    overflow: hidden;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: 60vh;
-  } */
-
 .__text_projects {
   display: flex;
   justify-content: center;
