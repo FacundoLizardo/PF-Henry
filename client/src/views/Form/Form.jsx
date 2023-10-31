@@ -135,7 +135,7 @@ const Form = () => {
 								<p className={style.input__description}>{}</p>
 								<div className={style.fieldPrice_Send}>
 									<div className={style.priceField}>
-										<label className={style.input__label}>Precio: </label>
+										<label className={style.input__label}>Precio: US$ </label>
 										<input
 											className={style.input__price}
 											type="number"

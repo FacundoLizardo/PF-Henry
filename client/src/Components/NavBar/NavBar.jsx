@@ -13,8 +13,20 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigateToUser = (userId) => {
+  const handleNavigateToInstructor = (userId) => {
     navigate(`/instructor/${userId}`, {
+      state: { userData: userData },
+    });
+  };
+
+  const handleNavigateToStudet = (userId) => {
+    navigate(`/student/${userId}`, {
+      state: { userData: userData },
+    });
+  };
+
+  const handleNavigateToConfig = (userId) => {
+    navigate(`/config/${userId}`, {
       state: { userData: userData },
     });
   };
@@ -69,15 +81,27 @@ const Navbar = () => {
                         className={Styles.modalContent}
                         onClick={handleModal}
                       >
-                        <Link to={"/student"}>Alumno</Link>
                         <button
                           onClick={() => {
-                            handleNavigateToUser(userData.id);
+                            handleNavigateToStudet(userData.id);
+                          }}
+                        >
+                          Mi aprendizaje
+                        </button>
+                        <button
+                          onClick={() => {
+                            handleNavigateToInstructor(userData.id);
                           }}
                         >
                           Instructor
                         </button>
-                        <Link to={"/config"}>Configuración</Link>
+                        <button
+                          onClick={() => {
+                            handleNavigateToConfig(userData.id);
+                          }}
+                        >
+                          Configuración
+                        </button>
                         <Link to={"/login"}>Ingresar / Salir</Link>
                       </div>
                     </div>
