@@ -1,8 +1,6 @@
-import CardContainer from "../../Components/CardContainer/CardContainer";
 import { useEffect, useState } from "react";
 import Button from "../../Components/Button/Button";
 import axios from "axios";
-
 import Styles from "./Courses.module.css";
 import Card from "../../Components/Card/Card";
 
@@ -27,6 +25,23 @@ const Courses = () => {
 		const url = `/courses?category=${categoryFilter}`;
 
 		if (categoryFilter) {
+			const { data } = await axios.get(url);
+			setDataCourses((prevState) => ({
+				...prevState,
+				filteredData: data,
+			}));
+		}
+	};
+
+	const [dataTitle, setDataTitle] = useState("");
+
+	const dataFilteredByTitle = async (event) => {
+		const newValue = event.target.value;
+		setDataTitle(newValue);
+
+		const url = `/courses?title=${newValue}`;
+
+		if (newValue) {
 			const { data } = await axios.get(url);
 			setDataCourses((prevState) => ({
 				...prevState,
@@ -101,6 +116,16 @@ const Courses = () => {
 			<section id="container" className={Styles.filtersContainer}>
 				<div className={Styles.filtOrderCont}>
 					<div className={Styles.filters}>
+						<div className={Styles.SearchBarContainer}>
+							<input
+								type="text"
+								value={dataTitle}
+								name="title"
+								onChange={dataFilteredByTitle}
+							/>
+							{/* <Button text={"Buscar"} /> */}
+						</div>
+
 						<select
 							className={Styles.filterButt}
 							onChange={dataFiltered}
