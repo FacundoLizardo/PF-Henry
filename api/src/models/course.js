@@ -42,6 +42,12 @@ const Course = (sequelize) => {
 			price: {
 				type: DataTypes.FLOAT,
 				allowNull: true,
+				validate: {
+					isFloat: {
+						args: [0, 999999.99],
+						msg: 'El precio debe tener como máximo dos decimales.',
+					},
+				},
 			},
 			onSale: {
 				type: DataTypes.BOOLEAN,
