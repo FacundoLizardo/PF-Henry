@@ -1,13 +1,12 @@
 .cardContainer {
-	display: flex;
-	flex-direction: column;
-	width: 300px;
-	height: 330px;
-	border-radius: var(--radius);
-	overflow: hidden;
-	box-shadow: var(--box-shadow);
-	border: 2px solid var(--color-border-two);
-	transition: all 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 330px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-out;
 }
 
 .cardContainer:hover {

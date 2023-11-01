@@ -7,7 +7,7 @@ import Styles from "./CardLayoutContainer.module.css";
 const responsive = {
   XXLarge: {
     breakpoint: { max: 4000, min: 1700 },
-    items: 6,
+    items: 5,
   },
   XLarge: {
     breakpoint: { max: 1700, min: 1400 },

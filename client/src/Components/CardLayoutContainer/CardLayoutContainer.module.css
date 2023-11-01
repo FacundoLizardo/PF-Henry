@@ -1,6 +1,5 @@
-/* CardLayoutContainer.module.css */
 .CardLayoutContainer {
   display: flex;
-  padding-bottom: var(--pd-y-4);
   width: 100%;
+  justify-content: center;
 }
