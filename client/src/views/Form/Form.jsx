@@ -101,7 +101,8 @@ const Form = () => {
 									name="description"
 									value={course.description}
 									className={style.input__field}
-									onInput={handleChange}></textarea>
+									onInput={handleChange}
+								></textarea>
 								<p className={style.input__description}>{}</p>
 								<label className={style.input__label}>Categoria:</label>
 								<select
@@ -110,7 +111,8 @@ const Form = () => {
 									name="category"
 									defaultValue="categorias"
 									value={course.category}
-									onInput={handleChange}>
+									onInput={handleChange}
+								>
 									<option name="categorias">Categorias:</option>
 									{categoriesData
 										?.sort((a, b) => {
