@@ -7,6 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { getAllCourses } from "../../utils/getAllCourses";
+import Swal from "sweetalert2";
 
 const Form = () => {
 	const navigate = useNavigate();
@@ -65,13 +66,22 @@ const Form = () => {
 			await getAllCourses();
 
 			if (response.data) {
-				alert("Se creo correctamente el curso.");
+				Swal.fire({
+					title: "Tu curso se creo correctamente!",
+					text: "Dirigete a la lista de cursos, ahi podras verlo.",
+					icon: "success",
+					confirmButtonText: "LISTA DE CURSOS",
+				}).then(() => navigate(`/courses`));
 			}
 		} catch (error) {
-			console.error("Error al crear el curso:", error);
+			Swal.fire({
+				title: "Falta informacion importante!",
+				text: "Por favor revisa y completa todos los campos.",
+				icon: "warning",
+				confirmButtonText: "INTENTARLO NUEVAMENTE",
+			});
 		} finally {
 			setLoading(false);
-			navigate("/courses/");
 		}
 	};
 
@@ -93,6 +103,7 @@ const Form = () => {
 									name="title"
 									value={course.title}
 									onInput={handleChange}
+									maxLength={100}
 								/>
 								<p className={style.input__description}>{}</p>
 								<label className={style.input__label}>Descripcion</label>
@@ -102,6 +113,7 @@ const Form = () => {
 									value={course.description}
 									className={style.input__field}
 									onInput={handleChange}
+									maxLength={300}
 								></textarea>
 								<p className={style.input__description}>{}</p>
 								<label className={style.input__label}>Categoria:</label>
