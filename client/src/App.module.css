@@ -36,7 +36,7 @@ html {
 
   /* Cards */
   --color-border-one: #494949;
-  --color-border-two: #f2f2f2;
+  --color-border-two: #d1d1d1b4;
   --color-border-three: #ccc;
 
   /* Hover */
@@ -74,6 +74,7 @@ html {
   /* Sombra */
   --box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2),
     0 10px 10px -10px rgba(0, 0, 0, 0.06);
+    
 }
 
 /* Estilos generales */
