@@ -1,151 +1,176 @@
 /* eslint-disable react/no-unknown-property */
-import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { userData } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
-
+import { userContext } from "../../App";
 import Styles from "../NavBar/NavBar.module.css";
+import { signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import nonuser from "../../assets/navBarImages/nonuser.png";
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+	const user2 = useContext(userContext);
+	const { user } = user2;
 
-  const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
-  const handleNavigateToInstructor = (userId) => {
-    navigate(`/instructor/${userId}`, {
-      state: { userData: userData },
-    });
-  };
+	const navigate = useNavigate();
 
-  const handleNavigateToStudet = (userId) => {
-    navigate(`/student/${userId}`, {
-      state: { userData: userData },
-    });
-  };
+	const handleNavigateToInstructor = (userId) => {
+		navigate(`/instructor/${userId}`, {
+			state: { userData: userData },
+		});
+	};
 
-  const handleNavigateToConfig = (userId) => {
-    navigate(`/config/${userId}`, {
-      state: { userData: userData },
-    });
-  };
+	const handleNavigateToStudet = (userId) => {
+		navigate(`/student/${userId}`, {
+			state: { userData: userData },
+		});
+	};
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768 && open) {
-        setOpen(false);
-      }
-    };
+	const handleNavigateToConfig = (userId) => {
+		navigate(`/config/${userId}`, {
+			state: { userData: userData },
+		});
+	};
 
-    window.addEventListener("resize", handleResize);
+	const signOutFn = () => {
+		const auth = getAuth();
+		signOut(auth);
+		window.location.reload();
+	};
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [open]);
+	const signInFn = () => {
+		window.location = "http://localhost:5173/login";
+	};
 
-  const handleClick = () => {
-    if (window.innerWidth < 768) {
-      setOpen(!open);
-    }
-  };
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 768 && open) {
+				setOpen(false);
+			}
+		};
 
-  const handleModal = () => {
-    setShowModal(!showModal);
-  };
+		window.addEventListener("resize", handleResize);
 
-  return (
-    <div className={Styles.navbarContainer}>
-      <nav>
-        <div className={Styles.navbarLogo}>
-          <img src={logo} alt="EducaStream" />
-        </div>
-        <div className={Styles.navbarAssets}>
-          <div className={`${Styles.navbarLinks} ${open ? Styles.active : ""}`}>
-            <div>
-              <ul>
-                <li>
-                  <NavLink to={"/"}>Inicio</NavLink>
-                </li>
-                <li>
-                  <NavLink to={"/courses"}>Cursos</NavLink>
-                </li>
-                <li>
-                  <button onClick={handleModal} className={Styles.menuModal}>
-                    M
-                  </button>
-                  {showModal && (
-                    <div className={Styles.modal}>
-                      <div
-                        className={Styles.modalContent}
-                        onClick={handleModal}
-                      >
-                        <button
-                          onClick={() => {
-                            handleNavigateToStudet(userData.id);
-                          }}
-                        >
-                          Mi aprendizaje
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleNavigateToInstructor(userData.id);
-                          }}
-                        >
-                          Instructor
-                        </button>
-                        <button
-                          onClick={() => {
-                            handleNavigateToConfig(userData.id);
-                          }}
-                        >
-                          Configuración
-                        </button>
-                        <Link to={"/login"}>Ingresar / Salir</Link>
-                      </div>
-                    </div>
-                  )}
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className={Styles.navbarToggle} onClick={handleClick}>
-            {open ? (
-              <svg
-                className={Styles.menuClose}
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M18 6l-12 12"></path>
-                <path d="M6 6l12 12"></path>
-              </svg>
-            ) : (
-              <svg
-                className={Styles.menuOpen}
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                fill="none"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M4 6h16"></path>
-                <path d="M7 12h13"></path>
-                <path d="M10 18h10"></path>
-              </svg>
-            )}
-          </div>
-        </div>
-      </nav>
-    </div>
-  );
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, [open]);
+
+	const handleClick = () => {
+		if (window.innerWidth < 768) {
+			setOpen(!open);
+		}
+	};
+
+	const handleModal = () => {
+		setShowModal(!showModal);
+	};
+
+	return (
+		<div className={Styles.navbarContainer}>
+			<nav>
+				<div className={Styles.navbarLogo}>
+					<img src={logo} alt="EducaStream" />
+				</div>
+				<div className={Styles.navbarAssets}>
+					<div className={`${Styles.navbarLinks} ${open ? Styles.active : ""}`}>
+						<div>
+							<ul>
+								<li>
+									<NavLink to={"/"}>Inicio</NavLink>
+								</li>
+								<li>
+									<NavLink to={"/courses"}>Cursos</NavLink>
+								</li>
+								<li>
+									{user2.email === "" ? (
+										<img
+											src={nonuser}
+											className={Styles.imgProfile}
+											onClick={handleModal}
+										/>
+									) : (
+										<img
+											src={user?.photoURL}
+											className={Styles.imgProfile}
+											onClick={handleModal}
+										/>
+									)}
+
+									{showModal && (
+										<div className={Styles.modal}>
+											<div
+												className={Styles.modalContent}
+												onClick={handleModal}>
+												<button
+													onClick={() => {
+														handleNavigateToStudet(userData.id);
+													}}>
+													Mi aprendizaje
+												</button>
+												<button
+													onClick={() => {
+														handleNavigateToInstructor(userData.id);
+													}}>
+													Instructor
+												</button>
+												<button
+													onClick={() => {
+														handleNavigateToConfig(userData.id);
+													}}>
+													Configuración
+												</button>
+												{user?.email ? (
+													<button onClick={signOutFn}>Log Out</button>
+												) : (
+													<button onClick={signInFn}>Ingresar</button>
+												)}
+											</div>
+										</div>
+									)}
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div className={Styles.navbarToggle} onClick={handleClick}>
+						{open ? (
+							<svg
+								className={Styles.menuClose}
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								fill="none">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+								<path d="M18 6l-12 12"></path>
+								<path d="M6 6l12 12"></path>
+							</svg>
+						) : (
+							<svg
+								className={Styles.menuOpen}
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+								fill="none">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+								<path d="M4 6h16"></path>
+								<path d="M7 12h13"></path>
+								<path d="M10 18h10"></path>
+							</svg>
+						)}
+					</div>
+				</div>
+			</nav>
+		</div>
+	);
 };
 
 export default Navbar;
