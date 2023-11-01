@@ -12,11 +12,7 @@ import Styles from "./Layout.module.css";
 const Layout = () => {
 	const navigate = useNavigate();
 	const [dataCourses, setDataCourses] = useState([]);
-	let onSaleData;
-	const getOnSaleCoursesFn = async () => {
-		onSaleData = await getOnSaleCourses();
-	};
-	getOnSaleCoursesFn();
+	const [onSaleCourses, setOnSlaeCourses] = useState([]);
 
 	const handleNavigate = () => {
 		navigate("./courses/");
@@ -26,11 +22,12 @@ const Layout = () => {
 		const fetchData = async () => {
 			await getAllCourses();
 			await getAllCategories();
+			setOnSlaeCourses(await getOnSaleCourses());
 			setDataCourses(JSON.parse(localStorage.getItem("coursesData")));
 		};
 		fetchData();
 	}, []);
-
+	console.log(onSaleCourses);
 	const dataCoursesByDate = dataCourses.sort((a, b) => {
 		const fechaA = new Date(a.createdAt);
 		const fechaB = new Date(b.createdAt);
@@ -49,6 +46,10 @@ const Layout = () => {
 		<div className={Styles.layoutContainer}>
 			<Home />
 			<div className={Styles.layoutContent}>
+				<div className={Styles.layoutContentItem}>
+					<h2>Ofertas!</h2>
+					<CardLayoutContainer dataCourses={onSaleCourses} />
+				</div>
 				<div className={Styles.layoutContentItem}>
 					<h2>Últimos cursos</h2>
 					<CardLayoutContainer dataCourses={dataCoursesByDate} />
