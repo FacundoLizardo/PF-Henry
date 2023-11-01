@@ -6,8 +6,8 @@ const { postHandlerCourse } = require("../handlers/postHandlerCourse");
 
 const courseRoutes = Router();
 
-courseRoutes.get("/", getHandlerAllRoutes);
 courseRoutes.get("/:id", getHandlerById);
+courseRoutes.get("/", getHandlerAllRoutes);
 courseRoutes.post("/create", postHandlerCourse);
 
 module.exports = courseRoutes;
