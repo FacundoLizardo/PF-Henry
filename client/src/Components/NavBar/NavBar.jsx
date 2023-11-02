@@ -19,7 +19,6 @@ const Navbar = () => {
 
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  let timer;
 
   const navigate = useNavigate();
 
@@ -51,37 +50,19 @@ const Navbar = () => {
     window.location = "http://localhost:5173/login";
   };
 
-  const openModal = () => {
-    clearTimeout(timer);
+  const handleMouseEnter = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    timer = setTimeout(() => {
-      setIsModalOpen(false);
-    }, 500);
-  };
-
-  const handleMouseEnter = () => {
-    openModal();
-  };
-
   const handleMouseLeave = () => {
-    closeModal();
+    setIsModalOpen(false);
   };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
 
   const handleClick = () => {
     if (window.innerWidth < 768) {
       setOpen(!open);
     }
   };
-
   return (
     <div className={Styles.navbarContainer}>
       <nav>
@@ -99,50 +80,68 @@ const Navbar = () => {
                   <NavLink to={"/courses"}>Cursos</NavLink>
                 </li>
                 <li>
-                  <Cart />
+                  {!userData ? (
+                    <NavLink to={"/login"}>Mi aprendizaje</NavLink>
+                  ) : (
+                    <NavLink to={`/student/${userData?.id}`}>
+                      Mi aprendizaje
+                    </NavLink>
+                  )}
                 </li>
                 <li>
-                  <img
-                    src={
-                      userData?.email === "" || !userData
-                        ? nonuser
-                        : userData?.photoURL
-                    }
-                    className={Styles.imgProfile}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  />
-                  {isModalOpen && (
-                    <div className={Styles.modal}>
-                      <div
-                        className={Styles.modalContent}
-                        onMouseLeave={handleMouseLeave}
-                      >
-                        <button
-                          onClick={() => handleNavigateToStudent(userData.id)}
-                        >
-                          Mi aprendizaje
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleNavigateToInstructor(userData.id)
-                          }
-                        >
-                          Instructor
-                        </button>
-                        <button
-                          onClick={() => handleNavigateToConfig(userData.id)}
-                        >
-                          Configuración
-                        </button>
-                        {userData?.email ? (
-                          <button onClick={signOutFn}>Log Out</button>
-                        ) : (
-                          <button onClick={signInFn}>Ingresar</button>
-                        )}
-                      </div>
-                    </div>
+                  {!userData ? (
+                    <NavLink to={"/login"}>Enseñar</NavLink>
+                  ) : (
+                    <NavLink to={`/instructor/${userData?.id}`}>
+                      Enseñar
+                    </NavLink>
                   )}
+                </li>
+                <li>
+                  <Cart />
+                </li>
+                <li
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className={Styles.imgProfile}>
+                    <img src={!userData ? nonuser : userData?.photoURL} />
+                  </div>
+                  {isModalOpen &&
+                    (!userData ? (
+                      <div className={Styles.modal}>
+                        <div className={Styles.modalContent}>
+                          <button onClick={signInFn}>Ingresar</button>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className={Styles.modal}>
+                        <div className={Styles.modalContent}>
+                          <button
+                            onClick={() =>
+                              handleNavigateToStudent(userData?.id)
+                            }
+                          >
+                            Mi aprendizaje
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleNavigateToInstructor(userData?.id)
+                            }
+                          >
+                            Instructor
+                          </button>
+                          <hr />
+                          <button
+                            onClick={() => handleNavigateToConfig(userData?.id)}
+                          >
+                            Configuración
+                          </button>
+                          <hr />
+                          <button onClick={signOutFn}>Desconectarse</button>
+                        </div>
+                      </div>
+                    ))}
                 </li>
               </ul>
             </div>
