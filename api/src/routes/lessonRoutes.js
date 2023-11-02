@@ -11,6 +11,6 @@ const lessonRoutes = Router();
 lessonRoutes.post("/create", postHandlerLessons);
 lessonRoutes.get("/:course_id", getHandlerLessonsByCourseId);
 lessonRoutes.get("/lesson/:id", getHandlerLessonsById);
-lessonRoutes.put("/:id", putHandlerLessonsById)
+lessonRoutes.put("/edit", putHandlerLessonsById)
 
 module.exports = lessonRoutes;
