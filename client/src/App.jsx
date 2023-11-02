@@ -13,13 +13,12 @@ import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
 import Footer from "./Components/Footer/Footer";
 import EditCourse from "./views/EditCourse/EditCourse";
-
-import Styles from "./App.module.css";
-
 // import { appFireBase } from "./firebase/firebase";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
+import CartPage from "./views/CartPage/CartPage";
 
+import Styles from "./App.module.css";
 export const userContext = React.createContext();
 
 function App() {
@@ -57,6 +56,7 @@ function App() {
 				element={<Lecture />}
 			/>
 			<Route path="/config/:id" element={<Config />} />
+			<Route path="/cart/:id" element={<CartPage />} />
 		</>
 	);
 

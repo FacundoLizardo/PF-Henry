@@ -1,7 +1,7 @@
 .buttonContainer .cssButtonSharpBlue {
   min-width: 100px;
   height: auto;
-  color: #fff;
+  color: var(--color-background-button);
   padding: 5px 8px;
   font-weight: bold;
   cursor: pointer;
@@ -14,6 +14,6 @@
   border-radius: var(--radius);
 }
 .buttonContainer .cssButtonSharpBlue:hover {
-  background: #fff;
+  background: var(--color-background-button);
   color: var(--color-primary);
 }
