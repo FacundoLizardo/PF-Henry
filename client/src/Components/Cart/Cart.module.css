@@ -1,67 +1,107 @@
-/* Cart.module.css */
+.cartContainer {
+  height: 100%;
+  position: relative;
+  color: var(--color-text-primary);
+}
 
 .modal {
-  display: none;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff;
-  border-top: 1px solid #ccc;
-  z-index: 1;
+  background-color: var(--color-background-details);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 45px;
+  padding: 20px;
+  right: 0;
+  z-index: 90;
+  min-width: 300px;
 }
 
 .modalContent {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  cursor: pointer;
+.modalContent ul {
+  display: flex;
+  flex-direction: column;
+  color: var(--color-text-primary);
+  width: 100%;
 }
 
-h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.modalContent ul p {
+  font-weight: 300;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.modalContent li {
+  display: flex;
+  align-items: start;
+  width: 100%;
+  justify-content: space-between;
+  text-align: start;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--color-background-black);
 }
 
-.cartItem {
-  padding: 10px 0;
-  border-bottom: 1px solid #ccc;
-}
 
 .cartRemoveItem {
-  background: #e74c3c;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  height: auto;
+  color: var(--color-text-secondary);
+  padding: 5px 5px;
+  font-weight: bold;
   cursor: pointer;
-  margin-left: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  background: red;
+  border-radius: var(--radius);
+  border: 2px solid red;
 }
 
 .cartRemoveItem:hover {
-  background: #c0392b;
+  background: #fff;
+  color: red;
+  border: 2px solid red;
 }
 
-.cartBuyItem {
-  background: #3498db;
-  color: #fff;
+.cartButton {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: none;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  padding: 0;
+  margin: 0;
+  outline: none;
 }
 
-.cartBuyItem:hover {
-  background: #2980b9;
+.cartButton svg {
+  color: var(--color-text-secondary);
+  position: absolute;
+  width: 24px;
+}
+
+.totalPrice {
+  color: var(--color-text-primary);
+  font-size: large;
+  padding: 20px 0;
+}
+
+.cartLength {
+  position: relative;
+  top: -13px;
+  right: -18px;
+  z-index: 91;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
 }

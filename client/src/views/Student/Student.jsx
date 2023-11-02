@@ -1,15 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../../Components/Button/Button";
-
 import Styles from "./Student.module.css";
 import { userContext } from "../../App";
-
-import { listCourses } from "../../utils/data";
 import { useContext } from "react";
 
 const Student = () => {
 	const userData = useContext(userContext);
-	console.log(userData);
 
 	/* const handleNavigateToLessons = (courseId) => {
     const selectedCourse = listCourses.find(
