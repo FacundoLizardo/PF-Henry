@@ -42,7 +42,7 @@ const EditCourse = () => {
 	};
 
 	console.log(newDataCourse);
-
+	// http://localhost:3001/courses/edit
 	const onSubmit = async () => {
 		if (image.files.length === 1) {
 			try {
