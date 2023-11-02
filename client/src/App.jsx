@@ -11,6 +11,7 @@ import ClassList from "./views/ListClass/ClassList";
 import Form from "./views/Form/Form";
 import Login from "./views/Login/Login";
 import Footer from "./Components/Footer/Footer";
+import EditCourse from "./views/EditCourse/EditCourse";
 
 import Styles from "./App.module.css";
 
@@ -82,6 +83,7 @@ function App() {
 						<Route path="/instructor/:id" element={<Instructor />} />
 						<Route path="/instructor/:id/form" element={<Form />} />
 						<Route path="/config/:id" element={<Config />} />
+						<Route path="/edit/:id" element={<EditCourse />} />
 						<Route
 							path="/login/"
 							element={<Login updateContextUser={updateContextUser} />}

@@ -17,8 +17,8 @@ const Instructor = () => {
 		? dataCourses.filter((item) => item.instructor_id === userData.id)
 		: [];
 
-	const handleNavigate = () => {
-		navigate("./form/");
+	const handleNavigate = (destination) => {
+		navigate(destination);
 	};
 
 	return (
@@ -31,7 +31,10 @@ const Instructor = () => {
 			</div>
 			<div className={Styles.instructorContainerCreate}>
 				<p>¡Empieza, crea tu curso!</p>
-				<Button text={"Crea tu curso"} onClick={handleNavigate} />
+				<Button
+					text={"Crea tu curso"}
+					onClick={() => handleNavigate(`/instructor/${userData.id}/form`)}
+				/>
 			</div>
 			<div className={Styles.instructorContainerCourse}>
 				<div>
@@ -46,7 +49,10 @@ const Instructor = () => {
 							<h2>{course.title}</h2>
 							<div className={Styles.buttonContainer}>
 								<Button text={"Crea clase"} />
-								<Button text={"Editar curso"} />
+								<Button
+									text={"Editar curso"}
+									onClick={() => handleNavigate(`/edit/${course.id}`)}
+								/>
 
 								{course.onSale === true ? (
 									<>

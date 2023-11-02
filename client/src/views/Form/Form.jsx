@@ -57,7 +57,6 @@ const Form = () => {
 					image: imagePath,
 				};
 			});
-
 			const response = await axios.post("/courses/create", {
 				...course,
 				image: imagePath,
