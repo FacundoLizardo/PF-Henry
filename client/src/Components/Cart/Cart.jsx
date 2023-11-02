@@ -70,7 +70,7 @@ function Cart() {
               <ul>
                 {state.cart.map((product, index) => (
                   <li key={index}>
-                    <div className={Styles.modalContentPrice}>
+                    <div>
                       <p>{product.name}</p>
                       <span>US$ {product.price}</span>
                     </div>

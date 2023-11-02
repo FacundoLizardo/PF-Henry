@@ -39,6 +39,7 @@
   width: 100%;
   justify-content: space-between;
   text-align: start;
+  padding: 5px 0;
   border-bottom: 1px solid var(--color-background-black);
 }
 
