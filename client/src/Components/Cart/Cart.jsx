@@ -11,33 +11,25 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
-  let timer;
 
-  const handleNavigate = () => {
+  const handleNavigateCart = () => {
     navigate(`./cart/${userData.id}`);
+  };
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
   };
 
   const handleRemoveFromCart = (productId) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: productId });
   };
 
-  const openModal = () => {
-    clearTimeout(timer);
+  const handleMouseEnter = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    timer = setTimeout(() => {
-      setIsModalOpen(false);
-    }, 500);
-  };
-
-  const handleMouseEnter = () => {
-    openModal();
-  };
-
   const handleMouseLeave = () => {
-    closeModal();
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -58,14 +50,10 @@ function Cart() {
       onMouseLeave={handleMouseLeave}
     >
       {isModalOpen && (
-        <div
-          className={Styles.modal}
-          onMouseEnter={openModal}
-          onMouseLeave={closeModal}
-        >
+        <div className={Styles.modal}>
           <div className={Styles.modalContent}>
             {isCartEmpty ? (
-              <p>El carrito está vacío</p>
+              <p className={Styles.modalContentText}>El carrito está vacío</p>
             ) : (
               <ul>
                 {state.cart.map((product, index) => (
@@ -87,15 +75,27 @@ function Cart() {
             {!isCartEmpty && (
               <div className={Styles.totalPrice}>Total: US$ {totalPrice}</div>
             )}
-            {!isCartEmpty && (
+            {isCartEmpty ? (
               <Button
                 className={Styles.cartBuyItem}
-                text={"Comprar"}
+                text={"Ir al carrito"}
                 onClick={() => {
-                  closeModal();
-                  handleNavigate();
+                  if (userData) {
+                    handleNavigateCart();
+                  } else {
+                    handleNavigateLogin();
+                  }
                 }}
               />
+            ) : (
+              <button
+                className={Styles.cartBuyItem}
+                onClick={() => {
+                  handleNavigateCart();
+                }}
+              >
+                Ir a pagar
+              </button>
             )}
           </div>
         </div>

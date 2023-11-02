@@ -1,3 +1,148 @@
 .cartPageContainer {
+  width: 90%;
   min-height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: var(--pd-section);
+}
+
+.cartPageContainer h2 {
+  padding-bottom: var(--pd-y-2);
+}
+
+.cartPageTop {
+  display: flex;
+  gap: 30px;
+}
+
+.cartPageInfo {
+  width: 60%;
+  min-height: 500px;
+  background-color: var(--color-background-details);
+  border-radius: var(--radius);
+  padding: var(--pd-4);
+}
+
+.content {
+  display: flex;
+  width: 100%;
+}
+
+.contentSelect a {
+  color: var(--color-primary);
+}
+
+.content li {
+  display: flex;
+  gap: 10px;
+  padding-top: var(--pd-y-2);
+  padding-bottom: var(--pd-y-2);
+  border-bottom: 1px solid var(--color-background-black);
+}
+
+.contentImg {
+  width: 12%;
+  height: 12%;
+  overflow: hidden;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentImg img {
+  width: 100%;
+  height: 100%;
+}
+
+.cartPageSummary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  min-height: 500px;
+  background-color: var(--color-background-details);
+  border-radius: var(--radius);
+  padding: var(--pd-4);
+}
+
+.cartPageSummary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cartPageSummary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--pd-y-2);
+}
+
+.cartPageSummary p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cartPageSummary span {
+  font-size: 1rem;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.cartRemoveItem {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red; /* Color azul, puedes ajustarlo según tu preferencia */
+}
+
+.cartRemoveItem svg {
+  border-radius: 50%;
+  transition: all 0.2s ease-out;
+  width: 24px;
+  height: 24px;
+}
+
+.cartRemoveItem svg:hover {
+  background-color: red;
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.bottonBuy {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  gap: 30px;
+}
+
+.finalizePurchase {
+  height: auto;
+  color: var(--color-text-secondary);
+  padding: 5px 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  background: green;
+  border-radius: var(--radius);
+  border: 2px solid green;
+}
+
+.finalizePurchase:hover {
+  background: #fff;
+  color: green;
+  border: 2px solid green;
 }
