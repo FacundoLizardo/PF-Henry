@@ -27,9 +27,7 @@ function Cart() {
   };
 
   const closeModal = () => {
-    timer = setTimeout(() => {
-      setIsModalOpen(false);
-    }, 500);
+    setIsModalOpen(false);
   };
 
   const handleMouseEnter = () => {
@@ -65,7 +63,7 @@ function Cart() {
         >
           <div className={Styles.modalContent}>
             {isCartEmpty ? (
-              <p>El carrito está vacío</p>
+              <p className={Styles.modalContentText}>El carrito está vacío</p>
             ) : (
               <ul>
                 {state.cart.map((product, index) => (
@@ -87,15 +85,25 @@ function Cart() {
             {!isCartEmpty && (
               <div className={Styles.totalPrice}>Total: US$ {totalPrice}</div>
             )}
-            {!isCartEmpty && (
+            {isCartEmpty ? (
               <Button
                 className={Styles.cartBuyItem}
-                text={"Comprar"}
+                text={"Ir al carrito"}
                 onClick={() => {
                   closeModal();
                   handleNavigate();
                 }}
               />
+            ) : (
+              <button
+                className={Styles.cartBuyItem}
+                onClick={() => {
+                  closeModal();
+                  handleNavigate();
+                }}
+              >
+                Ir a pagar
+              </button>
             )}
           </div>
         </div>
