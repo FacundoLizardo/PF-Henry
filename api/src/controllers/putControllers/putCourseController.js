@@ -12,6 +12,7 @@ const putCourseController = async (
 		{ title, category, description, image, price },
 
 		{
+			//aca hay que poner otra condicion, que este disponible el curso (que no este "borrado")...
 			where: { id: id },
 		}
 	);
