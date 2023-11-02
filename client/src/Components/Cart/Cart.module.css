@@ -1,0 +1,67 @@
+/* Cart.module.css */
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  z-index: 1;
+}
+
+.modalContent {
+  padding: 20px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cartItem {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.cartRemoveItem {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.cartRemoveItem:hover {
+  background: #c0392b;
+}
+
+.cartBuyItem {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cartBuyItem:hover {
+  background: #2980b9;
+}

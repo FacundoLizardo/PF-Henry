@@ -14,6 +14,10 @@ const CardLayout = ({ courses }) => {
     navigate(`/detailCourse/${course.id}`);
   };
 
+  const newPrice =
+    course.price - (course.price * course.percentageDiscount) / 100;
+  const roundedNewPrice = newPrice.toFixed(2);
+
   return (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer} onClick={handleCardClick}>
@@ -25,7 +29,19 @@ const CardLayout = ({ courses }) => {
         </div>
         <div className={Styles.contentBottom}>
           <p>{course.description}</p>
-          <div className={Styles.contentBottomPrice}>US$ {course.price}</div>
+
+          <div className={Styles.contentBottomPrice}>
+            {course.onSale ? (
+              <div className={Styles.priceContainer}>
+                <div className={Styles.priceWhitOutDiscount}>
+                  US${course.price}
+                </div>
+                <div>US${roundedNewPrice}</div>
+              </div>
+            ) : (
+              <div>US${course.price}</div>
+            )}
+          </div>
         </div>
         <div className={Styles.contentFooter}>
           <Button text={"¡Comprar ahora!"} />

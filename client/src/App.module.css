@@ -12,14 +12,13 @@ html {
 .appContainer {
   width: 100%;
   height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: var(--font-primary);
 }
 
 :root {
   /* Colores principales */
   --color-primary: #3d0dca;
-  --color-secondary: #27272A;
+  --color-secondary: #27272a;
   --color-details: #1c0570;
 
   /* Colores de fondo */
@@ -27,16 +26,17 @@ html {
   --color-background-off: #999999;
   --color-background-off-two: #8e7cff;
   --color-background-details: #f5f5f5;
-  --color-background-black: #2D2F31;
+  --color-background-black: #2d2f31;
 
   /* Texto y elementos */
   --color-text-primary: #000000;
   --color-text-secondary: #ffffff;
   --color-text-off: #494949;
+  --color-text-accent: #ffe502;
 
   /* Cards */
   --color-border-one: #494949;
-  --color-border-two: #f2f2f2;
+  --color-border-two: #d1d1d1b4;
   --color-border-three: #ccc;
 
   /* Hover */
@@ -74,6 +74,10 @@ html {
   /* Sombra */
   --box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2),
     0 10px 10px -10px rgba(0, 0, 0, 0.06);
+
+  /* Fonts */
+  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /* Estilos generales */

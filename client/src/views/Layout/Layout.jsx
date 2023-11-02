@@ -2,29 +2,25 @@ import Home from "../../Components/Home/Home";
 import { useEffect, useState } from "react";
 import { getAllCourses } from "../../utils/getAllCourses";
 import { getAllCategories } from "../../utils/getAllCategories";
-import { useNavigate } from "react-router-dom";
-import Button from "../../Components/Button/Button";
 import CardLayoutContainer from "../../Components/CardLayoutContainer/CardLayoutContainer";
+import { getOnSaleCourses } from "../../utils/getOnSaleCourses";
 
 import Styles from "./Layout.module.css";
 
 const Layout = () => {
-  const navigate = useNavigate();
   const [dataCourses, setDataCourses] = useState([]);
-
-  const handleNavigate = () => {
-    navigate("./courses/");
-  };
+  const [onSaleCourses, setOnSlaeCourses] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       await getAllCourses();
       await getAllCategories();
+      setOnSlaeCourses(await getOnSaleCourses());
       setDataCourses(JSON.parse(localStorage.getItem("coursesData")));
     };
     fetchData();
   }, []);
-
+  console.log(onSaleCourses);
   const dataCoursesByDate = dataCourses.sort((a, b) => {
     const fechaA = new Date(a.createdAt);
     const fechaB = new Date(b.createdAt);
@@ -44,8 +40,14 @@ const Layout = () => {
       <Home />
       <div className={Styles.layoutContent}>
         <div className={Styles.layoutContentItem}>
-          <h2>Últimos cursos</h2>
-          <CardLayoutContainer dataCourses={dataCoursesByDate} />
+          <h2>¡Ahorra con nuestros cursos!</h2>
+          <CardLayoutContainer dataCourses={onSaleCourses} />
+        </div>
+        <div className={Styles.registroBannerContainer}>
+          <h3>
+            Comienza a enseñar hoy y aumenta tus ingresos{" "}
+            <a href="/login">¡Regístrate ahora!</a>
+          </h3>
         </div>
         <h2>Cursos mejor valorados por nuestros alumnos</h2>
         <div className={Styles.layoutContentItem}>
@@ -55,9 +57,16 @@ const Layout = () => {
         <div className={Styles.layoutContentItem}>
           <CardLayoutContainer dataCourses={dataCoursesSortedByPurchases} />
         </div>
-      </div>
-      <div className={Styles.layoutBottom}>
-        <Button text={"Ver todos cursos"} onClick={handleNavigate} />
+        <div className={Styles.registroBannerContainer}>
+          <h3>
+            Descubre <a href="/courses">nuestros cursos</a> y potencia tu
+            aprendizaje
+          </h3>
+        </div>
+        <div className={Styles.layoutContentItem}>
+          <h2>Últimos cursos</h2>
+          <CardLayoutContainer dataCourses={dataCoursesByDate} />
+        </div>
       </div>
     </div>
   );

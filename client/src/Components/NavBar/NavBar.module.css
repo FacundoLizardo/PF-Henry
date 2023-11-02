@@ -22,6 +22,14 @@ nav {
   align-items: center;
 }
 
+.imgProfile {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  border: none;
+}
+
 .navbarAssets {
   display: flex;
   align-items: center;
@@ -70,10 +78,13 @@ nav {
 
 .menuModal {
   width: 40px;
+  display: flex;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
   border: none;
+  padding-bottom: 5px;
+  align-items: center;
 }
 
 .modal {
@@ -135,6 +146,19 @@ nav {
 
 .menuOpen {
   cursor: pointer;
+}
+
+.cart {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
 }
 
 @media screen and (min-width: 768px) {

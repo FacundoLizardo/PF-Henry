@@ -68,7 +68,7 @@
   gap: 10px;
 }
 
-.contentTopTitle span {
+.title span {
   color: var(--color-text-secondary);
   background-color: var(--color-background-off-two);
   padding: 3px 7px;
@@ -111,4 +111,12 @@
   justify-content: end;
   width: 100%;
   gap: 20px;
+}
+
+.priceWhitOutDiscount {
+  font-size: 12px;
+  color: var(--color-text-off);
+  text-decoration: line-through;
+  display: flex;
+  justify-content: center;
 }

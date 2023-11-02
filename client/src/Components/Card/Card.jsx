@@ -1,12 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
 import Button from "../Button/Button";
+import { useCart } from "../../context/CartContext";
 
 const Card = ({ course }) => {
   const navigate = useNavigate();
+  const { dispatch } = useCart();
 
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const productToAddToCart = {
+    id: course.id,
+    name: course.title,
+    price: course.price,
+  };
+
+  const addToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
   const generateStars = (rating) => {
@@ -21,10 +33,14 @@ const Card = ({ course }) => {
     return stars;
   };
 
+  const newPrice =
+    course.price - (course.price * course.percentageDiscount) / 100;
+  const roundedNewPrice = newPrice.toFixed(2);
+
   return (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer} onClick={handleCardClick}>
-        <img src={course.image} alt={course.title}/>
+        <img src={course.image} alt={course.title} />
       </div>
       <div className={Styles.contentContainer}>
         <div className={Styles.contentTop}>
@@ -33,7 +49,18 @@ const Card = ({ course }) => {
               <h2>{course.title}</h2>
               <span>{course.category}</span>
             </div>
-            <div className={Styles.contentTopPrice}>US$ {course.price}</div>
+            <div className={Styles.contentTopPrice}>
+              {course.onSale ? (
+                <>
+                  <span className={Styles.priceWhitOutDiscount}>
+                    US${course.price}
+                  </span>
+                  <span>US${roundedNewPrice}</span>
+                </>
+              ) : (
+                <div>US${course.price}</div>
+              )}
+            </div>
           </div>
           <div className={Styles.contentTopText}>
             <p>{course.description}</p>
@@ -49,7 +76,7 @@ const Card = ({ course }) => {
         </div>
         <div className={Styles.contentBottom}>
           <div className={Styles.contentBottomButton}>
-            <Button text={"Agregar al carrito"} />
+            <Button text={"Agregar al carrito"} onClick={addToCart} />
             <Button text={"Comprar"} />
           </div>
         </div>

@@ -19,7 +19,6 @@ const categoryRoutes = require("./routes/categoryRoutes.js");
 const ratingRoutes = require("./routes/ratingRoutes.js");
 const lessonRoutes = require("./routes/lessonRoutes.js")
 
-
 //const routes = require("./routes/index.js");
 //console.log(routes)
 require("./db.js");
@@ -42,13 +41,14 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
-//server.use(routes)
 
+server.use("/onSale", onSaleRoutes);
 server.use("/users", userRoutes);
 server.use("/courses", courseRoutes);
 server.use("/categories", categoryRoutes);
 server.use("/rating", ratingRoutes);
 server.use("/lessons", lessonRoutes);
+
 
 // Error catching endware.
 server.use((err, req, res, next) => {
