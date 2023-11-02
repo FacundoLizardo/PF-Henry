@@ -30,6 +30,10 @@
   width: 100%;
 }
 
+.contentSelect a {
+  color: var(--color-primary);
+}
+
 .content li {
   display: flex;
   gap: 10px;

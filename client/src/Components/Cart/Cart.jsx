@@ -11,31 +11,25 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
-  let timer;
 
-  const handleNavigate = () => {
+  const handleNavigateCart = () => {
     navigate(`./cart/${userData.id}`);
+  };
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
   };
 
   const handleRemoveFromCart = (productId) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: productId });
   };
 
-  const openModal = () => {
-    clearTimeout(timer);
+  const handleMouseEnter = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleMouseEnter = () => {
-    openModal();
-  };
-
   const handleMouseLeave = () => {
-    closeModal();
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -56,11 +50,7 @@ function Cart() {
       onMouseLeave={handleMouseLeave}
     >
       {isModalOpen && (
-        <div
-          className={Styles.modal}
-          onMouseEnter={openModal}
-          onMouseLeave={closeModal}
-        >
+        <div className={Styles.modal}>
           <div className={Styles.modalContent}>
             {isCartEmpty ? (
               <p className={Styles.modalContentText}>El carrito está vacío</p>
@@ -90,16 +80,18 @@ function Cart() {
                 className={Styles.cartBuyItem}
                 text={"Ir al carrito"}
                 onClick={() => {
-                  closeModal();
-                  handleNavigate();
+                  if (userData) {
+                    handleNavigateCart();
+                  } else {
+                    handleNavigateLogin();
+                  }
                 }}
               />
             ) : (
               <button
                 className={Styles.cartBuyItem}
                 onClick={() => {
-                  closeModal();
-                  handleNavigate();
+                  handleNavigateCart();
                 }}
               >
                 Ir a pagar

@@ -35,17 +35,26 @@ const CartPage = () => {
           <h2>Tus productos</h2>
           <div className={Styles.content}>
             <ul>
-              {state.cart.map((product, index) => (
-                <li key={index}>
-                  <div className={Styles.contentImg}>
-                    <img src={product.image} alt={product.name} />
-                  </div>
-                  <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-                  </div>
-                </li>
-              ))}
+              {state.cart.length === 0 ? (
+                <div className={Styles.contentSelect}>
+                  <p>
+                    Tu carrito de compras está vacío. Encuentra tus cursos
+                    favoritos <a href={"/courses"}>aquí</a>.
+                  </p>
+                </div>
+              ) : (
+                state.cart.map((product, index) => (
+                  <li key={index}>
+                    <div className={Styles.contentImg}>
+                      <img src={product.image} alt={product.name} />
+                    </div>
+                    <div>
+                      <h3>{product.name}</h3>
+                      <p>{product.description}</p>
+                    </div>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
         </div>
@@ -87,7 +96,7 @@ const CartPage = () => {
         </div>
       </div>
       <div className={Styles.bottonBuy}>
-        <Button text={"Volver"} onClick={handleNavigate}/>
+        <Button text={"Volver"} onClick={handleNavigate} />
         <button className={Styles.finalizePurchase}>Finalizar compra</button>
       </div>
     </div>
