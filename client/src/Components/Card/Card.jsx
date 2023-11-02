@@ -15,6 +15,8 @@ const Card = ({ course }) => {
     id: course.id,
     name: course.title,
     price: course.price,
+    image: course.image,
+    description: course.description,
   };
 
   const addToCart = () => {
