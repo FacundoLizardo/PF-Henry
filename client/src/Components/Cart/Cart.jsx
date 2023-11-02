@@ -41,7 +41,11 @@ function Cart() {
   };
 
   useEffect(() => {
-    const total = state.cart.reduce((acc, product) => acc + product.price, 0);
+    const totalReducer = state.cart.reduce(
+      (acc, product) => acc + product.price,
+      0
+    );
+    const total = totalReducer.toFixed(2);
     setTotalPrice(total);
   }, [state.cart]);
 
@@ -66,7 +70,7 @@ function Cart() {
               <ul>
                 {state.cart.map((product, index) => (
                   <li key={index}>
-                    <div>
+                    <div className={Styles.modalContentPrice}>
                       <p>{product.name}</p>
                       <span>US$ {product.price}</span>
                     </div>
