@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Styles from "./Instructor.module.css";
 import Button from "../../Components/Button/Button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { userContext } from "../../App";
 
 const Instructor = () => {
-	const { state } = useLocation();
-	const userData = state.userData;
+	const userData = useContext(userContext);
 	const navigate = useNavigate();
 	const [dataCourses, setDataCourses] = useState();
 

@@ -1,4 +1,4 @@
-const { Course, User } = require("../../db");
+const { User } = require("../../db");
 
 const postCreateUser = async (
 	user_name,
@@ -35,4 +35,35 @@ const postCreateUser = async (
 	}
 };
 
-module.exports = { postCreateUser };
+const postCreateUserGmail = async (
+	email,
+	first_name,
+	last_name,
+	photoURL,
+	role_instructor,
+	role_student,
+	isNew
+) => {
+	try {
+		const [user, created] = await User.findOrCreate({
+			where: { email: email },
+			defaults: {
+				first_name,
+				last_name,
+				photoURL,
+				role_instructor,
+				role_student,
+				isNew,
+			},
+		});
+
+		if (created) {
+			return user;
+		} else
+			return "User not created cause it already exist or something is wrong, please try again";
+	} catch (error) {
+		return error;
+	}
+};
+
+module.exports = { postCreateUser, postCreateUserGmail };

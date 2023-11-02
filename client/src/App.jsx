@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./views/Layout/Layout";
 import NavBar from "./Components/NavBar/NavBar";
@@ -33,6 +34,7 @@ function App() {
 			"/instructor/form",
 			"/instructor/",
 			"/detailCourse/",
+			"/config/",
 		].includes(location.pathname);
 	};
 
@@ -46,15 +48,6 @@ function App() {
 	});
 
 	console.log(user);
-
-	// onAuthStateChanged(auth, (userFireBase) => {
-	// 	if (userFireBase) {
-	// 		setUser(userFireBase);
-	// 	} else {
-	// 		setUser(null);
-	// 	}
-	// });
-
 	const authenticatedRoutes = (
 		<>
 			<Route path="/student/:id" element={<Student />} />
@@ -63,6 +56,7 @@ function App() {
 				path="/student/classList/lecture/:lessonId"
 				element={<Lecture />}
 			/>
+			<Route path="/config/:id" element={<Config />} />
 		</>
 	);
 
@@ -76,19 +70,37 @@ function App() {
 				<div className={Styles.appContainer}>
 					{location.pathname === "/login" ? "" : <NavBar />}
 					<Routes>
-						<Route path="/" element={<Layout />} />
-						<Route path="/courses/" element={<Courses />} />
+						<Route
+							path="/"
+							element={<Layout updateContextUser={updateContextUser} />}
+						/>
+						<Route
+							path="/courses/"
+							element={<Courses updateContextUser={updateContextUser} />}
+						/>
 						<Route path="/detailCourse/:id" element={<DetailCourse />} />
-						{user ? authenticatedRoutes : unauthenticatedRoutes}
-						<Route path="/instructor/:id" element={<Instructor />} />
-						<Route path="/instructor/:id/form" element={<Form />} />
-						<Route path="/config/:id" element={<Config />} />
-						<Route path="/edit/:id" element={<EditCourse />} />
+						{user?.email !== "" ? authenticatedRoutes : unauthenticatedRoutes}
+						<Route
+							path="/instructor/:id"
+							element={<Instructor updateContextUser={updateContextUser} />}
+						/>
+						<Route
+							path="/instructor/:id/form"
+							element={<Form updateContextUser={updateContextUser} />}
+						/>
+
+						<Route
+							path="/edit/:id"
+							element={<EditCourse updateContextUser={updateContextUser} />}
+						/>
 						<Route
 							path="/login/"
 							element={<Login updateContextUser={updateContextUser} />}
 						/>
-						<Route path="*" element={<Courses />} />
+						<Route
+							path="*"
+							element={<Courses updateContextUser={updateContextUser} />}
+						/>
 					</Routes>
 					{shouldShowFooter() && <Footer />}
 				</div>
