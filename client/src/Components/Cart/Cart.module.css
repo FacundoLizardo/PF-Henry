@@ -86,6 +86,7 @@
 .totalPrice {
   color: var(--color-text-primary);
   font-size: large;
+  padding: 20px 0;
 }
 
 .cartLength {
