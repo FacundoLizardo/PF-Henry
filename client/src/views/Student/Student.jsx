@@ -18,7 +18,7 @@ const Student = () => {
 		<div className={Styles.studentContainer}>
 			<div>
 				<div>
-					<h5>Alumno n°: {userData.id}</h5>
+					<h5>Alumno n°: {userData?.id}</h5>
 				</div>
 				<div>
 					<h1>Mis cursos</h1>
