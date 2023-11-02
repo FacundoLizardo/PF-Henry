@@ -1,35 +1,28 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { storage } from "../../firebase/firebase";
 import Styles from "./EditCourse.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import Button from "../../Components/Button/Button";
+import Swal from "sweetalert2";
 
 const EditCourse = () => {
 	const { id } = useParams();
-	const [newDataCourse, setNewDataCourse] = useState({
-		title: "",
-		description: "",
-		instructor_id: id,
-		category: "",
-		image: "",
-		price: 0,
-	});
-	const [oldDataCourse, setOldDataCourse] = useState({});
+	const navigate = useNavigate();
+	const [newDataCourse, setNewDataCourse] = useState({});
 	const [categoriesData, setCategoriesData] = useState([]);
 	const [loading, setLoading] = useState(false);
 
 	const image = document.getElementById("image");
-	// const imageFile = image.files[0];
-	//const nombreCurso = document.getElementById("title").value;
-
-	console.log(image.files);
 
 	useEffect(() => {
 		const allCourses = JSON.parse(localStorage.getItem("coursesData"));
-		setOldDataCourse(...allCourses.filter((i) => i.id === id));
+
 		const categoriesData = JSON.parse(localStorage.getItem("categoriesData"));
 		setCategoriesData([
 			...new Set(categoriesData.map((category) => category.name)),
 		]);
+		setNewDataCourse(...allCourses.filter((i) => i.id === id));
 	}, []);
 
 	const uploadImage = async () => {
@@ -51,59 +44,42 @@ const EditCourse = () => {
 	console.log(newDataCourse);
 
 	const onSubmit = async () => {
-		if (newDataCourse.title === "") {
-			setNewDataCourse({ ...newDataCourse, title: oldDataCourse.title });
-		}
-		if (newDataCourse.description === "") {
-			setNewDataCourse({
-				...newDataCourse,
-				description: oldDataCourse.description,
-			});
-		}
-		if (newDataCourse.category === "") {
-			setNewDataCourse({ ...newDataCourse, category: oldDataCourse.category });
-		}
-		if (newDataCourse.price === 0) {
-			setNewDataCourse({ ...newDataCourse, price: oldDataCourse.price });
-		}
-		if (image.files.length === 0 && newDataCourse.image === "") {
-			setNewDataCourse({ ...newDataCourse, image: oldDataCourse.image });
-		}
+		if (image.files.length === 1) {
+			try {
+				const imagePath = await uploadImage();
+				setNewDataCourse({ ...newDataCourse, image: imagePath });
+				// 	// setCourse((prevCourse) => {
+				// 	// 	return {
+				// 	// 		...prevCourse,
+				// 	// 		image: imagePath,
+				// 	// 	};
+				// 	// })
+				// 	const response = await axios.post("/courses/create", {
+				// 		...course,
+				// 		image: imagePath,
+				// 	});
 
-		try {
-			const imagePath = await uploadImage();
+				// 	await getAllCourses();
 
-			setNewDataCourse({ ...newDataCourse, image: imagePath });
-			// 	// setCourse((prevCourse) => {
-			// 	// 	return {
-			// 	// 		...prevCourse,
-			// 	// 		image: imagePath,
-			// 	// 	};
-			// 	// })
-			// 	const response = await axios.post("/courses/create", {
-			// 		...course,
-			// 		image: imagePath,
-			// 	});
-
-			// 	await getAllCourses();
-
-			// 	if (response.data) {
-			// 		Swal.fire({
-			// 			title: "Tu curso se creo correctamente!",
-			// 			text: "Dirigete a la lista de cursos, ahi podras verlo.",
-			// 			icon: "success",
-			// 			confirmButtonText: "LISTA DE CURSOS",
-			// 		}).then(() => navigate(`/courses`));
-			// 	}
-		} catch (error) {
-			Swal.fire({
-				title: "Falta informacion importante!",
-				text: "Por favor revisa y completa todos los campos.",
-				icon: "warning",
-				confirmButtonText: "INTENTARLO NUEVAMENTE",
-			});
-		} finally {
-			setLoading(false);
+				if (imagePath) {
+					Swal.fire({
+						title: "Tu curso se modifico correctamente!",
+						text: "Dirigete a la lista de cursos, ahi podras ver tu curso actualizado.",
+						icon: "success",
+						confirmButtonText: "LISTA DE CURSOS",
+					});
+					//.then(() => navigate(`/courses`));
+				}
+			} catch (error) {
+				Swal.fire({
+					title: "Falta informacion importante!",
+					text: "Por favor revisa y completa todos los campos.",
+					icon: "warning",
+					confirmButtonText: "INTENTARLO NUEVAMENTE",
+				});
+			} finally {
+				setLoading(false);
+			}
 		}
 	};
 
@@ -123,7 +99,7 @@ const EditCourse = () => {
 								id="title"
 								name="title"
 								maxLength={100}
-								defaultValue={oldDataCourse.title}
+								defaultValue={newDataCourse.title}
 								onChange={handleChange}
 							/>
 							<p className={Styles.input__description}>{}</p>
@@ -133,7 +109,7 @@ const EditCourse = () => {
 								name="description"
 								className={Styles.input__field}
 								maxLength={300}
-								defaultValue={oldDataCourse.description}
+								defaultValue={newDataCourse.description}
 								onChange={handleChange}
 							></textarea>
 							<p className={Styles.input__description}>{}</p>
@@ -142,11 +118,11 @@ const EditCourse = () => {
 								className={Styles.input__field}
 								id="category"
 								name="category"
-								defaultValue={oldDataCourse.category}
+								defaultValue={newDataCourse.category}
 								onInput={handleChange}
 							>
-								<option value={oldDataCourse.category}>
-									{oldDataCourse.category}
+								<option value={newDataCourse.category}>
+									{newDataCourse.category}
 								</option>
 								{categoriesData
 									?.sort((a, b) => {
@@ -187,12 +163,12 @@ const EditCourse = () => {
 										name="price"
 										min="0.00"
 										max="9999.99"
-										defaultValue={oldDataCourse.price}
+										defaultValue={newDataCourse.price}
 										onChange={handleChange}
 									/>
 								</div>
 								<p className={Styles.input__description}>{""}</p>
-								<button
+								<Button
 									text={"Modificar curso"}
 									onClick={() => onSubmit(newDataCourse)}
 								/>
