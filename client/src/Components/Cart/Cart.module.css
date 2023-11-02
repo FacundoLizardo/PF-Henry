@@ -9,7 +9,7 @@
   background-color: var(--color-background-details);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 55px;
+  top: 45px;
   padding: 20px;
   right: 0;
   z-index: 90;
@@ -20,6 +20,7 @@
   gap: 10px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .modalContent ul {
