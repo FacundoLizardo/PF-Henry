@@ -31,7 +31,7 @@ const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
 //Cursos con Lecciones
 Course.hasMany(Lesson, { as: "lesson" });
-Lesson.belongsTo(Course, { foreignKey: "course_id" });
+Lesson.belongsTo(Course);
 
 //Cursos con Ratings
 Course.hasMany(Rating);
@@ -50,19 +50,13 @@ Course.belongsTo(Category);
 Course.belongsToMany(User, { through: "Consumption" });
 User.belongsToMany(Course, { through: "Consumption" });
 
-Course.hasMany(Payment, {
-  foreignKey: "course_id",
-});
+Course.hasMany(Payment);
 
-Lesson.hasOne(Course);
+//Lesson.hasOne(Course);
 
 // Users - Payments
-User.hasMany(Payment, {
-  foreignKey: "user_id",
-});
-Payment.belongsTo(User, {
-  foreignKey: "user_id",
-});
+User.hasMany(Payment);
+Payment.belongsTo(User);
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
