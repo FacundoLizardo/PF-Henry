@@ -29,7 +29,7 @@ function Cart() {
   const closeModal = () => {
     timer = setTimeout(() => {
       setIsModalOpen(false);
-    }, 1000);
+    }, 500);
   };
 
   const handleMouseEnter = () => {

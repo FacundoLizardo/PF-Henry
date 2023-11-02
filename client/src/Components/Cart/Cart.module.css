@@ -9,7 +9,7 @@
   background-color: var(--color-background-details);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   position: absolute;
-  top: 35px;
+  top: 55px;
   padding: 20px;
   right: 0;
   z-index: 90;
@@ -37,7 +37,6 @@
   gap: 15px;
   display: flex;
   align-items: start;
-  padding: 10px 0;
   width: 100%;
   justify-content: space-between;
   text-align: start;
