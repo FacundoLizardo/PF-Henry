@@ -1,15 +1,21 @@
 const { Rating, Course, User } = require("../../db");
 
 const postCreateRating = async (course_id, user_id, rating, comment) => {
-  const existeCurso = await Course.findByPk(course_id);
-  const existeUsuario = await User.findByPk(user_id);
+  
+  const existeCurso = await Course.findByPk(course_id, {
+    where: { deletedAt: null },
+  });
+  
+  const existeUsuario = await User.findByPk(user_id, {
+    where: { deletedAt: null },
+  });
 
   if (!existeCurso || !existeUsuario) {
     return "Curso/Usuario inexistente";
   }
 
   const [newRating, created] = await Rating.findOrCreate({
-    where: { course_id: course_id, user_id: user_id },
+    where: { course_id: course_id, user_id: user_id, deletedAt: null },
     defaults: { course_id, user_id, rating, comment },
   });
 
@@ -20,7 +26,7 @@ const postCreateRating = async (course_id, user_id, rating, comment) => {
       { rating: rating },
       { where: { course_id: course_id, user_id: user_id } }
     );
-    return (`Rating actualizado a ${rating}`)
+    return `Rating actualizado a ${rating}`;
   }
 };
 

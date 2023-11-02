@@ -18,10 +18,10 @@ const Lesson = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      course_id: {
+      /*course_id: {
         type: DataTypes.UUID,
         allowNull: false,
-      },
+      },*/
       images: {
         type: DataTypes.STRING,
         allowNull: false,

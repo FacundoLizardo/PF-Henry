@@ -6,7 +6,8 @@ const { Router } = require("express");
 const { courseRoutes } = require("./courseRoutes");
 const { userRoutes } = require("./userRoutes");
 const { ratingRoutes } = require("./ratingRoutes");
-// const lessonRutes = require("./lessonRoutes");
+const { lessonRoutes } = require("./lessonRoutes");
+
 // const paymentRoutes = require("./paymentRoutes");
 // const consumptionRoutes = require("./consumptionRoutes");
 
@@ -15,9 +16,8 @@ const router = Router();
 router.use("/courses", courseRoutes);
 router.use("/users", userRoutes);
 router.use("/rating", ratingRoutes);
-// router.use("/lesson", lessonRutes);
+router.use("/lessons", lessonRoutes);
 // router.use("/payment", paymentRoutes);
 // router.use("/consumption", consumptionRoutes);
-
 
 module.exports = router;
