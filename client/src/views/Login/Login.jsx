@@ -83,7 +83,8 @@ const Login = ({ updateContextUser }) => {
 					};
 
 					const response = await axios.post("/users/create", objUser);
-					updateContextUser(response.data);
+					console.log(response.data);
+					return updateContextUser(response.data);
 				}
 			})
 			.finally(() => {

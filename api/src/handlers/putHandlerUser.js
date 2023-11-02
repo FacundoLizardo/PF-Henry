@@ -11,7 +11,6 @@ const putHandlerUser = async (req, res) => {
 		const mes = partesFecha[1];
 		const anio = partesFecha[2];
 		const fechaFormateada = `${anio}-${mes}-${dia}`;
-		const isNew = false;
 		const updatedUser = await putUserController({
 			id: id,
 			user_name: user_name,

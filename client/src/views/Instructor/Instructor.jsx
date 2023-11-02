@@ -14,7 +14,7 @@ const Instructor = () => {
 	}, []);
 
 	const coursesCreated = dataCourses
-		? dataCourses.filter((item) => item.instructor_id === userData.id)
+		? dataCourses.filter((item) => item.instructor_id === userData?.id)
 		: [];
 
 	const handleNavigate = (destination) => {
@@ -25,15 +25,15 @@ const Instructor = () => {
 		<div className={Styles.instructorContainer}>
 			<div className={Styles.instructorContainerTitle}>
 				<h1>
-					¡Hola <span>{userData.user_name}</span>!
+					¡Hola <span>{userData?.user_name}</span>!
 				</h1>
-				<h5>Instructor n°: {userData.id}</h5>
+				<h5>Instructor n°: {userData?.id}</h5>
 			</div>
 			<div className={Styles.instructorContainerCreate}>
 				<p>¡Empieza, crea tu curso!</p>
 				<Button
 					text={"Crea tu curso"}
-					onClick={() => handleNavigate(`/instructor/${userData.id}/form`)}
+					onClick={() => handleNavigate(`/instructor/${userData?.id}/form`)}
 				/>
 			</div>
 			<div className={Styles.instructorContainerCourse}>

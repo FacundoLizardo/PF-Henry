@@ -12,8 +12,8 @@ const Config = () => {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		user_name: "",
-		first_name: userData.first_name,
-		last_name: userData.last_name,
+		first_name: userData?.first_name,
+		last_name: userData?.last_name,
 		birthdate: "",
 		photoURL: "",
 	});
@@ -56,7 +56,7 @@ const Config = () => {
 		<div className={Styles.configContainer}>
 			<h1>Configuración</h1>
 			<div>
-				<h5>Usuario n°: {userData.id}</h5>
+				<h5>Usuario n°: {userData?.id}</h5>
 			</div>
 			<div className={Styles.form_container}>
 				<div className={Styles.form}>
