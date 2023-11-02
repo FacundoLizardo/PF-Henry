@@ -1,12 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
 import Button from "../Button/Button";
+import { useCart } from "../../context/CartContext";
 
 const Card = ({ course }) => {
   const navigate = useNavigate();
+  const { dispatch } = useCart();
 
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const productToAddToCart = {
+    id: course.id,
+    name: course.title,
+    price: course.price,
+  };
+
+  const addToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
   const generateStars = (rating) => {
@@ -64,7 +76,7 @@ const Card = ({ course }) => {
         </div>
         <div className={Styles.contentBottom}>
           <div className={Styles.contentBottomButton}>
-            <Button text={"Agregar al carrito"} />
+            <Button text={"Agregar al carrito"} onClick={addToCart} />
             <Button text={"Comprar"} />
           </div>
         </div>
