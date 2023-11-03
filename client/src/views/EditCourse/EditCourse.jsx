@@ -26,16 +26,20 @@ const EditCourse = () => {
 		]);
 		setNewDataCourse(...allCourses.filter((i) => i.id === id));
 	}, []);
-
+	console.log(newDataCourse);
 	const uploadImage = async () => {
-		const image = document.getElementById("image");
-		const imageFile = image.files[0];
-		const nombreCurso = document.getElementById("title").value;
-		const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
-		await uploadBytes(imageRef, imageFile);
-		const path = await getDownloadURL(imageRef);
-		setNewDataCourse({ ...newDataCourse, image: `${path}` });
-		return path;
+		if (document.getElementById("image").files[0]) {
+			const image = document.getElementById("image");
+			const imageFile = image.files[0];
+			const nombreCurso = document.getElementById("title").value;
+			const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
+			await uploadBytes(imageRef, imageFile);
+			const path = await getDownloadURL(imageRef);
+			setNewDataCourse({ ...newDataCourse, image: `${path}` });
+			return path;
+		} else {
+			return;
+		}
 	};
 
 	const handleChange = (event) => {
@@ -46,12 +50,23 @@ const EditCourse = () => {
 
 	const onSubmit = async (newDataCourse) => {
 		console.log("estoy en on submit");
+		const imagePath = await uploadImage();
+		console.log(imagePath);
 		if (image.files.length === 1) {
 			console.log("estoy subiendo la imagen");
 			try {
-				const imagePath = await uploadImage();
-				setNewDataCourse({ ...newDataCourse, image: imagePath });
-				console.log(newDataCourse);
+				const response = await updateCourse({
+					...newDataCourse,
+					image: imagePath,
+				});
+				if (response) {
+					Swal.fire({
+						title: "Tu curso se modifico correctamente!",
+						text: "Dirigete a la lista de cursos, ahi podras ver tu curso actualizado.",
+						icon: "success",
+						confirmButtonText: "LISTA DE CURSOS",
+					}).then(() => navigate(`/courses`));
+				}
 			} catch (error) {
 				Swal.fire({
 					title: "error de imagen!",
@@ -61,8 +76,8 @@ const EditCourse = () => {
 				});
 			}
 		}
-
-		const response = await updateCourse(newDataCourse);
+		console.log(newDataCourse);
+		const response = await updateCourse({ ...newDataCourse });
 		getAllCourses();
 		if (response) {
 			Swal.fire({

@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const updateCourse = async (newDataCourse) => {
-	console.log(newDataCourse + "     estoy en el updateCourse");
+	const { image, id, title } = newDataCourse;
+	console.log(image, id, title);
+
 	try {
 		const response = await axios.put(
 			`http://localhost:3001/courses/edit`,
