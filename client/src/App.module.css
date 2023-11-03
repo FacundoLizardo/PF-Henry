@@ -90,3 +90,7 @@ a {
 li {
   list-style: none;
 }
+
+:global .mySwal {
+  font-family: var(--font-primary);
+}

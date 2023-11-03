@@ -1,6 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { createContext, useContext, useEffect, useReducer } from "react";
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./CartTypes";
+import { ADD_TO_CART, CLEAR, REMOVE_FROM_CART } from "./CartTypes";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const CartContext = createContext();
 
@@ -8,17 +9,43 @@ const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
 };
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
+
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-    
       const isCourseInCart = state.cart.find(
         (product) => product.id === action.payload.id
       );
 
       if (isCourseInCart) {
+        Toast.fire({
+          icon: "warning",
+          title: "¡El curso ya existe!",
+          customClass: {
+            popup: "mySwal",
+          },
+        });
         return state;
       }
+
+      Toast.fire({
+        icon: "success",
+        title: "¡Curso agregado al carrito con éxito!",
+        customClass: {
+          popup: "mySwal",
+        },
+      });
 
       return {
         ...state,
@@ -32,6 +59,13 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: updatedCart,
+      };
+
+    case CLEAR:
+     
+      return {
+        ...state,
+        cart: action.payload,
       };
 
     default:

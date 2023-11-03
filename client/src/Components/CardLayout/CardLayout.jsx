@@ -2,9 +2,14 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
 import Styles from "./CardLayout.module.css";
+import { userContext } from "../../App";
+import { useContext } from "react";
+import { useCart } from "../../context/CartContext";
 
 const CardLayout = ({ courses }) => {
   const navigate = useNavigate();
+  const { dispatch } = useCart();
+  const userData = useContext(userContext);
   const course = courses;
   if (!course) {
     return <div>No hay datos disponibles.</div>;
@@ -12,6 +17,26 @@ const CardLayout = ({ courses }) => {
 
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const handleNavigateCart = () => {
+    navigate(`/cart/${userData.id}`);
+  };
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
+  };
+
+  const productToAddToCart = {
+    id: course.id,
+    name: course.title,
+    price: course.price,
+    image: course.image,
+    description: course.description,
+  };
+
+  const addToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
   const newPrice =
@@ -44,7 +69,18 @@ const CardLayout = ({ courses }) => {
           </div>
         </div>
         <div className={Styles.contentFooter}>
-          <Button text={"¡Comprar ahora!"} />
+          {!userData ? (
+            <Button text={"¡Comprar ahora!"} onClick={handleNavigateLogin} />
+          ) : (
+            <Button
+              text={"¡Comprar ahora!"}
+              onClick={() => {
+                addToCart();
+                handleNavigateCart();
+                window.scrollTo({ top: 0 });
+              }}
+            />
+          )}
         </div>
       </div>
     </div>

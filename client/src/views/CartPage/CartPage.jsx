@@ -96,7 +96,11 @@ const CartPage = () => {
 			</div>
 			<div className={Styles.bottonBuy}>
 				<Button text={"Volver"} onClick={handleNavigate} />
-				<PayButton text={"Finalizar Compra"} />
+				{state.cart.length === 0 
+				? <PayButton disabled={true} text={"Finalizar Compra"} />
+				:<PayButton text={"Finalizar Compra"} />
+				}
+				
 			</div>
 		</div>
 	);
