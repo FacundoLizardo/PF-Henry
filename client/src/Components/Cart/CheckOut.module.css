@@ -44,13 +44,3 @@
   font-family: Arial, sans-serif;
   padding: 20px;
 }
-
-.containerCheckoutError p {
-  font-size: 18px;
-  margin: 10px 0;
-}
-
-.containerCheckoutError h2:last-child {
-  font-size: 20px;
-  margin-top: 20px;
-}
