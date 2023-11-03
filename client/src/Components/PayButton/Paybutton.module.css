@@ -1,0 +1,20 @@
+.finalizePurchase:hover {
+    background: #fff;
+    color: green;
+    border: 2px solid green;
+}
+
+.finalizePurchase {
+    height: auto;
+    color: var(--color-text-secondary);
+    padding: 5px 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    background: green;
+    border-radius: var(--radius);
+    border: 2px solid green;
+}

@@ -21,12 +21,13 @@ const Login = ({ updateContextUser }) => {
 	const nav = useNavigate();
 	const user2 = useContext(userContext);
 	const [registering, setRegistering] = useState(false);
-	console.log(user2);
 
 	const authentication = async (e) => {
 		e.preventDefault();
 		const email = e.target.email.value;
 		const password = e.target.password.value;
+		const re_email = e.target.re_email.value;
+		const re_password = e.target.re_password.value;
 		if (registering) {
 			createUserWithEmailAndPassword(auth, email, password)
 				.then(() => {
@@ -60,7 +61,7 @@ const Login = ({ updateContextUser }) => {
 				if (user.email === userMail.email) {
 					localStorage.setItem("userOnSession", JSON.stringify(userMail));
 					updateContextUser(userMail);
-					console.log(userMail);
+					localStorage.setItem("logged", true);
 					return;
 				} else {
 					let name = "nombre";
@@ -81,9 +82,11 @@ const Login = ({ updateContextUser }) => {
 						role_student: true,
 						emailVerified: user.emailVerified,
 					};
-
 					const response = await axios.post("/users/create", objUser);
+					localStorage.setItem("userOnSession", JSON.stringify(response.data));
 					console.log(response.data);
+					setLogged(true);
+					localStorage.setItem("logged", true);
 					return updateContextUser(response.data);
 				}
 			})
