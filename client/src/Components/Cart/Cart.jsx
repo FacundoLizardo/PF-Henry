@@ -13,7 +13,7 @@ function Cart() {
   const navigate = useNavigate();
 
   const handleNavigateCart = () => {
-    navigate(`./cart/${userData.id}`);
+    navigate(`/cart/${userData.id}`);
   };
 
   const handleNavigateLogin = () => {

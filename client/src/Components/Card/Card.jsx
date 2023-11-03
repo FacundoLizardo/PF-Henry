@@ -2,13 +2,24 @@ import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
 import Button from "../Button/Button";
 import { useCart } from "../../context/CartContext";
+import { userContext } from "../../App";
+import { useContext } from "react";
 
 const Card = ({ course }) => {
   const navigate = useNavigate();
   const { dispatch } = useCart();
+  const userData = useContext(userContext);
 
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const handleNavigateCart = () => {
+    navigate(`/cart/${userData.id}`);
+  };
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
   };
 
   const productToAddToCart = {
@@ -79,7 +90,22 @@ const Card = ({ course }) => {
         <div className={Styles.contentBottom}>
           <div className={Styles.contentBottomButton}>
             <Button text={"Agregar al carrito"} onClick={addToCart} />
-            <Button text={"Comprar"} />
+            {!userData ? (
+              <Button
+                text={"Comprar"}
+                onClick={() => {
+                  handleNavigateLogin();
+                }}
+              />
+            ) : (
+              <Button
+                text={"Comprar"}
+                onClick={() => {
+                  addToCart();
+                  handleNavigateCart();
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

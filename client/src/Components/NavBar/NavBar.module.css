@@ -1,7 +1,7 @@
 .navbarContainer {
   width: 100%;
   height: 70px;
-  background-color: var(--color-background-off);
+  background-color: var(--color-background);
 }
 
 nav {
@@ -11,7 +11,7 @@ nav {
   height: 100%;
   justify-content: space-between;
   transition: box-shadow 0.1s ease 0s, background-color 0.1s ease 0s;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   position: static;
   margin: auto;
 }
@@ -19,6 +19,10 @@ nav {
 .navbarLogo {
   display: flex;
   align-items: center;
+}
+
+.navbarLogo img {
+  height: 50px;
 }
 
 .imgProfile {
