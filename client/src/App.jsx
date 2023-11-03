@@ -20,11 +20,13 @@ import CartPage from "./views/CartPage/CartPage";
 
 import Styles from "./App.module.css";
 import { useEffect } from "react";
+import { CheckOut } from "./Components/Cart/CheckOut";
+
 export const userContext = React.createContext();
 
 function App() {
 	const location = useLocation();
-	const [logged, setLogged] = useState(false);
+	const [logged, setLogged] = useState(null);
 	const shouldShowFooter = () => {
 		return ![
 			"/student/",
@@ -46,15 +48,15 @@ function App() {
 		password: "",
 		isNew: 0,
 	});
-
 	useEffect(() => {
-		const session = JSON.parse(localStorage.getItem("userOnSession"));
 		if (session) {
 			setLogged(!logged);
 		}
 	}, []);
 
-	// console.log(logged);
+	const session = JSON.parse(localStorage.getItem("userOnSession"));
+	const logged2 = localStorage.getItem("logged");
+	console.log(logged2);
 	const authenticatedRoutes = (
 		<>
 			<Route
@@ -86,13 +88,19 @@ function App() {
 				path="/edit/:id"
 				element={<EditCourse updateContextUser={updateContextUser} />}
 			/>
+			<Route
+				path="/payment/checkout/sucess"
+				element={<CheckOut updateContextUser={updateContextUser} />}
+			/>
 		</>
 	);
 
 	const unauthenticatedRoutes = (
-		<Route path="/" element={<Navigate to="/login" />} />
+		<>
+			<Route path="/" element={<Navigate to="/login" />} />
+		</>
 	);
-
+	console.log(logged);
 	return (
 		<>
 			<userContext.Provider value={user}>
@@ -107,14 +115,19 @@ function App() {
 							path="/courses/"
 							element={<Courses updateContextUser={updateContextUser} />}
 						/>
+						{logged2 ? authenticatedRoutes : unauthenticatedRoutes}
 						<Route path="/detailCourse/:id" element={<DetailCourse />} />
-						{logged ? authenticatedRoutes : unauthenticatedRoutes}
 
 						<Route
 							path="/login/"
-							element={<Login updateContextUser={updateContextUser} />}
+							element={
+								<Login
+									updateContextUser={updateContextUser}
+									setLogged={setLogged}
+								/>
+							}
 						/>
-						<Route path="*" element={<Navigate to="/courses/" />} />
+						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
 					{shouldShowFooter() && <Footer />}
 				</div>
