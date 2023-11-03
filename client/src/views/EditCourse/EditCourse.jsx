@@ -5,6 +5,8 @@ import Styles from "./EditCourse.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import Button from "../../Components/Button/Button";
 import Swal from "sweetalert2";
+import updateCourse from "../../utils/updateCourse";
+import { getAllCourses } from "../../utils/getAllCourses";
 
 const EditCourse = () => {
 	const { id } = useParams();
@@ -24,63 +26,68 @@ const EditCourse = () => {
 		]);
 		setNewDataCourse(...allCourses.filter((i) => i.id === id));
 	}, []);
-
+	console.log(newDataCourse);
 	const uploadImage = async () => {
-		const image = document.getElementById("image");
-		const imageFile = image.files[0];
-		const nombreCurso = document.getElementById("title").value;
-		const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
-		await uploadBytes(imageRef, imageFile);
-		const path = await getDownloadURL(imageRef);
-		setNewDataCourse({ ...newDataCourse, image: `${path}` });
-		return path;
+		if (document.getElementById("image").files[0]) {
+			const image = document.getElementById("image");
+			const imageFile = image.files[0];
+			const nombreCurso = document.getElementById("title").value;
+			const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
+			await uploadBytes(imageRef, imageFile);
+			const path = await getDownloadURL(imageRef);
+			setNewDataCourse({ ...newDataCourse, image: `${path}` });
+			return path;
+		} else {
+			return;
+		}
 	};
 
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setNewDataCourse({ ...newDataCourse, [name]: value });
+		console.log(newDataCourse);
 	};
 
-	console.log(newDataCourse);
-
-	const onSubmit = async () => {
+	const onSubmit = async (newDataCourse) => {
+		console.log("estoy en on submit");
+		const imagePath = await uploadImage();
+		console.log(imagePath);
 		if (image.files.length === 1) {
+			console.log("estoy subiendo la imagen");
 			try {
-				const imagePath = await uploadImage();
-				setNewDataCourse({ ...newDataCourse, image: imagePath });
-				// 	// setCourse((prevCourse) => {
-				// 	// 	return {
-				// 	// 		...prevCourse,
-				// 	// 		image: imagePath,
-				// 	// 	};
-				// 	// })
-				// 	const response = await axios.post("/courses/create", {
-				// 		...course,
-				// 		image: imagePath,
-				// 	});
-
-				// 	await getAllCourses();
-
-				if (imagePath) {
+				const response = await updateCourse({
+					...newDataCourse,
+					image: imagePath,
+				});
+				if (response) {
 					Swal.fire({
 						title: "Tu curso se modifico correctamente!",
 						text: "Dirigete a la lista de cursos, ahi podras ver tu curso actualizado.",
 						icon: "success",
 						confirmButtonText: "LISTA DE CURSOS",
-					});
-					//.then(() => navigate(`/courses`));
+					}).then(() => navigate(`/courses`));
 				}
 			} catch (error) {
 				Swal.fire({
-					title: "Falta informacion importante!",
-					text: "Por favor revisa y completa todos los campos.",
+					title: "error de imagen!",
+					text: "Por .",
 					icon: "warning",
 					confirmButtonText: "INTENTARLO NUEVAMENTE",
 				});
-			} finally {
-				setLoading(false);
 			}
 		}
+		console.log(newDataCourse);
+		const response = await updateCourse({ ...newDataCourse });
+		getAllCourses();
+		if (response) {
+			Swal.fire({
+				title: "Tu curso se modifico correctamente!",
+				text: "Dirigete a la lista de cursos, ahi podras ver tu curso actualizado.",
+				icon: "success",
+				confirmButtonText: "LISTA DE CURSOS",
+			}).then(() => navigate(`/courses`));
+		}
+		setLoading(false);
 	};
 
 	return (

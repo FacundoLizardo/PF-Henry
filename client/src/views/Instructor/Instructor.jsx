@@ -48,7 +48,7 @@ const Instructor = () => {
 						<div className={Styles.courseInfo}>
 							<h2>{course.title}</h2>
 							<div className={Styles.buttonContainer}>
-								<Button text={"Crea clase"} />
+								<Button text={"Crea clases"} />
 								<Button
 									text={"Editar curso"}
 									onClick={() => handleNavigate(`/edit/${course.id}`)}
