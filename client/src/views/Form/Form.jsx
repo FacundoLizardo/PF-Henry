@@ -29,7 +29,6 @@ const Form = () => {
     title: "",
     description: "",
     category: "",
-    image: "",
   });
 
   useEffect(() => {
@@ -166,7 +165,7 @@ const Form = () => {
                 <p className={style.input__description}>{errors.category}</p>
                 <label className={style.input__label}>Imagen:</label>
                 <input className={style.input__field} type="file" id="image" />
-                <p className={style.input__description}>{errors.image}</p>
+                <p className={style.input__description}>{}</p>
                 <div className={style.fieldPrice_Send}>
                   <div className={style.priceField}>
                     <label className={style.input__label}>Precio: US$ </label>

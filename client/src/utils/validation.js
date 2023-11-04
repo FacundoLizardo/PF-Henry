@@ -17,10 +17,6 @@ export const validation = (props) => {
         errors.category = "Debe ingresar una categoría relacionada con el curso.";
     }
 
-    if (!props.image) {
-        errors.image = "Debe ingresar una imagen relacionada con el curso.";
-    }
-
     if (!props.price) {
         errors.price = "El precio es obligatorio.";
     } else if (props.price.length < 0.50) {
