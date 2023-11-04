@@ -8,11 +8,11 @@ import { CartProvider } from "./context/CartContext.jsx";
 axios.defaults.baseURL = "http://localhost:3001";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Suspense>
-    <BrowserRouter>
-      <CartProvider>
-        <App />
-      </CartProvider>
-    </BrowserRouter>
-  </Suspense>
+	<Suspense>
+		<BrowserRouter>
+			<CartProvider>
+				<App />
+			</CartProvider>
+		</BrowserRouter>
+	</Suspense>
 );
