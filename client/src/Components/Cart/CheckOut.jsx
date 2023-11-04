@@ -7,12 +7,10 @@ import logo from "../../assets/logo.png";
 export const CheckOut = ({ updateContextUser }) => {
   const payment = JSON.parse(localStorage.getItem("payment"));
   const { dispatch } = useCart();
-
-  const enrollCourses = async (cart, id) => {
-    const response = await postPaymentCart(cart, id);
+  const enrollCourses = async (cart, id, email) => {
+    const response = await postPaymentCart(cart, id, email);
     return response;
   };
-
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -20,9 +18,7 @@ export const CheckOut = ({ updateContextUser }) => {
     if (session && session.id && Array.isArray(cart)) {
       updateContextUser(session);
       if (payment.payment) {
-        console.log(cart);
-        console.log(session.id);
-        enrollCourses(cart, session.id)
+        enrollCourses(cart, session.id, session.email)
           .then(() => {
             dispatch({ type: "CLEAR", payload: [] });
             window.location.reload;

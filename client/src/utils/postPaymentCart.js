@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export async function postPaymentCart(cart, id) {
+export async function postPaymentCart(cart, id, email) {
 	try {
-		const { data } = await axios.post("payment/enrollment", { cart, id });
+		const { data } = await axios.post("payment/enrollment", {
+			cart,
+			id,
+			email,
+		});
 		if (data) {
 			return data;
 		}
