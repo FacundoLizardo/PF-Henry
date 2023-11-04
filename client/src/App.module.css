@@ -94,3 +94,7 @@ li {
 :global .mySwal {
   font-family: var(--font-primary);
 }
+
+textarea {
+  font-family: var(--font-primary);
+}

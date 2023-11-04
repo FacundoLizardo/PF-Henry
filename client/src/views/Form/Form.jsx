@@ -52,7 +52,11 @@ const Form = () => {
     const { name, value } = event.target;
     setCourse({ ...course, [name]: value });
 
-    const newErrors = validation({ ...course, [name]: value });
+    const newErrors = validation({
+      ...course,
+      [name]: value,
+      [description]: description,
+    });
     setErrors(newErrors);
   };
 
@@ -80,7 +84,7 @@ const Form = () => {
           title: "Tu curso se creo correctamente!",
           text: "Dirígete a la sección de cursos, ahí podrás encontrarlo.",
           icon: "success",
-          confirmButtonText: "LISTA DE CURSOS",
+          confirmButtonText: "Ir a cursos",
           customClass: {
             popup: "mySwal",
           },
@@ -91,7 +95,7 @@ const Form = () => {
         title: "¡Falta información importante!",
         text: "Por favor revisa y completa todos los campos.",
         icon: "warning",
-        confirmButtonText: "INTENTARLO NUEVAMENTE",
+        confirmButtonText: "Completar formulario",
         customClass: {
           popup: "mySwal",
         },
@@ -131,7 +135,7 @@ const Form = () => {
                   onInput={handleChange}
                   maxLength={100}
                 ></textarea>
-                <p className={style.input__description}>{}</p>
+                <p className={style.input__description}>{errors.description}</p>
                 <label className={style.input__label}>Categoría:</label>
                 <select
                   className={style.input__field}
@@ -159,10 +163,10 @@ const Form = () => {
                       <option key={index}>{category.name}</option>
                     ))}
                 </select>
-                <p className={style.input__description}>{}</p>
+                <p className={style.input__description}>{errors.category}</p>
                 <label className={style.input__label}>Imagen:</label>
                 <input className={style.input__field} type="file" id="image" />
-                <p className={style.input__description}>{}</p>
+                <p className={style.input__description}>{errors.image}</p>
                 <div className={style.fieldPrice_Send}>
                   <div className={style.priceField}>
                     <label className={style.input__label}>Precio: US$ </label>
@@ -178,7 +182,7 @@ const Form = () => {
                       onInput={handleChange}
                     />
                   </div>
-                  <p className={style.input__description}>{}</p>
+                  <p className={style.input__description}>{errors.price}</p>
                   <Button
                     text={"Crear curso"}
                     onClick={() => onSubmit(course)}
