@@ -12,11 +12,11 @@ const CategoryModel = require("./models/category");
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
-  {
-    logging: false,
-    native: false,
-  }
+	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
+	{
+		logging: false,
+		native: false,
+	}
 );
 
 CourseModel(sequelize);
@@ -38,7 +38,7 @@ Course.hasMany(Rating);
 //Rating.belongsTo(Course, { foreignKey: "course_id" });
 Rating.belongsTo(Course);
 
-User.hasMany(Rating)
+User.hasMany(Rating);
 //Rating.belongsTo(User, { foreignKey: "user_id" });
 Rating.belongsTo(User);
 
@@ -50,7 +50,7 @@ Course.belongsTo(Category);
 Course.belongsToMany(User, { through: "Consumption" });
 User.belongsToMany(Course, { through: "Consumption" });
 
-Course.hasMany(Payment);
+// Course.hasMany(Payment);
 
 //Lesson.hasOne(Course);
 
@@ -85,19 +85,17 @@ Payment.belongsTo(User);
 // User.hasMany(Rating, { as: "user_rating" });
 // Rating.belongsTo(User, { foreingKey: "id", as: "rating_user" });
 
-
 // // Relacion Lessons con Tabla Intermedia Comsumption
 // Lesson.belongsTo(Consumption, {
 // 	foreignKey: "lesson_id",
 // });
 
-
 module.exports = {
-  Category,
-  Course,
-  Lesson,
-  Payment,
-  Rating,
-  User,
-  conn: sequelize,
+	Category,
+	Course,
+	Lesson,
+	Payment,
+	Rating,
+	User,
+	conn: sequelize,
 };
