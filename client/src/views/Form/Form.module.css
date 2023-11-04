@@ -1,20 +1,11 @@
-/* Form to create Course */
-
-.button {
-  font: inherit;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
+/* Estilos generales */
 .container {
-  /*     position: absolute; */
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   width: 100%;
-  min-height: 100%;
+  min-height: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,21 +17,21 @@
   flex-direction: column;
   width: 100%;
   max-width: 900px;
-  background-color: #fff;
-  box-shadow: 0 15px 30px 0 rgba(0, 125, 171, 0.15);
+  background-color: var(--color-text-secondary);
+  box-shadow: var(--box-shadow);
   border-radius: 10px;
 }
 
-.fieldPrice_Send{
+/* Estilos para campos de precio */
+.fieldPrice_Send {
   margin-top: 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-
 }
 
-.priceField{
+.priceField {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -49,30 +40,31 @@
 
 .input__price {
   display: block;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-three);
   border-radius: 0.25rem;
   padding: 0.38rem 0.38rem;
   transition: 0.15s ease;
 }
 
 .button_add {
-height: 41px !important;
+  height: 41px !important;
 }
 
-
-
+/* Estilos para el encabezado del modal */
 .modal__header {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color-border-three);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* Estilos para el cuerpo del modal */
 .modal__body {
   padding: 1rem 1rem;
 }
 
+/* Estilos para el pie del modal */
 .modal__footer {
   padding: 0 1.5rem 1.5rem;
 }
@@ -82,38 +74,7 @@ height: 41px !important;
   font-size: 1.25rem;
 }
 
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.15s ease;
-}
-
-.button--icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  background-color: transparent;
-  border-radius: 0.25rem;
-}
-
-.button--icon:focus,
-.button--icon:hover {
-  background-color: #ededed;
-}
-
-.button--primary {
-  background-color: #007dab;
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 0.25rem;
-  font-weight: 500;
-  font-size: 0.875rem;
-}
-
-.button--primary:hover {
-  background-color: #006489;
-}
-
+/* Estilos para campos de entrada */
 .input {
   display: flex;
   flex-direction: column;
@@ -131,7 +92,7 @@ height: 41px !important;
 .input__field {
   display: block;
   margin-top: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border-three);
   border-radius: 0.25rem;
   padding: 0.75rem 0.75rem;
   transition: 0.15s ease;
@@ -139,8 +100,9 @@ height: 41px !important;
 
 .input__field:focus {
   outline: none;
-  border-color: #007dab;
-  box-shadow: 0 0 0 1px #007dab, 0 0 0 4px rgba(0, 125, 171, 0.25);
+  border-color: var(--color-hover);
+  box-shadow: 0 0 0 1px var(--color-background-off-two),
+    0 0 0 4px rgba(142, 124, 255, 0.25);
 }
 
 .input__field--textarea {
@@ -149,24 +111,29 @@ height: 41px !important;
 }
 
 .input__description {
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
-  color: #8d8d8d;
+  font-size: 12px;
+  padding: 3px;
+  height: 25px;
+  color: red;
 }
 
+/* Estilos para el loader */
 .loader {
   width: 50px;
   padding: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
   background: #25b09b;
-  --_m: 
-    conic-gradient(#0000 10%,#000),
-    linear-gradient(#000 0 0) content-box;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
-          mask: var(--_m);
+  mask: var(--_m);
   -webkit-mask-composite: source-out;
-          mask-composite: subtract;
+  mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
-@keyframes l3 {to{transform: rotate(1turn)}}
+
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
+}

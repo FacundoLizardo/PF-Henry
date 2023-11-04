@@ -36,7 +36,7 @@ const Login = ({ updateContextUser }) => {
 				})
 				.catch((error) =>
 					console.log(
-						"Ocurrio un error al tratar de crear usuario en el authenticator" +
+						"Ocurrió un error al tratar de crear usuario en el autenticador: " +
 							error
 					)
 				)
@@ -130,7 +130,7 @@ const Login = ({ updateContextUser }) => {
 				)}
 
 				<div className={style.flex_column}>
-					<label>Password </label>
+					<label>Contraseña </label>
 				</div>
 				<div className={style.inputForm}>
 					<input
@@ -145,7 +145,7 @@ const Login = ({ updateContextUser }) => {
 				{registering ? (
 					<>
 						<div className={style.flex_column}>
-							<label>Repite Password: </label>
+							<label>Repetir Contraseña: </label>
 						</div>
 						<div className={style.inputForm}>
 							<input
@@ -163,20 +163,20 @@ const Login = ({ updateContextUser }) => {
 
 				<div className={style.flex_row}></div>
 				<button className={style.button_submit}>
-					{registering ? "Registrate" : "Inicia Sesion"}
+					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>
 					{registering ? "Si ya tienes cuenta" : "Si no tienes cuenta"}
 					<span
 						className={style.span}
 						onClick={() => setRegistering(!registering)}>
-						{registering ? "Inicia Sesion" : "Registrate"}
+						{registering ? "Inicia sesión" : "Regístrate"}
 					</span>
 				</p>
 				<p className={style.p}>
 					{registering
-						? "Registrate Tambien Con:"
-						: "Iniciar Sesion Tambien Con:"}
+						? "Regístrate también con:"
+						: "Iniciar sesión también con:"}
 				</p>
 				<div className={style.flex_row}></div>
 				<button id="google" className={style.btn} onClick={googleAuth}>

@@ -13,7 +13,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
   showConfirmButton: false,
-  timer: 2000,
+  timer: 1500,
   timerProgressBar: true,
   didOpen: (toast) => {
     toast.addEventListener("mouseenter", Swal.stopTimer);
@@ -73,6 +73,9 @@ const cartReducer = (state = initialState, action) => {
           Swal.fire({
             title: "El curso fue eliminado del carrito",
             icon: "success",
+            customClass: {
+              popup: "mySwal",
+            },
           });
         }
       });

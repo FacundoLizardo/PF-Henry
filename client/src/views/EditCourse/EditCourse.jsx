@@ -26,7 +26,6 @@ const EditCourse = () => {
     ]);
     setNewDataCourse(...allCourses.filter((i) => i.id === id));
   }, []);
-  console.log(newDataCourse);
   const uploadImage = async () => {
     if (document.getElementById("image").files[0]) {
       const image = document.getElementById("image");
@@ -45,15 +44,12 @@ const EditCourse = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setNewDataCourse({ ...newDataCourse, [name]: value });
-    console.log(newDataCourse);
   };
 
   const onSubmit = async (newDataCourse) => {
-    console.log("estoy en on submit");
     const imagePath = await uploadImage();
-    console.log(imagePath);
     if (image.files.length === 1) {
-      console.log("estoy subiendo la imagen");
+
       try {
         const response = await updateCourse({
           ...newDataCourse,
@@ -64,7 +60,7 @@ const EditCourse = () => {
             title: "Tu curso se modificó correctamente!",
             text: "Dirigete a la lista de cursos, ahi podras encontrar tu curso actualizado.",
             icon: "success",
-            confirmButtonText: "LISTA DE CURSOS",
+            confirmButtonText: "Ir a cursos",
             customClass: {
               popup: "mySwal",
             },
@@ -75,14 +71,13 @@ const EditCourse = () => {
           title: "¡Error de imagen!",
           text: "Por .",
           icon: "warning",
-          confirmButtonText: "INTENTARLO NUEVAMENTE",
+          confirmButtonText: "Prueba de nuevo",
           customClass: {
             popup: "mySwal",
           },
         });
       }
     }
-    console.log(newDataCourse);
     const response = await updateCourse({ ...newDataCourse });
     getAllCourses();
     if (response) {
@@ -90,7 +85,7 @@ const EditCourse = () => {
         title: "¡Tu curso se modificó correctamente!",
         text: "Dirigete a la lista de cursos, ahí podras encontrar tu curso actualizado.",
         icon: "success",
-        confirmButtonText: "LISTA DE CURSOS",
+        confirmButtonText: "Ir a cursos",
         customClass: {
           popup: "mySwal",
         },
@@ -177,7 +172,7 @@ const EditCourse = () => {
                     step="0.01"
                     id="price"
                     name="price"
-                    min="0.00"
+                    min="0.50"
                     max="9999.99"
                     defaultValue={newDataCourse.price}
                     onChange={handleChange}
