@@ -24,6 +24,10 @@
   padding-top: var(--pd-y-2);
 }
 
+.text a {
+  color: var(--color-primary);
+}
+
 .containerCheckout h2 svg {
   width: 24px;
   height: 24px;
@@ -39,8 +43,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ff5733;
-  color: white;
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  color: red;
+  font-weight: bold;
 }

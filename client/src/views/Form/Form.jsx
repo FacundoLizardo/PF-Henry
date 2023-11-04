@@ -8,12 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { getAllCourses } from "../../utils/getAllCourses";
 import Swal from "sweetalert2";
+import { validation } from "../../utils/validation";
 
 const Form = () => {
   const navigate = useNavigate();
   const id = useParams().id;
   const [categoriesData, setCategoriesData] = useState([]);
-  const [price, setPrice] = useState(0.0);
+  const [price, setPrice] = useState(0.5);
   const [loading, setLoading] = useState(false);
   const [course, setCourse] = useState({
     title: "",
@@ -22,6 +23,13 @@ const Form = () => {
     category: "",
     image: "",
     price: price,
+  });
+
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    category: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -43,6 +51,9 @@ const Form = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setCourse({ ...course, [name]: value });
+
+    const newErrors = validation({ ...course, [name]: value });
+    setErrors(newErrors);
   };
 
   const onSubmit = async () => {
@@ -67,7 +78,7 @@ const Form = () => {
       if (response.data) {
         Swal.fire({
           title: "Tu curso se creo correctamente!",
-          text: "Dirigete a la lista de cursos, ahí podras encontrarlo.",
+          text: "Dirígete a la sección de cursos, ahí podrás encontrarlo.",
           icon: "success",
           confirmButtonText: "LISTA DE CURSOS",
           customClass: {
@@ -77,7 +88,7 @@ const Form = () => {
       }
     } catch (error) {
       Swal.fire({
-        title: "¡Falta informacion importante!",
+        title: "¡Falta información importante!",
         text: "Por favor revisa y completa todos los campos.",
         icon: "warning",
         confirmButtonText: "INTENTARLO NUEVAMENTE",
@@ -108,9 +119,9 @@ const Form = () => {
                   name="title"
                   value={course.title}
                   onInput={handleChange}
-                  maxLength={100}
+                  maxLength={70}
                 />
-                <p className={style.input__description}>{}</p>
+                <div className={style.input__description}>{errors.title}</div>
                 <label className={style.input__label}>Descripción</label>
                 <textarea
                   id="description"
@@ -118,7 +129,7 @@ const Form = () => {
                   value={course.description}
                   className={style.input__field}
                   onInput={handleChange}
-                  maxLength={300}
+                  maxLength={100}
                 ></textarea>
                 <p className={style.input__description}>{}</p>
                 <label className={style.input__label}>Categoría:</label>
@@ -162,7 +173,7 @@ const Form = () => {
                       defaultValue={price.toFixed(2)}
                       id="price"
                       name="price"
-                      min="0.00"
+                      min="0.50"
                       max="9999.99"
                       onInput={handleChange}
                     />

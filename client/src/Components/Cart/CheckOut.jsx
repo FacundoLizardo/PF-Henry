@@ -56,10 +56,13 @@ export const CheckOut = ({ updateContextUser }) => {
           </h2>
           <div className={Styles.text}>
             <p>
-              Recibirás un correo electrónico con los detalles de tu compra.
+              Recibirás un correo electrónico con los detalles de tu compra y
+              también encontrarás la información en tu bandeja de entrada.
             </p>
             <br />
-            <p>También encontrarás la información en tu bandeja de entrada.</p>
+            <p>
+              Continúa comprando los mejores <a href="/courses">cursos</a>.
+            </p>
             <br />
             <p>¡Gracias por elegirnos!</p>
             <br />
@@ -70,21 +73,7 @@ export const CheckOut = ({ updateContextUser }) => {
         </div>
       ) : (
         <div className={Styles.containerCheckoutError}>
-          <h2>
-            ¡La operación no se ha completado con éxito!{" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="128"
-              height="128"
-              viewBox="0 0 48 48"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                d="m6 11l5-5l13 13L37 6l5 5l-13 13l13 13l-5 5l-13-13l-13 13l-5-5l13-13L6 11Z"
-              />
-            </svg>
-          </h2>
+          <h2>¡La operación no se ha completado con éxito!</h2>
         </div>
       )}
     </div>
