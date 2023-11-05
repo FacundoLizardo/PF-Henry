@@ -36,14 +36,9 @@ const Payment = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			deletedAt: {
-				type: DataTypes.DATE,
-				allowNull: true, // Para permitir registros no eliminados
-			},
 		},
 		{
 			timestamps: false,
-			paranoid: true,
 		}
 	);
 };

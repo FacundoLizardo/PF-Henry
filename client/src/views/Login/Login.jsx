@@ -10,41 +10,94 @@ import {
 	GoogleAuthProvider,
 } from "firebase/auth";
 
+import user from "../../assets/navBarImages/user.png";
+
+import Swal from "sweetalert2/dist/sweetalert2.js";
+
 import { useContext, useState } from "react";
 import { userContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/getUser";
 import axios from "axios";
+import { postUser } from "../../utils/postUser";
 const auth = getAuth(appFireBase);
 
-const Login = ({ updateContextUser }) => {
+const Login = ({ updateContextUser, setLogged }) => {
+	const Toast = Swal.mixin({
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: 2500,
+		timerProgressBar: true,
+		didOpen: (toast) => {
+			toast.addEventListener("mouseenter", Swal.stopTimer);
+			toast.addEventListener("mouseleave", Swal.resumeTimer);
+		},
+	});
 	const nav = useNavigate();
 	const user2 = useContext(userContext);
 	const [registering, setRegistering] = useState(false);
 
 	const authentication = async (e) => {
 		e.preventDefault();
-		const email = e.target.email.value;
-		const password = e.target.password.value;
-		const re_email = e.target.re_email.value;
-		const re_password = e.target.re_password.value;
+		const email = document.getElementById("email").value;
+		const password = document.getElementById("password").value;
+		const reemail = document.getElementById("re_email").value;
+		const repassword = document.getElementById("re_password").value;
 		if (registering) {
-			createUserWithEmailAndPassword(auth, email, password)
-				.then(() => {
-					const usuario = { email: email, password: password, isNew: 1 };
-					updateContextUser(usuario);
-				})
-				.catch((error) =>
-					console.log(
-						"Ocurrió un error al tratar de crear usuario en el autenticador: " +
-							error
-					)
-				)
-				.finally(nav("/courses/"));
+			if (email === reemail && password === repassword) {
+				// createUserWithEmailAndPassword(auth, email, password)
+				// 	.then((result) => {
+				// 		const usuario = { email: email, password: password };
+				// 		localStorage.setItem("allowed", false);
+				// 		updateContextUser(usuario);
+				// 		console.log(result);
+				// 	})
+				// 	.catch(() => {
+				// 		return Toast.fire({
+				// 			icon: "error",
+				// 			title: "¡Este email ya se encuentra en uso!",
+				// 			customClass: {
+				// 				popup: "mySwal",
+				// 			},
+				// 		});
+				// 	});
+				// .finally(nav("/courses/"));
+				const usuario = {
+					email: email,
+					password: password,
+					photoURL: user,
+					role_student: true,
+					role_instructor: false,
+				};
+				postUser(usuario)
+					.then((result) => {
+						//localStorage.setItem("allowed", false);
+						updateContextUser(usuario);
+						console.log(result);
+					})
+					.catch((error) => {
+						return Toast.fire({
+							icon: "warning",
+							title: "¡El email y las contraseñas deben ser iguales!",
+							customClass: {
+								popup: "mySwal",
+							},
+						});
+					});
+			} else {
+				return Toast.fire({
+					icon: "warning",
+					title: "¡El email y las contraseñas deben ser iguales!",
+					customClass: {
+						popup: "mySwal",
+					},
+				});
+			}
 		} else {
 			signInWithEmailAndPassword(auth, email, password)
 				.then(() => {
-					const usuario = { email: email, password: password, isNew: 0 };
+					const usuario = { email: email, password: password };
 					updateContextUser(usuario);
 				})
 				.finally(() => nav("/courses/"));
@@ -162,7 +215,9 @@ const Login = ({ updateContextUser }) => {
 				)}
 
 				<div className={style.flex_row}></div>
-				<button className={style.button_submit}>
+				<button
+					className={style.button_submit}
+					onClick={(e) => authentication(e)}>
 					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>

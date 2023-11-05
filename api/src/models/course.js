@@ -35,17 +35,13 @@ const Course = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			deletedAt: {
-				type: DataTypes.DATE,
-				allowNull: true,
-			},
 			price: {
 				type: DataTypes.FLOAT,
 				allowNull: true,
 				validate: {
 					isFloat: {
 						args: [0, 999999.99],
-						msg: 'El precio debe tener como máximo dos decimales.',
+						msg: "El precio debe tener como máximo dos decimales.",
 					},
 				},
 			},
@@ -58,11 +54,14 @@ const Course = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: true,
 			},
+			enabled: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
 		},
 
 		{
 			timestamps: true,
-			paranoid: true,
 		}
 	);
 };
