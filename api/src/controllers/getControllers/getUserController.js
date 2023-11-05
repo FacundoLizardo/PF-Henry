@@ -1,15 +1,30 @@
-const { User } = require("../../db");
+const { User, Course } = require("../../db");
 
 const getUserController = async (email) => {
-	const data = await User.findOne({
-		where: { email: email },
-	});
+	try {
+		const user = await User.findOne({
+			where: { email: email },
+			include: {
+				model: Course,
+				through: { attributes: [] },
+			},
+		});
 
-	if (data === null) {
-		return "User Not Founded";
+		if (!user) {
+			return "User Not Found";
+		}
+
+		const courses = user.Courses.map((course) => course.dataValues);
+		const userWithPurchasedCourses = {
+			...user.dataValues,
+			Courses: courses,
+		};
+		console.log(userWithPurchasedCourses);
+		return userWithPurchasedCourses;
+	} catch (error) {
+		console.error(error);
+		return "Error fetching user data";
 	}
-
-	return data.dataValues;
 };
 
 const putUserController = async (user) => {

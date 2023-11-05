@@ -3,6 +3,7 @@ import { postPaymentCart } from "../../utils/postPaymentCart";
 import { useCart } from "../../context/CartContext";
 import Styles from "./CheckOut.module.css";
 import logo from "../../assets/logo.png";
+import { getUser } from "../../utils/getUser";
 
 export const CheckOut = ({ updateContextUser }) => {
   const payment = JSON.parse(localStorage.getItem("payment"));
@@ -21,6 +22,12 @@ export const CheckOut = ({ updateContextUser }) => {
         enrollCourses(cart, session.id, session.email)
           .then(() => {
             dispatch({ type: "CLEAR", payload: [] });
+            getUser(session.email).then((updatedUser) => {
+              localStorage.setItem(
+                "userOnSession",
+                JSON.stringify(updatedUser)
+              );
+            });
             window.location.reload;
           })
           .catch((error) => console.log("este es el error," + error));

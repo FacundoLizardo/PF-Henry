@@ -7,7 +7,7 @@
 
 .modal {
   background-color: var(--color-background-details);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   position: absolute;
   top: 70px;
   padding: 20px;
