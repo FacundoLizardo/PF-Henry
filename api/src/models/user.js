@@ -26,12 +26,12 @@ const User = (sequelize) => {
 			},
 			first_name: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 				defaultValue: "nombre",
 			},
 			last_name: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 				defaultValue: "apellido",
 			},
 			birthdate: {
@@ -54,14 +54,13 @@ const User = (sequelize) => {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
-			deletedAt: {
-				type: DataTypes.DATE,
+			enabled: {
+				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
 		},
 		{
 			timestamps: true,
-			paranoid: true,
 		}
 	);
 };

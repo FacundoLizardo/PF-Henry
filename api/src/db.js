@@ -46,17 +46,14 @@ Rating.belongsTo(User);
 Category.hasMany(Course);
 Course.belongsTo(Category);
 
-// Courses - Payments
-Course.belongsToMany(User, { through: "Consumption" });
+// Courses con payments y usuarios para tener mejor la info.
 User.belongsToMany(Course, { through: "Consumption" });
-
+Course.belongsToMany(User, { through: "Consumption" });
+Course.belongsToMany(Payment, { through: "PaymentCourse" });
+Payment.belongsToMany(Course, { through: "PaymentCourse" });
 // Course.hasMany(Payment);
 
 //Lesson.hasOne(Course);
-
-// Users - Payments
-User.hasMany(Payment);
-Payment.belongsTo(User);
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
