@@ -1,15 +1,13 @@
 import Styles from "./Student.module.css";
-import { userContext } from "../../App";
-import { useContext } from "react";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const Student = () => {
-  const userData = useContext(userContext);
+  const session = JSON.parse(localStorage.getItem("userOnSession")); 
   const navigate = useNavigate();
 
   const handleNavigateToLessons = (courseId) => {
-    const selectedCourse = userData.Courses.find(
+    const selectedCourse = session.Courses.find(
       (course) => course.id === courseId
     );
     navigate(`/student/classList/${courseId}`, {
@@ -34,11 +32,11 @@ const Student = () => {
     <div className={Styles.studentContainer}>
       <div>
         <div>
-          <h5>Alumno n°: {userData?.id}</h5>
+          <h5>Alumno n°: {session?.id}</h5>
         </div>
         <div>
           <h1>Mis cursos</h1>
-          {userData?.Courses.map((course, index) => (
+          {session?.Courses.map((course, index) => (
             <CourseCard
               key={index}
               course={course}
