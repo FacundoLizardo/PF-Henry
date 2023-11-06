@@ -32,6 +32,7 @@ const Card = ({ course }) => {
 
   const addToCart = () => {
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
+    window.scrollTo({ top: 0 });
   };
 
   const generateStars = (rating) => {

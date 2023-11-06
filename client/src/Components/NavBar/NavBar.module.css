@@ -94,7 +94,7 @@ nav {
 
 .modal {
   background-color: var(--color-background-details);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   border-radius: 0 0 5px 5px;
   position: absolute;
   top: 35px;

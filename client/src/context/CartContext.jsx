@@ -1,7 +1,7 @@
 /* eslint-disable no-case-declarations */
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { ADD_TO_CART, CLEAR, REMOVE_FROM_CART } from "./CartTypes";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+import Swal from "sweetalert2";
 
 const CartContext = createContext();
 
@@ -56,29 +56,6 @@ const cartReducer = (state = initialState, action) => {
       const updatedCart = state.cart.filter(
         (product) => product.id !== action.payload
       );
-
-      Swal.fire({
-        title: "¿Seguro que quieres eliminar el curso?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3d0dca",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Cancelar",
-        confirmButtonText: "Aceptar",
-        customClass: {
-          popup: "mySwal",
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "El curso fue eliminado del carrito",
-            icon: "success",
-            customClass: {
-              popup: "mySwal",
-            },
-          });
-        }
-      });
 
       return {
         ...state,
