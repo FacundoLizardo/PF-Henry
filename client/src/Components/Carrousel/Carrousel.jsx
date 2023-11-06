@@ -7,13 +7,15 @@ import image2 from "../../assets/imgCarrousel/img2.jpg";
 import image3 from "../../assets/imgCarrousel/img3.jpg";
 import image4 from "../../assets/imgCarrousel/img4.jpg";
 import image5 from "../../assets/imgCarrousel/img5.jpg";
+import image7 from "../../assets/imgCarrousel/img7.jpg";
 
 const objSlides = [
-  { image: image1 },
+ /*  { image: image1 },
   { image: image2 },
   { image: image3 },
   { image: image4 },
-  { image: image5 },
+  { image: image5 }, */
+  { image: image7 },
 ];
 
 export const Carrousel = () => {

@@ -1,7 +1,7 @@
 .navbarContainer {
   width: 100%;
   height: 70px;
-  background-color: var(--color-background-off);
+  background-color: var(--color-background);
 }
 
 nav {
@@ -11,10 +11,9 @@ nav {
   height: 100%;
   justify-content: space-between;
   transition: box-shadow 0.1s ease 0s, background-color 0.1s ease 0s;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   position: static;
   margin: auto;
-  font-weight: bold;
 }
 
 .navbarLogo {
@@ -22,9 +21,24 @@ nav {
   align-items: center;
 }
 
-.navbarAssets {
+.navbarLogo img {
+  height: 50px;
+}
+
+.imgProfile {
+  cursor: pointer;
+  width: 40px;
+  height: 70px;
+  border: none;
   display: flex;
+  justify-content: center;
   align-items: center;
+}
+
+.navbarAssets img {
+  width: 35px;
+  height: 35px;
+  border-radius: 25px;
 }
 
 .navbarLinks {
@@ -64,27 +78,30 @@ nav {
 }
 
 .navbarLinks.active li a {
-  font-weight: bold;
   transition: all 0.2s ease-out;
 }
 
 .menuModal {
   width: 40px;
+  display: flex;
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
   border: none;
+  padding-bottom: 5px;
+  align-items: center;
 }
 
 .modal {
   background-color: var(--color-background-details);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  border-radius: 0 0 5px 5px;
   position: absolute;
   top: 35px;
   right: 0;
   padding: 30px;
   z-index: 97;
+  min-width: 300px;
 }
 
 .modalContent {
@@ -149,7 +166,7 @@ nav {
     text-align: center;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 17px;
   }
 
   .navbarToggle {

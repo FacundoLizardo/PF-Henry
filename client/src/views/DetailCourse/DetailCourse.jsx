@@ -9,6 +9,7 @@ const DetailCourse = () => {
 	const { id } = useParams();
 	const [dataDetail, setDataDetail] = useState();
 	const navigate = useNavigate();
+
 	useEffect(() => {
 		axios
 			.get(`/courses/${id}`)

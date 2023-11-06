@@ -1,9 +1,83 @@
-.coursesContainer {
-  width: 90%;
-  min-height: 100%;
-  margin: auto;
-  padding: var(--pd-section);
+/* Estilos específicos para elementos dentro de la sección de filtros */
+
+.SearchBarContainer {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid var(--color-border-two);
+  border-radius: var(--radius);
+  padding: 5px;
+  width: 100%;
 }
+
+.filtersContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.filtOrderCont {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 90%;
+}
+
+.filterButt {
+  padding: 5px;
+  border: 1px solid var(--color-border-three);
+  border-radius: 5px;
+}
+
+.SearchBarContainer input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-family: var(--font-primary);
+}
+
+.SearchBarContainer svg {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.filters select {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-family: var(--font-primary);
+  border: 1px solid var(--color-border-two);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.filters select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  right: 10px;
+}
+
+/* Estilos para elementos relacionados con categorías */
 
 .categoryContainerFilter {
   display: flex;
@@ -33,6 +107,15 @@
   transform: rotate(180deg);
 }
 
+/* Estilos para la sección de cursos */
+
+.coursesContainer {
+  width: 90%;
+  min-height: 100%;
+  margin: auto;
+  padding: var(--pd-section);
+}
+
 .courses {
   width: 100%;
   display: flex;
@@ -44,60 +127,7 @@
   display: none;
 }
 
-.filtersContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-.section-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--color-background-details);
-  padding: 10px;
-  border: 1px solid var(--color-border-three);
-  border-radius: 5px;
-}
-
-.filtOrderCont {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.filters {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.filterButt {
-  padding: 5px;
-  border: 1px solid var(--color-border-three);
-  border-radius: 5px;
-}
-
-.filter-butt:first-child {
-  margin-left: 0;
-}
-
-.order {
-  margin-left: 20px;
-}
-
-.orderButt {
-  padding: 5px;
-  border: 1px solid var(--color-border-three);
-  border-radius: 5px;
-  background-color: var(--color-background);
-}
+/* Estilos para pantallas pequeñas (máximo 642px) */
 
 @media (max-width: 642px) {
   .filters {
@@ -121,4 +151,45 @@
     gap: 10px;
     flex-direction: column-reverse;
   }
+}
+
+/* Estilo básico de la paginación */
+.paginationContainer {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.paginationBotton {
+  background-color: var(--color-primary);
+  color: var(--color-text-secondary);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.paginationContainer button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.currentPage {
+  background-color: var(--color-background-off-two);
+  color: var(--color-text-secondary);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 2px 5px;
+  border: none;
+  margin: 2px;
+  cursor: pointer;
+  width: 25px;
+}
+
+.buttonPage {
+  width: 25px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0 4px;
 }

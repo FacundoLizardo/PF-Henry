@@ -29,9 +29,31 @@ CategoryModel(sequelize);
 
 const { Course, Lesson, Payment, Rating, User, Category } = sequelize.models;
 
-// //Cursos con Lecciones
+//Cursos con Lecciones
 Course.hasMany(Lesson, { as: "lesson" });
-Lesson.belongsTo(Course, { foreignKey: "id" });
+Lesson.belongsTo(Course);
+
+//Cursos con Ratings
+Course.hasMany(Rating);
+//Rating.belongsTo(Course, { foreignKey: "course_id" });
+Rating.belongsTo(Course);
+
+User.hasMany(Rating);
+//Rating.belongsTo(User, { foreignKey: "user_id" });
+Rating.belongsTo(User);
+
+//Cursos con Categorias
+Category.hasMany(Course);
+Course.belongsTo(Category);
+
+// Courses con payments y usuarios para tener mejor la info.
+User.belongsToMany(Course, { through: "Consumption" });
+Course.belongsToMany(User, { through: "Consumption" });
+Course.belongsToMany(Payment, { through: "PaymentCourse" });
+Payment.belongsToMany(Course, { through: "PaymentCourse" });
+// Course.hasMany(Payment);
+
+//Lesson.hasOne(Course);
 
 // //Cursos con consumo
 // Course.hasMany(Consumption, { as: "course_consumption" });
@@ -60,41 +82,10 @@ Lesson.belongsTo(Course, { foreignKey: "id" });
 // User.hasMany(Rating, { as: "user_rating" });
 // Rating.belongsTo(User, { foreingKey: "id", as: "rating_user" });
 
-// Courses - Payments
-Course.belongsToMany(User, { through: "Consumption" });
-User.belongsToMany(Course, { through: "Consumption" });
-
-Course.hasMany(Payment, {
-	foreignKey: "course_id",
-});
-
-// Users - Payments
-User.hasMany(Payment, {
-	foreignKey: "user_id",
-});
-Payment.belongsTo(User, {
-	foreignKey: "user_id",
-});
 // // Relacion Lessons con Tabla Intermedia Comsumption
 // Lesson.belongsTo(Consumption, {
 // 	foreignKey: "lesson_id",
 // });
-
-// Relacion Rating con Cursos
-Rating.belongsTo(Course, {
-	foreignKey: "course_id",
-});
-
-// Relacion Cursos con Ratings
-Course.hasMany(Rating, {
-	foreignKey: "course_id",
-});
-
-Lesson.hasOne(Course);
-
-Category.hasMany(Course);
-
-Course.belongsTo(Category);
 
 module.exports = {
 	Category,

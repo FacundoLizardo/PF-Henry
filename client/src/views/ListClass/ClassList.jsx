@@ -4,7 +4,7 @@ import Button from "../../Components/Button/Button";
 
 const ClassList = () => {
   const { state } = useLocation();
-  const selectedCourse = state.courseData;
+  const selectedCourse = state.dataCourses;
   const navigate = useNavigate();
 
   const handleNavigateToLecture = (lessonId) => {

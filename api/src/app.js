@@ -6,6 +6,10 @@ const morgan = require("morgan");
 const courseRoutes = require("./routes/courseRoutes.js");
 const userRoutes = require("./routes/userRoutes.js");
 const categoryRoutes = require("./routes/categoryRoutes.js");
+const ratingRoutes = require("./routes/ratingRoutes.js");
+const onSaleRoutes = require("./routes/onSaleRoutes.js");
+const lessonRoutes = require("./routes/lessonRoutes.js");
+const stripeRoutes = require("./routes/StripeRoutes.js");
 //const routes = require("./routes/index.js");
 
 require("./db.js");
@@ -30,10 +34,13 @@ server.use((req, res, next) => {
 });
 // server.use("/courses", courseRoutes);
 // server.use("/", routes);
-
+server.use("/onSale", onSaleRoutes);
 server.use("/users", userRoutes);
 server.use("/courses", courseRoutes);
 server.use("/categories", categoryRoutes);
+server.use("/rating", ratingRoutes);
+server.use("/lessons", lessonRoutes);
+server.use("/payment", stripeRoutes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

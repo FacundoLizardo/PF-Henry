@@ -1,17 +1,63 @@
-import CardContainer from "../../Components/CardContainer/CardContainer";
+/* eslint-disable */
 import { useEffect, useState } from "react";
 import Button from "../../Components/Button/Button";
 import axios from "axios";
-
 import Styles from "./Courses.module.css";
 import Card from "../../Components/Card/Card";
 
-const Courses = () => {
+const ITEMS_PER_PAGE = 10;
+const MAX_PAGES_DISPLAYED = 5;
+
+const Courses = ({ updateContextUser }) => {
   const [dataCourses, setDataCourses] = useState({
     data: [],
     filteredData: [],
   });
+  console.log(dataCourses);
   const [categoriesData, setCategoriesData] = useState([]);
+  const [dataTitle, setDataTitle] = useState("");
+
+  const displayCourses =
+    dataCourses.filteredData.length > 0
+      ? dataCourses.filteredData
+      : dataCourses.data;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const totalPages = Math.ceil(displayCourses.length / ITEMS_PER_PAGE);
+  const currentItems = displayCourses.slice(startIndex, endIndex);
+
+  let startPage = currentPage - Math.floor(MAX_PAGES_DISPLAYED / 2);
+  let endPage = currentPage + Math.floor(MAX_PAGES_DISPLAYED / 2);
+
+  if (startPage < 1) {
+    startPage = 1;
+    endPage = Math.min(MAX_PAGES_DISPLAYED, totalPages);
+  }
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = Math.max(1, totalPages - MAX_PAGES_DISPLAYED + 1);
+  }
+
+  const handleNext = () => {
+    const totalElements = displayCourses.length;
+    const nextPage = currentPage + 1;
+    const totalPages = Math.ceil(totalElements / ITEMS_PER_PAGE);
+
+    if (nextPage <= totalPages) {
+      setCurrentPage(nextPage);
+      window.scrollTo({ top: 0 });
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0 });
+    }
+  };
 
   useEffect(() => {
     setDataCourses((prevState) => ({
@@ -19,6 +65,10 @@ const Courses = () => {
       data: JSON.parse(localStorage.getItem("coursesData")),
     }));
     setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
+    const session = JSON.parse(localStorage.getItem("userOnSession"));
+    if (session?.email !== "") {
+      updateContextUser(session);
+    }
   }, []);
 
   const dataFiltered = async (e) => {
@@ -27,6 +77,21 @@ const Courses = () => {
     const url = `/courses?category=${categoryFilter}`;
 
     if (categoryFilter) {
+      const { data } = await axios.get(url);
+      setDataCourses((prevState) => ({
+        ...prevState,
+        filteredData: data,
+      }));
+    }
+  };
+
+  const dataFilteredByTitle = async (event) => {
+    const newValue = event.target.value;
+    setDataTitle(newValue);
+
+    const url = `/courses?title=${newValue}`;
+
+    if (newValue) {
       const { data } = await axios.get(url);
       setDataCourses((prevState) => ({
         ...prevState,
@@ -98,9 +163,29 @@ const Courses = () => {
 
   return (
     <div className={Styles.coursesContainer}>
-      <section id="container" className={Styles.filtersContainer}>
+      <section className={Styles.filtersContainer}>
         <div className={Styles.filtOrderCont}>
           <div className={Styles.filters}>
+            <div className={Styles.SearchBarContainer}>
+              <input
+                type="text"
+                value={dataTitle}
+                name="title"
+                onChange={dataFilteredByTitle}
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="128"
+                height="128"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  fill="currentColor"
+                  d="m229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72a72.08 72.08 0 0 1-72-72Z"
+                />
+              </svg>
+            </div>
+
             <select
               className={Styles.filterButt}
               onChange={dataFiltered}
@@ -155,13 +240,42 @@ const Courses = () => {
 
       <section>
         <div className={`${Styles.courses}`}>
-          {dataCourses.filteredData.length > 0
-            ? dataCourses.filteredData.map((course, index) => (
+          {currentItems.length > 0
+            ? currentItems.map((course, index) => (
                 <Card key={index} course={course} />
               ))
-            : dataCourses.data.map((course, index) => (
+            : currentItems.map((course, index) => (
                 <Card key={index} course={course} />
               ))}
+        </div>
+        <div className={Styles.paginationContainer}>
+          <button
+            className={Styles.paginationBotton}
+            onClick={handlePrev}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+          {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
+            <button
+              key={startPage + index}
+              onClick={() => setCurrentPage(startPage + index)}
+              className={
+                currentPage === startPage + index
+                  ? Styles.currentPage
+                  : Styles.buttonPage
+              }
+            >
+              {startPage + index}
+            </button>
+          ))}
+          <button
+            className={Styles.paginationBotton}
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
         </div>
       </section>
     </div>
