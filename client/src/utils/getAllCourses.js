@@ -10,6 +10,12 @@ export const getAllCourses = async () => {
 
 		const data = response.data;
 
+		data.sort((a, b) => {
+			const fechaA = new Date(a.createdAt);
+			const fechaB = new Date(b.createdAt);
+			return fechaB - fechaA;
+		});
+
 		localStorage.setItem("coursesData", JSON.stringify(data));
 
 		return data;

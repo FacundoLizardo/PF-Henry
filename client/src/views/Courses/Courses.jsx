@@ -13,19 +13,22 @@ const Courses = ({ updateContextUser }) => {
     data: [],
     filteredData: [],
   });
+  console.log(dataCourses);
   const [categoriesData, setCategoriesData] = useState([]);
   const [dataTitle, setDataTitle] = useState("");
 
-  const cleanCourses =
+  const displayCourses =
     dataCourses.filteredData.length > 0
       ? dataCourses.filteredData
       : dataCourses.data;
 
-  const displayCourses = cleanCourses.sort((a, b) => {
+/*   displayCourses.sort((a, b) => {
     const fechaA = new Date(a.createdAt);
     const fechaB = new Date(b.createdAt);
     return fechaB - fechaA;
-  });
+  }); */
+
+  console.log("Display", displayCourses);
 
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
