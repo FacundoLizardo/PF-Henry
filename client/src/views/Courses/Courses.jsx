@@ -22,14 +22,6 @@ const Courses = ({ updateContextUser }) => {
       ? dataCourses.filteredData
       : dataCourses.data;
 
-/*   displayCourses.sort((a, b) => {
-    const fechaA = new Date(a.createdAt);
-    const fechaB = new Date(b.createdAt);
-    return fechaB - fechaA;
-  }); */
-
-  console.log("Display", displayCourses);
-
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
