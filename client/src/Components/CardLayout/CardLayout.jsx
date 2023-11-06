@@ -27,15 +27,18 @@ const CardLayout = ({ courses }) => {
     navigate("/login");
   };
 
-  const productToAddToCart = {
-    id: course.id,
-    name: course.title,
-    price: course.price,
-    image: course.image,
-    description: course.description,
-  };
-
   const addToCart = () => {
+    let newPrice =
+      course.price - (course.price * course.percentageDiscount) / 100;
+    let roundedNewPrice = parseFloat(newPrice.toFixed(2));
+
+    let productToAddToCart = {
+      id: course.id,
+      name: course.title,
+      price: roundedNewPrice,
+      image: course.image,
+      description: course.description,
+    };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 

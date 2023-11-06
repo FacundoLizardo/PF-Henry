@@ -16,8 +16,8 @@ const CartPage = () => {
       title: "¿Seguro que quieres eliminar el curso?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3d0dca",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3d0dca",
       cancelButtonText: "Cancelar",
       confirmButtonText: "Aceptar",
       customClass: {
