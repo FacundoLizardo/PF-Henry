@@ -44,6 +44,8 @@ const Login = ({ updateContextUser, setLogged }) => {
 		const password = document.getElementById("password").value;
 		const reemail = document.getElementById("re_email").value;
 		const repassword = document.getElementById("re_password").value;
+
+		console.log(email, password, reemail, repassword);
 		if (registering) {
 			if (email === reemail && password === repassword) {
 				// createUserWithEmailAndPassword(auth, email, password)
@@ -70,6 +72,7 @@ const Login = ({ updateContextUser, setLogged }) => {
 					role_student: true,
 					role_instructor: false,
 				};
+				console.log(usuario);
 				postUser(usuario)
 					.then((result) => {
 						//localStorage.setItem("allowed", false);
@@ -217,14 +220,16 @@ const Login = ({ updateContextUser, setLogged }) => {
 				<div className={style.flex_row}></div>
 				<button
 					className={style.button_submit}
-					onClick={(e) => authentication(e)}>
+					onClick={(e) => authentication(e)}
+				>
 					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>
 					{registering ? "Si ya tienes cuenta" : "Si no tienes cuenta"}
 					<span
 						className={style.span}
-						onClick={() => setRegistering(!registering)}>
+						onClick={() => setRegistering(!registering)}
+					>
 						{registering ? "Inicia sesión" : "Regístrate"}
 					</span>
 				</p>

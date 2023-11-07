@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
+const pg = require('pg');
 
 const CourseModel = require("./models/course");
 const LessonModel = require("./models/lesson");
@@ -9,13 +10,15 @@ const UserModel = require("./models/user");
 const CategoryModel = require("./models/category");
 //const ConsumptionModel = require("./models/consumption");
 
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DBURL } = process.env;
 
 const sequelize = new Sequelize(
-	`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
+	//`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`,
+	DBURL,
 	{
 		logging: false,
 		native: false,
+		dialectModule: pg,
 	}
 );
 
