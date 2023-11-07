@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
+const pg = require('pg');
 
 const CourseModel = require("./models/course");
 const LessonModel = require("./models/lesson");
@@ -17,7 +18,7 @@ const sequelize = new Sequelize(
 	{
 		logging: false,
 		native: false,
-		//dialectModule: pg,
+		dialectModule: pg,
 	}
 );
 
