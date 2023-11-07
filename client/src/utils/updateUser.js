@@ -2,10 +2,7 @@ import axios from "axios";
 
 export const updateUser = async (user) => {
 	try {
-		const response = await axios.put(
-			`http://localhost:3001/users/user/edit`,
-			user
-		);
+		const response = await axios.put(`/users/user/edit`, user);
 
 		if (response.status !== 200) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
