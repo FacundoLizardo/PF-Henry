@@ -5,10 +5,7 @@ const updateCourse = async (newDataCourse) => {
 	console.log(image, id, title);
 
 	try {
-		const response = await axios.put(
-			`http://localhost:3001/courses/edit`,
-			newDataCourse
-		);
+		const response = await axios.put(`/courses/edit`, newDataCourse);
 		console.log(response + "     respuesta de axios");
 
 		if (response.status !== 200) {
