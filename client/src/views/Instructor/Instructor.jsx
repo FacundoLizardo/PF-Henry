@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { userContext } from "../../App";
 import updateCourse from "../../utils/updateCourse";
 
-const Instructor = () => {
+const Instructor = ({ updateContextUser }) => {
 	const userData = useContext(userContext);
 	const navigate = useNavigate();
 	const [dataCourses, setDataCourses] = useState();
@@ -15,6 +15,10 @@ const Instructor = () => {
 	};
 	useEffect(() => {
 		updateData();
+		const session = JSON.parse(localStorage.getItem("userOnSession"));
+		if (session?.email !== "") {
+			updateContextUser(session);
+		}
 	}, []);
 
 	const coursesCreated = dataCourses
@@ -73,7 +77,12 @@ const Instructor = () => {
 						<div className={Styles.courseInfo}>
 							<h2>{course.title}</h2>
 							<div className={Styles.buttonContainer}>
-								<Button text={"Crea clases"} />
+								<Button
+									text={"Crea clases"}
+									onClick={() =>
+										handleNavigate(`/instructor/${course.id}/createLecture`)
+									}
+								/>
 								<Button
 									text={"Editar curso"}
 									onClick={() => handleNavigate(`/edit/${course.id}`)}

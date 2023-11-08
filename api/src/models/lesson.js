@@ -18,17 +18,13 @@ const Lesson = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			course_id: {
-				type: DataTypes.UUID,
-				allowNull: false,
-			},
-			images: {
-				type: DataTypes.STRING,
-				allowNull: false,
-			},
 			video_url: {
 				type: DataTypes.STRING,
 				allowNull: false,
+			},
+			wasLook: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
 			},
 			duration: {
 				type: DataTypes.INTEGER,

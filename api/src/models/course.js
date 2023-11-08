@@ -27,6 +27,11 @@ const Course = (sequelize) => {
 				allowNull: false,
 				defaultValue: 0,
 			},
+			sections: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+				defaultValue: 1,
+			},
 			category: {
 				type: DataTypes.STRING,
 				allowNull: true,
