@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { storage } from "../../firebase/firebase";
-import style from "./Form.module.css";
+import style from "./FormLecture.module.css";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
@@ -10,51 +10,57 @@ import { getAllCourses } from "../../utils/getAllCourses";
 import Swal from "sweetalert2";
 import { validation } from "../../utils/validation";
 
-const Form = () => {
+const FormLecture = ({ updateContextUser }) => {
 	const navigate = useNavigate();
-	const id = useParams().id;
-	const [categoriesData, setCategoriesData] = useState([]);
-	const [price, setPrice] = useState(0.5);
+	const id = useParams().courseId;
 	const [loading, setLoading] = useState(false);
-	const [course, setCourse] = useState({
+	const [secciones, setSecciones] = useState(0);
+	const [lecture, setLecture] = useState({
 		title: "",
 		description: "",
-		instructor_id: id,
-		category: "",
-		image: "",
-		sections: 1,
-		price: price,
+		CourseId: id,
+		video_url: "",
+		section: 0,
+		wasLook: false,
 	});
 
 	const [errors, setErrors] = useState({
 		title: "",
 		description: "",
-		category: "",
-		sections: 0,
+		section: 0,
 	});
+	const nombreCurso = JSON.parse(localStorage.getItem("coursesData")).filter(
+		(elemento) => elemento.id === id
+	);
+	const sections = nombreCurso[0].sections;
 
 	useEffect(() => {
-		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
-	}, []);
+		const session = JSON.parse(localStorage.getItem("userOnSession"));
+		if (session?.email !== "") {
+			updateContextUser(session);
+		}
+		console.log(lecture);
+	}, [lecture]);
 
-	const uploadImage = async () => {
-		const image = document.getElementById("image");
-		const imageFile = image.files[0];
-		const nombreCurso = document.getElementById("title").value;
-		const imageRef = ref(storage, `courses/${nombreCurso}/${imageFile.name}`);
-		await uploadBytes(imageRef, imageFile);
-		const path = await getDownloadURL(imageRef);
-		setCourse({ ...course, image: `${path}` });
+	const uploadVideo = async () => {
+		const video = document.getElementById("video");
+		const videoFile = video.files[0];
+		const videoRef = ref(
+			storage,
+			`courses/${nombreCurso[0].title}/${lecture.title} - ${id}`
+		);
+		await uploadBytes(videoRef, videoFile);
+		const path = await getDownloadURL(videoRef);
+		setLecture({ ...lecture, video_url: `${path}` });
 
 		return path;
 	};
-
 	const handleChange = (event) => {
 		const { name, value } = event.target;
-		setCourse({ ...course, [name]: value });
+		setLecture({ ...lecture, [name]: value });
 
 		const newErrors = validation({
-			...course,
+			...lecture,
 			[name]: value,
 			[description]: description,
 		});
@@ -63,33 +69,33 @@ const Form = () => {
 
 	const onSubmit = async () => {
 		setLoading(true);
-
 		try {
-			const imagePath = await uploadImage();
-
-			setCourse((prevCourse) => {
+			const videoPath = await uploadVideo();
+			return;
+			setLecture((prevLecture) => {
 				return {
-					...prevCourse,
-					image: imagePath,
+					...prevLecture,
+					video_url: videoPath,
 				};
 			});
-			const response = await axios.post("/courses/create", {
-				...course,
-				image: imagePath,
+			const response = await axios.post("/lessons/create", {
+				...lecture,
+				video_url: videoPath,
 			});
 
+			console.log(response);
 			await getAllCourses();
 
 			if (response.data) {
 				Swal.fire({
-					title: "Tu curso se creo correctamente!",
-					text: "Dirígete a la sección de cursos, ahí podrás encontrarlo.",
+					title: "Tu clase se creo correctamente!",
+					text: "Dirígete a la sección de tus cursos creados, ahí podrás encontrarlo.",
 					icon: "success",
-					confirmButtonText: "Ir a cursos",
+					confirmButtonText: "Ir a Lecciones",
 					customClass: {
 						popup: "mySwal",
 					},
-				}).then(() => navigate(`/courses`));
+				}).then(() => navigate(`/instructor/${nombreCurso[0].instructor_id}`));
 			}
 		} catch (error) {
 			Swal.fire({
@@ -105,24 +111,27 @@ const Form = () => {
 			setLoading(false);
 		}
 	};
-
 	return (
 		<>
 			{!loading && (
 				<div className={style.container}>
 					<div className={style.modal}>
 						<div className={style.modal__header}>
-							<span className={style.modal__title}>Nuevo Curso</span>
+							<span className={style.modal__title}>
+								Nueva Clase - {nombreCurso[0].title}{" "}
+							</span>
 						</div>
 						<div className={style.modal__body}>
 							<div className={style.input}>
-								<label className={style.input__label}>Nombre del curso</label>
+								<label className={style.input__label}>
+									Nombre de la leccion
+								</label>
 								<input
 									className={style.input__field}
 									type="text"
 									id="title"
 									name="title"
-									value={course.title}
+									value={lecture.title}
 									onInput={handleChange}
 									maxLength={70}
 								/>
@@ -131,22 +140,21 @@ const Form = () => {
 								<textarea
 									id="description"
 									name="description"
-									value={course.description}
+									value={lecture.description}
 									className={style.input__field}
 									onInput={handleChange}
 									maxLength={100}></textarea>
 								<p className={style.input__description}>{errors.description}</p>
-
-								<label className={style.input__label}>Categoría:</label>
+								<label className={style.input__label}>Seccion:</label>
 								<select
 									className={style.input__field}
-									id="category"
-									name="category"
-									defaultValue="categorias"
-									value={course.category}
+									id="section"
+									name="section"
+									value={lecture.section}
 									onInput={handleChange}>
-									<option name="categorias">Categorías:</option>
-									{categoriesData
+									<option name="section">Seccion:</option>
+									{new Array(sections)
+										.fill(" ")
 										?.sort((a, b) => {
 											const nameA = a.name.toUpperCase();
 											const nameB = b.name.toUpperCase();
@@ -159,46 +167,22 @@ const Form = () => {
 											}
 											return 0;
 										})
-										.map((category, index) => (
-											<option key={index}>{category.name}</option>
+										.map((section, index) => (
+											<option key={index} value={index + 1}>
+												Seccion {index + 1}
+											</option>
 										))}
 								</select>
-
-								<label className={style.input__label}>Secciones:</label>
+								<p className={style.input__description}>{errors.sections}</p>
+								<label className={style.input__label}>Cargar video:</label>
 								<input
 									className={style.input__field}
-									id="sections"
-									name="sections"
-									type="number"
-									value={course.sections}
+									type="file"
+									id="video"
 									onInput={handleChange}
 								/>
-								<p className={style.input__description}>{errors.sections}</p>
-
-								<label className={style.input__label}>Imagen:</label>
-								<input className={style.input__field} type="file" id="image" />
 								<p className={style.input__description}>{}</p>
-								<div className={style.fieldPrice_Send}>
-									<div className={style.priceField}>
-										<label className={style.input__label}>Precio: US$ </label>
-										<input
-											className={style.input__price}
-											type="number"
-											step="0.01"
-											defaultValue={price.toFixed(2)}
-											id="price"
-											name="price"
-											min="0.50"
-											max="9999.99"
-											onInput={handleChange}
-										/>
-									</div>
-									<p className={style.input__description}>{errors.price}</p>
-									<Button
-										text={"Crear curso"}
-										onClick={() => onSubmit(course)}
-									/>
-								</div>
+								<Button text={"Crear Clase"} onClick={() => onSubmit()} />
 							</div>
 						</div>
 					</div>
@@ -213,4 +197,4 @@ const Form = () => {
 	);
 };
 
-export default Form;
+export default FormLecture;
