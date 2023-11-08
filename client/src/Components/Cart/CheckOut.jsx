@@ -1,17 +1,26 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { postPaymentCart } from "../../utils/postPaymentCart";
 import { useCart } from "../../context/CartContext";
 import Styles from "./CheckOut.module.css";
 import logo from "../../assets/logo.png";
 import { getUser } from "../../utils/getUser";
+import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+import { userContext } from "../../App";
 
 export const CheckOut = ({ updateContextUser }) => {
   const payment = JSON.parse(localStorage.getItem("payment"));
+  const userData = useContext(userContext);
   const { dispatch } = useCart();
   const enrollCourses = async (cart, id, email) => {
     const response = await postPaymentCart(cart, id, email);
     return response;
   };
+  const navigate = useNavigate();
+  const handleNavigateStudent = () => {
+    navigate(`/student/${userData.id}`);
+  };
+
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -72,6 +81,9 @@ export const CheckOut = ({ updateContextUser }) => {
           </div>
           <div className={Styles.logo}>
             <img src={logo} alt={logo} />
+          </div>
+          <div>
+            <Button onClick={handleNavigateStudent} text={"Ir al curso"} />
           </div>
         </div>
       ) : (

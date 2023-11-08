@@ -1,49 +1,152 @@
+import { useEffect } from "react";
 import Styles from "./Student.module.css";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
-const Student = () => {
-  const session = JSON.parse(localStorage.getItem("userOnSession")); 
+const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const session = JSON.parse(localStorage.getItem("userOnSession"));
+    if (session?.email !== "") {
+      updateContextUser(session);
+    }
+  }, []);
+
   const handleNavigateToLessons = (courseId) => {
-    const selectedCourse = session.Courses.find(
-      (course) => course.id === courseId
-    );
-    navigate(`/student/classList/${courseId}`, {
-      state: { dataCourses: selectedCourse },
-    });
+    navigate(`/student/classList/${courseId}`);
   };
 
-  const CourseCard = ({ course, onClick }) => (
-    <div className={Styles.courseCard}>
-      <div className={Styles.courseCardImage}>
-        <img src={course.image} alt={course.title} />
+  const handleRating = () => {
+    const { value: text } = Swal.fire({
+      input: "textarea",
+      inputLabel: "Message",
+      inputPlaceholder: "Type your message here...",
+      inputAttributes: {
+        "aria-label": "Type your message here",
+      },
+      showCancelButton: true,
+      customClass: {
+        popup: "mySwal",
+      },
+    });
+    if (text) {
+      Swal.fire(`Has calificado el curso: "${text}"`);
+    }
+  };
+
+  const CourseCard = ({ course }) => (
+    <div className={Styles.cardContainer}>
+      <div className={Styles.imgContainer}>
+        <img src={course.image} />
       </div>
-      <div className={Styles.courseCardContent}>
-        <h2>{course.title}</h2>
-        <p>{course.description}</p>
-        <Button text={"Clases"} onClick={onClick} />
+      <div className={Styles.contentContainer}>
+        <div className={Styles.contentTop}>
+          <h4>{course.title}</h4>
+        </div>
+        <div className={Styles.percentage}>
+          <div className={Styles.progress}>
+            <div className={Styles.progressBar} id="progressBar">%</div>
+          </div>
+        </div>
+        <div className={Styles.linkRating}>
+          <p onClick={handleRating}>Calificar curso</p>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="128"
+              height="128"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M9 22c-.6 0-1-.4-1-1v-3H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-6.1l-3.7 3.7c-.2.2-.4.3-.7.3H9m4-11V5h-2v6m2 4v-2h-2v2h2Z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className={Styles.contentBottom}>
+          <Button text={"Clases disponibles"} />
+        </div>
       </div>
     </div>
   );
 
+  const session = JSON.parse(localStorage.getItem("userOnSession"));
+  console.log(session);
+
   return (
     <div className={Styles.studentContainer}>
-      <div>
-        <div>
-          <h5>Alumno n°: {session?.id}</h5>
-        </div>
-        <div>
-          <h1>Mis cursos</h1>
-          {session?.Courses.map((course, index) => (
+      <div className={Styles.studentTitle}>
+        <h1>¡{session?.first_name}, bienvenido a tu área de estudio!</h1>
+        <h5>Alumno n°: {session?.id}</h5>
+      </div>
+
+      <div className={Styles.studentDescription}>
+        <p>
+          Este es el centro de tu experiencia de aprendizaje. Aquí tendrás el
+          control total sobre tu educación. Desde este espacio, podrás:
+        </p>
+        <ul>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="128"
+              height="128"
+              viewBox="0 0 1200 1200"
+            >
+              <path
+                fill="currentColor"
+                d="m1004.237 99.152l-611.44 611.441l-198.305-198.305L0 706.779l198.305 198.306l195.762 195.763L588.56 906.355L1200 294.916L1004.237 99.152z"
+              />
+            </svg>
+            Acceder a tus cursos, verificar tu progreso y unirte a las clases.
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="128"
+              height="128"
+              viewBox="0 0 1200 1200"
+            >
+              <path
+                fill="currentColor"
+                d="m1004.237 99.152l-611.44 611.441l-198.305-198.305L0 706.779l198.305 198.306l195.762 195.763L588.56 906.355L1200 294.916L1004.237 99.152z"
+              />
+            </svg>
+            Una vez hayas terminado un curso, calificarlo y dejar tus
+            comentarios para brindar orientación a otros estudiantes.
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="128"
+              height="128"
+              viewBox="0 0 1200 1200"
+            >
+              <path
+                fill="currentColor"
+                d="m1004.237 99.152l-611.44 611.441l-198.305-198.305L0 706.779l198.305 198.306l195.762 195.763L588.56 906.355L1200 294.916L1004.237 99.152z"
+              />
+            </svg>
+            Realizar un seguimiento de tu progreso y visualizar el total de
+            horas dedicadas.
+          </li>
+        </ul>
+      </div>
+      <div className={Styles.coursesContainer}>
+        {session?.Courses && session.Courses.length > 0 ? (
+          session.Courses.map((course, index) => (
             <CourseCard
               key={index}
               course={course}
-              onClick={() => handleNavigateToLessons(course.id)}
+              onClick={() => handleNavigateToLessons(course.id, session)}
             />
-          ))}
-        </div>
+          ))
+        ) : (
+          <div>No hay cursos disponibles.</div>
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const Courses = ({ updateContextUser }) => {
     data: [],
     filteredData: [],
   });
-  console.log(dataCourses);
+
   const [categoriesData, setCategoriesData] = useState([]);
   const [dataTitle, setDataTitle] = useState("");
 
@@ -25,8 +25,14 @@ const Courses = ({ updateContextUser }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const totalPages = Math.ceil(displayCourses.length / ITEMS_PER_PAGE);
-  const currentItems = displayCourses.slice(startIndex, endIndex);
+  const totalPages =
+    displayCourses && displayCourses.length > 0
+      ? Math.ceil(displayCourses.length / ITEMS_PER_PAGE)
+      : 1;
+
+  const currentItems = displayCourses
+    ? displayCourses.slice(startIndex, endIndex)
+    : [];
 
   let startPage = currentPage - Math.floor(MAX_PAGES_DISPLAYED / 2);
   let endPage = currentPage + Math.floor(MAX_PAGES_DISPLAYED / 2);
@@ -239,14 +245,16 @@ const Courses = ({ updateContextUser }) => {
       </section>
 
       <section>
-        <div className={`${Styles.courses}`}>
-          {currentItems.length > 0
-            ? currentItems.map((course, index) => (
-                <Card key={index} course={course} />
-              ))
-            : currentItems.map((course, index) => (
-                <Card key={index} course={course} />
-              ))}
+        <div className={Styles.courses}>
+          {dataCourses.data && dataCourses.data.length !== 0 ? (
+            currentItems.map((course, index) => (
+              <Card key={index} course={course} />
+            ))
+          ) : (
+            <div>
+              No hay cursos disponibles.
+            </div>
+          )}
         </div>
         <div className={Styles.paginationContainer}>
           <button
