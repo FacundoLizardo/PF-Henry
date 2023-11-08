@@ -101,6 +101,23 @@ const Instructor = ({ updateContextUser }) => {
 		}
 	};
 
+	const openCloseModal = () => {
+		Swal.fire({
+			title: "Que porcentaje de descuento deseas agregar?",
+			icon: "question",
+			input: "number",
+			inputLabel: "Porcentaje de descuento:",
+			inputAttributes: {
+				min: "1",
+				max: "99",
+				step: "1",
+			},
+			inputValue: 1,
+			customClass: {
+				popup: "mySwal",
+			},
+		});
+	};
 	return (
 		<div className={Styles.instructorContainer}>
 			<div className={Styles.instructorContainerTitle}>
@@ -142,11 +159,14 @@ const Instructor = ({ updateContextUser }) => {
 								{course.onSale === true ? (
 									<>
 										<Button text={"Modificar descuento"} />
-										<Button text={"Eliminar descuento"} />{" "}
 									</>
 								) : (
-									<Button text={"Agregar descuento"} />
+									<Button
+										text={"Agregar descuento"}
+										onClick={() => openCloseModal()}
+									/>
 								)}
+
 								<Button
 									text={"Eliminar curso"}
 									onClick={() => enableRestoreCourse(course.id, false)}

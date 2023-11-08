@@ -1,6 +1,6 @@
 import Styles from "./Button.module.css";
 
-const Button = ({ text, onClick }) => {
+const Button = ({ text, onClick, string }) => {
 	const scrollToTop = () => {
 		window.scrollTo({
 			top: 0,
