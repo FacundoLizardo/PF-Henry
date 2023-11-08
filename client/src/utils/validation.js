@@ -23,10 +23,32 @@ export const validation = (props) => {
 		errors.price = "Debe ser superior a US$ 0.50.";
 	}
 
-	if (!props.section) {
-		errors.section = "debe ser un numero entre 1 y N.";
-	} else if (props.sections < 1) {
-		errors.price = "Debe ser superior a 0";
+	return errors;
+};
+
+export const validationLesson = (props) => {
+	let errors = {};
+
+	if (!props.title) {
+		errors.title = "El nombre es obligatorio.";
+	} else if (props.title.length < 3) {
+		errors.title = "Debe tener al menos 3 caracteres.";
+	}
+
+	if (!props.description) {
+		errors.description = "Debe ingresar una breve descripción de la leccion.";
+	} else if (props.description.length < 20) {
+		errors.description = "La descripción debe tener al menos 20 caracteres.";
+	}
+
+	if (!props.section || props.section === "Seccion:") {
+		errors.section = "Debe ser una de las secciones del listado.";
+	} else if (props.section === 0 || props.section < 1) {
+		errors.section = "Las secciones inician desde la seccion 1";
+	}
+
+	if (!props.video_url || props.video_url === "") {
+		errors.video_url = "Debe cargarse un video.";
 	}
 
 	return errors;

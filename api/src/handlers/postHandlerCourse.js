@@ -3,8 +3,15 @@ const {
 } = require("../controllers/postControllers/postCreateCourse");
 
 const postHandlerCourse = async (req, res) => {
-	const { title, description, instructor_id, category, image, price } =
-		req.body;
+	const {
+		title,
+		description,
+		instructor_id,
+		category,
+		image,
+		price,
+		sections,
+	} = req.body;
 
 	if (
 		!title ||
@@ -12,7 +19,8 @@ const postHandlerCourse = async (req, res) => {
 		!instructor_id ||
 		!category ||
 		!image ||
-		!price
+		!price ||
+		!sections
 	) {
 		return res.status(404).json({ error: "Lack Of Data" });
 	}
@@ -24,7 +32,8 @@ const postHandlerCourse = async (req, res) => {
 			instructor_id,
 			image,
 			category,
-			price
+			price,
+			sections
 		);
 
 		return res.status(200).json(newCourse);
