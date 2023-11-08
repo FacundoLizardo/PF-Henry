@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const updateCourse = async (newDataCourse) => {
-	const { image, id, title } = newDataCourse;
-	console.log(image, id, title);
+	const { image, id, title, enabled } = newDataCourse;
+	console.log(image, id, title, enabled);
 
 	try {
 		const response = await axios.put(`/courses/edit`, newDataCourse);
