@@ -26,8 +26,8 @@ const Rating = (sequelize) => {
 				allowNull: false,
 			},
 			comment: {
-				type: DataTypes.STRING,
-				allowNull: false,
+				type: DataTypes.STRING(200),
+				allowNull: true,
 			},
 		},
 		{
