@@ -21,6 +21,7 @@ import CartPage from "./views/CartPage/CartPage";
 import Styles from "./App.module.css";
 import { useEffect } from "react";
 import { CheckOut } from "./Components/Cart/CheckOut";
+import FormLecture from "./views/FormLecture/FormLecture";
 
 export const userContext = React.createContext();
 
@@ -86,6 +87,10 @@ function App() {
 			<Route
 				path="/instructor/:id/form"
 				element={<Form updateContextUser={updateContextUser} />}
+			/>
+			<Route
+				path="/instructor/:courseId/createLecture"
+				element={<FormLecture updateContextUser={updateContextUser} />}
 			/>
 			<Route
 				path="/edit/:id"
