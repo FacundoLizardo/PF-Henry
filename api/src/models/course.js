@@ -15,8 +15,12 @@ const Course = (sequelize) => {
 				allowNull: false,
 			},
 			description: {
-				type: DataTypes.STRING,
+				type: DataTypes.STRING(80),
 				allowNull: false,
+			},
+			complete_description: {
+				type: DataTypes.STRING(400),
+				allowNull: true,
 			},
 			instructor_id: {
 				type: DataTypes.UUID,
