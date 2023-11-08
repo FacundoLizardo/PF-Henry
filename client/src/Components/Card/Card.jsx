@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import { useNavigate } from "react-router-dom";
 import Styles from "./Card.module.css";
 import Button from "../Button/Button";
@@ -32,7 +33,6 @@ const Card = ({ course }) => {
 
   const addToCart = () => {
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
-    window.scrollTo({ top: 0 });
   };
 
   const generateStars = (rating) => {
@@ -103,7 +103,17 @@ const Card = ({ course }) => {
                 text={"Comprar"}
                 onClick={() => {
                   addToCart();
-                  handleNavigateCart();
+
+                  if (
+                    userData &&
+                    userData.Courses &&
+                    userData.Courses.find(
+                      (userCourse) => userCourse.id === course.id
+                    )
+                  ) {
+                  } else {
+                    handleNavigateCart();
+                  }
                 }}
               />
             )}

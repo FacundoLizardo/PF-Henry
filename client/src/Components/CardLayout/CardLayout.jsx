@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 
@@ -79,8 +80,16 @@ const CardLayout = ({ courses }) => {
               text={"¡Comprar ahora!"}
               onClick={() => {
                 addToCart();
-                handleNavigateCart();
-                window.scrollTo({ top: 0 });
+                if (
+                  userData &&
+                  userData.Courses &&
+                  userData.Courses.find(
+                    (userCourse) => userCourse.id === course.id
+                  )
+                ) {
+                } else {
+                  handleNavigateCart();
+                }
               }}
             />
           )}

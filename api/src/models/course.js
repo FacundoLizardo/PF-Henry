@@ -15,8 +15,12 @@ const Course = (sequelize) => {
 				allowNull: false,
 			},
 			description: {
-				type: DataTypes.STRING,
+				type: DataTypes.STRING(80),
 				allowNull: false,
+			},
+			complete_description: {
+				type: DataTypes.STRING(400),
+				allowNull: true,
 			},
 			instructor_id: {
 				type: DataTypes.UUID,
@@ -37,7 +41,7 @@ const Course = (sequelize) => {
 				allowNull: true,
 			},
 			image: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false,
 			},
 			price: {
