@@ -1,8 +1,5 @@
-const {Course, Rating} = require("../../db");
-const{Op, Sequelize} = require("sequelize");
+const getCourseByRatingController = async (userId, courseId) => {
+  
+};
 
-const getCourseByRatingController = async (rating) => {
-    
-}
-
-module.exports = {getCourseByRatingController}
+module.exports = { getCourseByRatingController };
