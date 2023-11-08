@@ -42,6 +42,7 @@ server.use("/rating", ratingRoutes);
 server.use("/lessons", lessonRoutes);
 server.use("/payment", stripeRoutes);
 
+
 // Error catching endware.
 server.use((err, req, res, next) => {
 	// eslint-disable-line no-unused-vars
