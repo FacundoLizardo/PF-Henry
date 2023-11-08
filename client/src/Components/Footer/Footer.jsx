@@ -46,19 +46,13 @@ const Footer = () => {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/carlosenriquegonzalezgonzalez/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              in/carlosenriquegonzalezgonzalez
-            </a>
-            <a
               href="https://www.linkedin.com/in/josevalperga/"
               target="_blank"
               rel="noopener noreferrer"
             >
               in/josevalperga
             </a>
+            
             <a
               href="https://www.linkedin.com/in/claudia-torres-a580a11a8/"
               target="_blank"

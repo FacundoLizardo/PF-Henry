@@ -6,9 +6,6 @@ import { userContext } from "../../App";
 import Styles from "./Cart.module.css";
 import Swal from "sweetalert2";
 
-
-
-
 function Cart() {
   const userData = useContext(userContext);
   const { state, dispatch } = useCart();

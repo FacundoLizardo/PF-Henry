@@ -41,7 +41,7 @@ const Course = (sequelize) => {
 				allowNull: true,
 			},
 			image: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false,
 			},
 			price: {

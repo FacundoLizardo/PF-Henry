@@ -37,8 +37,6 @@ const CartPage = () => {
     });
   };
 
-  console.log(state);
-
   const handleNavigate = () => {
     navigate("./courses");
   };
@@ -48,7 +46,7 @@ const CartPage = () => {
       (acc, product) => acc + product.price,
       0
     );
-    const total = totalReducer.toFixed(2);
+    const total = Math.round(totalReducer * 100) / 100;
     setTotalPrice(total);
   }, [state.cart]);
 
