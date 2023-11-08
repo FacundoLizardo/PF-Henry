@@ -4,6 +4,8 @@ import Button from "../../Components/Button/Button";
 import { useContext, useEffect, useState } from "react";
 import { userContext } from "../../App";
 import updateCourse from "../../utils/updateCourse";
+import { getAllCourses } from "../../utils/getAllCourses";
+import Swal from "sweetalert2";
 
 const Instructor = ({ updateContextUser }) => {
 	const userData = useContext(userContext);
@@ -42,14 +44,63 @@ const Instructor = ({ updateContextUser }) => {
 			id: id,
 			enabled: value,
 		};
-		await updateCourse(enableFalseCourse);
-		updateData();
-		navigate(`/instructor/${userData?.id}`);
-		//window.location.reload;
+		console.log(value);
+		if (value === true) {
+			Swal.fire({
+				title: "¿Seguro que quieres restaurar el curso?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await updateCourse(enableFalseCourse);
+					await getAllCourses();
+					updateData();
+					Swal.fire({
+						title: "Tu curso fue restaurado",
+						icon: "success",
+						customClass: {
+							popup: "mySwal",
+						},
+					});
+				}
+			});
+		}
+		if (value === false) {
+			Swal.fire({
+				title: "¿Seguro que quieres eliminar el curso?",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					await updateCourse(enableFalseCourse);
+					await getAllCourses();
+					updateData();
+					Swal.fire({
+						title: "Tu curso fue eliminado",
+						icon: "success",
+						customClass: {
+							popup: "mySwal",
+						},
+					});
+				}
+			});
+		}
 	};
-	console.log(dataCourses);
-	console.log(coursesCreated);
-	console.log(enabledCourses);
+
 	return (
 		<div className={Styles.instructorContainer}>
 			<div className={Styles.instructorContainerTitle}>
