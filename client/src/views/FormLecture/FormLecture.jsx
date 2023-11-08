@@ -3,12 +3,18 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { storage } from "../../firebase/firebase";
 import style from "./FormLecture.module.css";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+	ref,
+	uploadBytes,
+	getDownloadURL,
+	getMetadata,
+} from "firebase/storage";
+import {} from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { getAllCourses } from "../../utils/getAllCourses";
 import Swal from "sweetalert2";
-import { validation } from "../../utils/validation";
+import { validationLesson } from "../../utils/validation";
 
 const FormLecture = ({ updateContextUser }) => {
 	const navigate = useNavigate();
@@ -24,10 +30,19 @@ const FormLecture = ({ updateContextUser }) => {
 		wasLook: false,
 	});
 
+	const getVideoDuration = async (videoUrl) => {
+		const videoRef = ref(storage, videoUrl);
+		const metadata = await getMetadata(videoRef);
+		const durationInMilliseconds = metadata.size / 1000;
+		const durationInSeconds = durationInMilliseconds / 1000;
+		return durationInSeconds;
+	};
+
 	const [errors, setErrors] = useState({
 		title: "",
 		description: "",
-		section: 0,
+		section: "",
+		video_url: "",
 	});
 	const nombreCurso = JSON.parse(localStorage.getItem("coursesData")).filter(
 		(elemento) => elemento.id === id
@@ -59,10 +74,9 @@ const FormLecture = ({ updateContextUser }) => {
 		const { name, value } = event.target;
 		setLecture({ ...lecture, [name]: value });
 
-		const newErrors = validation({
+		const newErrors = validationLesson({
 			...lecture,
 			[name]: value,
-			[description]: description,
 		});
 		setErrors(newErrors);
 	};
@@ -71,20 +85,12 @@ const FormLecture = ({ updateContextUser }) => {
 		setLoading(true);
 		try {
 			const videoPath = await uploadVideo();
-			return;
-			setLecture((prevLecture) => {
-				return {
-					...prevLecture,
-					video_url: videoPath,
-				};
-			});
-			const response = await axios.post("/lessons/create", {
-				...lecture,
-				video_url: videoPath,
-			});
 
-			console.log(response);
-			await getAllCourses();
+			const lesson = { ...lecture, video_url: videoPath };
+			// const duration = await getVideoDuration(videoPath);
+
+			// console.log(duration);
+			const response = await axios.post("/lessons/create", lesson);
 
 			if (response.data) {
 				Swal.fire({
@@ -173,15 +179,16 @@ const FormLecture = ({ updateContextUser }) => {
 											</option>
 										))}
 								</select>
-								<p className={style.input__description}>{errors.sections}</p>
+								<p className={style.input__description}>{errors.section}</p>
 								<label className={style.input__label}>Cargar video:</label>
 								<input
 									className={style.input__field}
 									type="file"
 									id="video"
+									name="video_url"
 									onInput={handleChange}
 								/>
-								<p className={style.input__description}>{}</p>
+								<p className={style.input__description}>{errors.video_url}</p>
 								<Button text={"Crear Clase"} onClick={() => onSubmit()} />
 							</div>
 						</div>
