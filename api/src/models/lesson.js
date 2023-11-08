@@ -8,7 +8,6 @@ const Lesson = (sequelize) => {
 				type: DataTypes.UUID,
 				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
-				allowNull: false,
 			},
 			title: {
 				type: DataTypes.STRING,
@@ -19,7 +18,7 @@ const Lesson = (sequelize) => {
 				allowNull: false,
 			},
 			video_url: {
-				type: DataTypes.STRING,
+				type: DataTypes.TEXT,
 				allowNull: false,
 			},
 			wasLook: {
@@ -30,7 +29,7 @@ const Lesson = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			sequence_order: {
+			section: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},

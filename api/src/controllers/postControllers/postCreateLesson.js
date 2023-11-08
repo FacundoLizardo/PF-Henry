@@ -1,44 +1,52 @@
 const { Course, Lesson } = require("../../db");
 
 const postCreateLesson = async (
-  title,
-  description,
-  course_id,
-  images,
-  video_url,
-  duration,
-  sequence_order
+	title,
+	description,
+	CourseId,
+	video_url,
+	duration,
+	section,
+	enabled
 ) => {
-  const existeCurso = await Course.findByPk(course_id, {
-    where: { deletedAt: null },
-  });
-  if (!existeCurso) {
-    return "Curso/Usuario inexistente";
-  }
+	const existeCurso = await Course.findByPk(CourseId);
+	if (!existeCurso) {
+		return "Curso/Usuario inexistente";
+	}
+	console.log(
+		title,
+		description,
+		video_url,
+		CourseId,
+		section,
+		duration,
+		enabled
+	);
+	// Busca una lección existente con los mismos atributos
+	const existingLesson = await Lesson.findOne({
+		where: {
+			title,
+			CourseId,
+			section,
+		},
+	});
+	const wasLook = false;
+	if (existingLesson) {
+		return "La lección ya existe";
+	}
+	const newLesson = await Lesson.create({
+		title,
+		description,
+		video_url,
+		wasLook,
+		duration,
+		section,
+		enabled,
+		CourseId,
+	});
 
-  const [newLesson, created] = await Lesson.findOrCreate({
-    where: {
-      course_id: course_id,
-      sequence_order: sequence_order,
-      deletedAt: null,
-    },
-    defaults: {
-      title,
-      description,
-      course_id,
-      images,
-      video_url,
-      duration,
-      sequence_order,
-    },
-  });
-
-  if (created) {
-    await newLesson.setCourse(course_id);
-    return newLesson;
-  } else {
-    return "La leccion ya existe";
-  }
+	await newLesson.setCourse(CourseId);
+	return newLesson;
 };
 
 module.exports = { postCreateLesson };
