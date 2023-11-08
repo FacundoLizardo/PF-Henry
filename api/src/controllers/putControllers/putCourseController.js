@@ -7,10 +7,21 @@ const putCourseController = async (
 	description,
 	image,
 	price,
-	enabled
+	enabled,
+	onSale,
+	percentageDiscount
 ) => {
 	const data = await Course.update(
-		{ title, category, description, image, price, enabled },
+		{
+			title,
+			category,
+			description,
+			image,
+			price,
+			enabled,
+			onSale,
+			percentageDiscount,
+		},
 
 		{
 			//aca hay que poner otra condicion, que este disponible el curso (que no este "borrado")...
