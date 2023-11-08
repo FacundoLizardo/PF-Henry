@@ -7,7 +7,6 @@ const postCreateLesson = async (
 	video_url,
 	duration,
 	section,
-	sequence_order,
 	enabled
 ) => {
 	const existeCurso = await Course.findByPk(CourseId);
@@ -21,7 +20,6 @@ const postCreateLesson = async (
 		CourseId,
 		section,
 		duration,
-		sequence_order,
 		enabled
 	);
 	// Busca una lección existente con los mismos atributos
@@ -32,20 +30,19 @@ const postCreateLesson = async (
 			section,
 		},
 	});
-
+	const wasLook = false;
 	if (existingLesson) {
 		return "La lección ya existe";
 	}
 	const newLesson = await Lesson.create({
 		title,
 		description,
-		CourseId,
 		video_url,
+		wasLook,
 		duration,
-		sequence_order,
 		section,
 		enabled,
-		wasLook,
+		CourseId,
 	});
 
 	await newLesson.setCourse(CourseId);

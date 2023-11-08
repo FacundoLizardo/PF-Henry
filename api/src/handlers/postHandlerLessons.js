@@ -5,7 +5,6 @@ const { getVideoDurationInSeconds } = require("get-video-duration");
 
 const postHandlerLessons = async (req, res) => {
 	const { title, description, video_url, CourseId, section } = req.body;
-	const sequence_order = 1;
 
 	const duration = await getVideoDurationInSeconds(video_url).then(
 		(duration) => {
@@ -13,25 +12,7 @@ const postHandlerLessons = async (req, res) => {
 		}
 	);
 	const enabled = true;
-	console.log(
-		title,
-		description,
-		video_url,
-		CourseId,
-		section,
-		duration,
-		sequence_order,
-		enabled
-	);
-
-	if (
-		!title ||
-		!description ||
-		!video_url ||
-		!sequence_order ||
-		!duration ||
-		!CourseId
-	) {
+	if (!title || !description || !video_url || !duration || !CourseId) {
 		return res.status(404).json({ error: "No guardado - Faltan datos" });
 	}
 
@@ -42,8 +23,7 @@ const postHandlerLessons = async (req, res) => {
 			CourseId,
 			video_url,
 			duration,
-			sequence_order,
-			section,
+			Number(section),
 			enabled
 		);
 		return res.status(200).json(newLesson);

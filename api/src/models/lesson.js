@@ -33,10 +33,6 @@ const Lesson = (sequelize) => {
 				type: DataTypes.INTEGER,
 				allowNull: false,
 			},
-			sequence_order: {
-				type: DataTypes.INTEGER,
-				allowNull: false,
-			},
 			enabled: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,

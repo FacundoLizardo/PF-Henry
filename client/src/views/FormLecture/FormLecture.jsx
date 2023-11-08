@@ -20,7 +20,6 @@ const FormLecture = ({ updateContextUser }) => {
 	const navigate = useNavigate();
 	const id = useParams().courseId;
 	const [loading, setLoading] = useState(false);
-	const [secciones, setSecciones] = useState(0);
 	const [lecture, setLecture] = useState({
 		title: "",
 		description: "",
@@ -29,15 +28,7 @@ const FormLecture = ({ updateContextUser }) => {
 		section: 0,
 		wasLook: false,
 	});
-
-	const getVideoDuration = async (videoUrl) => {
-		const videoRef = ref(storage, videoUrl);
-		const metadata = await getMetadata(videoRef);
-		const durationInMilliseconds = metadata.size / 1000;
-		const durationInSeconds = durationInMilliseconds / 1000;
-		return durationInSeconds;
-	};
-
+	const cursos = localStorage.getItem("coursesData");
 	const [errors, setErrors] = useState({
 		title: "",
 		description: "",
@@ -87,10 +78,10 @@ const FormLecture = ({ updateContextUser }) => {
 			const videoPath = await uploadVideo();
 
 			const lesson = { ...lecture, video_url: videoPath };
-			// const duration = await getVideoDuration(videoPath);
 
-			// console.log(duration);
 			const response = await axios.post("/lessons/create", lesson);
+
+			await getAllCourses();
 
 			if (response.data) {
 				Swal.fire({
@@ -159,25 +150,11 @@ const FormLecture = ({ updateContextUser }) => {
 									value={lecture.section}
 									onInput={handleChange}>
 									<option name="section">Seccion:</option>
-									{new Array(sections)
-										.fill(" ")
-										?.sort((a, b) => {
-											const nameA = a.name.toUpperCase();
-											const nameB = b.name.toUpperCase();
-
-											if (nameA < nameB) {
-												return -1;
-											}
-											if (nameA > nameB) {
-												return 1;
-											}
-											return 0;
-										})
-										.map((section, index) => (
-											<option key={index} value={index + 1}>
-												Seccion {index + 1}
-											</option>
-										))}
+									{new Array(sections).fill(" ").map((section, index) => (
+										<option key={index} value={index + 1}>
+											Seccion {index + 1}
+										</option>
+									))}
 								</select>
 								<p className={style.input__description}>{errors.section}</p>
 								<label className={style.input__label}>Cargar video:</label>
