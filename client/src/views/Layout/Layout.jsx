@@ -13,8 +13,8 @@ const Layout = ({ updateContextUser }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getAllCourses();
       await getAllCategories();
+      await getAllCourses();
       setOnSlaeCourses(await getOnSaleCourses());
       setDataCourses(JSON.parse(localStorage.getItem("coursesData")));
     };
