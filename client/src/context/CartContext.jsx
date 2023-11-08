@@ -57,26 +57,6 @@ const cartReducer = (state = initialState, action) => {
 				(product) => product.id !== action.payload
 			);
 
-			Swal.fire({
-				title: "¿Seguro que quieres eliminar el curso?",
-				icon: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#3d0dca",
-				cancelButtonColor: "#d33",
-				cancelButtonText: "Cancelar",
-				confirmButtonText: "Aceptar",
-				customClass: {
-					popup: "mySwal",
-				},
-			}).then((result) => {
-				if (result.isConfirmed) {
-					Swal.fire({
-						title: "El curso fue eliminado del carrito",
-						icon: "success",
-					});
-				}
-			});
-
 			return {
 				...state,
 				cart: updatedCart,
