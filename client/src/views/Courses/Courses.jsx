@@ -251,7 +251,7 @@ const Courses = ({ updateContextUser }) => {
               <Card key={index} course={course} />
             ))
           ) : (
-            <div className={Styles.noCoursesMessage}>
+            <div>
               No hay cursos disponibles.
             </div>
           )}
