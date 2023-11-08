@@ -66,7 +66,6 @@ const Student = ({ updateContextUser }) => {
             </svg>
           </div>
         </div>
-
         <div className={Styles.contentBottom}>
           <Button text={"Clases disponibles"} />
         </div>
