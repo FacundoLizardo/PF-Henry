@@ -101,7 +101,7 @@ const Instructor = ({ updateContextUser }) => {
 		}
 	};
 
-	const openCloseModal = () => {
+	const openCloseModal = (id) => {
 		Swal.fire({
 			title: "Que porcentaje de descuento deseas agregar?",
 			icon: "question",
@@ -116,6 +116,25 @@ const Instructor = ({ updateContextUser }) => {
 			customClass: {
 				popup: "mySwal",
 			},
+		}).then(async (result) => {
+			const newDataCourse = {
+				id: id,
+				onSale: true,
+				percentageDiscount: parseInt(result.value),
+			};
+			if (result.isConfirmed) {
+				await updateCourse(newDataCourse);
+				await getAllCourses();
+				updateData();
+
+				Swal.fire({
+					title: "Tu curso ahora esta en oferta!",
+					icon: "success",
+					customClass: {
+						popup: "mySwal",
+					},
+				});
+			}
 		});
 	};
 	return (
@@ -163,7 +182,7 @@ const Instructor = ({ updateContextUser }) => {
 								) : (
 									<Button
 										text={"Agregar descuento"}
-										onClick={() => openCloseModal()}
+										onClick={() => openCloseModal(course.id)}
 									/>
 								)}
 
