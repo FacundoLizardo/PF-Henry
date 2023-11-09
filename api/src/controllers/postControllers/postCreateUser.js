@@ -64,8 +64,7 @@ const postCreateUserGmail = async (
 
 		if (created) {
 			return user;
-		} else
-			return "User not created cause it already exist or something is wrong, please try again";
+		} else return user;
 	} catch (error) {
 		return error;
 	}
