@@ -3,9 +3,9 @@ const { Resend } = require("resend");
 const resend = new Resend(process.env.RESENDKEY);
 
 const sendEmailBuy = async (to, cart) => {
-    const generateProductSections = () => {
-        const sections = cart.map((product) => {
-            return `
+	const generateProductSections = () => {
+		const sections = cart.map((product) => {
+			return `
             <div>
                 <h3>Usted compró el curso: ${product.name}</h3>
                 <p>${product.description}</p>
@@ -15,13 +15,13 @@ const sendEmailBuy = async (to, cart) => {
                 </div>
             </div>
             `;
-        });
-        return sections.join(""); // Combina todas las secciones en una sola cadena
-    };
+		});
+		return sections.join(""); // Combina todas las secciones en una sola cadena
+	};
 
-    const productSections = generateProductSections();
+	const productSections = generateProductSections();
 
-    const html = `
+	const html = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -116,18 +116,16 @@ const sendEmailBuy = async (to, cart) => {
     </body>
     </html>
   `;
-    console.log(html);
-    try {
-        const email = await resend.emails.send({
-            from: "EducaStream <admin@whitebeartech.com.co>",
-            to: [`${to}`],
-            subject: "Detalles de Compra - EducaStream",
-            html: `${html}`,
-        });
-        console.log(email);
-    } catch (error) {
-        console.log("Error al enviar el correo: ", error);
-    }
+	try {
+		const email = await resend.emails.send({
+			from: "EducaStream <admin@whitebeartech.com.co>",
+			to: [`${to}`],
+			subject: "Detalles de Compra - EducaStream",
+			html: `${html}`,
+		});
+	} catch (error) {
+		console.log("Error al enviar el correo: ", error);
+	}
 };
 
 module.exports = { sendEmailBuy };
