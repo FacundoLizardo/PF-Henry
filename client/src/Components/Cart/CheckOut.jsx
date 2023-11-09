@@ -6,6 +6,7 @@ import logo from "../../assets/logo.png";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
+import { getUser } from "../../utils/getUser";
 
 export const CheckOut = ({ updateContextUser }) => {
   const payment = JSON.parse(localStorage.getItem("payment"));
@@ -24,11 +25,17 @@ export const CheckOut = ({ updateContextUser }) => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     const cart = JSON.parse(localStorage.getItem("cart"));
     if (session && session.id && Array.isArray(cart)) {
+      console.log("datos session antes de enrollCourses", session);
       updateContextUser(session);
       if (payment.payment) {
         enrollCourses(cart, session.id, session.email, payment.payment)
-          .then(() => {
-            updateContextUser(session);
+          .then((result) => {
+            console.log("Result del enrollCourses", result);
+            return getUser(session.email);
+          })
+          .then((newUser) => {
+            console.log("Nuevo datos de usuraio traidos por getUser", newUser);
+            localStorage.setItem("userOnSession", JSON.stringify(newUser));
             window.location.reload;
             dispatch({ type: "CLEAR", payload: [] });
           })
