@@ -134,7 +134,7 @@ const Form = () => {
 									value={course.description}
 									className={style.input__field}
 									onInput={handleChange}
-									maxLength={100}></textarea>
+									maxLength={90}></textarea>
 								<p className={style.input__description}>{errors.description}</p>
 
 								<label className={style.input__label}>Categoría:</label>
