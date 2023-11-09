@@ -11,6 +11,8 @@ export const validation = (props) => {
 		errors.description = "Debe ingresar una breve descripción del curso.";
 	} else if (props.description.length < 20) {
 		errors.description = "La descripción debe tener al menos 20 caracteres.";
+	} else if (props.description.length > 90)  {
+		errors.description = "La descripción debe tener menos de 80 caracteres.";
 	}
 
 	if (!props.category) {
