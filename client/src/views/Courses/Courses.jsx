@@ -79,6 +79,7 @@ const Courses = ({ updateContextUser }) => {
 			updateContextUser(session);
 		}
 	}, []);
+
 	const dataFiltered = async (e) => {
 		const categoryFilter = e.target.value;
 
