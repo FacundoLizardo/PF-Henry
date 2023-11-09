@@ -16,6 +16,7 @@ const sequelize = new Sequelize(
 
 	//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`, 
 	 DBURL,
+	
 	{
 		logging: false,
 		native: false,
@@ -55,7 +56,8 @@ User.belongsToMany(Course, { through: "Consumption" });
 Course.belongsToMany(User, { through: "Consumption" });
 Course.belongsToMany(Payment, { through: "PaymentCourse" });
 Payment.belongsToMany(Course, { through: "PaymentCourse" });
-// Course.hasMany(Payment);
+User.belongsToMany(Payment, { through: "UserPayment" });
+Payment.belongsToMany(User, { through: "UserPayment" });
 
 //Lesson.hasOne(Course);
 
