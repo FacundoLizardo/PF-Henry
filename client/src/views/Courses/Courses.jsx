@@ -66,11 +66,11 @@ const Courses = ({ updateContextUser }) => {
 	};
 
 	useEffect(() => {
+		const storedData = localStorage.getItem("coursesData");
+		const parsedData = storedData ? JSON.parse(storedData) : [];
 		setDataCourses((prevState) => ({
 			...prevState,
-			data: JSON.parse(localStorage.getItem("coursesData")).filter(
-				(element) => element.enabled !== false
-			),
+			data: parsedData.filter((element) => element.enabled !== false),
 		}));
 
 		setCategoriesData(JSON.parse(localStorage.getItem("categoriesData")));
@@ -79,7 +79,6 @@ const Courses = ({ updateContextUser }) => {
 			updateContextUser(session);
 		}
 	}, []);
-
 	const dataFiltered = async (e) => {
 		const categoryFilter = e.target.value;
 
@@ -186,7 +185,8 @@ const Courses = ({ updateContextUser }) => {
 								xmlns="http://www.w3.org/2000/svg"
 								width="128"
 								height="128"
-								viewBox="0 0 256 256">
+								viewBox="0 0 256 256"
+							>
 								<path
 									fill="currentColor"
 									d="m229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72a72.08 72.08 0 0 1-72-72Z"
@@ -198,7 +198,8 @@ const Courses = ({ updateContextUser }) => {
 							className={Styles.filterButt}
 							onChange={dataFiltered}
 							name="category"
-							id="category">
+							id="category"
+						>
 							<option name="categories" value="categories">
 								Categorías
 							</option>
@@ -226,7 +227,8 @@ const Courses = ({ updateContextUser }) => {
 							className={Styles.filterButt}
 							onChange={sortByPrice}
 							name="order"
-							id="order">
+							id="order"
+						>
 							<option name="Default" value="Default">
 								Ordenar por precio
 							</option>
@@ -258,7 +260,8 @@ const Courses = ({ updateContextUser }) => {
 					<button
 						className={Styles.paginationBotton}
 						onClick={handlePrev}
-						disabled={currentPage === 1}>
+						disabled={currentPage === 1}
+					>
 						Prev
 					</button>
 					{Array.from({ length: endPage - startPage + 1 }, (_, index) => (
@@ -269,14 +272,16 @@ const Courses = ({ updateContextUser }) => {
 								currentPage === startPage + index
 									? Styles.currentPage
 									: Styles.buttonPage
-							}>
+							}
+						>
 							{startPage + index}
 						</button>
 					))}
 					<button
 						className={Styles.paginationBotton}
 						onClick={handleNext}
-						disabled={currentPage === totalPages}>
+						disabled={currentPage === totalPages}
+					>
 						Next
 					</button>
 				</div>

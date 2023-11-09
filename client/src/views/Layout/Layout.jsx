@@ -12,9 +12,9 @@ const Layout = ({ updateContextUser }) => {
 	const [onSaleCourses, setOnSlaeCourses] = useState([]);
 
 	const checkDisabled = () => {
-		const withoutDisabled = JSON.parse(
-			localStorage.getItem("coursesData")
-		).filter((element) => element.enabled);
+		const storedData = localStorage.getItem("coursesData");
+		const parsedData = storedData ? JSON.parse(storedData) : [];
+		const withoutDisabled = parsedData.filter((element) => element.enabled);
 		setDataCourses(withoutDisabled);
 	};
 
