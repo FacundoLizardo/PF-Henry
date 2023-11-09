@@ -12,6 +12,7 @@ const Student = ({ updateContextUser }) => {
     if (session?.email !== "") {
       updateContextUser(session);
     }
+    console.log("info", session);
   }, []);
 
   const handleNavigateToLessons = (courseId) => {
@@ -36,7 +37,7 @@ const Student = ({ updateContextUser }) => {
     }
   };
 
-  const CourseCard = ({ course }) => (
+  const CourseCard = (course) => (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer}>
         <img src={course.image} />
@@ -47,7 +48,9 @@ const Student = ({ updateContextUser }) => {
         </div>
         <div className={Styles.percentage}>
           <div className={Styles.progress}>
-            <div className={Styles.progressBar} id="progressBar">%</div>
+            <div className={Styles.progressBar} id="progressBar">
+              %
+            </div>
           </div>
         </div>
         <div className={Styles.linkRating}>
@@ -74,7 +77,8 @@ const Student = ({ updateContextUser }) => {
   );
 
   const session = JSON.parse(localStorage.getItem("userOnSession"));
-  console.log(session);
+  const sessionCourses = session.courses?.map((elemento) => elemento.course);
+  //console.log("esta info de curso", sessionCourses);
 
   return (
     <div className={Styles.studentContainer}>
@@ -136,12 +140,12 @@ const Student = ({ updateContextUser }) => {
         </ul>
       </div>
       <div className={Styles.coursesContainer}>
-        {session?.Courses && session.Courses.length > 0 ? (
-          session.Courses.map((course, index) => (
+        {sessionCourses && sessionCourses.length > 0 ? (
+          sessionCourses.map((courses, index) => (
             <CourseCard
               key={index}
-              course={course}
-              onClick={() => handleNavigateToLessons(course.id, session)}
+              courses={courses}
+              onClick={() => handleNavigateToLessons(courses.id, session)}
             />
           ))
         ) : (

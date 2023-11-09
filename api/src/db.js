@@ -16,8 +16,8 @@ const sequelize = new Sequelize(
 
 	//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`, 
 	 DBURL,
-	
-	{
+	{ 
+
 		logging: false,
 		native: false,
 		dialectModule: pg,
