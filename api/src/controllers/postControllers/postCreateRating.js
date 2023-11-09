@@ -9,16 +9,16 @@ const postCreateRating = async (course_id, user_id, rating, comment) => {
   }
 
   const [newRating, created] = await Rating.findOrCreate({
-    where: { course_id: course_id, user_id: user_id },
-    defaults: { course_id, user_id, rating, comment },
+    where: { CourseId: course_id, UserId: user_id },
+    defaults: { rating, comment },
   });
 
   if (created) {
     return newRating;
   } else {
     await Rating.update(
-      { rating: rating },
-      { where: { course_id: course_id, user_id: user_id } }
+      { rating: rating, comment:comment },
+      { where: { CourseId: course_id, UserId: user_id } }
     );
     return (`Rating actualizado a ${rating}`)
   }

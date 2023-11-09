@@ -6,8 +6,13 @@ const { postHandlerRating } = require("../handlers/postHandlerRating");
 
 const ratingRoutes = Router();
 
-ratingRoutes.get("/", getHandlerRating);
+
 ratingRoutes.get("/userCourse", getUserCourseHandler)
-ratingRoutes.post("/create", postHandlerRating);
+
+ratingRoutes.get("/", getHandlerRating); //Trae todos los cursos ordenados x rating
+ratingRoutes.get("/ratingCourse"); //Trae rating de un curso
+ratingRoutes.post("/create", postHandlerRating);//Crea o modifica rating y comentario
+
+
 
 module.exports = ratingRoutes;
