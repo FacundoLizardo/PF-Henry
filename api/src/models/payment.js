@@ -10,11 +10,10 @@ const Payment = (sequelize) => {
 				allowNull: false,
 				primaryKey: true,
 			},
-			// payment_id: {
-			//   type: DataTypes.UUID,
-			//   defaultValue: DataTypes.UUIDV4,
-			//   allowNull: false,
-			// },
+			payment_id: {
+				type: DataTypes.STRING,
+				allowNull: false,
+			},
 			// course_id: {
 			// 	type: DataTypes.UUID,
 			// 	defaultValue: DataTypes.UUIDV4,
