@@ -15,7 +15,7 @@ const Course = (sequelize) => {
 				allowNull: false,
 			},
 			description: {
-				type: DataTypes.STRING(80),
+				type: DataTypes.STRING(90),
 				allowNull: false,
 			},
 			complete_description: {

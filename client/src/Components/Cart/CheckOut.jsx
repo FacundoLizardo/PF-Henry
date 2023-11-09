@@ -3,17 +3,17 @@ import { postPaymentCart } from "../../utils/postPaymentCart";
 import { useCart } from "../../context/CartContext";
 import Styles from "./CheckOut.module.css";
 import logo from "../../assets/logo.png";
-import { getUser } from "../../utils/getUser";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../App";
+import { getUser } from "../../utils/getUser";
 
 export const CheckOut = ({ updateContextUser }) => {
   const payment = JSON.parse(localStorage.getItem("payment"));
   const userData = useContext(userContext);
   const { dispatch } = useCart();
-  const enrollCourses = async (cart, id, email) => {
-    const response = await postPaymentCart(cart, id, email);
+  const enrollCourses = async (cart, id, email, id_payment) => {
+    const response = await postPaymentCart(cart, id, email, id_payment);
     return response;
   };
   const navigate = useNavigate();
@@ -24,20 +24,20 @@ export const CheckOut = ({ updateContextUser }) => {
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     const cart = JSON.parse(localStorage.getItem("cart"));
-
     if (session && session.id && Array.isArray(cart)) {
+      console.log("datos session antes de enrollCourses", session);
       updateContextUser(session);
       if (payment.payment) {
-        enrollCourses(cart, session.id, session.email)
-          .then(() => {
-            dispatch({ type: "CLEAR", payload: [] });
-            getUser(session.email).then((updatedUser) => {
-              localStorage.setItem(
-                "userOnSession",
-                JSON.stringify(updatedUser)
-              );
-            });
+        enrollCourses(cart, session.id, session.email, payment.payment)
+          .then((result) => {
+            console.log("Result del enrollCourses", result);
+            return getUser(session.email);
+          })
+          .then((newUser) => {
+            console.log("Nuevo datos de usuraio traidos por getUser", newUser);
+            localStorage.setItem("userOnSession", JSON.stringify(newUser));
             window.location.reload;
+            dispatch({ type: "CLEAR", payload: [] });
           })
           .catch((error) => console.log("este es el error," + error));
       }

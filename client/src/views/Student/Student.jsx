@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Styles from "./Student.module.css";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
@@ -6,12 +6,37 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 
 const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
+  const [sessionCourses, setSessionCourses] = useState();
+  const session = JSON.parse(localStorage.getItem("userOnSession"));
+  console.log("esto en student",session);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
+
     if (session?.email !== "") {
       updateContextUser(session);
     }
+
+    const sessionCourses =
+      session?.courses?.flatMap((course) =>
+        course.course.map((dataCourse) => ({
+          id: dataCourse.id,
+          title: dataCourse.title,
+          description: dataCourse.description,
+          category: dataCourse.category,
+          createdAt: dataCourse.createdAt,
+          enabled: dataCourse.enabled,
+          image: dataCourse.image,
+          instructorId: dataCourse.instructor_id,
+          onSale: dataCourse.onSale,
+          price: dataCourse.price,
+          progress: dataCourse.progress,
+          sections: dataCourse.sections,
+          updatedAt: dataCourse.updatedAt,
+        }))
+      ) || [];
+
+    setSessionCourses(sessionCourses);
   }, []);
 
   const handleNavigateToLessons = (courseId) => {
@@ -36,18 +61,20 @@ const Student = ({ updateContextUser }) => {
     }
   };
 
-  const CourseCard = ({ course }) => (
+  const CourseCard = ({ courses }) => (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer}>
-        <img src={course.image} />
+        <img src={courses.image} />
       </div>
       <div className={Styles.contentContainer}>
         <div className={Styles.contentTop}>
-          <h4>{course.title}</h4>
+          <h4>{courses.title}</h4>
         </div>
         <div className={Styles.percentage}>
           <div className={Styles.progress}>
-            <div className={Styles.progressBar} id="progressBar">%</div>
+            <div className={Styles.progressBar} id="progressBar">
+              %
+            </div>
           </div>
         </div>
         <div className={Styles.linkRating}>
@@ -72,9 +99,6 @@ const Student = ({ updateContextUser }) => {
       </div>
     </div>
   );
-
-  const session = JSON.parse(localStorage.getItem("userOnSession"));
-  console.log(session);
 
   return (
     <div className={Styles.studentContainer}>
@@ -136,12 +160,12 @@ const Student = ({ updateContextUser }) => {
         </ul>
       </div>
       <div className={Styles.coursesContainer}>
-        {session?.Courses && session.Courses.length > 0 ? (
-          session.Courses.map((course, index) => (
+        {sessionCourses && sessionCourses.length > 0 ? (
+          sessionCourses.map((courses, index) => (
             <CourseCard
               key={index}
-              course={course}
-              onClick={() => handleNavigateToLessons(course.id, session)}
+              courses={courses}
+              onClick={() => handleNavigateToLessons(courses.id, session)}
             />
           ))
         ) : (
