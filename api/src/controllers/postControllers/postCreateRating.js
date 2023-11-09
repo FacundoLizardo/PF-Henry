@@ -14,6 +14,8 @@ const postCreateRating = async (course_id, user_id, rating, comment) => {
   });
 
   if (created) {
+    await newRating.setUser(user_id);
+    await newRating.setCourse(course_id);
     return newRating;
   } else {
     await Rating.update(
