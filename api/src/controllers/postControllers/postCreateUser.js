@@ -47,6 +47,7 @@ const postCreateUserGmail = async (
 	photoURL,
 	role_instructor,
 	role_student,
+	enabled,
 	isNew
 ) => {
 	try {
@@ -58,6 +59,7 @@ const postCreateUserGmail = async (
 				photoURL,
 				role_instructor,
 				role_student,
+				enabled,
 				isNew,
 			},
 		});

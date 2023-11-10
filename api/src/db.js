@@ -52,10 +52,17 @@ Course.belongsTo(Category);
 // Courses con payments y usuarios para tener mejor la info.
 User.belongsToMany(Course, { through: "Consumption" });
 Course.belongsToMany(User, { through: "Consumption" });
-Course.belongsToMany(Payment, { through: "PaymentCourse" });
-Payment.belongsToMany(Course, { through: "PaymentCourse" });
-User.belongsToMany(Payment, { through: "UserPayment" });
-Payment.belongsToMany(User, { through: "UserPayment" });
+Course.belongsToMany(Payment, {
+	through: "PaymentCourse",
+	foreignKey: "course_id",
+});
+Payment.belongsToMany(Course, {
+	through: "PaymentCourse",
+	foreignKey: "payment_id",
+});
+
+User.hasMany(Payment);
+Payment.belongsTo(User);
 
 //Lesson.hasOne(Course);
 
