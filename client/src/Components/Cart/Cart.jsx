@@ -12,7 +12,6 @@ function Cart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
-  console.log(state);
 
   const handleNavigateCart = () => {
     navigate(`/cart/${userData.id}`);

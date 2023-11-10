@@ -8,7 +8,6 @@ const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
   const [sessionCourses, setSessionCourses] = useState();
   const session = JSON.parse(localStorage.getItem("userOnSession"));
-  console.log(session);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
