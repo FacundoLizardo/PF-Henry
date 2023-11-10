@@ -1,4 +1,4 @@
-const { User, Course, Payment } = require("../../db");
+const { User, Course, Payment, Lesson } = require("../../db");
 
 const getUserController = async (email) => {
 	try {
@@ -8,7 +8,17 @@ const getUserController = async (email) => {
 				{
 					model: Payment,
 					through: "UserPayment",
-					include: [Course], // Incluir directamente el modelo Course
+					include: [
+						{
+							model: Course,
+							include: [
+								{
+									model: Lesson,
+									as: "lesson",
+								},
+							],
+						},
+					],
 				},
 			],
 		});

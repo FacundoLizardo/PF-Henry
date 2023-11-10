@@ -1,4 +1,4 @@
-import ReactPlayer from "react-player/youtube";
+import ReactPlayer from "react-player";
 import Button from "../../Components/Button/Button";
 import { useLocation } from "react-router-dom";
 
@@ -6,7 +6,9 @@ import Styles from "./Lecture.module.css";
 
 const Lecture = () => {
   const { state } = useLocation();
-  const lesson = state.lessonData;
+  const lesson = state;
+  console.log("leccion", lesson);
+  const video = lesson.video_url;
 
   return (
     <div className={Styles.lectureContainer}>
@@ -33,15 +35,10 @@ const Lecture = () => {
       <div className={Styles.videoContainer}>
         <div className={Styles.videoWrapper}>
           <ReactPlayer
-            url={lesson.video_url}
+            url={video}
             controls
             width="100%"
             height="100%"
-            config={{
-              youtube: {
-                playerVars: { showinfo: 1 },
-              },
-            }}
           />
         </div>
       </div>
