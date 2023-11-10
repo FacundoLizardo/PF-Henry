@@ -8,3 +8,19 @@
 .classListContent {
   padding: 10px 0;
 }
+
+.listContainer {
+  width: 80%;
+  margin: 50px auto;
+  background-color: var(--color-background-details);
+  padding: var(--pd-3);
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.listItem h4 {
+  cursor: pointer;
+}

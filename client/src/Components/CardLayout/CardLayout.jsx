@@ -39,7 +39,16 @@ const CardLayout = ({ courses }) => {
       price: roundedNewPrice,
       image: course.image,
       description: course.description,
-    };
+      category: course.category,
+      createdAt: course.createdAt,
+      enabled: course.enabled,
+      instructorId: course.instructor_id,
+      onSale: course.onSale,
+      progress: course.progress,
+      sections: course.sections,
+      updatedAt: course.updatedAt,
+      lesson: course.lesson,
+  };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
