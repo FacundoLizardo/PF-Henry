@@ -101,41 +101,108 @@ const Instructor = ({ updateContextUser }) => {
 		}
 	};
 
-	const openCloseModal = (id) => {
-		Swal.fire({
-			title: "Que porcentaje de descuento deseas agregar?",
-			icon: "question",
-			input: "number",
-			inputLabel: "Porcentaje de descuento:",
-			inputAttributes: {
-				min: "1",
-				max: "99",
-				step: "1",
-			},
-			inputValue: 1,
-			customClass: {
-				popup: "mySwal",
-			},
-		}).then(async (result) => {
-			const newDataCourse = {
-				id: id,
-				onSale: true,
-				percentageDiscount: parseInt(result.value),
-			};
-			if (result.isConfirmed) {
-				await updateCourse(newDataCourse);
-				await getAllCourses();
-				updateData();
+	const openCloseModal = (id, string) => {
+		if (string) {
+			Swal.fire({
+				title: "Modifica el descuento ingresando el nuevo porcentaje",
+				text: "TEN EN CUENTA QUE SI INGRESAS 0 TU CURSO TENDRA EL PRECIO ORIGINAL",
 
-				Swal.fire({
-					title: "Tu curso ahora esta en oferta!",
-					icon: "success",
-					customClass: {
-						popup: "mySwal",
-					},
-				});
-			}
-		});
+				showCloseButton: true,
+				icon: "warning",
+				input: "number",
+				inputLabel: "Porcentaje de descuento nuevo:",
+				inputAttributes: {
+					min: "0",
+					max: "99",
+				},
+				inputValue: 0,
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				let newDataCourse;
+
+				if (result.value === "0") {
+					console.log("value 0");
+					newDataCourse = {
+						id: id,
+						onSale: false,
+						percentageDiscount: parseInt(result.value),
+					};
+				}
+				if (result.value != "0") {
+					newDataCourse = {
+						id: id,
+						onSale: true,
+						percentageDiscount: parseInt(result.value),
+					};
+				}
+				if (result.isConfirmed && newDataCourse.percentageDiscount >= 1) {
+					console.log(newDataCourse);
+					await updateCourse(newDataCourse);
+					await getAllCourses();
+					updateData();
+
+					Swal.fire({
+						title: "Se modifico el descuento de tu curso con exito!",
+						icon: "success",
+						customClass: {
+							popup: "mySwal",
+						},
+					});
+				}
+				if (result.isConfirmed && newDataCourse.percentageDiscount === 0) {
+					await updateCourse(newDataCourse);
+					await getAllCourses();
+					updateData();
+
+					Swal.fire({
+						title: "Se retiro tu curso de la lista de ofertas!",
+						icon: "success",
+						customClass: {
+							popup: "mySwal",
+						},
+					});
+				}
+			});
+		}
+		if (!string) {
+			Swal.fire({
+				title: "Que porcentaje de descuento deseas agregar?",
+				showCloseButton: true,
+				validationMessage: "El porcentaje de descuento no puede ser 0",
+				icon: "question",
+				input: "number",
+				inputLabel: "Porcentaje de descuento:",
+				inputAttributes: {
+					min: "1",
+					max: "99",
+				},
+				inputValue: 0,
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				const newDataCourse = {
+					id: id,
+					onSale: true,
+					percentageDiscount: parseInt(result.value),
+				};
+				if (result.isConfirmed) {
+					await updateCourse(newDataCourse);
+					await getAllCourses();
+					updateData();
+
+					Swal.fire({
+						title: "Tu curso ahora esta en oferta!",
+						icon: "success",
+						customClass: {
+							popup: "mySwal",
+						},
+					});
+				}
+			});
+		}
 	};
 	return (
 		<div className={Styles.instructorContainer}>
@@ -177,7 +244,10 @@ const Instructor = ({ updateContextUser }) => {
 
 								{course.onSale === true ? (
 									<>
-										<Button text={"Modificar descuento"} />
+										<Button
+											text={"Modificar descuento"}
+											onClick={() => openCloseModal(course.id, "modificar")}
+										/>
 									</>
 								) : (
 									<Button
@@ -212,15 +282,6 @@ const Instructor = ({ updateContextUser }) => {
 									text={"Editar curso"}
 									onClick={() => handleNavigate(`/edit/${course.id}`)}
 								/>
-
-								{course.onSale === true ? (
-									<>
-										<Button text={"Modificar descuento"} />
-										<Button text={"Eliminar descuento"} />{" "}
-									</>
-								) : (
-									<Button text={"Agregar descuento"} />
-								)}
 								<Button
 									text={"Restaurar curso"}
 									onClick={() => enableRestoreCourse(course.id, true)}
