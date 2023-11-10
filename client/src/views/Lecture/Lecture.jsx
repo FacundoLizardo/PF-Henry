@@ -34,12 +34,7 @@ const Lecture = () => {
       </div>
       <div className={Styles.videoContainer}>
         <div className={Styles.videoWrapper}>
-          <ReactPlayer
-            url={video}
-            controls
-            width="100%"
-            height="100%"
-          />
+          <ReactPlayer url={video} controls />
         </div>
       </div>
 

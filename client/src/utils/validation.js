@@ -11,7 +11,7 @@ export const validation = (props) => {
 		errors.description = "Debe ingresar una breve descripción del curso.";
 	} else if (props.description.length < 20) {
 		errors.description = "La descripción debe tener al menos 20 caracteres.";
-	} else if (props.description.length > 90)  {
+	} else if (props.description.length > 90) {
 		errors.description = "La descripción debe tener menos de 80 caracteres.";
 	}
 
@@ -21,8 +21,10 @@ export const validation = (props) => {
 
 	if (!props.price) {
 		errors.price = "El precio es obligatorio.";
-	} else if (props.price.length < 0.5) {
-		errors.price = "Debe ser superior a US$ 0.50.";
+	} else if (parseFloat(props.price) < 0.5) {
+		errors.price = "Debe ser superior a US$ 0,50.";
+	} else if (props.price.indexOf('.') !== -1) {
+		props.price = props.price.replace(/\./g, ',');
 	}
 
 	return errors;

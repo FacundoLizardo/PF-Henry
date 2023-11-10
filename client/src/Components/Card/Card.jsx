@@ -23,15 +23,27 @@ const Card = ({ course }) => {
     navigate("/login");
   };
 
-  const productToAddToCart = {
-    id: course.id,
-    name: course.title,
-    price: course.price,
-    image: course.image,
-    description: course.description,
-  };
-
   const addToCart = () => {
+    let newPrice =
+      course.price - (course.price * course.percentageDiscount) / 100;
+    let roundedNewPrice = parseFloat(newPrice.toFixed(2));
+
+    let productToAddToCart = {
+      id: course.id,
+      name: course.title,
+      price: roundedNewPrice,
+      image: course.image,
+      description: course.description,
+      category: course.category,
+      createdAt: course.createdAt,
+      enabled: course.enabled,
+      instructorId: course.instructor_id,
+      onSale: course.onSale,
+      progress: course.progress,
+      sections: course.sections,
+      updatedAt: course.updatedAt,
+      lesson: course.lesson,
+    };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
