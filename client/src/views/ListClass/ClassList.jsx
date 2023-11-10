@@ -4,17 +4,18 @@ import Button from "../../Components/Button/Button";
 
 const ClassList = () => {
   const { state } = useLocation();
-  const selectedCourse = state.dataCourses;
+  const selectedCourse = state[0];
+  console.log("estado en list", selectedCourse);
   const navigate = useNavigate();
 
   const handleNavigateToLecture = (lessonId) => {
-    if (selectedCourse && selectedCourse.lessons) {
-      const selectedLesson = selectedCourse.lessons.find(
-        (lesson) => lesson.lesson_id === lessonId
+    if (selectedCourse && selectedCourse.lesson) {
+      const selectedLesson = selectedCourse.lesson.find(
+        (lesson) => lesson.id === lessonId
       );
       if (selectedLesson) {
         navigate(`/student/classList/lecture/${lessonId}`, {
-          state: { lessonData: selectedLesson },
+          state: selectedLesson,
         });
       } else {
         console.log("Lección no encontrada");
@@ -27,13 +28,16 @@ const ClassList = () => {
   return (
     <div className={Styles.classListContainer}>
       <h1>Lista de Clases</h1>
-      {selectedCourse && selectedCourse.lessons ? (
-        selectedCourse.lessons.map((lesson, index) => (
-          <div key={lesson.lesson_id} className={Styles.classListContent}>
-            <p key={index}>{lesson.title}</p>
+      {selectedCourse &&
+      selectedCourse.lesson &&
+      selectedCourse.lesson.length > 0 ? (
+        selectedCourse.lesson.map((elemento) => (
+          <div key={elemento.id}>
+            <p>{elemento.title}</p>
+            <p>{elemento.description}</p>
             <Button
-              text={"Ir"}
-              onClick={() => handleNavigateToLecture(lesson.lesson_id)}
+              onClick={() => handleNavigateToLecture(elemento.id)}
+              text={"Ir a la clase"}
             />
           </div>
         ))
