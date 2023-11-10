@@ -5,6 +5,12 @@
   padding: var(--pd-section);
 }
 
+.classListContainer header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .classListContent {
   padding: 10px 0;
 }
@@ -12,15 +18,37 @@
 .listContainer {
   width: 80%;
   margin: 50px auto;
-  background-color: var(--color-background-details);
   padding: var(--pd-3);
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background);
 }
 
 .listItem {
   display: flex;
   justify-content: space-between;
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background-details);
+  padding: var(--pd-y-1) var(--pd-x-3);
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 }
 
-.listItem h4 {
-  cursor: pointer;
+.listItem:hover {
+  color: var(--color-hover);
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-text-secondary);
+}
+
+.section {
+  padding: var(--pd-y-1) 0;
+}
+
+.listTime h3 {
+  display: flex;
+  justify-content: end;
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background-details);
+  padding: var(--pd-y-3) var(--pd-x-3);
+  transition: all 0.2s ease-out;
+  margin-top: 20px;
 }
