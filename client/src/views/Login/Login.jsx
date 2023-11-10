@@ -77,7 +77,7 @@ const Login = ({ updateContextUser, setLogged }) => {
 					.then((result) => {
 						//localStorage.setItem("allowed", false);
 						updateContextUser(usuario);
-						console.log(result);
+						//console.log(result);
 					})
 					.catch((error) => {
 						return Toast.fire({
@@ -137,10 +137,11 @@ const Login = ({ updateContextUser, setLogged }) => {
 						role_instructor: true,
 						role_student: true,
 						emailVerified: user.emailVerified,
+						enabled: true,
 					};
 					const response = await axios.post("/users/create", objUser);
 					localStorage.setItem("userOnSession", JSON.stringify(response.data));
-					console.log(response.data);
+					//console.log(response.data);
 					setLogged(true);
 					localStorage.setItem("logged", true);
 					return updateContextUser(response.data);
@@ -220,16 +221,14 @@ const Login = ({ updateContextUser, setLogged }) => {
 				<div className={style.flex_row}></div>
 				<button
 					className={style.button_submit}
-					onClick={(e) => authentication(e)}
-				>
+					onClick={(e) => authentication(e)}>
 					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>
 					{registering ? "Si ya tienes cuenta" : "Si no tienes cuenta"}
 					<span
 						className={style.span}
-						onClick={() => setRegistering(!registering)}
-					>
+						onClick={() => setRegistering(!registering)}>
 						{registering ? "Inicia sesión" : "Regístrate"}
 					</span>
 				</p>
