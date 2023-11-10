@@ -7,7 +7,7 @@ const postEnrollmentController = async (cart, userId, id_payment) => {
 		return { courses: [], payments: [] };
 	}
 
-	// Busca los cursos que ya ha comprado el usuario
+	// !!!Busca los cursos que ya ha comprado el usuario!!!
 	const existingPayments = await Payment.findAll({
 		where: {
 			UserId: userId,
@@ -15,17 +15,17 @@ const postEnrollmentController = async (cart, userId, id_payment) => {
 		attributes: ["courses"],
 	});
 
-	// Convierte los cursos existentes en un arreglo de IDs
+	// !!!Convierte los cursos existentes en un arreglo de Cursos!!!
 	const existingCourses = existingPayments.flatMap(
 		(payment) => payment.courses
 	);
 
-	// Filtra los cursos del carrito para eliminar los cursos que ya han sido comprados
+	// !!!Filtra los cursos del carrito para eliminar los cursos que ya han sido comprados!!!!
 	const filteredCart = cart.filter(
 		(course) =>
 			!existingCourses.some((existingCourse) => existingCourse.id === course.id)
 	);
-	// Si el carrito filtrado está vacío, significa que todos los cursos ya han sido comprados
+	// !!!Si el carrito filtrado está vacío, significa que todos los cursos ya han sido comprados!!!
 	if (!filteredCart.length) {
 		return {
 			courses: [],
@@ -34,7 +34,7 @@ const postEnrollmentController = async (cart, userId, id_payment) => {
 		};
 	}
 
-	// Acumular los cursos en el campo courses del pago
+	// !!Acumular los cursos en el campo courses del pago!!!
 	const courses = filteredCart.map((course) => ({
 		id: course.id,
 		name: course.name,
