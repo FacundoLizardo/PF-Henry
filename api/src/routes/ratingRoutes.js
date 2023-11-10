@@ -10,7 +10,7 @@ const ratingRoutes = Router();
 ratingRoutes.get("/userCourse", getUserCourseHandler)
 
 ratingRoutes.get("/", getHandlerRating); //Trae todos los cursos ordenados x rating
-ratingRoutes.get("/ratingCourse"); //Trae rating de un curso
+//ratingRoutes.get("/:id",getHandlerCourseRating); //Trae rating de un curso
 ratingRoutes.post("/create", postHandlerRating);//Crea o modifica rating y comentario
 
 
