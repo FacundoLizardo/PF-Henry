@@ -8,39 +8,38 @@ const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
   const [sessionCourses, setSessionCourses] = useState();
   const session = JSON.parse(localStorage.getItem("userOnSession"));
-  console.log("esto en student",session);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
-
     if (session?.email !== "") {
       updateContextUser(session);
     }
 
-    const sessionCourses =
-      session?.courses?.flatMap((course) =>
-        course.course.map((dataCourse) => ({
-          id: dataCourse.id,
-          title: dataCourse.title,
-          description: dataCourse.description,
-          category: dataCourse.category,
-          createdAt: dataCourse.createdAt,
-          enabled: dataCourse.enabled,
-          image: dataCourse.image,
-          instructorId: dataCourse.instructor_id,
-          onSale: dataCourse.onSale,
-          price: dataCourse.price,
-          progress: dataCourse.progress,
-          sections: dataCourse.sections,
-          updatedAt: dataCourse.updatedAt,
-        }))
-      ) || [];
+    console.log(session);
 
+    const sessionCourses = (session?.Payments || []).flatMap((payment) =>
+      (payment.Courses || []).map((course) => ({
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        category: course.category,
+        createdAt: course.createdAt,
+        enabled: course.enabled,
+        image: course.image,
+        instructorId: course.instructor_id,
+        onSale: course.onSale,
+        price: course.price,
+        progress: course.progress,
+        sections: course.sections,
+        updatedAt: course.updatedAt,
+        lesson: course.lesson,
+      }))
+    );
     setSessionCourses(sessionCourses);
   }, []);
 
   const handleNavigateToLessons = (courseId) => {
-    navigate(`/student/classList/${courseId}`);
+    navigate(`/student/classList/${courseId}`, { state: sessionCourses });
   };
 
   const handleRating = () => {
@@ -94,7 +93,7 @@ const Student = ({ updateContextUser }) => {
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          <Button text={"Clases disponibles"} />
+          <Button onClick={() => handleNavigateToLessons(session.id)} text={"Clases disponibles"} />
         </div>
       </div>
     </div>
