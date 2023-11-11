@@ -47,7 +47,8 @@ const Student = ({ updateContextUser }) => {
 
   const handleRating = (course_id, user_id) => {
     Swal.fire({
-      title: "Select field validation",
+      title: "Calificación del curso",
+      text: "Por favor, selecciona una calificación de 1 a 5 estrellas:",
       input: "select",
       inputOptions: {
         1: "1 estrella",
@@ -64,12 +65,11 @@ const Student = ({ updateContextUser }) => {
       if (result.isConfirmed) {
         const rating = result.value;
         Swal.fire({
-          title: "Message",
+          title: "Deja un comentario",
           input: "textarea",
-          inputLabel: "Message",
-          inputPlaceholder: "Type your message here...",
+          inputPlaceholder: "Escribe tu comentario aquí...",
           inputAttributes: {
-            "aria-label": "Type your message here",
+            "aria-label": "Escribe tu comentario aquí",
           },
           showCancelButton: true,
           customClass: {
@@ -78,13 +78,20 @@ const Student = ({ updateContextUser }) => {
         }).then((result) => {
           if (result.isConfirmed) {
             const comment = result.value;
-
             postRating(course_id, user_id, rating, comment);
+            Swal.fire({
+              title: "Calificaste el curso correctamente.",
+              icon: "success",
+              customClass: {
+                popup: "mySwal",
+              },
+            });
           }
         });
       }
     });
   };
+
   const CourseCard = ({ courses }) => (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer}>
