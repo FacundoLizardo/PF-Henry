@@ -14,8 +14,8 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DBURL } = process.env;
 
 const sequelize = new Sequelize(
 
-	//   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`, 
-	 DBURL,
+	   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/educastream`, 
+	//  DBURL,
 	{ 
 
 		logging: false,
