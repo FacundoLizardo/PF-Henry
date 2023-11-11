@@ -1,6 +1,7 @@
 .detailCourseContainer {
-  width: 50%;
+  width: 90%;
   margin: auto;
+  max-width: 1024px;
   min-height: 100%;
   padding: var(--pd-section);
 }
@@ -10,12 +11,11 @@
 }
 
 .detailContentTop {
-  width: 100%;
-  height: auto;
   display: flex;
-  gap: 30px;
+  width: 80%;
+  margin: auto;
   padding-bottom: var(--pd-y-2);
-  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .courseImage {
@@ -29,26 +29,41 @@
   max-height: 300px;
 }
 
-.detailContentBottom {
-  width: 100%;
-  gap: 15px;
-  display: flex;
-  flex-direction: column;
+.listContainer {
+  width: 80%;
+  margin: auto;
+  padding: var(--pd-3);
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background);
 }
 
-.classContainer {
+.listItem {
   display: flex;
-  width: 100%;
-  background-color: var(--color-background-details);
   justify-content: space-between;
-  padding: 15px 20px;
-  box-shadow: var(--box-shadow);
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background-details);
+  padding: var(--pd-y-1) var(--pd-x-3);
+  transition: all 0.2s ease-out;
+}
+
+.section {
+  padding: var(--pd-y-1) 0;
+}
+
+.listTime h3 {
+  display: flex;
+  justify-content: end;
+  border: 1px solid var(--color-border-three);
+  background-color: var(--color-background-details);
+  padding: var(--pd-y-3) var(--pd-x-3);
+  transition: all 0.2s ease-out;
+  margin-top: 20px;
 }
 
 .buttonsContainer {
   width: 100%;
   padding: var(--pd-section);
   display: flex;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
 }
