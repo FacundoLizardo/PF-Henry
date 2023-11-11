@@ -3,6 +3,7 @@
   margin: auto;
   min-height: 100%;
   padding: var(--pd-section);
+  max-width: 1024px;
 }
 
 .studentContainer h1 {
@@ -90,13 +91,15 @@
   width: 100%;
   height: 50%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imgContainer img {
   width: 100%;
   min-height: 100%;
-  object-fit: cover;
-  cursor: pointer;
+  object-fit: contain;
   transition: transform 0.2s ease;
 }
 

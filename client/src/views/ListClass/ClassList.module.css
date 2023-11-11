@@ -3,12 +3,18 @@
   margin: auto;
   min-height: 100%;
   padding: var(--pd-section);
+  max-width: 1024px;
 }
 
 .classListContainer header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.headerButton {
+  display: flex;
+  gap: 15px;
 }
 
 .classListContent {

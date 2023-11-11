@@ -16,12 +16,23 @@ const CardLayout = ({ courses }) => {
     return <div>No hay datos disponibles.</div>;
   }
 
+  const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
+    (payment.Courses || []).find((elemento) => elemento.id === course.id)
+  );
+
+  const handleCardToCourse = () => {
+    navigate(`/student/${userData.id}`);
+    window.scrollTo({ top: 0 });
+  };
+
   const handleCardClick = () => {
     navigate(`/detailCourse/${course.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateCart = () => {
     navigate(`/cart/${userData.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateLogin = () => {
@@ -48,7 +59,7 @@ const CardLayout = ({ courses }) => {
       sections: course.sections,
       updatedAt: course.updatedAt,
       lesson: course.lesson,
-  };
+    };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
@@ -82,23 +93,21 @@ const CardLayout = ({ courses }) => {
           </div>
         </div>
         <div className={Styles.contentFooter}>
-          {!userData ? (
+          {courseAlreadyPurchased ? (
+            <Button
+              text={"Ir al curso"}
+              onClick={() => {
+                handleCardToCourse();
+              }}
+            />
+          ) : !userData ? (
             <Button text={"¡Comprar ahora!"} onClick={handleNavigateLogin} />
           ) : (
             <Button
               text={"¡Comprar ahora!"}
               onClick={() => {
                 addToCart();
-                if (
-                  userData &&
-                  userData.Courses &&
-                  userData.Courses.find(
-                    (userCourse) => userCourse.id === course.id
-                  )
-                ) {
-                } else {
-                  handleNavigateCart();
-                }
+                handleNavigateCart();
               }}
             />
           )}
