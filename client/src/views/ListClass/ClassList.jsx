@@ -21,7 +21,6 @@ const ClassList = ({ updateContextUser }) => {
   const selectedCourse = state;
   const navigate = useNavigate();
   const [totalTime, setTotalTime] = useState(0);
-  console.log(selectedCourse);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));

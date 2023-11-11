@@ -3,6 +3,7 @@ import Styles from "./Student.module.css";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
+import { postRating } from "../../utils/postRating";
 
 const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const Student = ({ updateContextUser }) => {
         sections: course.sections,
         updatedAt: course.updatedAt,
         lesson: course.lesson,
+        Rating: course.Rating,
       }))
     );
     setSessionCourses(sessionCourses);
@@ -43,24 +45,46 @@ const Student = ({ updateContextUser }) => {
     navigate(`/student/classList/${courseId}`, { state: dataCourse });
   };
 
-  const handleRating = () => {
-    const { value: text } = Swal.fire({
-      input: "textarea",
-      inputLabel: "Message",
-      inputPlaceholder: "Type your message here...",
-      inputAttributes: {
-        "aria-label": "Type your message here",
+  const handleRating = (course_id, user_id) => {
+    Swal.fire({
+      title: "Select field validation",
+      input: "select",
+      inputOptions: {
+        1: "1 estrella",
+        2: "2 estrellas",
+        3: "3 estrellas",
+        4: "4 estrellas",
+        5: "5 estrellas",
       },
       showCancelButton: true,
       customClass: {
         popup: "mySwal",
       },
-    });
-    if (text) {
-      Swal.fire(`Has calificado el curso: "${text}"`);
-    }
-  };
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const rating = result.value;
+        Swal.fire({
+          title: "Message",
+          input: "textarea",
+          inputLabel: "Message",
+          inputPlaceholder: "Type your message here...",
+          inputAttributes: {
+            "aria-label": "Type your message here",
+          },
+          showCancelButton: true,
+          customClass: {
+            popup: "mySwal",
+          },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const comment = result.value;
 
+            postRating(course_id, user_id, rating, comment);
+          }
+        });
+      }
+    });
+  };
   const CourseCard = ({ courses }) => (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer}>
@@ -78,7 +102,9 @@ const Student = ({ updateContextUser }) => {
           </div>
         </div>
         <div className={Styles.linkRating}>
-          <p onClick={handleRating}>Calificar curso</p>
+          <p onClick={() => handleRating(courses.id, session.id)}>
+            Calificar curso
+          </p>
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
