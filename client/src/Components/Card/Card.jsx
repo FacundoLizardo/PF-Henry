@@ -50,14 +50,17 @@ const Card = ({ course }) => {
 
   const handleCardToDetails = () => {
     navigate(`/detailCourse/${course.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleCardToCourse = () => {
     navigate(`/student/${userData.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateCart = () => {
     navigate(`/cart/${userData.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateLogin = () => {
