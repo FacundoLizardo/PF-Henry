@@ -1,17 +1,30 @@
 const {
 	getUserController,
 } = require("../controllers/getControllers/getUserController");
+const { getUserControllerId } = require("../controllers/getControllers/getUserControllerId");
 
 const getHandlerUser = async (req, res) => {
-	const { email } = req.query;
+	const { email, id } = req.query;
 
-	if (email) {
-		const user = await getUserController(email);
-		return res.status(200).json(user);
+	if (email || id) {
+		let user;
+
+		if (email) {
+			user = await getUserController(email);
+		} else if (id) {
+			user = await getUserControllerId(id);
+		}
+
+		if (user) {
+			return res.status(200).json(user);
+		} else {
+			return res.status(404).json({
+				error: "Usuario no encontrado",
+			});
+		}
 	} else {
 		return res.status(400).json({
-			error:
-				error.message + "No se envio correctamente la informacion al servidor",
+			error: "No se envió correctamente la información al servidor",
 		});
 	}
 };

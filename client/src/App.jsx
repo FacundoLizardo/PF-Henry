@@ -127,7 +127,7 @@ function App() {
               element={<Courses updateContextUser={updateContextUser} />}
             />
             {logged2 ? authenticatedRoutes : unauthenticatedRoutes}
-            <Route path="/detailCourse/:id" element={<DetailCourse />} />
+            <Route path="/detailCourse/:id" element={<DetailCourse updateContextUser={updateContextUser} />} />
 
             <Route
               path="/login/"
