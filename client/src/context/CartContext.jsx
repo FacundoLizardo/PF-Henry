@@ -40,7 +40,12 @@ const cartReducer = (state = initialState, action) => {
       }
 
       const session = JSON.parse(localStorage.getItem("userOnSession"));
-      const userCourse = session && session.Courses && session.Courses.find((course) => course.id === action.payload.id);
+      const userCourse = (session?.Payments || []).find((payment) =>
+        (payment.Courses || []).find(
+          (course) => course.id === action.payload.id
+        )
+      );
+
       if (userCourse) {
         Toast.fire({
           icon: "warning",

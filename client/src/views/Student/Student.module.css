@@ -3,6 +3,7 @@
   margin: auto;
   min-height: 100%;
   padding: var(--pd-section);
+  max-width: 1024px;
 }
 
 .studentContainer h1 {

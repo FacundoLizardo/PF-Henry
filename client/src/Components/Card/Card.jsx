@@ -29,6 +29,7 @@ const Card = ({ course }) => {
       );
       setTotalTime(totalDuration);
     }
+    
     if (course && course.lesson) {
       const totalLessonCount = course.lesson.length;
       setTotalClass(totalLessonCount);

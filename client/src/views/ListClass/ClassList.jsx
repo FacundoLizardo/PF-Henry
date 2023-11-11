@@ -10,10 +10,10 @@ const formatTime = (seconds) => {
 };
 
 const formatTimeWithHours = (seconds) => {
-  const hours = String(Math.floor(seconds / 3600)).padStart(2, "0");
-  const minutes = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-  const restSeconds = String(seconds % 60).padStart(2, "0");
-  return `${hours}:${minutes}:${restSeconds} hs`;
+  const hours = String(Math.floor(seconds / 3600));
+  const minutes = String(Math.floor((seconds % 3600) / 60));
+  const restSeconds = String(seconds % 60);
+  return `${hours} h ${minutes} m ${restSeconds} s`;
 };
 
 const ClassList = ({ updateContextUser }) => {
@@ -21,18 +21,25 @@ const ClassList = ({ updateContextUser }) => {
   const selectedCourse = state;
   const navigate = useNavigate();
   const [totalTime, setTotalTime] = useState(0);
+  const [totalClass, setTotalClass] = useState(0);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     if (session?.email !== "") {
       updateContextUser(session);
     }
+
     if (selectedCourse && selectedCourse.lesson) {
       const totalDuration = selectedCourse.lesson.reduce(
         (acc, lesson) => acc + lesson.duration,
         0
       );
       setTotalTime(totalDuration);
+    }
+
+    if (selectedCourse && selectedCourse.lesson) {
+      const totalLessonCount = selectedCourse.lesson.length;
+      setTotalClass(totalLessonCount);
     }
   }, [selectedCourse]);
 
@@ -58,6 +65,10 @@ const ClassList = ({ updateContextUser }) => {
     // navigate(`/student/classList/${instructorId}`);
   };
 
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   const lessonsBySection = {};
   if (selectedCourse && selectedCourse.lesson) {
     selectedCourse.lesson.forEach((lesson) => {
@@ -75,7 +86,8 @@ const ClassList = ({ updateContextUser }) => {
         <div>
           <h1>{selectedCourse && selectedCourse.title}</h1>
         </div>
-        <div>
+        <div className={Styles.headerButton}>
+          <Button text={"Volver"} onClick={handleGoBack} />
           <Button
             text={"Contactar al instructor"}
             onClick={() => handleNavigateToMessage(selectedCourse.instructorId)}
@@ -107,7 +119,10 @@ const ClassList = ({ updateContextUser }) => {
             <p>No se encontraron lecciones para este curso.</p>
           )}
           <div className={Styles.listTime}>
-            <h3>Duración del curso: {formatTimeWithHours(totalTime)}</h3>
+            <h3>
+              {totalClass} clases - duración del curso:{" "}
+              {formatTimeWithHours(totalTime)}
+            </h3>
           </div>
         </div>
       </main>
