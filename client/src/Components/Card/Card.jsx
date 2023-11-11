@@ -20,7 +20,10 @@ const Card = ({ course }) => {
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
   const [user, setUser] = useState(null);
-  console.log(user);
+  const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
+    (payment.Courses || []).find((elemento) => elemento.id === course.id)
+  );
+
   useEffect(() => {
     if (course && course.lesson) {
       const totalDuration = course.lesson.reduce(
@@ -29,7 +32,6 @@ const Card = ({ course }) => {
       );
       setTotalTime(totalDuration);
     }
-    
     if (course && course.lesson) {
       const totalLessonCount = course.lesson.length;
       setTotalClass(totalLessonCount);
@@ -46,8 +48,12 @@ const Card = ({ course }) => {
     }
   }, [course]);
 
-  const handleCardClick = () => {
+  const handleCardToDetails = () => {
     navigate(`/detailCourse/${course.id}`);
+  };
+
+  const handleCardToCourse = () => {
+    navigate(`/student/${userData.id}`);
   };
 
   const handleNavigateCart = () => {
@@ -100,7 +106,7 @@ const Card = ({ course }) => {
 
   return (
     <div className={Styles.cardContainer}>
-      <div className={Styles.imgContainer} onClick={handleCardClick}>
+      <div className={Styles.imgContainer} onClick={handleCardToDetails}>
         <img src={course.image} alt={course.title} />
       </div>
       <div className={Styles.contentContainer}>
@@ -144,35 +150,34 @@ const Card = ({ course }) => {
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          <div className={Styles.contentBottomButton}>
-            <Button text={"Agregar al carrito"} onClick={addToCart} />
-            {!userData ? (
-              <Button
-                text={"Comprar"}
-                onClick={() => {
-                  handleNavigateLogin();
-                }}
-              />
-            ) : (
-              <Button
-                text={"Comprar"}
-                onClick={() => {
-                  addToCart();
-
-                  if (
-                    userData &&
-                    userData.Courses &&
-                    userData.Courses.find(
-                      (userCourse) => userCourse.id === course.id
-                    )
-                  ) {
-                  } else {
+          {courseAlreadyPurchased ? (
+            <Button
+              text={"Ir al curso"}
+              onClick={() => {
+                handleCardToCourse();
+              }}
+            />
+          ) : (
+            <>
+              <Button text={"Agregar al carrito"} onClick={addToCart} />
+              {!userData ? (
+                <Button
+                  text={"Comprar"}
+                  onClick={() => {
+                    handleNavigateLogin();
+                  }}
+                />
+              ) : (
+                <Button
+                  text={"Comprar"}
+                  onClick={() => {
+                    addToCart();
                     handleNavigateCart();
-                  }
-                }}
-              />
-            )}
-          </div>
+                  }}
+                />
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
