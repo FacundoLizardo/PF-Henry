@@ -13,6 +13,7 @@ const postHandlerUser = async (req, res) => {
 			photoURL,
 			role_instructor,
 			role_student,
+			enabled,
 		} = req.body;
 
 		if (
@@ -21,7 +22,8 @@ const postHandlerUser = async (req, res) => {
 			!last_name ||
 			!photoURL ||
 			!role_instructor ||
-			!role_student
+			!role_student ||
+			!enabled
 		) {
 			return res.status(400).json({ error: "Lack Of Data" });
 		}
@@ -34,6 +36,7 @@ const postHandlerUser = async (req, res) => {
 				photoURL,
 				role_instructor,
 				role_student,
+				enabled,
 				isNew
 			);
 			return res.status(200).json(newUser);

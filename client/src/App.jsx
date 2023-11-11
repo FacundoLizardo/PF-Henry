@@ -26,121 +26,125 @@ import FormLecture from "./views/FormLecture/FormLecture";
 export const userContext = React.createContext();
 
 function App() {
-	const location = useLocation();
-	const [logged, setLogged] = useState(null);
-	const shouldShowFooter = () => {
-		return ![
-			"/student/",
-			"/student/classList/",
-			"/student/classList/lecture/",
-			"/login",
-			"/instructor/form",
-			"/instructor/",
-			"/detailCourse/",
-			"/config/",
-		].includes(location.pathname);
-	};
+  const location = useLocation();
+  const [logged, setLogged] = useState(null);
+  const shouldShowFooter = () => {
+    return ![
+      "/student/",
+      "/student/classList/",
+      "/student/classList/lecture/",
+      "/login",
+      "/instructor/form",
+      "/instructor/",
+      "/detailCourse/",
+      "/config/",
+    ].includes(location.pathname);
+  };
 
-	const [user, setUser] = useState({
-		email: "",
-		password: "",
-		isNew: null,
-		enabled: false,
-	});
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+    isNew: null,
+    enabled: false,
+  });
 
-	const updateContextUser = (newUser) => {
-		setUser(newUser);
-	};
+  const updateContextUser = (newUser) => {
+    setUser(newUser);
+  };
 
-	const session = JSON.parse(localStorage.getItem("userOnSession"));
+  const session = JSON.parse(localStorage.getItem("userOnSession"));
 
-	useEffect(() => {
-		if (session) {
-			setLogged(!logged);
-		}
-	}, []);
+  useEffect(() => {
+    if (session) {
+      setLogged(!logged);
+    }
+  }, []);
 
-	const logged2 = localStorage.getItem("logged");
-	const authenticatedRoutes = (
-		<>
-			<Route
-				path="/student/:id"
-				element={<Student updateContextUser={updateContextUser} />}
-			/>
-			<Route path="/student/classList/:courseId" element={<ClassList />} />
-			<Route
-				path="/student/classList/lecture/:lessonId"
-				element={<Lecture />}
-			/>
-			<Route
-				path="/config/:id"
-				element={<Config updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/cart/:id"
-				element={<CartPage updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/instructor/:id"
-				element={<Instructor updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/instructor/:id/form"
-				element={<Form updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/instructor/:courseId/createLecture"
-				element={<FormLecture updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/edit/:id"
-				element={<EditCourse updateContextUser={updateContextUser} />}
-			/>
-			<Route
-				path="/payment/checkout/sucess"
-				element={<CheckOut updateContextUser={updateContextUser} />}
-			/>
-		</>
-	);
+  const logged2 = localStorage.getItem("logged");
+  const authenticatedRoutes = (
+    <>
+      <Route
+        path="/student/:id"
+        element={<Student updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/student/classList/:courseId"
+        element={<ClassList updateContextUser={updateContextUser} />}
+        updateContextUser={updateContextUser}
+      />
+      <Route
+        path="/student/classList/lecture/:lessonId"
+        element={<Lecture updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/config/:id"
+        element={<Config updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/cart/:id"
+        element={<CartPage updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/instructor/:id"
+        element={<Instructor updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/instructor/:id/form"
+        element={<Form updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/instructor/:courseId/createLecture"
+        element={<FormLecture updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/edit/:id"
+        element={<EditCourse updateContextUser={updateContextUser} />}
+      />
+      <Route
+        path="/payment/checkout/sucess"
+        element={<CheckOut updateContextUser={updateContextUser} />}
+      />
+    </>
+  );
 
-	const unauthenticatedRoutes = (
-		<>
-			<Route path="/" element={<Navigate to="/login" />} />
-		</>
-	);
-	return (
-		<>
-			<userContext.Provider value={user}>
-				<div className={Styles.appContainer}>
-					{location.pathname === "/login" ? "" : <NavBar />}
-					<Routes>
-						<Route
-							path="/"
-							element={<Layout updateContextUser={updateContextUser} />}
-						/>
-						<Route
-							path="/courses/"
-							element={<Courses updateContextUser={updateContextUser} />}
-						/>
-						{logged2 ? authenticatedRoutes : unauthenticatedRoutes}
-						<Route path="/detailCourse/:id" element={<DetailCourse />} />
+  const unauthenticatedRoutes = (
+    <>
+      <Route path="/" element={<Navigate to="/login" />} />
+    </>
+  );
+  return (
+    <>
+      <userContext.Provider value={user}>
+        <div className={Styles.appContainer}>
+          {location.pathname === "/login" ? "" : <NavBar />}
+          <Routes>
+            <Route
+              path="/"
+              element={<Layout updateContextUser={updateContextUser} />}
+            />
+            <Route
+              path="/courses/"
+              element={<Courses updateContextUser={updateContextUser} />}
+            />
+            {logged2 ? authenticatedRoutes : unauthenticatedRoutes}
+            <Route path="/detailCourse/:id" element={<DetailCourse />} />
 
-						<Route
-							path="/login/"
-							element={
-								<Login
-									updateContextUser={updateContextUser}
-									setLogged={setLogged}
-								/>
-							}
-						/>
-						<Route path="*" element={<Navigate to="/" />} />
-					</Routes>
-					{shouldShowFooter() && <Footer />}
-				</div>
-			</userContext.Provider>
-		</>
-	);
+            <Route
+              path="/login/"
+              element={
+                <Login
+                  updateContextUser={updateContextUser}
+                  setLogged={setLogged}
+                />
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+          {shouldShowFooter() && <Footer />}
+        </div>
+      </userContext.Provider>
+    </>
+  );
 }
 
 export default App;

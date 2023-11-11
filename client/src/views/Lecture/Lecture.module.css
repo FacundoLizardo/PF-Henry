@@ -27,17 +27,16 @@
 .videoContainer {
   max-width: 564px;
   width: 100%;
+  height: 100%;
   margin: auto;
   padding-bottom: var(--pd-y-2);
 }
 
 .videoWrapper {
   position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
 }
 
-.videoWrapper iframe {
+.videoWrapper video {
   position: absolute;
   top: 0;
   left: 0;

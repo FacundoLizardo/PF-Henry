@@ -15,8 +15,6 @@ const Student = ({ updateContextUser }) => {
       updateContextUser(session);
     }
 
-    console.log(session);
-
     const sessionCourses = (session?.Payments || []).flatMap((payment) =>
       (payment.Courses || []).map((course) => ({
         id: course.id,
@@ -39,7 +37,10 @@ const Student = ({ updateContextUser }) => {
   }, []);
 
   const handleNavigateToLessons = (courseId) => {
-    navigate(`/student/classList/${courseId}`, { state: sessionCourses });
+    const dataCourse = sessionCourses.find(
+      (elemento) => elemento.id === courseId
+    );
+    navigate(`/student/classList/${courseId}`, { state: dataCourse });
   };
 
   const handleRating = () => {
@@ -93,7 +94,10 @@ const Student = ({ updateContextUser }) => {
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          <Button onClick={() => handleNavigateToLessons(session.id)} text={"Clases disponibles"} />
+          <Button
+            onClick={() => handleNavigateToLessons(courses.id)}
+            text={"Clases disponibles"}
+          />
         </div>
       </div>
     </div>
@@ -164,7 +168,7 @@ const Student = ({ updateContextUser }) => {
             <CourseCard
               key={index}
               courses={courses}
-              onClick={() => handleNavigateToLessons(courses.id, session)}
+              onClick={() => handleNavigateToLessons(courses.id)}
             />
           ))
         ) : (

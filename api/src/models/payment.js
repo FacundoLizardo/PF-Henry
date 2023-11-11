@@ -14,13 +14,13 @@ const Payment = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
-			// course_id: {
-			// 	type: DataTypes.UUID,
-			// 	defaultValue: DataTypes.UUIDV4,
-			// 	allowNull: false,
-			// },
+			courses: {
+				type: DataTypes.JSONB,
+				allowNull: true,
+				defaultValue: [],
+			},
 			amount: {
-				type: DataTypes.STRING,
+				type: DataTypes.FLOAT,
 				allowNull: false,
 			},
 			payment_status: {
