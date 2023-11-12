@@ -1,20 +1,19 @@
 const { Lesson } = require("../../db");
 
 const putLessonByIdController = async (
-  id,
-  title,
-  description,
-  images,
-  video_url,
-  duration,
-  sequence_order
+	id,
+	title,
+	description,
+	video_url,
+	duration,
+	section
 ) => {
-  const lessonsUpdated = await Lesson.update(
-    { title, description, images, video_url, duration, sequence_order },
-    { where: { id: id } }
-  );
+	const lessonsUpdated = await Lesson.update(
+		{ title, description, video_url, duration, section },
+		{ where: { id: id } }
+	);
 
-  return lessonsUpdated
+	return lessonsUpdated;
 };
 
 module.exports = { putLessonByIdController };
