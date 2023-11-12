@@ -1,101 +1,189 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
 import Styles from "./DetailCourse.module.css";
 import Button from "../../Components/Button/Button";
+import { userContext } from "../../App";
+import { useCart } from "../../context/CartContext";
 
-const DetailCourse = () => {
-	const { id } = useParams();
-	const [dataDetail, setDataDetail] = useState();
-	const navigate = useNavigate();
+const formatTime = (seconds) => {
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const restSeconds = String(seconds % 60).padStart(2, "0");
+  return `${minutes}:${restSeconds}`;
+};
 
-	useEffect(() => {
-		axios
-			.get(`/courses/${id}`)
-			.then((response) => {
-				setDataDetail(response.data);
-				window.scrollTo(0, 0);
-			})
-			.catch((error) => {
-				console.error("Error al cargar los datos del curso", error);
-			});
-	}, [id]);
+const formatTimeWithHours = (seconds) => {
+  const hours = String(Math.floor(seconds / 3600));
+  const minutes = String(Math.floor((seconds % 3600) / 60));
+  const restSeconds = String(seconds % 60);
+  return `${hours} h ${minutes} m ${restSeconds} s`;
+};
 
-	return (
-		<div className={Styles.detailCourseContainer}>
-			<div>
-				{dataDetail && (
-					<>
-						<h1>{dataDetail.title}</h1>
-						<div className={Styles.detailContentTop}>
-							<div className={Styles.imageContainer}>
-								{dataDetail.image && (
-									<img
-										src={dataDetail.image}
-										alt={dataDetail.title}
-										className={Styles.courseImage}
-									/>
-								)}
-							</div>
-							<div className={Styles.descriptionContainer}>
-								{dataDetail.description}
-							</div>
-						</div>
-						<div className={Styles.detailContentBottom}>
-							<div className={Styles.classContainer}>
-								<h4>Clase 1</h4>
-								<p>01:25</p>
-							</div>
-							<div className={Styles.classContainer}>
-								<h4>Clase 2</h4>
-								<p>01:42</p>
-							</div>
-							<div className={Styles.classContainer}>
-								<h4>Clase 3</h4>
-								<p>01:10</p>
-							</div>
-							<div className={Styles.classContainer}>
-								<h4>Clase 4</h4>
-								<p>00:50</p>
-							</div>
-							<div className={Styles.classContainer}>
-								<h4>Clase 5</h4>
-								<p>01:15</p>
-							</div>
-							<div className={Styles.classContainer}>
-								<h4>Clase 6</h4>
-								<p>01:25</p>
-							</div>
-						</div>
-						<div className={Styles.buttonsContainer}>
-							<Button
-								text={"Volver"}
-								className={Styles.button}
-								onClick={() => navigate(-1)}
-							/>
-							<Button text={"Agregar al carrito"} className={Styles.button} />
-						</div>
-					</>
-				)}
-			</div>
-		</div>
-	);
+const DetailCourse = ({ updateContextUser }) => {
+  const { id } = useParams();
+  const [dataDetail, setDataDetail] = useState(null);
+
+  const { dispatch } = useCart();
+  const navigate = useNavigate();
+  const userData = useContext(userContext);
+  const [totalTime, setTotalTime] = useState(0);
+  const [totalClass, setTotalClass] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`/courses/${id}`)
+      .then((response) => {
+        setDataDetail(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al cargar los datos del curso", error);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    const session = JSON.parse(localStorage.getItem("userOnSession"));
+    if (session?.email !== "") {
+      updateContextUser(session);
+    }
+
+    if (dataDetail && dataDetail.lesson) {
+      const totalDuration = dataDetail.lesson.reduce(
+        (acc, lesson) => acc + lesson.duration,
+        0
+      );
+      setTotalTime(totalDuration);
+      setTotalClass(dataDetail.lesson.length);
+    }
+  }, [dataDetail]);
+
+  const handleCardToCourse = () => {
+    navigate(`/student/${userData.id}`);
+  };
+
+  const handleNavigateCart = () => {
+    navigate(`/cart/${userData.id}`);
+  };
+
+  const handleNavigateLogin = () => {
+    navigate("/login");
+  };
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
+  const addToCart = () => {
+    if (dataDetail) {
+      const newPrice =
+        dataDetail.price - (dataDetail.price * dataDetail.percentageDiscount) / 100;
+      const roundedNewPrice = parseFloat(newPrice.toFixed(2));
+
+      const productToAddToCart = {
+        id: dataDetail.id,
+        name: dataDetail.title,
+        price: roundedNewPrice,
+        image: dataDetail.image || "", // Verifica si 'image' está definido
+        description: dataDetail.description,
+        category: dataDetail.category,
+        createdAt: dataDetail.createdAt,
+        enabled: dataDetail.enabled,
+        instructorId: dataDetail.instructor_id,
+        onSale: dataDetail.onSale,
+        progress: dataDetail.progress,
+        sections: dataDetail.sections,
+        updatedAt: dataDetail.updatedAt,
+        lesson: dataDetail.lesson,
+      };
+      dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
+      handleNavigateCart();
+    }
+  };
+
+  const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
+    (payment.Courses || []).find(
+      (elemento) => elemento.id === (dataDetail?.id || 0)
+    )
+  );
+
+  const lessonsBySection = {};
+  if (dataDetail && dataDetail.lesson) {
+    dataDetail.lesson.forEach((lesson) => {
+      const section = lesson.section;
+      if (!lessonsBySection[section]) {
+        lessonsBySection[section] = [];
+      }
+      lessonsBySection[section].push(lesson);
+    });
+  }
+
+  return (
+    <div className={Styles.detailCourseContainer}>
+      <header>
+        <div className={Styles.detailContentTop}>
+          <div className={Styles.imageContainer}>
+            {dataDetail && dataDetail.image && (
+              <img
+                src={dataDetail.image}
+                alt={dataDetail.title}
+                className={Styles.courseImage}
+              />
+            )}
+          </div>
+          <div className={Styles.descriptionContainer}>
+            <h1>{dataDetail?.title}</h1>
+            {dataDetail?.description}
+          </div>
+        </div>
+      </header>
+      <main>
+        <div className={Styles.listContainer}>
+          {dataDetail && Object.keys(lessonsBySection).length > 0 ? (
+            Object.keys(lessonsBySection).map((section) => (
+              <div key={section}>
+                <h3 className={Styles.section}>Sección {section}</h3>
+                {lessonsBySection[section].map((elemento) => (
+                  <div key={elemento.id} className={Styles.listItem}>
+                    <div>
+                      <h4>{elemento.title}</h4>
+                    </div>
+                    <div>{formatTime(elemento.duration)}</div>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            <p>No se encontraron lecciones para este curso.</p>
+          )}
+          <div className={Styles.listTime}>
+            <h3>
+              {totalClass} clases - duración del curso:{" "}
+              {formatTimeWithHours(totalTime)}
+            </h3>
+          </div>
+        </div>
+        <footer className={Styles.buttonsContainer}>
+          <div className={Styles.buttonsContainer}>
+            <Button text={"Volver"} onClick={handleGoBack} />
+            {courseAlreadyPurchased ? (
+              <Button
+                text={"Ir al curso"}
+                onClick={() => {
+                  handleCardToCourse();
+                }}
+              />
+            ) : !userData ? (
+              <Button text={"¡Comprar ahora!"} onClick={handleNavigateLogin} />
+            ) : (
+              <Button
+                text={"¡Comprar ahora!"}
+                onClick={addToCart}
+              />
+            )}
+          </div>
+        </footer>
+      </main>
+    </div>
+  );
 };
 
 export default DetailCourse;
-
-{
-	/* <div className={Styles.classContainer}>
-              {dataDetail.lessons ? (
-                dataDetail.lessons.map((lesson, index) => (
-                  <div key={lesson.lesson_id} className={Styles.classItem}>
-                    <div className={Styles.classItemTitle}>{lesson.title}</div>
-                    <div>{lesson.duration}</div>
-                  </div>
-                ))
-              ) : (
-                <p>No se encontraron lecciones para este curso.</p>
-              )}
-            </div> */
-}

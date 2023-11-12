@@ -4,19 +4,63 @@ import Styles from "./Card.module.css";
 import Button from "../Button/Button";
 import { useCart } from "../../context/CartContext";
 import { userContext } from "../../App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import { getUserById } from "../../utils/getUserById";
+
+const formatTimeWithHours = (seconds) => {
+  const hours = String(Math.floor(seconds / 3600));
+  const minutes = String(Math.floor((seconds % 3600) / 60));
+  return `${hours} h ${minutes} m duración total`;
+};
 
 const Card = ({ course }) => {
   const navigate = useNavigate();
   const { dispatch } = useCart();
   const userData = useContext(userContext);
+  const [totalTime, setTotalTime] = useState(0);
+  const [totalClass, setTotalClass] = useState(0);
+  const [user, setUser] = useState(null);
+  const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
+    (payment.Courses || []).find((elemento) => elemento.id === course.id)
+  );
 
-  const handleCardClick = () => {
+  useEffect(() => {
+    if (course && course.lesson) {
+      const totalDuration = course.lesson.reduce(
+        (acc, lesson) => acc + lesson.duration,
+        0
+      );
+      setTotalTime(totalDuration);
+    }
+    if (course && course.lesson) {
+      const totalLessonCount = course.lesson.length;
+      setTotalClass(totalLessonCount);
+    }
+
+    if (course && course.instructor_id) {
+      getUserById(course.instructor_id)
+        .then((user) => {
+          setUser(user);
+        })
+        .catch((error) => {
+          console.error("Error al obtener información del usuario:", error);
+        });
+    }
+  }, [course]);
+
+  const handleCardToDetails = () => {
     navigate(`/detailCourse/${course.id}`);
+    window.scrollTo({ top: 0 });
+  };
+
+  const handleCardToCourse = () => {
+    navigate(`/student/${userData.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateCart = () => {
     navigate(`/cart/${userData.id}`);
+    window.scrollTo({ top: 0 });
   };
 
   const handleNavigateLogin = () => {
@@ -65,7 +109,7 @@ const Card = ({ course }) => {
 
   return (
     <div className={Styles.cardContainer}>
-      <div className={Styles.imgContainer} onClick={handleCardClick}>
+      <div className={Styles.imgContainer} onClick={handleCardToDetails}>
         <img src={course.image} alt={course.title} />
       </div>
       <div className={Styles.contentContainer}>
@@ -92,44 +136,51 @@ const Card = ({ course }) => {
             <p>{course.description}</p>
           </div>
           <div className={Styles.contentTopDetail}>
-            <div>Nombre del instructor</div>
+            <div>
+              {!user ? null : (
+                <div>
+                  Desarrollado por {user.first_name} {user.last_name}
+                </div>
+              )}
+            </div>
             <div>
               4.5 xxxxx (800)
               {course.rating} {generateStars(course.rating)}
+              <div>
+                {totalClass} clases - {formatTimeWithHours(totalTime)}
+              </div>
             </div>
-            <div>30 horas en total - 200 clases</div>
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          <div className={Styles.contentBottomButton}>
-            <Button text={"Agregar al carrito"} onClick={addToCart} />
-            {!userData ? (
-              <Button
-                text={"Comprar"}
-                onClick={() => {
-                  handleNavigateLogin();
-                }}
-              />
-            ) : (
-              <Button
-                text={"Comprar"}
-                onClick={() => {
-                  addToCart();
-
-                  if (
-                    userData &&
-                    userData.Courses &&
-                    userData.Courses.find(
-                      (userCourse) => userCourse.id === course.id
-                    )
-                  ) {
-                  } else {
+          {courseAlreadyPurchased ? (
+            <Button
+              text={"Ir al curso"}
+              onClick={() => {
+                handleCardToCourse();
+              }}
+            />
+          ) : (
+            <>
+              <Button text={"Agregar al carrito"} onClick={addToCart} />
+              {!userData ? (
+                <Button
+                  text={"Comprar"}
+                  onClick={() => {
+                    handleNavigateLogin();
+                  }}
+                />
+              ) : (
+                <Button
+                  text={"Comprar"}
+                  onClick={() => {
+                    addToCart();
                     handleNavigateCart();
-                  }
-                }}
-              />
-            )}
-          </div>
+                  }}
+                />
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
