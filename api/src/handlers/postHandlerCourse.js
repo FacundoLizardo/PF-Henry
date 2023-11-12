@@ -24,7 +24,6 @@ const postHandlerCourse = async (req, res) => {
 	) {
 		return res.status(404).json({ error: "Lack Of Data" });
 	}
-	//Comment Prueba
 	try {
 		const newCourse = await postCreateCourse(
 			title,
@@ -35,6 +34,7 @@ const postHandlerCourse = async (req, res) => {
 			price,
 			sections
 		);
+		console.log(newCourse);
 
 		return res.status(200).json(newCourse);
 	} catch (error) {

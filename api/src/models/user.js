@@ -54,6 +54,10 @@ const User = (sequelize) => {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
+			isAdmin: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
 			enabled: {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
