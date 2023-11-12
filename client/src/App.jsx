@@ -22,6 +22,8 @@ import Styles from "./App.module.css";
 import { useEffect } from "react";
 import { CheckOut } from "./Components/Cart/CheckOut";
 import FormLecture from "./views/FormLecture/FormLecture";
+import Mailer from "./views/SendEmails/Mailer";
+
 
 export const userContext = React.createContext();
 
@@ -103,6 +105,10 @@ function App() {
       <Route
         path="/payment/checkout/sucess"
         element={<CheckOut updateContextUser={updateContextUser} />}
+      />
+        <Route
+        path="/mailer"
+        element={<Mailer updateContextUser={updateContextUser} />}
       />
     </>
   );

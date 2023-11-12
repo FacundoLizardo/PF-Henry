@@ -1,0 +1,80 @@
+.container {
+   margin: 0;
+   padding: 0;
+   background: linear-gradient(-45deg, #11151d, #252525);
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.titleForm {
+   color: #ff6600;
+   font-size: 2rem;
+   font-weight: 600;
+   font-family: 'Shadows Into Light', cursive;
+   margin: 0px;
+}
+
+.formMail {
+   width: 20rem;
+   border: groove 3px #fff;
+   border-radius: 15px;
+   box-shadow: -3px -2px 1px #535366;
+   background: #232526;
+   background: linear-gradient(to right, #414345, #232526);
+   opacity: 0.8;
+   padding: 1rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.hr {
+   width: 20rem;
+}
+
+label {
+   font-size: 1.5rem;
+   color: #9cc7f3;
+   font-weight: 900;
+   margin-bottom: 0.5rem;
+}
+
+input {
+   font-size: 1rem;
+   background: transparent;
+   box-shadow: 0 -2px 2px rgb(199, 194, 194);
+   border-radius: 20px;
+   color: #fff;
+   margin-bottom: 1rem;
+   padding: 0.5rem;
+}
+
+textarea {
+   border-radius: 10px;
+   background-color: #a3a8af;
+   padding: 0.5rem;
+   color: #fff;
+   margin-bottom: 1rem;
+}
+
+button {
+   padding: 0.5rem 1rem;
+   background-color: #b3ffcc; 
+   /* background-color: #99ff00; */
+
+   /* color: #fff; */
+   color:#11151d;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 1rem;
+   font-weight: bold;
+   transition: background-color 0.3s;
+}
+
+button:hover {
+   background-color: #e65c00;
+}
