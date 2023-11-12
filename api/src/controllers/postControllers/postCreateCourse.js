@@ -1,4 +1,4 @@
-const { Course, User } = require("../../db");
+const { Course, User, Category } = require("../../db");
 
 const postCreateCourse = async (
 	title,
@@ -10,7 +10,12 @@ const postCreateCourse = async (
 	sections
 ) => {
 	try {
-		const enabled = true;
+		const existCat = await Category.findOne({
+			where: {
+				name: category,
+			},
+		});
+
 		const [course, created] = await Course.findOrCreate({
 			where: { title: title },
 			defaults: {
@@ -20,14 +25,18 @@ const postCreateCourse = async (
 				category,
 				price,
 				sections,
-				enabled,
+				enabled: true,
 			},
 		});
 
 		const instructor = await User.findByPk(instructor_id);
 
 		if (instructor) {
-			course.addUser(instructor);
+			await course.addUser(instructor);
+		}
+
+		if (existCat) {
+			await course.setCategory(existCat);
 		}
 
 		if (created) {

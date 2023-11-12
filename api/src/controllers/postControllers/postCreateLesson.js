@@ -13,15 +13,6 @@ const postCreateLesson = async (
 	if (!existeCurso) {
 		return "Curso/Usuario inexistente";
 	}
-	console.log(
-		title,
-		description,
-		video_url,
-		CourseId,
-		section,
-		duration,
-		enabled
-	);
 	// Busca una lección existente con los mismos atributos
 	const existingLesson = await Lesson.findOne({
 		where: {
