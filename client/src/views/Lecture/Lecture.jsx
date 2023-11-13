@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const Lecture = ({ updateContextUser }) => {
   const { state } = useLocation();
   const lesson = state;
-  console.log("leccion", lesson);
   const video = lesson.video_url;
 
   useEffect(() => {

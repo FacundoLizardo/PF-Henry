@@ -3,6 +3,7 @@
 	width: 90%;
 	margin: auto;
 	max-width: 1024px;
+	min-height: 100%;
 	padding: var(--pd-section);
 	padding-bottom: var(--pd-y-2);
 }

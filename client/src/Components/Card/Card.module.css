@@ -114,3 +114,22 @@
   display: flex;
   justify-content: center;
 }
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ratingContainer div {
+  display: flex;
+  align-items: center;
+}
+
+.ratingContainer svg {
+  width: 14px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: yellow;
+}

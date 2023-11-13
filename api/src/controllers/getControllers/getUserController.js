@@ -1,4 +1,4 @@
-const { User, Course, Payment, Lesson } = require("../../db");
+const { User, Course, Payment, Lesson, Rating } = require("../../db");
 
 const getUserController = async (email) => {
 	try {
@@ -15,6 +15,7 @@ const getUserController = async (email) => {
 									model: Lesson,
 									as: "lesson",
 								},
+								{ model: Rating, as: "ratings" },
 							],
 						},
 					],

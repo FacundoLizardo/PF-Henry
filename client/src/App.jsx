@@ -17,11 +17,13 @@ import EditCourse from "./views/EditCourse/EditCourse";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 import React, { useState } from "react";
 import CartPage from "./views/CartPage/CartPage";
-
 import Styles from "./App.module.css";
 import { useEffect } from "react";
 import { CheckOut } from "./Components/Cart/CheckOut";
 import FormLecture from "./views/FormLecture/FormLecture";
+import { getAllUser } from "./utils/getAllUser";
+import { getAllCategories } from "./utils/getAllCategories";
+import { getAllCourses } from "./utils/getAllCourses";
 
 export const userContext = React.createContext();
 
@@ -55,6 +57,9 @@ function App() {
   const session = JSON.parse(localStorage.getItem("userOnSession"));
 
   useEffect(() => {
+    getAllUser();
+    getAllCourses();
+    getAllCategories();
     if (session) {
       setLogged(!logged);
     }
@@ -127,7 +132,10 @@ function App() {
               element={<Courses updateContextUser={updateContextUser} />}
             />
             {logged2 ? authenticatedRoutes : unauthenticatedRoutes}
-            <Route path="/detailCourse/:id" element={<DetailCourse updateContextUser={updateContextUser} />} />
+            <Route
+              path="/detailCourse/:id"
+              element={<DetailCourse updateContextUser={updateContextUser} />}
+            />
 
             <Route
               path="/login/"

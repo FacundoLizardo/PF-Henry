@@ -6,10 +6,12 @@ import CardLayoutContainer from "../../Components/CardLayoutContainer/CardLayout
 import { getOnSaleCourses } from "../../utils/getOnSaleCourses";
 
 import Styles from "./Layout.module.css";
+import { getAllUser } from "../../utils/getAllUser";
 
 const Layout = ({ updateContextUser }) => {
 	const [dataCourses, setDataCourses] = useState([]);
 	const [onSaleCourses, setOnSlaeCourses] = useState([]);
+	console.log(dataCourses);
 
 	const checkDisabled = () => {
 		const storedData = localStorage.getItem("coursesData");
@@ -20,6 +22,7 @@ const Layout = ({ updateContextUser }) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
+			await getAllUser();
 			await getAllCategories();
 			await getAllCourses();
 			setOnSlaeCourses(await getOnSaleCourses());
