@@ -56,7 +56,7 @@ const EditCourse = () => {
 		setLessons(course.lesson);
 	};
 
-	console.log(newLessonValues);
+	console.log(newDataCourse);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -142,13 +142,12 @@ const EditCourse = () => {
 		setLoading(false);
 	};
 
-	const handlerModifiLesson = async (id) => {
+	const handlerModifyLesson = async (string, id) => {
+		console.log(string.id);
 		console.log(id);
-		const [lesson] = lessons.filter((i) => i.id === id);
+		let [lesson] = lessons.filter((i) => i.id === id);
 		console.log(lesson);
-		setNewLessonValues({ ...lesson });
-
-		console.log(newLessonValues);
+		//await setNewLessonValues({ ...lesson });
 		Swal.fire({
 			title: "Modificar lección",
 			html:
@@ -164,27 +163,29 @@ const EditCourse = () => {
 			customClass: {
 				popup: "mySwal",
 			},
-			preConfirm: () => {
-				const title = Swal.getPopup().querySelector("#title").value;
-				const description = Swal.getPopup().querySelector("#description").value;
-				const section = parseInt(
+			//preConfirm: async () => {},
+		}).then(async (result) => {
+			if (!result.isConfirmed) {
+				string.value = "";
+			}
+			if (result.isConfirmed) {
+				lesson.title = Swal.getPopup().querySelector("#title").value;
+				lesson.description =
+					Swal.getPopup().querySelector("#description").value;
+				lesson.section = parseInt(
 					Swal.getPopup().querySelector("#section").value
 				);
 
-				setNewLessonValues((prevData) => ({
-					...prevData,
-					title,
-					description,
-					section,
-				}));
-			},
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				console.log(newLessonValues);
-				await updateLesson(newLessonValues).then(
-					await getAllCourses().then(getData(), updateAllLessonsData())
-				);
+				console.log(lesson);
 
+				await updateLesson(lesson).then(
+					await getAllCourses().then(
+						getData(),
+						updateAllLessonsData(),
+						navigate(`localhost:5173/edit/${newDataCourse.id}`)
+					)
+				);
+				string.value = "";
 				Swal.fire({
 					title: "Se modifico tu leccion con exito!",
 					icon: "success",
@@ -278,11 +279,12 @@ const EditCourse = () => {
 											</label>
 											<select
 												key={i}
-												id={"miSelect"}
+												id={`miSelect${i}`}
 												className={Styles.input__field}
 												onChange={() =>
-													handlerModifiLesson(
-														document.getElementById("miSelect").value
+													handlerModifyLesson(
+														document.getElementById(`miSelect${i}`),
+														document.getElementById(`miSelect${i}`).value
 													)
 												}
 											>

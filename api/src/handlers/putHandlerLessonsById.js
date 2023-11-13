@@ -5,6 +5,7 @@ const {
 const putHandlerLessonsById = async (req, res) => {
 	const { id, title, description, video_url, duration, section } = req.body;
 
+	console.log(req.body);
 	if (!id || !title || !description || !video_url || !duration || !section) {
 		return res.status(404).json({ error: "No guardado - Faltan datos" });
 	}
