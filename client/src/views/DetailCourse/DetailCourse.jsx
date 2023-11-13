@@ -5,6 +5,7 @@ import Styles from "./DetailCourse.module.css";
 import Button from "../../Components/Button/Button";
 import { userContext } from "../../App";
 import { useCart } from "../../context/CartContext";
+import Swal from "sweetalert2";
 
 const formatTime = (seconds) => {
   const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
@@ -22,7 +23,7 @@ const formatTimeWithHours = (seconds) => {
 const DetailCourse = ({ updateContextUser }) => {
   const { id } = useParams();
   const [dataDetail, setDataDetail] = useState(null);
-
+  console.log(dataDetail);
   const { dispatch } = useCart();
   const navigate = useNavigate();
   const userData = useContext(userContext);
@@ -75,7 +76,8 @@ const DetailCourse = ({ updateContextUser }) => {
   const addToCart = () => {
     if (dataDetail) {
       const newPrice =
-        dataDetail.price - (dataDetail.price * dataDetail.percentageDiscount) / 100;
+        dataDetail.price -
+        (dataDetail.price * dataDetail.percentageDiscount) / 100;
       const roundedNewPrice = parseFloat(newPrice.toFixed(2));
 
       const productToAddToCart = {
@@ -93,6 +95,7 @@ const DetailCourse = ({ updateContextUser }) => {
         sections: dataDetail.sections,
         updatedAt: dataDetail.updatedAt,
         lesson: dataDetail.lesson,
+        ratings: dataDetail.ratings,
       };
       dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
       handleNavigateCart();
@@ -116,6 +119,49 @@ const DetailCourse = ({ updateContextUser }) => {
     });
   }
 
+  const handleRating = () => {
+    if (dataDetail && dataDetail.ratings) {
+      const formattedRatings = `
+        <table style="border-collapse: collapse; width: 100%; min-width: 400px; font-size: 14px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">#</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">Calificación</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">Comentario</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${dataDetail.ratings
+              .map(
+                (rating, index) => `
+              <tr>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">${
+                  index + 1
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">${
+                  rating.rating
+                } estrellas</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">${
+                  rating.comment
+                }</td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      `;
+
+      Swal.fire({
+        title: "Calificaciones",
+        html: formattedRatings,
+        customClass: {
+          popup: "mySwal",
+        },
+      });
+    }
+  };
+
   return (
     <div className={Styles.detailCourseContainer}>
       <header>
@@ -130,8 +176,12 @@ const DetailCourse = ({ updateContextUser }) => {
             )}
           </div>
           <div className={Styles.descriptionContainer}>
-            <h1>{dataDetail?.title}</h1>
-            {dataDetail?.description}
+            <div>
+              <h1>{dataDetail?.title}</h1>
+            </div>
+            <div>{dataDetail?.description}</div>
+            <div></div>
+            <Button text={"Ver calificaciones"} onClick={handleRating} />
           </div>
         </div>
       </header>
@@ -174,10 +224,7 @@ const DetailCourse = ({ updateContextUser }) => {
             ) : !userData ? (
               <Button text={"¡Comprar ahora!"} onClick={handleNavigateLogin} />
             ) : (
-              <Button
-                text={"¡Comprar ahora!"}
-                onClick={addToCart}
-              />
+              <Button text={"¡Comprar ahora!"} onClick={addToCart} />
             )}
           </div>
         </footer>
