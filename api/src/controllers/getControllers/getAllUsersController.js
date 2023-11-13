@@ -11,6 +11,7 @@ const getAllUsersController = async () => {
 				last_name: user.last_name,
 				user_name: user.user_name,
 				id: user.id,
+				enabled: user.enabled,
 			};
 		});
 		return cleanInfo;
