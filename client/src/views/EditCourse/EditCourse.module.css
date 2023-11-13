@@ -175,3 +175,10 @@
 	border: 1px solid var(--color-border-three);
 	background-color: var(--color-text-secondary);
 }
+
+.mySwal {
+	border-radius: 50px;
+	width: 90%;
+	border-color: #000;
+	border-style: solid;
+}

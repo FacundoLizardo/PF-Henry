@@ -150,18 +150,21 @@ const EditCourse = () => {
 		//await setNewLessonValues({ ...lesson });
 		Swal.fire({
 			title: "Modificar lección",
+
 			html:
-				'<label for="title">Nombre:</label>' +
-				'<input id="title" class="swal2-input" placeholder="Ingrese el nombre de la lección">' +
-				'<label for="description">Descripción:</label>' +
-				'<input id="description" class="swal2-input" placeholder="Ingrese la descripción">' +
-				'<label for="section">    Sección</label>' +
-				'<input id="section" class="swal2-input" placeholder="Ingrese la sección">',
+				`<p>Si no modifica un campo este mantendra su valor actual</p>` +
+				'<label for="title" class="swal2-label">Nombre:</label>' +
+				`<input id="title" class="swal2-input" placeholder=${lesson.title}>` +
+				'<label for="description" class="swal2-label">Descripción:</label>' +
+				`<textarea id="description" class="swal2-input-description" rows="6" cols="50" placeholder=${lesson.description}></textarea>` +
+				'<label for="section" class="swal2-label">Sección:</label>' +
+				`<input id="section" class="swal2-input" placeholder=${lesson.section}>`,
+
 			focusConfirm: false,
 			confirmButtonText: "MODIFICAR",
 			showCancelButton: true,
 			customClass: {
-				popup: "mySwal",
+				popup: "mySwalLesson",
 			},
 			//preConfirm: async () => {},
 		}).then(async (result) => {
