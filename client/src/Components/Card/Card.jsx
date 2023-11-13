@@ -22,6 +22,7 @@ const Card = ({ course }) => {
   const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
     (payment.Courses || []).find((elemento) => elemento.id === course.id)
   );
+  console.log(course);
 
   useEffect(() => {
     if (course && course.lesson) {
@@ -136,11 +137,14 @@ const Card = ({ course }) => {
           <div className={Styles.contentTopDetail}>
             <div>
               {user
-                ? user.map((item, index) => (
-                    <div key={index}>
-                      Desarrollado por {item.first_name} {item.last_name}
-                    </div>
-                  ))
+                ? user
+                    .filter((item) => item.id === course.instructor_id)
+                    .map((elemento, index) => (
+                      <div key={index}>
+                        Desarrollado por {elemento.first_name}{" "}
+                        {elemento.last_name}
+                      </div>
+                    ))
                 : null}
             </div>
             <div>
