@@ -140,13 +140,17 @@ const Navbar = () => {
 														Configuración
 													</button>
 													<hr />
-													<button
-														onClick={() =>
-															handleNavigateToDashboard(userData?.id)
-														}>
-														Dashboard
-													</button>
-													<hr />
+													{userOnSession.isAdmin && (
+														<>
+															<button
+																onClick={() =>
+																	handleNavigateToDashboard(userData?.id)
+																}>
+																Dashboard
+															</button>
+															<hr />
+														</>
+													)}
 													<button onClick={signOutFn}>Desconectarse</button>
 												</div>
 											</div>

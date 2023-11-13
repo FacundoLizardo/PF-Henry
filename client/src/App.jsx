@@ -67,6 +67,14 @@ function App() {
 	}, []);
 
 	const logged2 = localStorage.getItem("logged");
+
+	const adminRoutes = (
+		<Route
+			path="/admin/dashboard/:id"
+			element={<Dashboard updateContextUser={updateContextUser} />}
+		/>
+	);
+
 	const authenticatedRoutes = (
 		<>
 			<Route
@@ -110,10 +118,6 @@ function App() {
 				path="/payment/checkout/sucess"
 				element={<CheckOut updateContextUser={updateContextUser} />}
 			/>
-			<Route
-				path="/admin/dashboard/:id"
-				element={<Dashboard updateContextUser={updateContextUser} />}
-			/>
 		</>
 	);
 
@@ -136,6 +140,7 @@ function App() {
 							path="/courses/"
 							element={<Courses updateContextUser={updateContextUser} />}
 						/>
+						{session?.isAdmin ? adminRoutes : unauthenticatedRoutes}
 						{logged2 ? authenticatedRoutes : unauthenticatedRoutes}
 						<Route
 							path="/detailCourse/:id"
