@@ -106,6 +106,7 @@
 	padding: 0.75rem 0.75rem;
 	transition: 0.15s ease;
 	width: 100%;
+	resize: none;
 }
 
 .input__field:focus {

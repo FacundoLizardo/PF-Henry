@@ -176,8 +176,8 @@ const EditCourse = () => {
 				`<p>Si no modifica un campo este mantendra su valor actual</p>` +
 				'<label for="title" class="swal2-label">Nombre:</label>' +
 				`<input id="title" class="swal2-input" placeholder=${lesson.title}>` +
-				'<label for="description" class="swal2-label">Descripción:</label>' +
-				`<textarea id="description" class="swal2-input-description" rows="6" cols="50" placeholder=${lesson.description}></textarea>` +
+				'<label for="description" class="swal2-label" >Descripción:</label>' +
+				`<textarea id="description" class="swal2-input-description" maxLength="300" rows="6" cols="50" placeholder=${lesson.description}></textarea>` +
 				'<label for="section" class="swal2-label">Sección:</label>' +
 				`<input id="section" class="swal2-input" placeholder=${lesson.section}>` +
 				'<label for="section" class="swal2-label">Cargar nuevo video:</label>' +
