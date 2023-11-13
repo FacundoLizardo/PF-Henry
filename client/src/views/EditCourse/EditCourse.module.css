@@ -10,9 +10,9 @@
 	align-items: center;
 	justify-content: center;
 	padding: 1.5rem;
-  }
-  
-  .modal {
+}
+
+.modal {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -20,105 +20,116 @@
 	background-color: var(--color-text-secondary);
 	box-shadow: var(--box-shadow);
 	border-radius: 10px;
-  }
-  
-  /* Estilos para campos de precio */
-  .fieldPrice_Send {
+}
+
+/* Estilos para campos de precio */
+.fieldPrice_Send {
 	margin-top: 15px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
-  }
-  
-  .priceField {
+}
+
+.priceField {
 	display: flex;
 	gap: 20px;
 	align-items: center;
 	padding: 0px !important;
-  }
-  
-  .input__price {
+}
+
+.input__price {
 	display: block;
 	border: 1px solid var(--color-border-three);
 	border-radius: 0.25rem;
 	padding: 0.38rem 0.38rem;
 	transition: 0.15s ease;
-  }
-  
-  .button_add {
+}
+
+.button_add {
 	height: 41px !important;
-  }
-  
-  /* Estilos para el encabezado del modal */
-  .modal__header {
+}
+
+/* Estilos para el encabezado del modal */
+.modal__header {
 	padding: 1rem 1.5rem;
 	border-bottom: 1px solid var(--color-border-three);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-  }
-  
-  /* Estilos para el cuerpo del modal */
-  .modal__body {
+}
+
+/* Estilos para el cuerpo del modal */
+.modal__body {
 	padding: 1rem 1rem;
-  }
-  
-  /* Estilos para el pie del modal */
-  .modal__footer {
+}
+
+/* Estilos para el pie del modal */
+.modal__footer {
 	padding: 0 1.5rem 1.5rem;
-  }
-  
-  .modal__title {
+}
+
+.modal__title {
 	font-weight: 700;
 	font-size: 1.25rem;
-  }
-  
-  /* Estilos para campos de entrada */
-  .input {
+}
+
+/* Estilos para campos de entrada */
+.input {
 	display: flex;
 	flex-direction: column;
-  }
-  
-  .input + .input {
+}
+
+.input + .input {
 	margin-top: 1.75rem;
-  }
-  
-  .input__label {
+}
+
+.input__label {
 	font-weight: 700;
 	font-size: 0.875rem;
-  }
-  
-  .input__field {
+}
+.input__label2 {
+	font-weight: 400;
+	font-size: 0.875rem;
+}
+.input__label3 {
+	margin-top: 1.3rem;
+	font-weight: 700;
+	font-size: 0.875rem;
+}
+
+.input__field {
 	display: block;
 	margin-top: 0.5rem;
 	border: 1px solid var(--color-border-three);
 	border-radius: 0.25rem;
 	padding: 0.75rem 0.75rem;
 	transition: 0.15s ease;
-  }
-  
-  .input__field:focus {
+	width: 100%;
+	resize: none;
+}
+
+.input__field:focus {
 	outline: none;
 	border-color: var(--color-hover);
 	box-shadow: 0 0 0 1px var(--color-background-off-two),
-	  0 0 0 4px rgba(142, 124, 255, 0.25);
-  }
-  
-  .input__field--textarea {
+		0 0 0 4px rgba(142, 124, 255, 0.25);
+}
+
+.input__field--textarea {
 	min-height: 100px;
 	max-width: 100%;
-  }
-  
-  .input__description {
+}
+
+.input__description {
 	font-size: 12px;
 	padding: 3px;
 	height: 25px;
 	color: red;
-  }
-  
-  /* Estilos para el loader */
-  .loader {
+}
+
+/* Estilos para el loader */
+.loader {
 	width: 50px;
 	padding: 8px;
 	aspect-ratio: 1;
@@ -130,11 +141,45 @@
 	-webkit-mask-composite: source-out;
 	mask-composite: subtract;
 	animation: l3 1s infinite linear;
-  }
-  
-  @keyframes l3 {
+}
+
+@keyframes l3 {
 	to {
-	  transform: rotate(1turn);
+		transform: rotate(1turn);
 	}
-  }
-  
+}
+
+.listContainer {
+	width: 80%;
+	margin: 50px auto;
+	padding: var(--pd-3);
+	border: 1px solid var(--color-border-three);
+	background-color: var(--color-background);
+}
+
+.section {
+	padding: var(--pd-y-1) 0;
+}
+
+.listItem {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid var(--color-border-three);
+	background-color: var(--color-background-details);
+	padding: var(--pd-y-1) var(--pd-x-3);
+	transition: all 0.2s ease-out;
+	cursor: pointer;
+}
+
+.listItem:hover {
+	color: var(--color-hover);
+	border: 1px solid var(--color-border-three);
+	background-color: var(--color-text-secondary);
+}
+
+.mySwal {
+	border-radius: 50px;
+	width: 90%;
+	border-color: #000;
+	border-style: solid;
+}
