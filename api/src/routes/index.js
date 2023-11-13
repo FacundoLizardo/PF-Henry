@@ -7,7 +7,7 @@ const { courseRoutes } = require("./courseRoutes");
 const { userRoutes } = require("./userRoutes");
 const { ratingRoutes } = require("./ratingRoutes");
 const { onSaleRoutes } = require("./onSaleRoutes");
-// const lessonRutes = require("./lessonRoutes");
+const { lessonRutes } = require("./lessonRoutes");
 // const paymentRoutes = require("./paymentRoutes");
 // const consumptionRoutes = require("./consumptionRoutes");
 
@@ -17,7 +17,7 @@ router.use("/onSale", onSaleRoutes);
 router.use("/courses", courseRoutes);
 router.use("/users", userRoutes);
 router.use("/rating", ratingRoutes);
-// router.use("/lesson", lessonRutes);
+router.use("/lesson", lessonRutes);
 // router.use("/payment", paymentRoutes);
 // router.use("/consumption", consumptionRoutes);
 
