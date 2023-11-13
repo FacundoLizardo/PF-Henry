@@ -47,7 +47,7 @@ const Navbar = () => {
 	};
 
 	const signInFn = () => {
-		window.location = "http://localhost:5173/login";
+		window.location = "/login";
 	};
 
 	const handleMouseEnter = () => {
