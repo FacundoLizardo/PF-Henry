@@ -142,12 +142,33 @@ const EditCourse = () => {
 		setLoading(false);
 	};
 
+	const uploadVideo = async () => {
+		const video = document.getElementById("video");
+		const videoFile = video.files[0];
+		const videoRef = ref(
+			storage,
+			`courses/${nombreCurso[0].title}/${lecture.title} - ${id}`
+		);
+		await uploadBytes(videoRef, videoFile);
+		const path = await getDownloadURL(videoRef);
+		if (path) {
+			Swal.fire({
+				title: "Tu video se cargo con exito!",
+				icon: "success",
+				confirmButtonText: "Continuar",
+				customClass: {
+					popup: "mySwal",
+				},
+			});
+		}
+		return path;
+	};
 	const handlerModifyLesson = async (string, id) => {
 		console.log(string.id);
 		console.log(id);
 		let [lesson] = lessons.filter((i) => i.id === id);
 		console.log(lesson);
-		//await setNewLessonValues({ ...lesson });
+
 		Swal.fire({
 			title: "Modificar lección",
 
@@ -158,7 +179,9 @@ const EditCourse = () => {
 				'<label for="description" class="swal2-label">Descripción:</label>' +
 				`<textarea id="description" class="swal2-input-description" rows="6" cols="50" placeholder=${lesson.description}></textarea>` +
 				'<label for="section" class="swal2-label">Sección:</label>' +
-				`<input id="section" class="swal2-input" placeholder=${lesson.section}>`,
+				`<input id="section" class="swal2-input" placeholder=${lesson.section}>` +
+				'<label for="section" class="swal2-label">Cargar nuevo video:</label>' +
+				`<input id="video" type="file" class="swal2-input-video" >`,
 
 			focusConfirm: false,
 			confirmButtonText: "MODIFICAR",
@@ -166,18 +189,19 @@ const EditCourse = () => {
 			customClass: {
 				popup: "mySwalLesson",
 			},
-			//preConfirm: async () => {},
 		}).then(async (result) => {
 			if (!result.isConfirmed) {
 				string.value = "";
 			}
 			if (result.isConfirmed) {
+				// const videoPath = await uploadVideo();
 				lesson.title = Swal.getPopup().querySelector("#title").value;
 				lesson.description =
 					Swal.getPopup().querySelector("#description").value;
 				lesson.section = parseInt(
 					Swal.getPopup().querySelector("#section").value
 				);
+				// lesson.video_url = videoPath;
 
 				console.log(lesson);
 
