@@ -19,7 +19,6 @@ const Card = ({ course }) => {
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
   const user = JSON.parse(localStorage.getItem("allUser"));
-  console.log(course);
   const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
     (payment.Courses || []).find((elemento) => elemento.id === course.id)
   );
