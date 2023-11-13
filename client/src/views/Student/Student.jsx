@@ -1,42 +1,43 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Styles from "./Student.module.css";
 import Button from "../../Components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import { postRating } from "../../utils/postRating";
+import { userContext } from "../../App";
+import { getUser } from "../../utils/getUser";
+import { getAllCourses } from "../../utils/getAllCourses";
 
 const Student = ({ updateContextUser }) => {
   const navigate = useNavigate();
-  const [sessionCourses, setSessionCourses] = useState();
-  const session = JSON.parse(localStorage.getItem("userOnSession"));
+  const userData = useContext(userContext);
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
     if (session?.email !== "") {
       updateContextUser(session);
     }
-
-    const sessionCourses = (session?.Payments || []).flatMap((payment) =>
-      (payment.Courses || []).map((course) => ({
-        id: course.id,
-        title: course.title,
-        description: course.description,
-        category: course.category,
-        createdAt: course.createdAt,
-        enabled: course.enabled,
-        image: course.image,
-        instructorId: course.instructor_id,
-        onSale: course.onSale,
-        price: course.price,
-        progress: course.progress,
-        sections: course.sections,
-        updatedAt: course.updatedAt,
-        lesson: course.lesson,
-        Rating: course.Rating,
-      }))
-    );
-    setSessionCourses(sessionCourses);
   }, []);
+
+  const sessionCourses = (userData?.Payments || []).flatMap((payment) =>
+    (payment.Courses || []).map((course) => ({
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      category: course.category,
+      createdAt: course.createdAt,
+      enabled: course.enabled,
+      image: course.image,
+      instructorId: course.instructor_id,
+      onSale: course.onSale,
+      price: course.price,
+      progress: course.progress,
+      sections: course.sections,
+      updatedAt: course.updatedAt,
+      lesson: course.lesson,
+      ratings: course.ratings,
+    }))
+  );
 
   const handleNavigateToLessons = (courseId) => {
     const dataCourse = sessionCourses.find(
@@ -85,12 +86,35 @@ const Student = ({ updateContextUser }) => {
               customClass: {
                 popup: "mySwal",
               },
-            });
+            })
+              .then(getAllCourses())
+              .then((result) => {
+                console.log("Result del enrollCourses", result);
+                return getUser(userData.email);
+              })
+              .then((newUser) => {
+                console.log(
+                  "Nuevo datos de usuraio traidos por getUser",
+                  newUser
+                );
+                localStorage.setItem("userOnSession", JSON.stringify(newUser));
+                updateContextUser(newUser);
+                window.location.reload;
+              });
           }
         });
       }
     });
   };
+
+  const hasRated =
+    sessionCourses &&
+    sessionCourses.length > 0 &&
+    sessionCourses.some(
+      (course) =>
+        course.ratings &&
+        course.ratings.some((rating) => rating.UserId === userData.id)
+    );
 
   const CourseCard = ({ courses }) => (
     <div className={Styles.cardContainer}>
@@ -103,14 +127,14 @@ const Student = ({ updateContextUser }) => {
         </div>
         <div className={Styles.percentage}>
           <div className={Styles.progress}>
-            <div className={Styles.progressBar} id="progressBar">
+            {/*      <div className={Styles.progressBar} id="progressBar">
               %
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={Styles.linkRating}>
-          <p onClick={() => handleRating(courses.id, session.id)}>
-            Calificar curso
+          <p onClick={() => handleRating(courses.id, userData.id)}>
+            {hasRated ? "Modificar Calificación" : "Calificar Curso"}
           </p>
           <div>
             <svg
@@ -139,8 +163,8 @@ const Student = ({ updateContextUser }) => {
   return (
     <div className={Styles.studentContainer}>
       <div className={Styles.studentTitle}>
-        <h1>¡{session?.first_name}, bienvenido a tu área de estudio!</h1>
-        <h5>Alumno n°: {session?.id}</h5>
+        <h1>¡{userData?.first_name}, bienvenido a tu área de estudio!</h1>
+        <h5>Alumno n°: {userData?.id}</h5>
       </div>
 
       <div className={Styles.studentDescription}>

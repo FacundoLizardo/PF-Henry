@@ -59,6 +59,7 @@ const CardLayout = ({ courses }) => {
       sections: course.sections,
       updatedAt: course.updatedAt,
       lesson: course.lesson,
+      ratings: course.ratings,
     };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
