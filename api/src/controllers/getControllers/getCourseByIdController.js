@@ -1,11 +1,19 @@
-const { Course, Lesson } = require("../../db");
+const { Course, Lesson, Rating } = require("../../db");
 
 const getCourseByIdController = async (id) => {
-	const { dataValues } = await Course.findByPk(id, {
-		include: { model: Lesson, as: "lesson" },
+	const course = await Course.findByPk(id, {
+		include: [
+			{ model: Lesson, as: "lesson" },
+			{ model: Rating, as: "ratings" },
+		],
 	});
-	console.log(dataValues);
-	return dataValues;
+
+	if (course) {
+		console.log(course.dataValues);
+		return course.dataValues;
+	} else {
+		return null;
+	}
 };
 
 module.exports = { getCourseByIdController };

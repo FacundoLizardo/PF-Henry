@@ -39,7 +39,7 @@ Course.hasMany(Lesson, { as: "lesson" });
 Lesson.belongsTo(Course);
 
 //Cursos con Ratings
-Course.hasMany(Rating);
+Course.hasMany(Rating, { as: "ratings" });
 //Rating.belongsTo(Course, { foreignKey: "course_id" });
 Rating.belongsTo(Course);
 

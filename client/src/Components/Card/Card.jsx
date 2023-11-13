@@ -5,7 +5,6 @@ import Button from "../Button/Button";
 import { useCart } from "../../context/CartContext";
 import { userContext } from "../../App";
 import { useContext, useEffect, useState } from "react";
-import { getUserById } from "../../utils/getUserById";
 
 const formatTimeWithHours = (seconds) => {
   const hours = String(Math.floor(seconds / 3600));
@@ -19,7 +18,7 @@ const Card = ({ course }) => {
   const userData = useContext(userContext);
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
-  const [user, setUser] = useState(null);
+  const user = JSON.parse(localStorage.getItem("allUser"));
   const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
     (payment.Courses || []).find((elemento) => elemento.id === course.id)
   );
@@ -35,16 +34,6 @@ const Card = ({ course }) => {
     if (course && course.lesson) {
       const totalLessonCount = course.lesson.length;
       setTotalClass(totalLessonCount);
-    }
-
-    if (course && course.instructor_id) {
-      getUserById(course.instructor_id)
-        .then((user) => {
-          setUser(user);
-        })
-        .catch((error) => {
-          console.error("Error al obtener información del usuario:", error);
-        });
     }
   }, [course]);
 
@@ -87,21 +76,30 @@ const Card = ({ course }) => {
       sections: course.sections,
       updatedAt: course.updatedAt,
       lesson: course.lesson,
+      ratings: course.ratings,
     };
     dispatch({ type: "ADD_TO_CART", payload: productToAddToCart });
   };
 
-  const generateStars = (rating) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i <= rating) {
-        stars.push(<span key={i} className={Styles.starFilled}></span>);
-      } else {
-        stars.push(<span key={i} className={Styles.star}></span>);
-      }
+  const calculateRating = (ratings) => {
+    if (ratings.length === 0) {
+      return 0;
     }
-    return stars;
+
+    const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
+    const averageRating = totalRating / ratings.length;
+
+    return averageRating;
   };
+  const averageRating = calculateRating(
+    course.ratings.map((rating) => rating.rating)
+  );
+
+  const calculateCommentCount = (ratings) => {
+    return ratings.length;
+  };
+
+  const commentCount = calculateCommentCount(course.ratings);
 
   const newPrice =
     course.price - (course.price * course.percentageDiscount) / 100;
@@ -137,15 +135,35 @@ const Card = ({ course }) => {
           </div>
           <div className={Styles.contentTopDetail}>
             <div>
-              {!user ? null : (
-                <div>
-                  Desarrollado por {user.first_name} {user.last_name}
-                </div>
-              )}
+              {user
+                ? user.map((item, index) => (
+                    <div key={index}>
+                      Desarrollado por {item.first_name} {item.last_name}
+                    </div>
+                  ))
+                : null}
             </div>
             <div>
-              4.5 xxxxx (800)
-              {course.rating} {generateStars(course.rating)}
+              <div className={Styles.ratingContainer}>
+                <div>{averageRating} </div>
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="128"
+                    height="128"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m5.825 22l1.625-7.025L2 10.25l7.2-.625L12 3l2.8 6.625l7.2.625l-5.45 4.725L18.175 22L12 18.275L5.825 22Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  - {commentCount}{" "}
+                  {commentCount === 1 ? "comentario" : "comentarios"}
+                </div>
+              </div>
               <div>
                 {totalClass} clases - {formatTimeWithHours(totalTime)}
               </div>
