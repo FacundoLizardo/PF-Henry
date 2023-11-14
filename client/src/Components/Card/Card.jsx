@@ -18,7 +18,6 @@ const Card = ({ course }) => {
   const userData = useContext(userContext);
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
-  const user = JSON.parse(localStorage.getItem("allUser"));
   const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
     (payment.Courses || []).find((elemento) => elemento.id === course.id)
   );
@@ -136,16 +135,14 @@ const Card = ({ course }) => {
           </div>
           <div className={Styles.contentTopDetail}>
             <div>
-              {user
-                ? user
-                    .filter((item) => item.id === course.instructor_id)
-                    .map((elemento, index) => (
-                      <div key={index}>
-                        Desarrollado por {elemento.first_name}{" "}
-                        {elemento.last_name}
-                      </div>
-                    ))
-                : null}
+              {course.dataInstructor ? (
+                <div>
+                  Desarrollado por {course.dataInstructor.first_name}{" "}
+                  {course.dataInstructor.last_name}
+                </div>
+              ) : (
+                <div>No se encontró información del instructor</div>
+              )}
             </div>
             <div>
               <div className={Styles.ratingContainer}>
