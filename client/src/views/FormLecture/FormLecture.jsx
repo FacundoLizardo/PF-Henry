@@ -20,6 +20,7 @@ const FormLecture = ({ updateContextUser }) => {
 	const navigate = useNavigate();
 	const id = useParams().courseId;
 	const [loading, setLoading] = useState(false);
+	const [duration, setDuration] = useState(false);
 	const [lecture, setLecture] = useState({
 		title: "",
 		description: "",
@@ -46,8 +47,34 @@ const FormLecture = ({ updateContextUser }) => {
 			updateContextUser(session);
 		}
 		console.log(lecture);
-	}, [lecture]);
+		console.log(duration);
+	}, [lecture, duration]);
 
+	const getVideoDuration = async () => {
+		const videoInput = document.getElementById("video");
+
+		if (videoInput.files.length > 0) {
+			const selectedVideo = videoInput.files[0];
+			const videoElement = document.createElement("video");
+
+			// Asignar el archivo seleccionado al elemento de video
+			videoElement.src = URL.createObjectURL(selectedVideo);
+
+			// Evento que se ejecuta cuando la metadata del video está cargada
+			videoElement.onloadedmetadata = () => {
+				// Obtener la duración y mostrarla
+				const durationInSeconds = videoElement.duration;
+				setDuration(durationInSeconds);
+				return durationInSeconds;
+				// return durationInSeconds;
+			};
+			// Manejar errores durante la carga del video
+			videoElement.onerror = (error) => {
+				console.error("Error al cargar el video:", error);
+				durationResult.textContent = "Error al cargar el video";
+			};
+		}
+	};
 	const uploadVideo = async () => {
 		const video = document.getElementById("video");
 		const videoFile = video.files[0];
@@ -62,6 +89,7 @@ const FormLecture = ({ updateContextUser }) => {
 		return path;
 	};
 	const handleChange = (event) => {
+		getVideoDuration();
 		const { name, value } = event.target;
 		setLecture({ ...lecture, [name]: value });
 
@@ -77,7 +105,7 @@ const FormLecture = ({ updateContextUser }) => {
 		try {
 			const videoPath = await uploadVideo();
 
-			const lesson = { ...lecture, video_url: videoPath };
+			const lesson = { ...lecture, video_url: videoPath, duration: duration };
 
 			const response = await axios.post("/lessons/create", lesson);
 
