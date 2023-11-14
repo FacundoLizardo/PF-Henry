@@ -204,13 +204,56 @@ const Instructor = ({ updateContextUser }) => {
       });
     }
   };
+
+  const handleRating = () => {
+    if (dataCourses && dataCourses.ratings) {
+      const formattedRatings = `
+        <table style="border-collapse: collapse; width: 100%; min-width: 400px; font-size: 14px;">
+          <thead>
+            <tr>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">#</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">Calificación</th>
+              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">Comentario</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${dataCourses.ratings
+              .map(
+                (rating, index) => `
+              <tr>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">${
+                  index + 1
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">${
+                  rating.rating
+                } estrellas</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">${
+                  rating.comment
+                }</td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+      `;
+
+      Swal.fire({
+        title: "Calificaciones",
+        html: formattedRatings,
+        customClass: {
+          popup: "mySwal",
+        },
+      });
+    }
+  };
+
   return (
     <div className={Styles.instructorContainer}>
       <div className={Styles.instructorContainerTitle}>
         <h1>
-          ¡Hola <span>{userData?.user_name}</span>!
+          ¡Hola <span>{userData?.first_name}</span>!
         </h1>
-        <h5>Instructor n°: {userData?.id}</h5>
       </div>
       <div className={Styles.instructorContainerCreate}>
         <p>¡Empieza, crea tu curso!</p>
@@ -226,40 +269,52 @@ const Instructor = ({ updateContextUser }) => {
         {coursesCreated.map((course, index) => (
           <div key={index} className={Styles.courseContainer}>
             <div className={Styles.cardCourse}>
-              <img src={course.image} alt={course.title} />
-            </div>
-            <div className={Styles.courseInfo}>
-              <h2>{course.title}</h2>
-              <div className={Styles.buttonContainer}>
-                <Button
-                  text={"Crea clases"}
-                  onClick={() =>
-                    handleNavigate(`/instructor/${course.id}/createLecture`)
-                  }
-                />
-                <Button
-                  text={"Editar curso"}
-                  onClick={() => handleNavigate(`/edit/${course.id}`)}
-                />
-
-                {course.onSale === true ? (
-                  <>
+              <div className={Styles.courseImg}>
+                <img src={course.image} alt={course.title} />
+              </div>
+              <div className={Styles.courseInfo}>
+                <div>
+                  <div>
+                    <h3>{course.title}</h3>
+                  </div>
+                  <div>
                     <Button
-                      text={"Modificar descuento"}
-                      onClick={() => openCloseModal(course.id, "modificar")}
+                      text={"Ver calificaciones"}
+                      onClick={handleRating}
                     />
-                  </>
-                ) : (
+                  </div>
+                </div>
+                <div className={Styles.buttonContainer}>
                   <Button
-                    text={"Agregar descuento"}
-                    onClick={() => openCloseModal(course.id)}
+                    text={"Crea clases"}
+                    onClick={() =>
+                      handleNavigate(`/instructor/${course.id}/createLecture`)
+                    }
                   />
-                )}
+                  <Button
+                    text={"Editar curso"}
+                    onClick={() => handleNavigate(`/edit/${course.id}`)}
+                  />
 
-                <Button
-                  text={"Eliminar curso"}
-                  onClick={() => enableRestoreCourse(course.id, false)}
-                />
+                  {course.onSale === true ? (
+                    <>
+                      <Button
+                        text={"Modificar descuento"}
+                        onClick={() => openCloseModal(course.id, "modificar")}
+                      />
+                    </>
+                  ) : (
+                    <Button
+                      text={"Agregar descuento"}
+                      onClick={() => openCloseModal(course.id)}
+                    />
+                  )}
+
+                  <Button
+                    text={"Eliminar curso"}
+                    onClick={() => enableRestoreCourse(course.id, false)}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -268,28 +323,36 @@ const Instructor = ({ updateContextUser }) => {
 
       <div className={Styles.disabledCourses}>
         <div>
-          <h3>Tus cursos eliminados</h3>
+          <h3>Tus cursos desactivados</h3>
         </div>
-        {enabledCourses.map((course, index) => (
-          <div key={index} className={Styles.courseContainer}>
-            <div className={Styles.cardCourse}>
-              <img src={course.image} alt={course.title} />
-            </div>
-            <div className={Styles.courseInfo}>
-              <h2>{course.title}</h2>
-              <div className={Styles.buttonContainer}>
-                <Button
-                  text={"Editar curso"}
-                  onClick={() => handleNavigate(`/edit/${course.id}`)}
-                />
-                <Button
-                  text={"Restaurar curso"}
-                  onClick={() => enableRestoreCourse(course.id, true)}
-                />
+        {enabledCourses.length === 0 ? (
+          <div className={Styles.enabledCourses}>
+            <p>No hay cursos desactivados</p>
+          </div>
+        ) : (
+          enabledCourses.map((course, index) => (
+            <div key={index} className={Styles.courseContainer}>
+              <div className={Styles.cardCourse}>
+                <div className={Styles.courseImg}>
+                  <img src={course.image} alt={course.title} />
+                </div>
+                <div className={Styles.courseInfo}>
+                  <h2>{course.title}</h2>
+                  <div className={Styles.buttonContainer}>
+                    <Button
+                      text={"Editar curso"}
+                      onClick={() => handleNavigate(`/edit/${course.id}`)}
+                    />
+                    <Button
+                      text={"Restaurar curso"}
+                      onClick={() => enableRestoreCourse(course.id, true)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

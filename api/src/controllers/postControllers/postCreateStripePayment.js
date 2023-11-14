@@ -1,6 +1,6 @@
 require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPEKEY);
-const url = process.env.FRONTEND_URL;
+// const url = process.env.FRONTEND_URL;
 
 const postCreateStripePayment = async (req, res) => {
 	const line_items = req.body.cartItems.map((item) => {
@@ -25,10 +25,10 @@ const postCreateStripePayment = async (req, res) => {
 		payment_method_types: ["card"],
 		line_items,
 		mode: "payment",
+		success_url: "http://localhost:5173/payment/checkout/sucess",
+		cancel_url: "http://localhost:5173/payment/checkout/cancel",
 		//success_url: `${url}/payment/checkout/sucess`,
 		//cancel_url: `${url}/payment/checkout/cancel`,
-		success_url: "/payment/checkout/sucess",
-		cancel_url: "/payment/checkout/cancel",
 	});
 
 	res.status(200).send({ url: payment.url, payment: payment.id });
