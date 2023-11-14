@@ -35,6 +35,10 @@ const Navbar = () => {
 		navigate(`/config/${userId}`);
 	};
 
+	const handleNavigateToDashboard = (userId) => {
+		navigate(`/admin/dashboard/${userId}`);
+	};
+
 	const signOutFn = () => {
 		const auth = getAuth();
 		if (userOnSession) {
@@ -47,7 +51,7 @@ const Navbar = () => {
 	};
 
 	const signInFn = () => {
-		window.location = "http://localhost:5173/login";
+		window.location = "/login";
 	};
 
 	const handleMouseEnter = () => {
@@ -136,6 +140,17 @@ const Navbar = () => {
 														Configuración
 													</button>
 													<hr />
+													{userOnSession.isAdmin && (
+														<>
+															<button
+																onClick={() =>
+																	handleNavigateToDashboard(userData?.id)
+																}>
+																Dashboard
+															</button>
+															<hr />
+														</>
+													)}
 													<button onClick={signOutFn}>Desconectarse</button>
 												</div>
 											</div>

@@ -1,0 +1,151 @@
+.container{
+  width: 100%;
+  min-height: 90%;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  
+}
+
+.menuContext{
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  align-items: center;
+  flex-direction: column;
+  border-top:1px solid #887adf5e;
+  border-left:1px solid #887adf5e;
+  border-bottom:1px solid #887adf5e;
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  padding: 15px;
+  background-color: #8e7cff5e;
+}
+
+.containerContext{
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  border-top:1px solid #887adf5e;
+  border-right:1px solid #887adf5e;
+  border-bottom:1px solid #887adf5e;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.panelAdminTitle{
+    font-size: 19px;
+    text-align: center;
+    margin-bottom: 150px;
+    margin-top: 100px;
+    border-radius: 25px;
+    padding: 5px;
+    color: var(--color-primary);
+}
+
+.courses_table_container {
+  margin: 20px;
+}
+
+.courses_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.courses_table th, .courses_table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.courses_table th {
+  background-color: #f2f2f2;
+}
+
+.course_image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover; 
+  border-radius: 50%; 
+}
+
+.container_check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.container_check {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  font-size: 15px;
+  user-select: none;
+  justify-content: center;
+}
+
+
+.checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 2.3em;
+  width: 2.3em;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+.checkmark:hover {
+  box-shadow: inset 17px 17px 16px #b3b3b3,
+            inset -17px -17px 16px #ffffff;
+}
+
+
+.container_check input:checked ~ .checkmark {
+  box-shadow: none;
+  background-color: limegreen;
+  transform: rotateX(360deg);
+}
+
+.container_check input:checked ~ .checkmark:hover {
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.container_check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.container_check .checkmark:after {
+  left: 0.96em;
+  top: 0.7em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  box-shadow: 0.1em 0.1em 0em 0 rgba(0,0,0,0.3);
+  transform: rotate(45deg);
+}
