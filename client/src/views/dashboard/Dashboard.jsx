@@ -5,6 +5,9 @@ import Content from "./Content";
 import { getAllUser } from "../../utils/getAllUser";
 import { getAllCourses } from "../../utils/getAllCourses";
 import { getAllPayments } from "../../utils/getAllPayments";
+import axios from "axios";
+import Swal from "sweetalert2";
+import updateCourse from "../../utils/updateCourse";
 
 export const Dashboard = ({ updateContextUser }) => {
 	const [users, setUsers] = useState({});
@@ -53,6 +56,143 @@ export const Dashboard = ({ updateContextUser }) => {
 		setPayments(payments);
 	};
 
+	const handleBlockUser = async (user) => {
+		console.log(user);
+		if (user.enabled === true) {
+			Swal.fire({
+				title: "Deseas bloquear a este usuario de la plataforma?",
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					console.log(user.enabled);
+					const response = await axios.put("/users/user/edit", {
+						...user,
+						enabled: false,
+					});
+					if (response) {
+						Swal.fire({
+							title: "Este usuario a sido bloqueado de Educastream",
+							icon: "success",
+							customClass: {
+								popup: "mySwal",
+							},
+						});
+					}
+				}
+				await handleUsers();
+			});
+			return;
+		}
+
+		if (user.enabled === false) {
+			Swal.fire({
+				title: "Deseas desbloquear a este usuario de la plataforma?",
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					console.log(user.enabled);
+					const response = await axios.put("/users/user/edit", {
+						...user,
+						enabled: true,
+					});
+					if (response) {
+						Swal.fire({
+							title: "Este usuario a sido desbloqueado de Educastream",
+							icon: "success",
+							customClass: {
+								popup: "mySwal",
+							},
+						});
+					}
+				}
+				await handleUsers();
+			});
+			return;
+		}
+	};
+
+	const handleBlockCourse = (course) => {
+		console.log(course);
+		if (course.enabled === true) {
+			Swal.fire({
+				title: "Deseas bloquear este curso de la plataforma?",
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					console.log(course.enabled);
+					const response = await updateCourse({ ...course, enabled: false });
+
+					if (response) {
+						Swal.fire({
+							title: "Este curso a sido bloqueado de Educastream",
+							icon: "success",
+							customClass: {
+								popup: "mySwal",
+							},
+						});
+					}
+				}
+				await handleCourses();
+			});
+			return;
+		}
+		if (course.enabled === false) {
+			Swal.fire({
+				title: "Deseas desbloquear este curso de la plataforma?",
+				icon: "question",
+				showCancelButton: true,
+				confirmButtonColor: "#d33",
+				cancelButtonColor: "#3d0dca",
+				cancelButtonText: "Cancelar",
+				confirmButtonText: "Aceptar",
+				customClass: {
+					popup: "mySwal",
+				},
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					console.log(course.enabled);
+					const response = await updateCourse({ ...course, enabled: true });
+
+					if (response) {
+						Swal.fire({
+							title: "Este curso a sido desbloqueado de Educastream",
+							icon: "success",
+							customClass: {
+								popup: "mySwal",
+							},
+						});
+					}
+				}
+				await handleCourses();
+			});
+			return;
+		}
+	};
+
 	return (
 		<div className={style.container}>
 			<Sidebar onButtonClick={handleButtonClick} />
@@ -61,6 +201,8 @@ export const Dashboard = ({ updateContextUser }) => {
 				users={users}
 				courses={courses}
 				payments={payments}
+				handleBlockUser={handleBlockUser}
+				handleBlockCourse={handleBlockCourse}
 			/>
 		</div>
 	);

@@ -1,6 +1,14 @@
 import style from "./Dashboard.module.css";
+import Button from "../../Components/Button/Button";
 
-const Content = ({ selectedButton, courses, payments, users }) => {
+const Content = ({
+	selectedButton,
+	courses,
+	payments,
+	users,
+	handleBlockUser,
+	handleBlockCourse,
+}) => {
 	return (
 		<div className={style.containerContext}>
 			<h2>Registros de {selectedButton || "Administracion"} del sistema</h2>
@@ -14,6 +22,7 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 								<th>Nombre</th>
 								<th>Apellido</th>
 								<th>Estado</th>
+								<th>Bloquear/Desbloquear</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -26,14 +35,30 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 									<td>
 										<label className={style.container_check}>
 											{user.enabled ? (
-												<input type="checkbox" checked="checked" />
+												<input type="checkbox" checked={true} />
 											) : (
-												<input type="checkbox" />
+												<input type="checkbox" checked={false} />
 											)}
 
 											<div className={style.checkmark}></div>
 										</label>
 									</td>
+
+									{user.enabled ? (
+										<td>
+											<Button
+												text={"Bloquear usuario"}
+												onClick={() => handleBlockUser(user)}
+											/>
+										</td>
+									) : (
+										<td>
+											<Button
+												text={"Desbloquear usuario"}
+												onClick={() => handleBlockUser(user)}
+											/>
+										</td>
+									)}
 								</tr>
 							))}
 						</tbody>
@@ -53,6 +78,7 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 								<th>Descuento</th>
 								<th>Imagen</th>
 								<th>Estado</th>
+								<th>Bloquear/Desbloquear</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -78,14 +104,29 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 									<td>
 										<label className={style.container_check}>
 											{course.enabled ? (
-												<input type="checkbox" checked="checked" />
+												<input type="checkbox" checked={true} />
 											) : (
-												<input type="checkbox" />
+												<input type="checkbox" checked={false} />
 											)}
 
 											<div className={style.checkmark}></div>
 										</label>
 									</td>
+									{course.enabled ? (
+										<td>
+											<Button
+												text={"Bloquear curso"}
+												onClick={() => handleBlockCourse(course)}
+											/>
+										</td>
+									) : (
+										<td>
+											<Button
+												text={"Desbloquear curso"}
+												onClick={() => handleBlockCourse(course)}
+											/>
+										</td>
+									)}
 								</tr>
 							))}
 						</tbody>
