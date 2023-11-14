@@ -205,42 +205,56 @@ const Instructor = ({ updateContextUser }) => {
     }
   };
 
-  const handleRating = () => {
-    if (dataCourses && dataCourses.ratings) {
+  const handleRating = (course) => {
+    if (course && course.ratings) {
+      let totalRating = 0;
+      let totalComments = 0;
+
       const formattedRatings = `
-        <table style="border-collapse: collapse; width: 100%; min-width: 400px; font-size: 14px;">
-          <thead>
-            <tr>
-              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">#</th>
-              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">Calificación</th>
-              <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">Comentario</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${dataCourses.ratings
-              .map(
-                (rating, index) => `
-              <tr>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">${
-                  index + 1
-                }</td>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">${
-                  rating.rating
-                } estrellas</td>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">${
-                  rating.comment
-                }</td>
-              </tr>
-            `
-              )
-              .join("")}
-          </tbody>
-        </table>
-      `;
+      <table style="border-collapse: collapse; width: 100%; min-width: 400px; font-size: 14px;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">#</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">Calificación</th>
+            <th style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">Comentario</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${course.ratings
+            .map((rating, index) => {
+              totalRating += rating.rating;
+              totalComments++;
+              return `
+                <tr>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 30px;">${
+                    index + 1
+                  }</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 100px;">${
+                    rating.rating
+                  } estrellas</td>
+                  <td style="border: 1px solid #ddd; padding: 8px; text-align: center; min-width: 250px;">${
+                    rating.comment
+                  }</td>
+                </tr>
+              `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+    `;
+
+      const averageRating = totalRating / totalComments;
 
       Swal.fire({
         title: "Calificaciones",
-        html: formattedRatings,
+        html: `
+        <div>
+          <p>Promedio de calificación: ${averageRating.toFixed(2)}</p>
+          <p>Total de comentarios: ${totalComments}</p>
+		  <br>
+        </div>
+        ${formattedRatings}
+      `,
         customClass: {
           popup: "mySwal",
         },
@@ -273,15 +287,25 @@ const Instructor = ({ updateContextUser }) => {
                 <img src={course.image} alt={course.title} />
               </div>
               <div className={Styles.courseInfo}>
-                <div>
+                <div className={Styles.courseHeader}>
                   <div>
                     <h3>{course.title}</h3>
                   </div>
                   <div>
-                    <Button
-                      text={"Ver calificaciones"}
-                      onClick={handleRating}
-                    />
+                    <button onClick={() => handleRating(course)}>
+                      Ver calificaciones
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="128"
+                        height="128"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M9 22c-.6 0-1-.4-1-1v-3H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-6.1l-3.7 3.7c-.2.2-.4.3-.7.3H9m4-11V5h-2v6m2 4v-2h-2v2h2Z"
+                        />
+                      </svg>
+                    </button>
                   </div>
                 </div>
                 <div className={Styles.buttonContainer}>

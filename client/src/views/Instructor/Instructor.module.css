@@ -68,6 +68,41 @@
   padding: var(--pd-2);
 }
 
+.courseHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.courseHeader button {
+  display: flex;
+  background: transparent;
+  border: none;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.courseHeader:hover button {
+  text-decoration: underline;
+}
+
+.courseHeader:hover svg {
+  color: green;
+}
+
+.courseHeader svg {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.courseHeader:hover svg {
+  color: green;
+}
+
 .buttonContainer {
   display: flex;
   width: 100%;
