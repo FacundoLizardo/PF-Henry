@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const getAllUser = async () => {
+export const getAllPayments = async () => {
 	try {
-		const response = await axios.get(`/users/all`);
+		const response = await axios.get(`/payment/all`);
 
 		if (response.status !== 200) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
