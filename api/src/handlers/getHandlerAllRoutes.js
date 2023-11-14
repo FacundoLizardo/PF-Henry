@@ -8,7 +8,6 @@ const {
 const {
   getCourseByRatingController,
 } = require("../controllers/getControllers/getCourseByRatingController");
-const { Rating } = require("../db");
 
 const getHandlerAllRoutes = async (req, res) => {
   const arrayPropiedad = Object.keys(req.query);

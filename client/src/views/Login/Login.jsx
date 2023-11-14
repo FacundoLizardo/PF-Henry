@@ -134,7 +134,7 @@ const Login = ({ updateContextUser, setLogged }) => {
 						email: user.email,
 						last_name: apellido.join(" "),
 						photoURL: user.photoURL,
-						role_instructor: false,
+						role_instructor: true,
 						role_student: true,
 						emailVerified: user.emailVerified,
 						enabled: true,

@@ -23,7 +23,6 @@ const formatTimeWithHours = (seconds) => {
 const DetailCourse = ({ updateContextUser }) => {
   const { id } = useParams();
   const [dataDetail, setDataDetail] = useState(null);
-  console.log(dataDetail);
   const { dispatch } = useCart();
   const navigate = useNavigate();
   const userData = useContext(userContext);
@@ -84,7 +83,7 @@ const DetailCourse = ({ updateContextUser }) => {
         id: dataDetail.id,
         name: dataDetail.title,
         price: roundedNewPrice,
-        image: dataDetail.image || "", // Verifica si 'image' está definido
+        image: dataDetail.image || "",
         description: dataDetail.description,
         category: dataDetail.category,
         createdAt: dataDetail.createdAt,
@@ -180,8 +179,9 @@ const DetailCourse = ({ updateContextUser }) => {
               <h1>{dataDetail?.title}</h1>
             </div>
             <div>{dataDetail?.description}</div>
-            <div></div>
-            <Button text={"Ver calificaciones"} onClick={handleRating} />
+            <div>
+              <Button text={"Ver calificaciones"} onClick={handleRating} />
+            </div>
           </div>
         </div>
       </header>
