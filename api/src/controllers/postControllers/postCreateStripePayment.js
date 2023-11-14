@@ -25,8 +25,10 @@ const postCreateStripePayment = async (req, res) => {
 		payment_method_types: ["card"],
 		line_items,
 		mode: "payment",
-		success_url: `${url}/payment/checkout/sucess`,
-		cancel_url: `${url}/payment/checkout/cancel`,
+		//success_url: `${url}/payment/checkout/sucess`,
+		//cancel_url: `${url}/payment/checkout/cancel`,
+		success_url: "/payment/checkout/sucess",
+		cancel_url: "/payment/checkout/cancel",
 	});
 
 	res.status(200).send({ url: payment.url, payment: payment.id });
