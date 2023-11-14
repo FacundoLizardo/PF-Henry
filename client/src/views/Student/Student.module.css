@@ -141,7 +141,15 @@
   font-size: 13px;
 }
 
-.linkRating:hover p {
+.linkRating button {
+  border: none;
+  display: flex;
+  background: transparent;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.linkRating button:hover {
   text-decoration: underline;
 }
 
