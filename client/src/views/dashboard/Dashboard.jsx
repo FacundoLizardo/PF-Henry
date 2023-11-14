@@ -144,7 +144,11 @@ export const Dashboard = ({ updateContextUser }) => {
 			}).then(async (result) => {
 				if (result.isConfirmed) {
 					console.log(course.enabled);
-					const response = await updateCourse({ ...course, enabled: false });
+					const response = await updateCourse({
+						...course,
+						enabled: false,
+						banned: true,
+					});
 
 					if (response) {
 						Swal.fire({
@@ -175,7 +179,11 @@ export const Dashboard = ({ updateContextUser }) => {
 			}).then(async (result) => {
 				if (result.isConfirmed) {
 					console.log(course.enabled);
-					const response = await updateCourse({ ...course, enabled: true });
+					const response = await updateCourse({
+						...course,
+						enabled: true,
+						banned: false,
+					});
 
 					if (response) {
 						Swal.fire({

@@ -67,6 +67,10 @@ const Course = (sequelize) => {
 				type: DataTypes.BOOLEAN,
 				allowNull: true,
 			},
+			banned: {
+				type: DataTypes.BOOLEAN,
+				allowNull: true,
+			},
 		},
 
 		{
