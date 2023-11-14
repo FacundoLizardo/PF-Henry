@@ -1,48 +1,56 @@
 /* Estilos contenedor */
 .lectureContainer {
-  width: 90%;
-  margin: auto;
-  max-width: 1024px;
-  min-height: 100%;
-  padding: var(--pd-section);
-  padding-bottom: var(--pd-y-2);
+	width: 90%;
+	margin: auto;
+	max-width: 1024px;
+	min-height: 100%;
+	padding: var(--pd-section);
+	padding-bottom: var(--pd-y-2);
 }
 
 .lectureContainer header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: var(--pd-y-2);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: var(--pd-y-2);
 }
 
 .headerButton {
-  display: flex;
-  gap: 15px;
+	display: flex;
+	gap: 15px;
 }
 
 /* Estilos descripción de clase */
 
 .descriptionClass {
-  padding-bottom: var(--pd-y-2);
+	padding-bottom: var(--pd-y-2);
 }
 
 .descriptionClass h3 {
-  padding-bottom: var(--pd-y-2);
-  padding-left: var(--pd-x-2);
+	padding-bottom: var(--pd-y-2);
+	padding-left: var(--pd-x-2);
 }
 
 /* Estilos video */
 
 .videoContainer {
-  min-width: 100%;
-  padding-bottom: var(--pd-y-3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+	min-width: 100%;
+	padding-bottom: var(--pd-y-3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
 .videoWrapper iframe {
-  position: absolute;
-  width: 100%;
+	position: absolute;
+	width: 100%;
+}
+
+.listContainer {
+	width: 80%;
+	margin: 50px auto;
+	padding: var(--pd-3);
+	border: 1px solid var(--color-border-three);
+	background-color: var(--color-background);
 }

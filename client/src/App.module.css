@@ -1,100 +1,155 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
-  height: 100vh;
-  width: 100%;
+	height: 100vh;
+	width: 100%;
 }
 
 .appContainer {
-  width: 100%;
-  height: 100vh;
-  font-family: var(--font-primary);
+	width: 100%;
+	height: 100vh;
+	font-family: var(--font-primary);
 }
 
 :root {
-  /* Colores principales */
-  --color-primary: #3d0dca;
-  --color-secondary: #27272a;
-  --color-details: #1c0570;
+	/* Colores principales */
+	--color-primary: #3d0dca;
+	--color-secondary: #27272a;
+	--color-details: #1c0570;
 
-  /* Colores de fondo */
-  --color-background: #f0f0f0;
-  --color-background-off: #999999;
-  --color-background-off-two: #8e7cff;
-  --color-background-details: #f5f5f5;
-  --color-background-black: #2d2f31;
-  --color-background-button: #fff;
+	/* Colores de fondo */
+	--color-background: #f0f0f0;
+	--color-background-off: #999999;
+	--color-background-off-two: #8e7cff;
+	--color-background-details: #f5f5f5;
+	--color-background-black: #2d2f31;
+	--color-background-button: #fff;
 
-  /* Texto y elementos */
-  --color-text-primary: #000000;
-  --color-text-secondary: #ffffff;
-  --color-text-off: #494949;
-  --color-text-accent: #ffe502;
+	/* Texto y elementos */
+	--color-text-primary: #000000;
+	--color-text-secondary: #ffffff;
+	--color-text-off: #494949;
+	--color-text-accent: #ffe502;
 
-  /* Cards */
-  --color-border-one: #494949;
-  --color-border-two: #d1d1d1b4;
-  --color-border-three: #ccc;
+	/* Cards */
+	--color-border-one: #494949;
+	--color-border-two: #d1d1d1b4;
+	--color-border-three: #ccc;
 
-  /* Hover */
-  --color-hover: #2c0b8e;
+	/* Hover */
+	--color-hover: #2c0b8e;
 
-  /* Radius */
-  --radius: 5px;
+	/* Radius */
+	--radius: 5px;
 
-  /* Padding */
+	/* Padding */
 
-  /* Eje Y = Se usa para para el padding-top ó padding-bottom */
-  --pd-y-1: 10px;
-  --pd-y-2: 20px;
-  --pd-y-3: 30px;
-  --pd-y-4: 40px;
-  --pd-y-5: 50px;
+	/* Eje Y = Se usa para para el padding-top ó padding-bottom */
+	--pd-y-1: 10px;
+	--pd-y-2: 20px;
+	--pd-y-3: 30px;
+	--pd-y-4: 40px;
+	--pd-y-5: 50px;
 
-  /* Eje X = Se usa para para el padding-left ó padding-right */
-  --pd-x-1: 10px;
-  --pd-x-2: 20px;
-  --pd-x-3: 30px;
-  --pd-x-4: 40px;
-  --pd-x-5: 50px;
+	/* Eje X = Se usa para para el padding-left ó padding-right */
+	--pd-x-1: 10px;
+	--pd-x-2: 20px;
+	--pd-x-3: 30px;
+	--pd-x-4: 40px;
+	--pd-x-5: 50px;
 
-  /* Eje Y + X = le da padding a los 4 lados y se usa en padding*/
-  --pd-1: 10px;
-  --pd-2: 20px;
-  --pd-3: 30px;
-  --pd-4: 30px;
-  --pd-5: 30px;
+	/* Eje Y + X = le da padding a los 4 lados y se usa en padding*/
+	--pd-1: 10px;
+	--pd-2: 20px;
+	--pd-3: 30px;
+	--pd-4: 30px;
+	--pd-5: 30px;
 
-  --pd-section: 30px 0;
-  --pd-section-x2: 60px 0;
+	--pd-section: 30px 0;
+	--pd-section-x2: 60px 0;
 
-  /* Sombra */
-  --box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2),
-    0 10px 10px -10px rgba(0, 0, 0, 0.06);
+	/* Sombra */
+	--box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2),
+		0 10px 10px -10px rgba(0, 0, 0, 0.06);
 
-  /* Fonts */
-  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	/* Fonts */
+	--font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 /* Estilos generales */
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 li {
-  list-style: none;
+	list-style: none;
 }
 
 :global .mySwal {
-  font-family: var(--font-primary);
+	font-family: var(--font-primary);
 }
 
 textarea {
-  font-family: var(--font-primary);
+	font-family: var(--font-primary);
+}
+
+:global .mySwalLesson {
+	display: flex;
+	flex-direction: column;
+	font-family: var(--font-primary);
+	width: 70rem;
+	align-items: left;
+}
+:global .swal2-input {
+	width: 90%;
+	margin: 1em 2em 2em;
+}
+:global .swal2-label {
+	margin: 0px;
+}
+:global .swal2-input-description {
+	box-sizing: border-box;
+	width: 90%;
+	transition: border-color 0.1s, box-shadow 0.1s;
+	border: 1px solid #d9d9d9;
+	border-radius: 0.1875em;
+	background: rgba(0, 0, 0, 0);
+	box-shadow: inset 0 1px 1px rgba(90, 192, 255, 0.06),
+		0 0 0 3px rgba(44, 106, 148, 0);
+	font-size: 1.125em;
+	height: 10rem;
+	padding: 0.5em;
+	margin: 1em 2em 10px;
+	resize: none;
+}
+:global .swal2-input-description:focus {
+	border: 1px solid #b4dbed;
+	outline: none;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.06),
+		0 0 0 3px rgba(100, 150, 200, 0.5);
+}
+
+:global .swal2-input-video {
+	box-sizing: border-box;
+	width: 90%;
+	transition: border-color 0.1s, box-shadow 0.1s;
+	border: 1px solid #d9d9d9;
+	border-radius: 0.1875em;
+	background: rgba(0, 0, 0, 0);
+	box-shadow: inset 0 1px 1px rgba(90, 192, 255, 0.06),
+		0 0 0 3px rgba(0, 0, 0, 0);
+
+	font-size: 1.125em;
+	height: 2.625em;
+	padding: 0 0.75em;
+	padding-top: 0.5em;
+
+	margin: 1em 2em 3px;
+	resize: none;
 }
