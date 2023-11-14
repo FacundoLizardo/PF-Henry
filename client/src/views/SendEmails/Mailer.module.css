@@ -1,0 +1,53 @@
+/* .container {
+   margin: 0;
+   padding: 0;
+   background: linear-gradient(-45deg, #11151d, #252525);
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.titleForm {
+   color: #25b09b;
+   font-size: 3rem;
+   font-weight: 600;
+   font-family: 'Shadows Into Light', cursive;
+   margin: 0px;
+}
+
+.formMail {
+   width: 20rem;
+   border: groove 3px #fff;
+   border-radius: 15px;
+   box-shadow: -3px -2px 1px #535366;
+   background: #232526;
+   background: linear-gradient(to right, #414345, #232526);
+   opacity: 0.8;
+   padding: 1rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.hr {
+   width: 20rem;
+}
+
+.message {
+   font-size: 1.5rem;
+   color: #9cc7f3;
+   font-weight: 900;
+   margin-bottom: 0.5rem;
+}
+
+
+.textarea {
+   border-radius: 10px;
+   background-color: #a3a8af;
+   padding: 0.5rem;
+   color: #fff;
+   margin-bottom: 1rem;
+}
+ */
