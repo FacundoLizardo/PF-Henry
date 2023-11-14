@@ -121,7 +121,7 @@ export const Dashboard = ({ updateContextUser }) => {
 						});
 					}
 				}
-				await handleCourses();
+				await handleUsers();
 			});
 			return;
 		}
