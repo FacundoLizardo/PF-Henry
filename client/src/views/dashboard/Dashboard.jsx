@@ -5,6 +5,7 @@ import Content from "./Content";
 import { getAllUser } from "../../utils/getAllUser";
 import { getAllCourses } from "../../utils/getAllCourses";
 import { getAllPayments } from "../../utils/getAllPayments";
+import axios from "axios";
 
 export const Dashboard = ({ updateContextUser }) => {
 	const [users, setUsers] = useState({});
@@ -53,6 +54,30 @@ export const Dashboard = ({ updateContextUser }) => {
 		setPayments(payments);
 	};
 
+	const handleBlockUser = async (user) => {
+		console.log(user);
+		if (user.enabled === true) {
+			console.log(user.enabled);
+			const response = await axios.put("/users/user/edit", {
+				...user,
+				enabled: false,
+			});
+			console.log(response + "estaba en true");
+			await handleUsers();
+			return true;
+		}
+		if (user.enabled === false) {
+			const response = await axios.put("/users/user/edit", {
+				...user,
+				enabled: true,
+			});
+
+			console.log(response + "estaba en false");
+			await handleUsers();
+			return;
+		}
+	};
+
 	return (
 		<div className={style.container}>
 			<Sidebar onButtonClick={handleButtonClick} />
@@ -61,6 +86,7 @@ export const Dashboard = ({ updateContextUser }) => {
 				users={users}
 				courses={courses}
 				payments={payments}
+				handleBlockUser={handleBlockUser}
 			/>
 		</div>
 	);

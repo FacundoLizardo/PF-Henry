@@ -1,6 +1,13 @@
 import style from "./Dashboard.module.css";
+import Button from "../../Components/Button/Button";
 
-const Content = ({ selectedButton, courses, payments, users }) => {
+const Content = ({
+	selectedButton,
+	courses,
+	payments,
+	users,
+	handleBlockUser,
+}) => {
 	return (
 		<div className={style.containerContext}>
 			<h2>Registros de {selectedButton || "Administracion"} del sistema</h2>
@@ -14,6 +21,7 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 								<th>Nombre</th>
 								<th>Apellido</th>
 								<th>Estado</th>
+								<th>Deshabilitar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -26,14 +34,30 @@ const Content = ({ selectedButton, courses, payments, users }) => {
 									<td>
 										<label className={style.container_check}>
 											{user.enabled ? (
-												<input type="checkbox" checked="checked" />
+												<input type="checkbox" checked={true} />
 											) : (
-												<input type="checkbox" />
+												<input type="checkbox" checked={false} />
 											)}
 
 											<div className={style.checkmark}></div>
 										</label>
 									</td>
+
+									{user.enabled ? (
+										<td>
+											<Button
+												text={"Deshabilitar usuario"}
+												onClick={() => handleBlockUser(user)}
+											/>
+										</td>
+									) : (
+										<td>
+											<Button
+												text={"Habilitar usuario"}
+												onClick={() => handleBlockUser(user)}
+											/>
+										</td>
+									)}
 								</tr>
 							))}
 						</tbody>

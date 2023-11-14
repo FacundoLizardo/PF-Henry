@@ -134,7 +134,7 @@ const Login = ({ updateContextUser, setLogged }) => {
 						email: user.email,
 						last_name: apellido.join(" "),
 						photoURL: user.photoURL,
-						role_instructor: false,
+						role_instructor: true,
 						role_student: true,
 						emailVerified: user.emailVerified,
 						enabled: true,
@@ -221,14 +221,16 @@ const Login = ({ updateContextUser, setLogged }) => {
 				<div className={style.flex_row}></div>
 				<button
 					className={style.button_submit}
-					onClick={(e) => authentication(e)}>
+					onClick={(e) => authentication(e)}
+				>
 					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>
 					{registering ? "Si ya tienes cuenta" : "Si no tienes cuenta"}
 					<span
 						className={style.span}
-						onClick={() => setRegistering(!registering)}>
+						onClick={() => setRegistering(!registering)}
+					>
 						{registering ? "Inicia sesión" : "Regístrate"}
 					</span>
 				</p>
