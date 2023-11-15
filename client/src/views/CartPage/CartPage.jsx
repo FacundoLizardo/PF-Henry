@@ -38,7 +38,7 @@ const CartPage = () => {
   };
 
   const handleNavigate = () => {
-    navigate("./courses");
+    navigate("/courses/");
   };
 
   useEffect(() => {
