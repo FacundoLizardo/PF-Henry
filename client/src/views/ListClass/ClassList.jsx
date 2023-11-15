@@ -3,8 +3,6 @@ import Styles from "./ClassList.module.css";
 import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react";
 
-
-
 const formatTime = (seconds) => {
   const minutes = String(Math.floor(seconds / 60)).padStart(2, "0");
   const restSeconds = String(seconds % 60).padStart(2, "0");
@@ -22,15 +20,13 @@ const ClassList = ({ updateContextUser }) => {
   const { state } = useLocation();
   const selectedCourse = state;
   const courses = JSON.parse(localStorage.getItem("coursesData"));
-  const {courseId} = useParams();
+  const { courseId } = useParams();
   const navigate = useNavigate();
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
-  const course = courses.filter((element, index)=>  {
-    return element.id === courseId
-
-  })
-  console.log(course[0].dataInstructor.id);
+  const course = courses.filter((element) => {
+    return element.id === courseId;
+  });
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
@@ -69,9 +65,8 @@ const ClassList = ({ updateContextUser }) => {
     }
   };
 
-  const handleNavigateToMessage = async(instructorId) => {
-    
- navigate(`/mailer/${instructorId}`);
+  const handleNavigateToMessage = async (instructorId) => {
+    navigate(`/mailer/${instructorId}`);
   };
 
   const handleGoBack = () => {

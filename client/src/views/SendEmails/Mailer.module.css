@@ -1,53 +1,38 @@
-/* .container {
-   margin: 0;
-   padding: 0;
-   background: linear-gradient(-45deg, #11151d, #252525);
-   width: 100vw;
-   height: 100vh;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+.SendEmailsContainer {
+  width: 90%;
+  margin: auto;
+  max-width: 1024px;
+  min-height: 90%;
+  padding: var(--pd-section);
+  padding-bottom: var(--pd-y-2);
 }
 
-.titleForm {
-   color: #25b09b;
-   font-size: 3rem;
-   font-weight: 600;
-   font-family: 'Shadows Into Light', cursive;
-   margin: 0px;
+.formTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .formMail {
-   width: 20rem;
-   border: groove 3px #fff;
-   border-radius: 15px;
-   box-shadow: -3px -2px 1px #535366;
-   background: #232526;
-   background: linear-gradient(to right, #414345, #232526);
-   opacity: 0.8;
-   padding: 1rem;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.hr {
-   width: 20rem;
+.formMessage {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
-
-.message {
-   font-size: 1.5rem;
-   color: #9cc7f3;
-   font-weight: 900;
-   margin-bottom: 0.5rem;
-}
-
 
 .textarea {
-   border-radius: 10px;
-   background-color: #a3a8af;
-   padding: 0.5rem;
-   color: #fff;
-   margin-bottom: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 20px;
 }
- */
+
+.formFooter {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}

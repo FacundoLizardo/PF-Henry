@@ -87,9 +87,10 @@ const Student = ({ updateContextUser }) => {
                 popup: "mySwal",
               },
             })
-              .then(getAllCourses())
+              //.then(getAllCourses())
               .then((result) => {
                 console.log("Result del enrollCourses", result);
+                getAllCourses()
                 return getUser(userData.email);
               })
               .then((newUser) => {
@@ -106,15 +107,6 @@ const Student = ({ updateContextUser }) => {
       }
     });
   };
-
-  const hasRated =
-    sessionCourses &&
-    sessionCourses.length > 0 &&
-    sessionCourses.some(
-      (course) =>
-        course.ratings &&
-        course.ratings.some((rating) => rating.UserId === userData.id)
-    );
 
   const CourseCard = ({ courses }) => (
     <div className={Styles.cardContainer}>
@@ -134,7 +126,9 @@ const Student = ({ updateContextUser }) => {
         </div>
         <div className={Styles.linkRating}>
           <button onClick={() => handleRating(courses.id, userData.id)}>
-            {hasRated ? "Modificar Calificación" : "Calificar Curso"}
+            {courses.ratings.find((rating) => rating.UserId === userData.id)
+              ? "Modificar Calificación"
+              : "Calificar Curso"}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="128"
