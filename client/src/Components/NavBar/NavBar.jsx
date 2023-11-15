@@ -140,7 +140,7 @@ const Navbar = () => {
 														Configuración
 													</button>
 													<hr />
-													{userOnSession.isAdmin && (
+													{userOnSession?.isAdmin && (
 														<>
 															<button
 																onClick={() =>
