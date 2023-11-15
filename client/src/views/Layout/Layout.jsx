@@ -10,6 +10,7 @@ import Styles from "./Layout.module.css";
 const Layout = ({ updateContextUser }) => {
   const [dataCourses, setDataCourses] = useState([]);
   const [onSaleCourses, setOnSlaeCourses] = useState([]);
+  console.log(dataCourses);
 
   const checkDisabled = () => {
     const storedData = localStorage.getItem("coursesData");
@@ -38,9 +39,17 @@ const Layout = ({ updateContextUser }) => {
     return fechaB - fechaA;
   });
 
-  const dataCoursesSortedByRating = dataCourses.sort(
-    (a, b) => b.rating - a.rating
-  );
+  const calculateAverageRating = (ratings) => {
+    if (ratings.length === 0) return 0;
+    const sum = ratings.reduce((total, rating) => total + rating.rating, 0);
+    return sum / ratings.length;
+  };
+
+  const dataCoursesSortedByRating = dataCourses.sort((a, b) => {
+    const averageRatingA = calculateAverageRating(a.ratings);
+    const averageRatingB = calculateAverageRating(b.ratings);
+    return averageRatingB - averageRatingA;
+  });
 
   const dataCoursesSortedByPurchases = dataCourses.sort(
     (a, b) => b.purchases - a.purchases

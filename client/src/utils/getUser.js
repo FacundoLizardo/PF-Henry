@@ -9,7 +9,7 @@ export const getUser = async (email) => {
 		}
 
 		const data = response.data;
-
+		
 		return data;
 	} catch (error) {
 		console.error("Error fetching data:", error);
