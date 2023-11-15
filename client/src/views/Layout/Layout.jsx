@@ -53,7 +53,7 @@ const Layout = ({ updateContextUser }) => {
 
   const dataCoursesByPrice = dataCourses
     .slice()
-    .sort((a, b) => b.price - a.price);
+    .sort((a, b) => a.price - b.price);
 
   return (
     <div className={Styles.layoutContainer}>
