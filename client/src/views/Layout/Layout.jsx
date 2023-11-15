@@ -36,7 +36,7 @@ const Layout = ({ updateContextUser }) => {
   const dataCoursesByDate = dataCourses.sort((a, b) => {
     const fechaA = new Date(a.createdAt);
     const fechaB = new Date(b.createdAt);
-    return fechaA - fechaB;
+    return fechaB - fechaA;
   });
 
   const calculateAverageRating = (ratings) => {
