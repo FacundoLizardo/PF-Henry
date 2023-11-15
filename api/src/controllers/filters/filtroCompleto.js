@@ -1,50 +1,52 @@
-const { Course, Lesson } = require('../../db');
+const { Course, Lesson, Rating, User } = require('../../db');
 const { Op } = require('sequelize');
 
-const applyFilters = async (category, page, order, price, rating) => {
-  const limit = 10; // Número de elementos por página
-  const offset = (page - 1) * limit; // Cálculo del desplazamiento
+const applyFilters = async (category, page, rating) => {
+  const limit = 10;
+  const offset = (page - 1) * limit;
 
-  let whereClause = {}
+  let whereClause = {};
+  let includeClauses = [
+    { model: Lesson, as: 'lesson' },
+    { model: Rating, as: 'ratings' },
+  ];
 
   if (category) {
     whereClause.category = { [Op.iLike]: `%${category}%` };
   }
 
   if (rating) {
-    whereClause.rating = { [Op.gte]: rating }; // Filtrar por cursos con rating igual o superior a "rating"
+    whereClause.rating = { [Op.gte]: rating };
   }
 
-  let filteredCourses = []
+  const courses = await Course.findAll({
+    where: whereClause,
+    offset,
+    limit,
+    include: includeClauses,
+  });
 
-  if (order) {
-    filteredCourses = await Course.findAll({
-      where: whereClause,
-      offset,
-      order: [['name', order]],
-      include: 
-        { model: Lesson, as: "lesson"},
-    });
-  } else if (price) {
-    filteredCourses = await Course.findAll({
-      where: whereClause,
-      offset,
-      order: [['price', price]],
-      include: 
-          { model: Lesson, as: "lesson"},
-    });
-  } else {
-    filteredCourses = await Course.findAll({
-      where: whereClause,
-      offset,
-      include: 
-          { model: Lesson, as: "lesson"},
-    });
-  }
+  const coursesWithInstructors = courses.map(course => {
+    const instructor = course.dataValues.instructor;
+    const cleanedInstructor = instructor
+      ? {
+        email: instructor.email,
+        first_name: instructor.first_name,
+        last_name: instructor.last_name,
+        user_name: instructor.user_name,
+        id: instructor.id,
+        enabled: instructor.enabled,
+      }
+      : null;
 
-  return filteredCourses;
-}
+    return {
+      ...course.dataValues,
+      dataInstructor: cleanedInstructor,
+    };
+  });
 
-module.exports = {applyFilters};
+  console.log(coursesWithInstructors);
+  return coursesWithInstructors;
+};
 
-
+module.exports = { applyFilters };

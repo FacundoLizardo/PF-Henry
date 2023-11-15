@@ -113,8 +113,6 @@ const Card = ({ course }) => {
     course.price - (course.price * course.percentageDiscount) / 100;
   const roundedNewPrice = newPrice.toFixed(2);
 
-  console.log("course", course);
-  console.log("userData", userData);
   return (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer} onClick={handleCardToDetails}>
@@ -145,10 +143,10 @@ const Card = ({ course }) => {
           </div>
           <div className={Styles.contentTopDetail}>
             <div>
-              {course.dataInstructor ? (
+              {course?.dataInstructor ? (
                 <div>
-                  Desarrollado por {course.dataInstructor.first_name}{" "}
-                  {course.dataInstructor.last_name}
+                  Desarrollado por {course?.dataInstructor?.first_name}{" "}
+                  {course?.dataInstructor?.last_name}
                 </div>
               ) : (
                 <div>No se encontró información del instructor</div>
@@ -182,7 +180,7 @@ const Card = ({ course }) => {
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          {course.dataInstructor.id === userData.id ? (
+          {course?.dataInstructor && course.dataInstructor?.id === userData?.id ? (
             <Button
               text={"Ir al panel de instructor"}
               onClick={() => {
