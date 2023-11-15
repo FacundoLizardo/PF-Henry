@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 
 import user from "../../assets/navBarImages/user.png";
-
+import Swal2 from "sweetalert2";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 import { useContext, useState } from "react";
@@ -114,37 +114,52 @@ const Login = ({ updateContextUser, setLogged }) => {
 			.then(async (result) => {
 				const { user } = result;
 				const userMail = await getUser(user.email);
-				if (user.email === userMail.email) {
-					localStorage.setItem("userOnSession", JSON.stringify(userMail));
-					updateContextUser(userMail);
-					localStorage.setItem("logged", true);
-					return;
-				} else {
-					let name = "nombre";
-					let apellido = [];
-					const nameSplited = result.user.displayName.split(" ");
-					for (let i = 0; i < nameSplited.length; i++) {
-						name = nameSplited[0];
-						if (i >= 1) {
-							apellido.push(nameSplited[i]);
+				if (userMail.enabled) {
+					if (user.email === userMail.email) {
+						localStorage.setItem("userOnSession", JSON.stringify(userMail));
+						updateContextUser(userMail);
+						localStorage.setItem("logged", true);
+						return;
+					} else {
+						let name = "nombre";
+						let apellido = [];
+						const nameSplited = result.user.displayName.split(" ");
+						for (let i = 0; i < nameSplited.length; i++) {
+							name = nameSplited[0];
+							if (i >= 1) {
+								apellido.push(nameSplited[i]);
+							}
 						}
+						const objUser = {
+							first_name: name,
+							email: user.email,
+							last_name: apellido.join(" "),
+							photoURL: user.photoURL,
+							role_instructor: true,
+							role_student: true,
+							emailVerified: user.emailVerified,
+							enabled: true,
+						};
+						const response = await axios.post("/users/create", objUser);
+						localStorage.setItem(
+							"userOnSession",
+							JSON.stringify(response.data)
+						);
+						//console.log(response.data);
+						setLogged(true);
+						localStorage.setItem("logged", true);
+						return updateContextUser(response.data);
 					}
-					const objUser = {
-						first_name: name,
-						email: user.email,
-						last_name: apellido.join(" "),
-						photoURL: user.photoURL,
-						role_instructor: true,
-						role_student: true,
-						emailVerified: user.emailVerified,
-						enabled: true,
-					};
-					const response = await axios.post("/users/create", objUser);
-					localStorage.setItem("userOnSession", JSON.stringify(response.data));
-					//console.log(response.data);
-					setLogged(true);
-					localStorage.setItem("logged", true);
-					return updateContextUser(response.data);
+				} else {
+					Swal2.fire({
+						title: "Tu usuario ha sido bloqueado",
+						text: "Comunicate con nosotros al mail admin@educastream.com",
+						icon: "error",
+						confirmButtonText: "Entiendo",
+						customClass: {
+							popup: "mySwal",
+						},
+					}).then(() => nav(`/courses/`));
 				}
 			})
 			.finally(() => {
@@ -221,16 +236,14 @@ const Login = ({ updateContextUser, setLogged }) => {
 				<div className={style.flex_row}></div>
 				<button
 					className={style.button_submit}
-					onClick={(e) => authentication(e)}
-				>
+					onClick={(e) => authentication(e)}>
 					{registering ? "Regístrate" : "Inicia sesión"}
 				</button>
 				<p className={style.p}>
 					{registering ? "Si ya tienes cuenta" : "Si no tienes cuenta"}
 					<span
 						className={style.span}
-						onClick={() => setRegistering(!registering)}
-					>
+						onClick={() => setRegistering(!registering)}>
 						{registering ? "Inicia sesión" : "Regístrate"}
 					</span>
 				</p>

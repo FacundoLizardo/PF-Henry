@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Styles from "./ClassList.module.css";
 import Button from "../../Components/Button/Button";
 import { useEffect, useState } from "react";
@@ -19,9 +19,14 @@ const formatTimeWithHours = (seconds) => {
 const ClassList = ({ updateContextUser }) => {
   const { state } = useLocation();
   const selectedCourse = state;
+  const courses = JSON.parse(localStorage.getItem("coursesData"));
+  const { courseId } = useParams();
   const navigate = useNavigate();
   const [totalTime, setTotalTime] = useState(0);
   const [totalClass, setTotalClass] = useState(0);
+  const course = courses.filter((element) => {
+    return element.id === courseId;
+  });
 
   useEffect(() => {
     const session = JSON.parse(localStorage.getItem("userOnSession"));
@@ -60,9 +65,8 @@ const ClassList = ({ updateContextUser }) => {
     }
   };
 
-  const handleNavigateToMessage = (instructorId) => {
-    console.log("Recibo el id del instructor", instructorId);
-    // navigate(`/student/classList/${instructorId}`);
+  const handleNavigateToMessage = async (instructorId) => {
+    navigate(`/mailer/${instructorId}`);
   };
 
   const handleGoBack = () => {
@@ -90,7 +94,7 @@ const ClassList = ({ updateContextUser }) => {
           <Button text={"Volver"} onClick={handleGoBack} />
           <Button
             text={"Contactar al instructor"}
-            onClick={() => handleNavigateToMessage(selectedCourse.instructorId)}
+            onClick={() => handleNavigateToMessage(course[0].dataInstructor.id)}
           />
         </div>
       </header>

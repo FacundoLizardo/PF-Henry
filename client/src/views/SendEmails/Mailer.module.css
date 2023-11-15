@@ -1,0 +1,38 @@
+.SendEmailsContainer {
+  width: 90%;
+  margin: auto;
+  max-width: 1024px;
+  min-height: 90%;
+  padding: var(--pd-section);
+  padding-bottom: var(--pd-y-2);
+}
+
+.formTitle {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.formMail {
+  display: flex;
+  flex-direction: column;
+}
+
+.formMessage {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.textarea {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 20px;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: end;
+  gap: 30px;
+}

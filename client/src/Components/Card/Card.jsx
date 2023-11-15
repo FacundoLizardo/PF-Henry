@@ -21,7 +21,6 @@ const Card = ({ course }) => {
   const courseAlreadyPurchased = (userData?.Payments || []).find((payment) =>
     (payment.Courses || []).find((elemento) => elemento.id === course.id)
   );
-  console.log(course);
 
   useEffect(() => {
     if (course && course.lesson) {

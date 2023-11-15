@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const updateCourse = async (newDataCourse) => {
-	const { image, id, title, enabled, onSale, percentageDiscount } =
+	const { image, id, title, enabled, onSale, percentageDiscount, banned } =
 		newDataCourse;
-	console.log(image, id, title, enabled, onSale, percentageDiscount);
-
+	console.log(image, id, title, enabled, onSale, percentageDiscount, banned);
+	console.log(newDataCourse);
 	try {
 		const response = await axios.put(`/courses/edit`, newDataCourse);
 		console.log(response + "     respuesta de axios");
