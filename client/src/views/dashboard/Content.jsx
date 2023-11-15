@@ -34,7 +34,7 @@ const Content = ({
 									<td>{user.last_name}</td>
 									<td>
 										<label className={style.container_check}>
-											{user.enabled ? (
+											{user?.enabled ? (
 												<input type="checkbox" checked={true} />
 											) : (
 												<input type="checkbox" checked={false} />
