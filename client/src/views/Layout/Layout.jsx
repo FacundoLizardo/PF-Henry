@@ -10,7 +10,6 @@ import Styles from "./Layout.module.css";
 const Layout = ({ updateContextUser }) => {
   const [dataCourses, setDataCourses] = useState([]);
   const [onSaleCourses, setOnSlaeCourses] = useState([]);
-  console.log(dataCourses);
 
   const checkDisabled = () => {
     const storedData = localStorage.getItem("coursesData");
