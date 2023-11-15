@@ -60,7 +60,7 @@ export const Dashboard = ({ updateContextUser }) => {
 		console.log(user);
 		if (user.enabled === true) {
 			Swal.fire({
-				title: "Deseas bloquear a este usuario de la plataforma?",
+				title: "¿Deseas bloquear al usuario en la plataforma?",
 				icon: "question",
 				showCancelButton: true,
 				confirmButtonColor: "#d33",
@@ -79,7 +79,7 @@ export const Dashboard = ({ updateContextUser }) => {
 					});
 					if (response) {
 						Swal.fire({
-							title: "Este usuario a sido bloqueado de Educastream",
+							title: "Este curso ha sido desbloqueado en Educastream",
 							icon: "success",
 							customClass: {
 								popup: "mySwal",
@@ -94,7 +94,7 @@ export const Dashboard = ({ updateContextUser }) => {
 
 		if (user.enabled === false) {
 			Swal.fire({
-				title: "Deseas desbloquear a este usuario de la plataforma?",
+				title: "¿Deseas desbloquear a este usuario en la plataforma?",
 				icon: "question",
 				showCancelButton: true,
 				confirmButtonColor: "#d33",
@@ -113,7 +113,7 @@ export const Dashboard = ({ updateContextUser }) => {
 					});
 					if (response) {
 						Swal.fire({
-							title: "Este usuario a sido desbloqueado de Educastream",
+							title: "Este usuario ha sido desbloqueado en Educastream",
 							icon: "success",
 							customClass: {
 								popup: "mySwal",
@@ -131,7 +131,7 @@ export const Dashboard = ({ updateContextUser }) => {
 		console.log(course);
 		if (course.enabled === true) {
 			Swal.fire({
-				title: "Deseas bloquear este curso de la plataforma?",
+				title: "¿Quieres bloquear este curso en la plataforma?",
 				icon: "question",
 				showCancelButton: true,
 				confirmButtonColor: "#d33",
@@ -152,7 +152,7 @@ export const Dashboard = ({ updateContextUser }) => {
 
 					if (response) {
 						Swal.fire({
-							title: "Este curso a sido bloqueado de Educastream",
+							title: "Este curso ha sido bloqueado en Educastream",
 							icon: "success",
 							customClass: {
 								popup: "mySwal",
@@ -166,7 +166,7 @@ export const Dashboard = ({ updateContextUser }) => {
 		}
 		if (course.enabled === false) {
 			Swal.fire({
-				title: "Deseas desbloquear este curso de la plataforma?",
+				title: "¿Quieres desbloquear este curso de la plataforma?",
 				icon: "question",
 				showCancelButton: true,
 				confirmButtonColor: "#d33",
@@ -187,7 +187,7 @@ export const Dashboard = ({ updateContextUser }) => {
 
 					if (response) {
 						Swal.fire({
-							title: "Este curso a sido desbloqueado de Educastream",
+							title: "Este curso ha sido desbloqueado en Educastream",
 							icon: "success",
 							customClass: {
 								popup: "mySwal",

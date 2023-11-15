@@ -35,6 +35,11 @@ const CardLayout = ({ courses }) => {
     window.scrollTo({ top: 0 });
   };
 
+  const handleCardToInstructor = () => {
+    navigate(`/instructor/${userData.id}`);
+    window.scrollTo({ top: 0 });
+  };
+
   const handleNavigateLogin = () => {
     navigate("/login");
   };
@@ -94,7 +99,14 @@ const CardLayout = ({ courses }) => {
           </div>
         </div>
         <div className={Styles.contentFooter}>
-          {courseAlreadyPurchased ? (
+          {course?.dataInstructor && course.dataInstructor?.id === userData?.id ? (
+            <Button
+              text={"Panel de instructor"}
+              onClick={() => {
+                handleCardToInstructor();
+              }}
+            />
+          ) : courseAlreadyPurchased ? (
             <Button
               text={"Ir al curso"}
               onClick={() => {
