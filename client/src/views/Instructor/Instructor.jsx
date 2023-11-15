@@ -261,7 +261,6 @@ const Instructor = ({ updateContextUser }) => {
 			});
 		}
 	};
-
 	return (
 		<div className={Styles.instructorContainer}>
 			<div className={Styles.instructorContainerTitle}>
@@ -280,70 +279,75 @@ const Instructor = ({ updateContextUser }) => {
 				<div>
 					<h3>Tus cursos</h3>
 				</div>
-				{coursesCreated.map((course, index) => (
-					<div key={index} className={Styles.courseContainer}>
-						<div className={Styles.cardCourse}>
-							<div className={Styles.courseImg}>
-								<img src={course.image} alt={course.title} />
-							</div>
-							<div className={Styles.courseInfo}>
-								<div className={Styles.courseHeader}>
-									<div>
-										<h3>{course.title}</h3>
-									</div>
-									<div>
-										<button onClick={() => handleRating(course)}>
-											Ver calificaciones
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												width="128"
-												height="128"
-												viewBox="0 0 24 24">
-												<path
-													fill="currentColor"
-													d="M9 22c-.6 0-1-.4-1-1v-3H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-6.1l-3.7 3.7c-.2.2-.4.3-.7.3H9m4-11V5h-2v6m2 4v-2h-2v2h2Z"
-												/>
-											</svg>
-										</button>
-									</div>
+				{coursesCreated.length === 0 ? (
+					<div className={Styles.enabledCourses}>
+						<p>No tienes cursos creados</p>
+					</div>
+				) : (
+					coursesCreated.map((course, index) => (
+						<div key={index} className={Styles.courseContainer}>
+							<div className={Styles.cardCourse}>
+								<div className={Styles.courseImg}>
+									<img src={course.image} alt={course.title} />
 								</div>
-								<div className={Styles.buttonContainer}>
-									<Button
-										text={"Crea clases"}
-										onClick={() =>
-											handleNavigate(`/instructor/${course.id}/createLecture`)
-										}
-									/>
-									<Button
-										text={"Editar curso"}
-										onClick={() => handleNavigate(`/edit/${course.id}`)}
-									/>
-
-									{course.onSale === true ? (
-										<>
-											<Button
-												text={"Modificar descuento"}
-												onClick={() => openCloseModal(course.id, "modificar")}
-											/>
-										</>
-									) : (
+								<div className={Styles.courseInfo}>
+									<div className={Styles.courseHeader}>
+										<div>
+											<h3>{course.title}</h3>
+										</div>
+										<div>
+											<button onClick={() => handleRating(course)}>
+												Ver calificaciones
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width="128"
+													height="128"
+													viewBox="0 0 24 24">
+													<path
+														fill="currentColor"
+														d="M9 22c-.6 0-1-.4-1-1v-3H4c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2h-6.1l-3.7 3.7c-.2.2-.4.3-.7.3H9m4-11V5h-2v6m2 4v-2h-2v2h2Z"
+													/>
+												</svg>
+											</button>
+										</div>
+									</div>
+									<div className={Styles.buttonContainer}>
 										<Button
-											text={"Agregar descuento"}
-											onClick={() => openCloseModal(course.id)}
+											text={"Crea clases"}
+											onClick={() =>
+												handleNavigate(`/instructor/${course.id}/createLecture`)
+											}
 										/>
-									)}
+										<Button
+											text={"Editar curso"}
+											onClick={() => handleNavigate(`/edit/${course.id}`)}
+										/>
 
-									<Button
-										text={"Eliminar curso"}
-										onClick={() => enableRestoreCourse(course.id, false)}
-									/>
+										{course.onSale === true ? (
+											<>
+												<Button
+													text={"Modificar descuento"}
+													onClick={() => openCloseModal(course.id, "modificar")}
+												/>
+											</>
+										) : (
+											<Button
+												text={"Agregar descuento"}
+												onClick={() => openCloseModal(course.id)}
+											/>
+										)}
+
+										<Button
+											text={"Eliminar curso"}
+											onClick={() => enableRestoreCourse(course.id, false)}
+										/>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				))}
+					))
+				)}
 			</div>
-
 			<div className={Styles.disabledCourses}>
 				<div>
 					<h3>Tus cursos desactivados</h3>
