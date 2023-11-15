@@ -13,11 +13,23 @@ const putHandlerCourse = async (req, res) => {
 		enabled,
 		onSale,
 		percentageDiscount,
+		banned,
 	} = req.body;
-
+	console.log(
+		id,
+		title,
+		category,
+		description,
+		image,
+		price,
+		enabled,
+		onSale,
+		percentageDiscount,
+		banned
+	);
 	try {
-		console.log(id + "     estoy en el handler");
-		console.log(onSale, percentageDiscount, id);
+		// console.log(id + "     estoy en el handler");
+		// console.log(onSale, percentageDiscount, id);
 		const response = await putCourseController(
 			id,
 			title,
@@ -27,7 +39,8 @@ const putHandlerCourse = async (req, res) => {
 			price,
 			enabled,
 			onSale,
-			percentageDiscount
+			percentageDiscount,
+			banned
 		);
 		return res.status(200).json(response);
 	} catch (error) {
