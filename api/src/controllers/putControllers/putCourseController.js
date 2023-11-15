@@ -9,7 +9,8 @@ const putCourseController = async (
 	price,
 	enabled,
 	onSale,
-	percentageDiscount
+	percentageDiscount,
+	banned
 ) => {
 	const data = await Course.update(
 		{
@@ -21,6 +22,7 @@ const putCourseController = async (
 			enabled,
 			onSale,
 			percentageDiscount,
+			banned,
 		},
 
 		{
