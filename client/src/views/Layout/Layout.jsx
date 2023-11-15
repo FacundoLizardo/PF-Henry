@@ -32,7 +32,7 @@ const Layout = ({ updateContextUser }) => {
     }
   }, []);
 
-  const dataCoursesByDate = dataCourses.sort((a, b) => {
+  const dataCoursesByDate = dataCourses.slice().sort((a, b) => {
     const fechaA = new Date(a.createdAt);
     const fechaB = new Date(b.createdAt);
     return fechaB - fechaA;
@@ -44,7 +44,7 @@ const Layout = ({ updateContextUser }) => {
     return sum / ratings.length;
   };
 
-  const dataCoursesSortedByRating = dataCourses.sort((a, b) => {
+  const dataCoursesSortedByRating = dataCourses.slice().sort((a, b) => {
     const averageRatingA = calculateAverageRating(a.ratings);
     const averageRatingB = calculateAverageRating(b.ratings);
     return averageRatingB - averageRatingA;
