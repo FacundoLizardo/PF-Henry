@@ -33,7 +33,7 @@ const Layout = ({ updateContextUser }) => {
     }
   }, []);
 
-  const dataCoursesByDate = dataCourses.sort((a, b) => {
+  const dataCoursesByDate = dataCourses.slice().sort((a, b) => {
     const fechaA = new Date(a.createdAt);
     const fechaB = new Date(b.createdAt);
     return fechaB - fechaA;
@@ -45,15 +45,15 @@ const Layout = ({ updateContextUser }) => {
     return sum / ratings.length;
   };
 
-  const dataCoursesSortedByRating = dataCourses.sort((a, b) => {
+  const dataCoursesSortedByRating = dataCourses.slice().sort((a, b) => {
     const averageRatingA = calculateAverageRating(a.ratings);
     const averageRatingB = calculateAverageRating(b.ratings);
     return averageRatingB - averageRatingA;
   });
 
-  const dataCoursesSortedByPurchases = dataCourses.sort(
-    (a, b) => b.purchases - a.purchases
-  );
+  const dataCoursesByPrice = dataCourses
+    .slice()
+    .sort((a, b) => a.price - b.price);
 
   return (
     <div className={Styles.layoutContainer}>
@@ -73,9 +73,9 @@ const Layout = ({ updateContextUser }) => {
         <div className={Styles.layoutContentItem}>
           <CardLayoutContainer dataCourses={dataCoursesSortedByRating} />
         </div>
-        <h2>Cursos más comprados</h2>
+        <h2>Encuentra los cursos con mejores precios</h2>
         <div className={Styles.layoutContentItem}>
-          <CardLayoutContainer dataCourses={dataCoursesSortedByPurchases} />
+          <CardLayoutContainer dataCourses={dataCoursesByPrice} />
         </div>
         <div className={Styles.registroBannerContainer}>
           <h3>
