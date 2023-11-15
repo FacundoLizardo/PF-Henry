@@ -10,6 +10,7 @@ import Styles from "./Layout.module.css";
 const Layout = ({ updateContextUser }) => {
   const [dataCourses, setDataCourses] = useState([]);
   const [onSaleCourses, setOnSlaeCourses] = useState([]);
+  console.log(dataCourses);
 
   const checkDisabled = () => {
     const storedData = localStorage.getItem("coursesData");
@@ -50,9 +51,9 @@ const Layout = ({ updateContextUser }) => {
     return averageRatingB - averageRatingA;
   });
 
-  const dataCoursesSortedByPurchases = dataCourses.sort(
-    (a, b) => b.purchases - a.purchases
-  );
+  const dataCoursesByPrice = dataCourses
+    .slice()
+    .sort((a, b) => b.price - a.price);
 
   return (
     <div className={Styles.layoutContainer}>
@@ -72,9 +73,9 @@ const Layout = ({ updateContextUser }) => {
         <div className={Styles.layoutContentItem}>
           <CardLayoutContainer dataCourses={dataCoursesSortedByRating} />
         </div>
-        <h2>Cursos más comprados</h2>
+        <h2>Encuentra los cursos con mejores precios</h2>
         <div className={Styles.layoutContentItem}>
-          <CardLayoutContainer dataCourses={dataCoursesSortedByPurchases} />
+          <CardLayoutContainer dataCourses={dataCoursesByPrice} />
         </div>
         <div className={Styles.registroBannerContainer}>
           <h3>
