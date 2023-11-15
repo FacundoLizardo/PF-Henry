@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getUser = async (email) => {
-	console.log(email);
 	try {
 		const response = await axios.get(`/users/user?email=${email}`);
 
@@ -10,7 +9,7 @@ export const getUser = async (email) => {
 		}
 
 		const data = response.data;
-		console.log("data", data);
+		
 		return data;
 	} catch (error) {
 		console.error("Error fetching data:", error);
