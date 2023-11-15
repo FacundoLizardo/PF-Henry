@@ -46,6 +46,11 @@ const Card = ({ course }) => {
     window.scrollTo({ top: 0 });
   };
 
+  const handleCardToInstructor = () => {
+    navigate(`/instructor/${userData.id}`);
+    window.scrollTo({ top: 0 });
+  };
+
   const handleNavigateCart = () => {
     navigate(`/cart/${userData.id}`);
     window.scrollTo({ top: 0 });
@@ -90,12 +95,16 @@ const Card = ({ course }) => {
 
     return averageRating;
   };
+
   const averageRating = calculateRating(
-    course.ratings.map((rating) => rating.rating)
+    course.ratings ? course.ratings.map((rating) => rating.rating) : []
   );
 
   const calculateCommentCount = (ratings) => {
-    return ratings.length;
+    if (ratings && ratings.length) {
+      return ratings.length;
+    }
+    return 0;
   };
 
   const commentCount = calculateCommentCount(course.ratings);
@@ -104,6 +113,8 @@ const Card = ({ course }) => {
     course.price - (course.price * course.percentageDiscount) / 100;
   const roundedNewPrice = newPrice.toFixed(2);
 
+  console.log("course", course);
+  console.log("userData", userData);
   return (
     <div className={Styles.cardContainer}>
       <div className={Styles.imgContainer} onClick={handleCardToDetails}>
@@ -171,7 +182,14 @@ const Card = ({ course }) => {
           </div>
         </div>
         <div className={Styles.contentBottom}>
-          {courseAlreadyPurchased ? (
+          {course.dataInstructor.id === userData.id ? (
+            <Button
+              text={"Ir al panel de instructor"}
+              onClick={() => {
+                handleCardToInstructor();
+              }}
+            />
+          ) : courseAlreadyPurchased ? (
             <Button
               text={"Ir al curso"}
               onClick={() => {
