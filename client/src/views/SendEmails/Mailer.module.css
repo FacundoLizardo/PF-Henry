@@ -36,3 +36,11 @@
   justify-content: end;
   gap: 30px;
 }
+
+.SendEmailsContainerLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 90%;
+}

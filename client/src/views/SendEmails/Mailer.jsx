@@ -6,12 +6,14 @@ import { useRef } from "react";
 import { getUserById } from "../../utils/getUserById";
 import Button from "../../Components/Button/Button";
 import { useParams } from "react-router-dom";
+import Loader from "../../Components/Loader/Loader";
 
 const Mailer = ({ updateContextUser }) => {
   const { id } = useParams();
   const formRef = useRef(null);
   const [userData, setUserData] = useState(null);
   const [instructorData, setInstructorData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleGoBack = () => {
     window.history.back();
@@ -34,6 +36,7 @@ const Mailer = ({ updateContextUser }) => {
 
   const SendEmail = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     const userMessage = event.target.user_message.value;
 
@@ -89,27 +92,38 @@ const Mailer = ({ updateContextUser }) => {
           popup: "mySwal",
         },
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className={Styles.SendEmailsContainer}>
-      <h1 className={Styles.formTitle}>Contactar al instructor</h1>
-      <form ref={formRef} className={Styles.formMail} onSubmit={SendEmail}>
-        <label className={Styles.formMessage}>Escribe tu mensaje</label>
-        <textarea
-          name="user_message"
-          className={Styles.textarea}
-          cols="30"
-          rows="10"
-          required
-        ></textarea>
-        <div className={Styles.formFooter}>
-          <Button text="Volver" onClick={handleGoBack} />
-          <Button text="Enviar" onClick={() => {}} />
+    <>
+      {!loading && (
+        <div className={Styles.SendEmailsContainer}>
+          <h1 className={Styles.formTitle}>Contactar al instructor</h1>
+          <form ref={formRef} className={Styles.formMail} onSubmit={SendEmail}>
+            <label className={Styles.formMessage}>Escribe tu mensaje</label>
+            <textarea
+              name="user_message"
+              className={Styles.textarea}
+              cols="30"
+              rows="10"
+              required
+            ></textarea>
+            <div className={Styles.formFooter}>
+              <Button text="Volver" onClick={handleGoBack} />
+              <Button text="Enviar" onClick={() => {}} />
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+      {loading && (
+        <div className={Styles.SendEmailsContainerLoader}>
+          <Loader />
+        </div>
+      )}
+    </>
   );
 };
 
