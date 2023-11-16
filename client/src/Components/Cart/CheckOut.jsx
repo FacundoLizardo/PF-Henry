@@ -25,21 +25,18 @@ export const CheckOut = ({ updateContextUser }) => {
 		const session = JSON.parse(localStorage.getItem("userOnSession"));
 		const cart = JSON.parse(localStorage.getItem("cart"));
 		if (session && session.id && Array.isArray(cart)) {
-			console.log("datos session antes de enrollCourses", session);
 			if (payment.payment) {
 				enrollCourses(cart, session.id, session.email, payment.payment)
-					.then((result) => {
-						console.log("Result del enrollCourses", result);
+					.then(() => {
 						return getUser(session.email);
 					})
 					.then((newUser) => {
-						console.log("Nuevo datos de usuraio traidos por getUser", newUser);
 						localStorage.setItem("userOnSession", JSON.stringify(newUser));
 						updateContextUser(newUser);
 						window.location.reload;
 						dispatch({ type: "CLEAR", payload: [] });
 					})
-					.catch((error) => console.log("este es el error," + error));
+					.catch((error) => new Error(error));
 			}
 		} else {
 			console.log(

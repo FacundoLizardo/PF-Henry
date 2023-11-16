@@ -23,9 +23,6 @@ export const Dashboard = ({ updateContextUser }) => {
 		handleUsers();
 		handleCourses();
 		handlePayments();
-		console.log(courses);
-		console.log(users);
-		console.log(payments);
 	}, []);
 
 	const handleButtonClick = (button) => {
@@ -57,7 +54,6 @@ export const Dashboard = ({ updateContextUser }) => {
 	};
 
 	const handleBlockUser = async (user) => {
-		console.log(user);
 		if (user.enabled === true) {
 			Swal.fire({
 				title: "¿Deseas bloquear al usuario en la plataforma?",
@@ -72,7 +68,6 @@ export const Dashboard = ({ updateContextUser }) => {
 				},
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					console.log(user.enabled);
 					const response = await axios.put("/users/user/edit", {
 						...user,
 						enabled: false,
@@ -106,7 +101,6 @@ export const Dashboard = ({ updateContextUser }) => {
 				},
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					console.log(user.enabled);
 					const response = await axios.put("/users/user/edit", {
 						...user,
 						enabled: true,
@@ -128,7 +122,6 @@ export const Dashboard = ({ updateContextUser }) => {
 	};
 
 	const handleBlockCourse = (course) => {
-		console.log(course);
 		if (course.enabled === true) {
 			Swal.fire({
 				title: "¿Quieres bloquear este curso en la plataforma?",
@@ -143,7 +136,6 @@ export const Dashboard = ({ updateContextUser }) => {
 				},
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					console.log(course.enabled);
 					const response = await updateCourse({
 						...course,
 						enabled: false,
@@ -178,7 +170,6 @@ export const Dashboard = ({ updateContextUser }) => {
 				},
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					console.log(course.enabled);
 					const response = await updateCourse({
 						...course,
 						enabled: true,

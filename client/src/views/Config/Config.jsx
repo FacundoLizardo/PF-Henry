@@ -21,9 +21,7 @@ const Config = () => {
 	const handleChange = (event) => {
 		const { name, value } = event.target;
 		setFormData({ ...formData, [name]: value });
-		console.log(formData);
 	};
-	console.log(userData);
 	const uploadImage = async () => {
 		const image = document.getElementById("image");
 		const imageFile = image.files[0];

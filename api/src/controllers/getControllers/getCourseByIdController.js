@@ -9,7 +9,6 @@ const getCourseByIdController = async (id) => {
 	});
 
 	if (course) {
-		console.log(course.dataValues);
 		return course.dataValues;
 	} else {
 		return null;
