@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export async function sendData(course) {
-	console.log(course);
 	try {
 		const { data } = await axios.post("/courses/create", course);
 		if (data) {
