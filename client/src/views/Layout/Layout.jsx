@@ -10,7 +10,11 @@ import Styles from "./Layout.module.css";
 const Layout = ({ updateContextUser }) => {
   const [dataCourses, setDataCourses] = useState([]);
   const [onSaleCourses, setOnSlaeCourses] = useState([]);
-  console.log(dataCourses);
+  const onSaleCoursesOrdened =
+    onSaleCourses &&
+    onSaleCourses
+      .slice()
+      .sort((a, b) => b.percentageDiscount - a.percentageDiscount);
 
   const checkDisabled = () => {
     const storedData = localStorage.getItem("coursesData");
@@ -61,7 +65,7 @@ const Layout = ({ updateContextUser }) => {
       <div className={Styles.layoutContent}>
         <div className={Styles.layoutContentItem}>
           <h2>¡Ahorra con nuestros cursos!</h2>
-          <CardLayoutContainer dataCourses={onSaleCourses} />
+          <CardLayoutContainer dataCourses={onSaleCoursesOrdened} />
         </div>
         <div className={Styles.registroBannerContainer}>
           <h3>
